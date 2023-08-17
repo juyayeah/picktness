@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition name="busipageLayout" template="/WEB-INF/views/business/mypage/busipage_layout.jsp">
+		<put-attribute name="title" value=""/>
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="side" value="/WEB-INF/views/business/mypage/busiMypage.jsp"/>
+		<put-attribute name="body" value=""/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+		<put-attribute name="talk" value="/WEB-INF/views/common/talk.jsp"/>
+	</definition>
+	<definition name="/business/mypage/goodsAskCont" extends="busipageLayout">
+		<put-attribute name="title" value="상품문의 관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/goodsAskCont.jsp"/>
+	</definition>
+	<definition name="/business/mypage/gymCont" extends="busipageLayout">
+		<put-attribute name="title" value="운동시설관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/gymCont.jsp"/>
+	</definition>
+	<definition name="/business/mypage/trainerCont" extends="busipageLayout">
+		<put-attribute name="title" value="트레이너 관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/trainerCont.jsp"/>
+	</definition>
+	<definition name="/business/mypage/orderPayCont" extends="busipageLayout">
+		<put-attribute name="title" value="주문결제관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/orderPayCont.jsp"/>
+	</definition>
+	<definition name="/business/mypage/orderPayList" extends="busipageLayout">
+		<put-attribute name="title" value="주문결제리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/orderPayList.jsp"/>
+	</definition>
+	<definition name="/business/mypage/reviewCont" extends="busipageLayout">
+		<put-attribute name="title" value="리뷰관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/reviewCont.jsp"/>
+	</definition>
+	<definition name="/business/mypage/busiInfo" extends="busipageLayout">
+		<put-attribute name="title" value="사업자정보"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/busiInfo.jsp"/>
+	</definition>
+	<definition name="/business/mypage/settlementDetail" extends="busipageLayout">
+		<put-attribute name="title" value="정산내역"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/settlementDetail.jsp"/>
+	</definition>
+	
+</tiles-definitions>

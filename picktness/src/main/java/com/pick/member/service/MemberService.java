@@ -1,0 +1,11 @@
+package com.pick.member.service;
+
+import java.util.Map;
+
+import org.springframework.dao.DataAccessException;
+
+import com.pick.member.vo.MemberVO;
+
+public interface MemberService {
+	public MemberVO login(Map loginMap) throws DataAccessException;
+}

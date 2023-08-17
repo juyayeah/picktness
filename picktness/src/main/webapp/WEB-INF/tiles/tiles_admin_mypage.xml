@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition name="adpageLayout" template="/WEB-INF/views/admin/mypage/adpage_layout.jsp">
+		<put-attribute name="title" value=""/>
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="side" value="/WEB-INF/views/admin/mypage/adminMypage.jsp"/>
+		<put-attribute name="body" value=""/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+		<put-attribute name="talk" value="/WEB-INF/views/common/talk.jsp"/>
+	</definition>
+<!-- goodsCont -->
+<definition name="/admin/mypage/adminProdList" extends="adpageLayout">
+<put-attribute name="title" value="상품관리"/>
+<put-attribute name="body" value="/WEB-INF/views/admin/mypage/adminProdList.jsp"/>
+</definition>
+<definition name="/admin/mypage/adminQnAList" extends="adpageLayout">
+<put-attribute name="title" value="상품문의글"/>
+<put-attribute name="body" value="/WEB-INF/views/admin/mypage/adminQnAList.jsp"/>
+</definition>
+<!-- qym -->
+<definition name="/admin/mypage/adminBusiList" extends="adpageLayout">
+<put-attribute name="title" value="사업자리스트"/>
+<put-attribute name="body" value="/WEB-INF/views/admin/mypage/adminBusiList.jsp"/>
+</definition>
+
+<!-- trainer -->
+<definition name="/admin/mypage/adminTrainerList" extends="adpageLayout">
+<put-attribute name="title" value="트레이너리스트"/>
+<put-attribute name="body" value="/WEB-INF/views/admin/mypage/adminTrainerList.jsp"/>
+</definition>
+
+<!-- order -->
+<definition name="/admin/mypage/adminDeliverList" extends="adpageLayout">
+<put-attribute name="title" value="배송리스트"/>
+<put-attribute name="body" value="/WEB-INF/views/admin/mypage/adminDeliverList.jsp"/>
+</definition>
+<definition name="/admin/mypage/adminOrder" extends="adpageLayout">
+<put-attribute name="title" value="결제주문"/>
+<put-attribute name="body" value="/WEB-INF/views/admin/mypage/adminOrder.jsp"/>
+</definition>
+<definition name="/admin/mypage/adminOrderList" extends="adpageLayout">
+<put-attribute name="title" value="주문리스트"/>
+<put-attribute name="body" value="/WEB-INF/views/admin/mypage/adminOrderList.jsp"/>
+</definition>
+<!-- review -->
+<!-- busi-member info -->
+<definition name="/admin/mypage/busimemberInfo" extends="adpageLayout">
+<put-attribute name="title" value="사업자정보"/>
+<put-attribute name="body" value="/WEB-INF/views/admin/mypage/busimemberInfo.jsp"/>
+</definition>
+<!-- settlement detail -->
+<definition name="/admin/mypage/adsettlementDetail" extends="adpageLayout">
+<put-attribute name="title" value="정산관리"/>
+<put-attribute name="body" value="/WEB-INF/views/admin/mypage/adsettlementDetail.jsp"/>
+</definition>
+	
+</tiles-definitions>

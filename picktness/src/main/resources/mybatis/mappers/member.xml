@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+ <mapper namespace="com.pick.member.dao.MemberDAO">
+ 	<resultMap id="memberResult" type="memberVO">
+ 		<result property="id" column="id"/>
+ 		<result property="pwd" column="pwd"/>
+ 		<result property="name" column="name"/>
+ 		<result property="zipcode" column="zipcode"/>
+ 		<result property="addrBasic" column="addrBasic"/>
+ 		<result property="addrDetail" column="addrDetail"/>
+ 		<result property="email1" column="email1"/>
+ 		<result property="email2" column="email2"/>
+ 		<result property="phone1" column="phone1"/>
+ 		<result property="phone2" column="phone2"/>
+ 		<result property="phone3" column="phone3"/>
+ 		<result property="point" column="point"/>
+ 		<result property="emailConsent" column="emailConsent"/>
+ 		<result property="phoneConsent" column="phoneConsent"/>
+ 		<result property="del_yn" column="del_yn"/>
+ 		<result property="joinDate" column="joinDate"/>
+ 		<result property="lat" column="lat"/>
+ 		<result property="lng" column="lng"/>
+ 	</resultMap>
+
+ 
+ <select id="loginById" resultType="memberVO" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	select * from member
+ 	where id=#{id} and pwd=#{pwd}
+ 	]]>
+ </select>
+
+ </mapper>
