@@ -17,4 +17,25 @@
 		<put-attribute name="title" value="상세창" />
 		<put-attribute name="body" value="/WEB-INF/views/board/faqList.jsp" />
 	</definition>
+	
+		<definition name="/board/millDetail" extends="baseLayout">
+		<put-attribute name="title" value="상세창" />
+		<put-attribute name="body" value="/WEB-INF/views/board/millDetail.jsp" />
+	</definition>
+	
+		<definition name="/board/millList" extends="baseLayout">
+		<put-attribute name="title" value="상세창" />
+		<put-attribute name="body" value="/WEB-INF/views/board/millList.jsp" />
+	</definition>
+
+		<definition name="/board/freeBoardInsert" extends="baseLayout">
+		<put-attribute name="title" value="글쓰기창" />
+		<put-attribute name="body" value="/WEB-INF/views/board/freeBoardInsert.jsp" />
+	</definition>
+			
+		<definition name="/board/millBoardInsert" extends="baseLayout">
+		<put-attribute name="title" value="글쓰기창" />
+		<put-attribute name="body" value="/WEB-INF/views/board/millBoardInsert.jsp" />
+	</definition>
+	
 </tiles-definitions>
