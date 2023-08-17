@@ -82,7 +82,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
   <body>
     <div class="container">
       <div class="login-container">
-        <h2>로그인창 수정123</h2>
+        <h2>로그인창 수정123123123</h2>
         <form action="${contextPath}/member/login.do" method="post">
           <input type="text" id="id" name="id" placeholder="아이디" required />
 
