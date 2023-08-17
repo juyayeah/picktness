@@ -148,7 +148,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
         });
       });
     </script>
-    <title>운동시설</title>
+    <title>운동시설리스트</title>
   </head>
   <body>
     <div class="content-inner">
