@@ -105,10 +105,12 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           <a href="${contextPath}/footer/privacy.do">개인정보처리방침</a>
         </li>
         <li>
-          <a href="">이용약관</a>
+          <a href="${contextPath}/footer/uselaw.do">이용약관</a>
         </li>
         <li>
-          <a href="">위치기반 서비스 이용약관 </a>
+          <a href="${contextPath}/footer/service_location.do"
+            >위치기반 서비스 이용약관
+          </a>
         </li>
       </ul>
     </div>

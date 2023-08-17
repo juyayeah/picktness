@@ -327,7 +327,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         margin-top: 10px;
         margin-bottom: 5px;
       }
-      .menu_list_title:hover {
+      .menu_list_title a:hover {
         color: #2890f1;
       }
       .menu_list_a:hover {
@@ -379,14 +379,18 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       </div>
       <!--/logo-->
       <div class="header-search">
+        <form method="get" action="${contextPath}/"></form>
         <div class="top_search">
-          <input
-            type="search"
-            class="input-search"
-            spellcheck="false"
-            placeholder="검색어를 입력하세요"
-            maxlength="100"
-          />
+          
+            <input
+              type="search"
+              class="input-search"
+              spellcheck="false"
+              placeholder="검색어를 입력하세요"
+              maxlength="100"
+              id=""
+            />
+         
           <button
             type="button"
             class="btn_top_search"
@@ -399,6 +403,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
             />
           </button>
         </div>
+      </form>
       </div>
       <!--/header-search-->
       <div class="my_menu">
