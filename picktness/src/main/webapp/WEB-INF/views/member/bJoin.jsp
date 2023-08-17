@@ -202,7 +202,7 @@ textarea{
         <div class="cation">
         <span class="label-with-star">*</span>필수 입력 사항
         </div>
-        <h2>사업자 정보</h2>
+        <h2>사업자정보</h2>
         <br><hr><br>
         <form action="register.php" method="post">
             <div class="form-row">
