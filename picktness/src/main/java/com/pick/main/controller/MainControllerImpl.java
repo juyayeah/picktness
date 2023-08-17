@@ -18,12 +18,25 @@ public class MainControllerImpl {
 		return mav;
 	}
 	@RequestMapping(value="/footer/privacy.do", method=RequestMethod.GET)
-	private ModelAndView footer(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	private ModelAndView privacy(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
+	@RequestMapping(value="/footer/uselaw.do", method=RequestMethod.GET)
+	private ModelAndView uselaw(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		return mav;
+	}
+	@RequestMapping(value="/footer/service_location.do", method=RequestMethod.GET)
+	private ModelAndView location_service(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		return mav;
+	}
 
 }

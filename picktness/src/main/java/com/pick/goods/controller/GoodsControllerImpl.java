@@ -57,4 +57,11 @@ public class GoodsControllerImpl implements GoodsController{
 		return mav;
 	}
 
+	@Override
+	@RequestMapping(value="/goods/searchGoods.do", method=RequestMethod.GET)
+	public ModelAndView searchGoods(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
