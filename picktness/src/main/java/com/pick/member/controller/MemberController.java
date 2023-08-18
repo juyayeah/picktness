@@ -34,6 +34,15 @@ public class MemberController{
 		return mav;
 	}
 	
+	@RequestMapping(value="/member/b_loginForm.do", method=RequestMethod.GET)
+	private ModelAndView b_loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	
 	@RequestMapping(value="/member/login.do", method=RequestMethod.POST)
 	private ModelAndView login(@RequestParam Map<String, String> loginMap,HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
@@ -65,6 +74,7 @@ public class MemberController{
 			mav.setViewName("/main");
 			return mav;
 		}
+	
 	
 	@RequestMapping(value="/member/join.do", method=RequestMethod.GET)
 	private ModelAndView join(HttpServletRequest request, HttpServletResponse response) throws Exception{
