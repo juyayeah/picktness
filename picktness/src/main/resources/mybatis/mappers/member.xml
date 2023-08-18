@@ -32,4 +32,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	]]>
  </select>
 
+<insert id="insertMember" parameterType="memberVO">
+    <![CDATA[
+    insert into member(id, pwd, name, zipcode, addrbasic, addrdetail, email1, email2, phone1, phone2, phone3
+    point, emailconsent, phoneconsent, del_yn, joindate, lat, lng)
+    values(#{id}, #{pwd}, #{name}, #{zipcode}, #{addrbasic}, #{addrdetail}, #{email1}, #{email2}, #{phone1}
+    , #{phone2}, #{phone3}, #{point}, #{emailconsent}, #{phoneconsent}, 'N', CURRENT_TIMESTAMP, #{lat}, #{lng})
+    ]]>
+</insert>
+
  </mapper>

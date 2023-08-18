@@ -360,7 +360,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
                 <a href="${contextPath}/member/loginForm.do">로그인</a>
               </li>
               <li>
-                <a href="#">회원가입</a>
+                <a href="${contextPath}/member/selectJoin.do">회원가입</a>
               </li>
               <li>
                 <a href="#">고객센터</a>

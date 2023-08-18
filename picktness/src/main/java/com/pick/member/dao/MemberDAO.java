@@ -12,4 +12,5 @@ import com.pick.member.vo.MemberVO;
 @Repository("memberDAO")
 public interface MemberDAO {
 	public MemberVO loginById(Map loginMap) throws DataAccessException;
+	public MemberVO inserMember(MemberVO memberVO) throws DataAccessException;
 }

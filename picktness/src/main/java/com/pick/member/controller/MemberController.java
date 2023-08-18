@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +23,7 @@ import com.pick.member.vo.MemberVO;
 
 @Controller("memberController")
 
-public class MemberController{
+public class MemberController implements MemberControllerImpl{
 	@Autowired
 	MemberVO memberVO;
 	@Autowired
@@ -33,15 +36,6 @@ public class MemberController{
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
-	@RequestMapping(value="/member/b_loginForm.do", method=RequestMethod.GET)
-	private ModelAndView b_loginForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ModelAndView mav = new ModelAndView();
-		String viewName = (String) request.getAttribute("viewName");
-		mav.setViewName(viewName);
-		return mav;
-	}
-	
 	
 	@RequestMapping(value="/member/login.do", method=RequestMethod.POST)
 	private ModelAndView login(@RequestParam Map<String, String> loginMap,HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -100,6 +94,31 @@ public class MemberController{
 		return mav;
 	}
 	
+	
+	
+	@Override
+	@RequestMapping(value="/addMember.do" ,method = RequestMethod.POST)
+	public ResponseEntity addMember(MemberVO member, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+		    memberService.addMember(memberVO);
+		    message  = "<script>";
+		    message += " location.href='"+request.getContextPath()+"/member/joinSuccess.do';";
+		    message += " </script>";
+		    
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
+	}
+
 	@RequestMapping(value="/member/joinSuccess.do", method=RequestMethod.GET)
 	private ModelAndView joinSuccess(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();

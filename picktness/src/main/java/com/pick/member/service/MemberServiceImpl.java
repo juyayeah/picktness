@@ -17,4 +17,11 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO login(Map loginMap) throws DataAccessException{
 		return memberDAO.loginById(loginMap);
 	}
+	@Override
+	public void addMember(MemberVO memberVO) throws Exception {
+		memberDAO.inserMember(memberVO);
+		
+	}
+
+
 }
