@@ -436,6 +436,7 @@ background-color:#fff;
 					style="width: 100%; display: none" id="gymdetail_goods"> <img
 					src="${contextPath }/images/member/delivery.jpg"
 					style="width: 100%; display: none" id="gymdetail_goods">
+				
 				<button type="button" class=button_white onclick="more()"
 					id="goods_more" style="display: block; width: 500px; margin:auto;">상품설명
 					펼쳐보기 V</button>
