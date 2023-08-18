@@ -34,6 +34,14 @@ import org.springframework.web.servlet.ModelAndView;
 				mav.setViewName(viewName);
 				return mav;
 			}
+			//트레이너 등록//
+			@RequestMapping(value="/business/mypage/trainerForm.do", method=RequestMethod.GET)
+			private ModelAndView addTrainer(HttpServletRequest request, HttpServletResponse response) throws Exception{
+				ModelAndView mav = new ModelAndView();
+				String viewName = (String) request.getAttribute("viewName");
+				mav.setViewName(viewName);
+				return mav;
+			}
 			//주문결제 관리//
 			@RequestMapping(value="business/mypage/orderPayCont.do", method=RequestMethod.GET)
 			private ModelAndView orderPayCont(HttpServletRequest request, HttpServletResponse response) throws Exception{
