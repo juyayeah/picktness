@@ -11,18 +11,26 @@
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
 		<put-attribute name="talk" value="/WEB-INF/views/common/talk.jsp"/>
 	</definition>
-	<definition name="/business/mypage/goodsAskCont" extends="busipageLayout">
-		<put-attribute name="title" value="상품문의 관리"/>
-		<put-attribute name="body" value="/WEB-INF/views/business/mypage/goodsAskCont.jsp"/>
-	</definition>
+	
+	<!-- 운동시설 관리 -->
 	<definition name="/business/mypage/gymCont" extends="busipageLayout">
 		<put-attribute name="title" value="운동시설관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/gymCont.jsp"/>
 	</definition>
+	<definition name="/business/mypage/goodsAskCont" extends="busipageLayout">
+		<put-attribute name="title" value="상품문의 관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/goodsAskCont.jsp"/>
+	</definition>
+	<!-- 트레이너 관리 -->
 	<definition name="/business/mypage/trainerCont" extends="busipageLayout">
 		<put-attribute name="title" value="트레이너 관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/trainerCont.jsp"/>
 	</definition>
+	<definition name="/business/mypage/trainerForm" extends="busipageLayout">
+		<put-attribute name="title" value="트레이너 등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/trainerForm.jsp"/>
+	</definition>
+	<!-- 주문/결제 관리 -->
 	<definition name="/business/mypage/orderPayCont" extends="busipageLayout">
 		<put-attribute name="title" value="주문결제관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/orderPayCont.jsp"/>
@@ -31,14 +39,17 @@
 		<put-attribute name="title" value="주문결제리스트"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/orderPayList.jsp"/>
 	</definition>
+	<!-- 리뷰 관리 -->
 	<definition name="/business/mypage/reviewCont" extends="busipageLayout">
 		<put-attribute name="title" value="리뷰관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/reviewCont.jsp"/>
 	</definition>
+	<!-- 사업자 정보 -->
 	<definition name="/business/mypage/busiInfo" extends="busipageLayout">
 		<put-attribute name="title" value="사업자정보"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/busiInfo.jsp"/>
 	</definition>
+	<!-- 정산내역 -->
 	<definition name="/business/mypage/settlementDetail" extends="busipageLayout">
 		<put-attribute name="title" value="정산내역"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/settlementDetail.jsp"/>
