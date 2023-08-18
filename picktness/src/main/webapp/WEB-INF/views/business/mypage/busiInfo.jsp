@@ -12,6 +12,6 @@ uri="http://tiles.apache.org/tags-tiles" %>
     <title></title>
   </head>
   <body>
-    
+    비지니스
   </body>
 </html>
