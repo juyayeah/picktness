@@ -19,46 +19,41 @@ request.setCharacterEncoding("utf-8");
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
-<style>
-body {
-	width: 100%;
-	margin: 0px auto;
-	border: 0px solid #bcbcbc;
-}
-
-#header {
-	position: relative;
-	width: 100%;
-	z-index: 20;
-	background-color: #fff;
-}
-
-#mypage_content {
-	position: relative;
-	max-width: 1100px;
-	min-height: 120px;
-	margin: 0 auto;
-}
-
-#sidebar-left {
-	width: 220px;
-	display: inline-block;
-}
-
+    <style>
+      body {
+        width: 100%;
+        margin: 0px auto;
+        border: 0px solid #bcbcbc;
+      }
+      #header {
+        position: relative;
+        width: 100%;
+        z-index: 20;
+        background-color: #fff;
+      }
+      #mypage_content {
+        position: relative;
+        max-width: 1100px;
+        min-height: 120px;
+        margin: 0 auto;
+        display: flex;
+      }
+      #sidebar-left {
+        width: 220px;
+      }
       #content {
         width: 860px;
-        display: inline-block;
+        margin: 50px;
       }
-
-#footer {
-	clear: both;
-}
-
-#talk {
-	position: fixed;
-	right: 15px;
-	bottom: 15px;
-}
+      #footer {
+        clear: both;
+      }
+      #talk {
+        position: fixed;
+        right: 15px;
+        bottom: 15px;
+      }
+    </style>
 </style>
 <title><tiles:insertAttribute name="title" /></title>
 </head>
