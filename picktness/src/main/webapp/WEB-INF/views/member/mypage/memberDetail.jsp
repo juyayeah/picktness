@@ -10,6 +10,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
     <meta charset="UTF-8" />
     <style>
       .mypage_content {
+        margin: 30px;
         border: 1px solid tomato;
       }
     </style>

@@ -44,7 +44,6 @@ uri="http://tiles.apache.org/tags-tiles" %>
       }
       #content {
         width: 860px;
-        margin: 50px;
       }
       #footer {
         clear: both;
