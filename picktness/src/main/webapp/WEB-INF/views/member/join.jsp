@@ -212,7 +212,7 @@ textarea{
       <div class="signup-container">
         <h1 style="text-align: center;">회원가입</h1><br>
         <div class="cation">
-        <span class="label-with-star">*</span>은 필수입력 사항입니다
+        <span class="label-with-star">*</span>은 필수입력
         </div>
         <form action="register.php" method="post">
             <div class="form-row">
