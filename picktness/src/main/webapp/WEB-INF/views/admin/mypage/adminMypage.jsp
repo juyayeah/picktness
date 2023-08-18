@@ -197,7 +197,7 @@ li {
 							주문결제 관리</a>
 						<ul class="hide">
 							<li><a class="minimi"
-								href="${contextPath }/admin/mypage/adminOrderList">주문/결제리스트</a></li>
+								href="${contextPath }/admin/mypage/adminOrderList.do">주문/결제리스트</a></li>
 							<li><a href="${contextPath}/admin/mypage/adminDeliverList.do"
 								class="minimi">배송관리</a></li>
 						</ul></li>
@@ -205,7 +205,7 @@ li {
 						href="${contextPath }/admin/mypage/adminBusiList.do"> 사업자 관리</a></li>
 					<li class="menu"><a
 						href="${contextPath }/admin/mypage/adminTrainerList.do"> 트레이너 관리</a></li>
-					<li class="menu"><a href="${contextPath }/#/"> 회원관리</a></li>
+					<li class="menu"><a href="${contextPath }"> 회원관리</a></li>
 					<li class="menu"><a href="${contextPath }"> 리뷰 관리</a></li>
 					<li class="menu"><a
 						href="${contextPath }/admin/mypage/adsettlementDetail.do"> 정산관리</a></li>
