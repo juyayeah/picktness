@@ -128,26 +128,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
         color: #555;
       }
     </style>
-    <script>
-      $(function () {
-        $(".map_button1").click(function () {
-          $(".not_modal").css("visibility", "visible");
-          $(".modal_location").css("visibility", "visible");
-        });
-        $(".map-arrow").click(function () {
-          $(".not_modal").css("visibility", "hidden");
-          $(".modal_location").css("visibility", "hidden");
-        });
-        $(".map_button2").click(function () {
-          $(".not_modal").css("visibility", "visible");
-          $(".modal_map").css("visibility", "visible");
-        });
-        $(".map-arrow").click(function () {
-          $(".not_modal").css("visibility", "hidden");
-          $(".modal_map").css("visibility", "hidden");
-        });
-      });
-    </script>
+    <script></script>
     <title>운동시설리스트</title>
   </head>
   <body>

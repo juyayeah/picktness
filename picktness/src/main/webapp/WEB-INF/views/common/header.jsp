@@ -127,23 +127,32 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       .header-inner .header-search {
         position: absolute;
         top: 60px;
-        left: 370px;
+        left: 300px;
         text-align: center;
         z-index: 100;
-        width: 380px;
+        width: 500px;
+      }
+      .option_box {
+        display: inline-block;
+        position: relative;
+        font-size: 13px;
+      }
+      .option_box img {
+        width: 10px;
       }
       .top_search {
         position: relative;
         display: inline-block;
-        width: 300px;
+        width: 380px;
         height: 40px;
         border: 1px solid #2890f1;
         border-radius: 6px;
         background: #fff;
         padding: 0 45px 0 15px;
+        text-align: left;
       }
       .input-search {
-        width: 100%;
+        width: 70%;
         height: 100%;
         border: 0;
         padding: 0;
@@ -379,31 +388,28 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       </div>
       <!--/logo-->
       <div class="header-search">
-        <form method="get" action="${contextPath}/"></form>
-        <div class="top_search">
-          
+        <form method="get" action="${contextPath}/goods/searchGoods.do">
+          <div class="top_search">
+            <div class="option_box">
+              검색 옵션<img src=${contextPath}/images/option_down.png>
+            </div>
             <input
               type="search"
               class="input-search"
               spellcheck="false"
               placeholder="검색어를 입력하세요"
               maxlength="100"
-              id=""
+              name="search_content"
             />
-         
-          <button
-            type="button"
-            class="btn_top_search"
-            onclick="alert('검색어 클릭!')"
-          >
-            <img
-              class="btn_top_search_img"
-              src="${contextPath}/images/search.png"
-              alt="검색 아이콘"
-            />
-          </button>
-        </div>
-      </form>
+            <button type="submit" class="btn_top_search">
+              <img
+                class="btn_top_search_img"
+                src="${contextPath}/images/search.png"
+                alt="검색 아이콘"
+              />
+            </button>
+          </div>
+        </form>
       </div>
       <!--/header-search-->
       <div class="my_menu">
