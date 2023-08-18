@@ -14,7 +14,6 @@
         position: relative;
         width: 1100px;
         margin: 0 auto;
-        margin-bottom:20px;
       }
         table {
             width: 100%;
@@ -32,7 +31,7 @@
   }
   .searchBox{
   margin-top:10px;
-  
+  margin-bottom:20px;
   }
   
   table th,table td {
@@ -47,7 +46,9 @@
 float: right;
 
   }
-
+  notice_margin{
+    margin-top:20px;
+  }
   
     </style>
 </head>
@@ -55,8 +56,22 @@ float: right;
     <div class="notice_inner">
     <h1>공지사항</h1>
     
+<div class="divider"></div>
+     <s_sidebar_element>
+        <div class="searchBox">
+          <s_search>
+            <input
+              type="text"
+              name=""
+              value=""
+              onkeypress="if (event.keyCode == 13) { }"
+              class="text"
+              placeholder="SEARCH"
+            />
 
-
+            <input value="검색" type="button" onclick="" class="submit" />
+          </s_search>
+        </div>
       </s_sidebar_element>
     <table>
         <thead>
@@ -92,21 +107,7 @@ float: right;
           </tr>
         </tbody>
     </table>
-       <s_sidebar_element>
-        <div class="searchBox">
-          <s_search>
-            <input
-              type="text"
-              name=""
-              value=""
-              onkeypress="if (event.keyCode == 13) { }"
-              class="text"
-              placeholder="SEARCH"
-            />
-
-            <input value="검색" type="button" onclick="" class="submit" />
-          </s_search>
-        </div>
+  
     <div class="notice_margin">
       <select> 
       <option>일주일</option>
@@ -118,7 +119,8 @@ float: right;
         <option>제목</option>
         <option>내용</option>
     </select>
-  
+    <span class="notice_btn"><input type="submit" value="등록하기">
+    </span>
   </div>
 </div>
 

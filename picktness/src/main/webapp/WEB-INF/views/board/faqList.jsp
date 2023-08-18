@@ -80,7 +80,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         margin-top: 20px;
         margin-bottom: 20px;
       }
-      p {
+      .faq_bgc p {
         background-color: aliceblue;
       }
       .button2 {
@@ -129,7 +129,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         <li>
           <input type="checkbox" id="qna-1" />
           <label for="qna-1">다른 사람 명의의 계좌로 환불받을 수 있나요?</label>
-          <div>
+          <div class="faq_bgc">
             <p>
               다른 사람 명의로는 환불할 수 없습니다. 고객님 본인 명의 계좌로만
               환불이 가능합니다.
@@ -139,7 +139,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         <li>
           <input type="checkbox" id="qna-2" />
           <label for="qna-2">등록한 환불계좌를 등록/변경하고 싶어요.</label>
-          <div>
+          <div class="faq_bgc">
             <p>
               마이페이지에서 환불계좌 등록 및 수정이 가능합니다. 환불계좌는
               주문자 명의의 본인 계좌만 등록할 수 있습니다.
@@ -153,7 +153,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         <li>
           <input type="checkbox" id="qna-3" />
           <label for="qna-3">반품 신청을 철회하고 싶어요.</label>
-          <div>
+          <div class="faq_bgc">
             <p>
               반품할 상품을 아직 보내지 않은 경우, 마이페이지에서 반품철회를
               하실 수 있습니다.
@@ -169,7 +169,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           <label for="qna-4"
             >배송된 상품이 부재중으로 반송된 경우 어떻게 하나요?</label
           >
-          <div>
+          <div class="faq_bgc">
             <p>
               부재 등의 사유로 반송된 상품은 "마이페이지 > 주문 조회"]"에서
               택배사 영업소, 또는 배송 담당 택배원 연락처를 통해 재배송 요청을
@@ -183,7 +183,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           <label for="qna-5"
             >상품에 대해서 문의하려면 어떻게 해야 하나요?</label
           >
-          <div>
+          <div class="faq_bgc">
             <p>
               상품에 관한 내용은 상품상세 화면에 자세히 안내되어 있습니다.
               마이페이지 > 주문내역에서 주문한 상품을 선택하면 상세페이지로
@@ -200,9 +200,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         </li>
       </ul>
       <div class="divider"></div>
-      <input value="글쓰기" type="button" onclick="" class="button2" />
-      <input value="수정하기" type="button" onclick="" class="button2" />
-      <input value="삭제하기" type="button" onclick="" class="button2" />
+     
     </div>
   </body>
 </html>
