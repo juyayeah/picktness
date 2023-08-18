@@ -178,10 +178,10 @@ uri="http://tiles.apache.org/tags-tiles" %>
     <script>
       $(function () {
         var memberLocation;
-        if ("{membersLocation}" == null && "${membersLocation}" == "") {
+        if ("{member.addrBasic}" == null && "${member.addrBasic}" == "") {
           memberLocation = "대전 서구 둔산동";
         } else {
-          memberLocation = "${membersLocation}";
+          memberLocation = "${member.addrBasic}";
         }
         $(".member_location").append(memberLocation);
         $(".modal_title2").append(memberLocation);

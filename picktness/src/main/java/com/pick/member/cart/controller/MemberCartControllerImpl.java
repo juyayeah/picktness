@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 	@Controller("memberCartController")
-		public class MemberCartControllerImpl {
+		public class MemberCartControllerImpl implements MemberCartController{
 		
 		//--------장바구니------------//
 		@RequestMapping(value="/member/cart/cartList.do", method=RequestMethod.GET)
