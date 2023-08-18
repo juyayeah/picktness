@@ -6,6 +6,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+      .faq_inner {
+        position: relative;
+        width: 1100px;
+        margin: 0 auto;
+      }
   body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -15,7 +20,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
   }
   .button {
     padding: 10px 20px;
@@ -30,7 +35,7 @@
   }
   .divider {
     border-top: 1px solid #ccc;
-    margin-top: 20px;
+    /* margin-top: 10px; */
     margin-bottom: 20px;
   }
   .content {
@@ -91,10 +96,20 @@
   .comment-button:hover {
     background-color: #999;
   }
+  .image_pic{
+  width:300px;
+  height:300px;
+  }
+  textarea{
+
+    margin-bottom: 20px;
+    resize: none;
+  }
 </style>
 <title>오늘 식단</title>
 </head>
 <body>
+<div class=faq_inner>
   <div class="header">
     <h3>오늘 식단</h3>
     <button class="button">목록으로</button>
@@ -104,7 +119,7 @@
   <div class="content">
     <div class="image">
     <p class="content-date">작성일: 2023-07-20</p>
-      <img src="images/food.png" alt="이미지 설명">
+      <img  class="image_pic" src="${contextPath}/images/board/food.png" alt="이미지 설명">
       
     </div>
     <div class="info" style ="margin-left: 200px;">
@@ -132,11 +147,13 @@
     </div>
     <!-- 댓글 내용을 추가하려면 위와 같은 형식으로 추가하시면 됩니다. -->
   </div>
+  
   <div class="divider"></div>
-  <h3>댓글 등록</h3>
+ <h3>댓글 등록</h3> 
   <div class="comment-input-container">
-    <textarea class="comment-input" rows="4" placeholder="로그인 후 코멘트를 작성하실 수 있습니다."></textarea>
+    <textarea class="comment-input" rows="4" placeholder="댓글을 작성해주세요!"></textarea>
     <button class="comment-button">댓글 등록</button>
+  </div>
   </div>
 </body>
 </html>

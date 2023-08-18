@@ -6,11 +6,7 @@
 <meta charset="UTF-8">
 
 <style>
-          .faq_inner {
-        position: relative;
-        width: 1100px;
-        margin: 0 auto;
-      }
+
 .text1{
 width :80%;
 height: 30px; 
@@ -77,6 +73,7 @@ margin-right:10px;
     <title>글쓰기</title>
 </head>
 <body>
+
   <div class="faq_inner">
   <h1 style="margin-bottom: 5px;">자유게시판</h1>
   <div class="divider"></div>

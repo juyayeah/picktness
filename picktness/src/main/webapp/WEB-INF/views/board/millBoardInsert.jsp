@@ -17,6 +17,27 @@ request.setCharacterEncoding("UTF-8");
         width: 1100px;
         margin: 0 auto;
       }
+      
+      .file_input{
+        margin-left: 50px;
+      
+      }
+      
+
+
+
+.btn_right {
+float:right;
+
+
+}
+.btn_margin{
+
+  margin-right:150px;
+}
+#file {
+  display: none;
+}
       .file-label {
   margin-top: 30px;
   background-color: #5b975b;
@@ -72,10 +93,7 @@ float:right;
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 var cnt=1;
-function fn_addFile(){
-	$("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
-	cnt++;
-}
+
 function back() {
     
     history.go(-1); 
@@ -90,24 +108,30 @@ function back() {
 <h1>글쓰기</h1>
 <form method="post" action="${contextPath}/upload" enctype="multipart/form-data">
       <p><span style="font-size: 20px;">제목</span> <input type="text" placeholder="제목을 입력해 주세요." name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
+      <p><span style="font-size: 20px;">태그</span> <input type="text" name="hasTag" placeholder="#오운완 #오늘식단" name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
       <p class="content"><span style="font-size: 20px;">내용</span> <textarea style="margin-left: 5px;" placeholder="내용을 입력해 주세요." name="content" style="width: 80%; margin-bottom: 50px;"></textarea></p>
-      <p class="center"> <button class="btn" type="button" onclick="back()" style="margin-right: 10px;">돌아가기</button></p>
+    <tr>
+        
+        <td colspan="3">
+            <div class="file_list">
+                <div>
+                    <span class="file_input">
+                        
+                        <label> 첨부파일
+                            <input type="file" name="files" onchange="selectFile(this);" />
+                        </label>
+                    </span>
+                    <span class= "btn_right">
+                    <button type="button" onclick="back()" class="btns del_btn"><span>돌아가기</span></button>
+                    <button class= "btn_margin" type="submit" onclick="addFile();" class="btns fn_add_btn"><span>등록하기</span></button>
+                  </span>
+                  </div>
+            </div>
+        </td>
+    </tr>
 <div id="root">
-  <h2 class="title">File Upload</h2>
-  <hr>
-  <div class="contents">
-    <div class="upload-box">
-      <div id="drop-file" class="drag-file">
-        <img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image" >
-        <p class="message">Drag files to upload</p>
-        <img src="" alt="미리보기 이미지" class="preview">
-      </div>
-      <label class="file-label" for="chooseFile">Choose File</label>
-      <input class="file" id="chooseFile" type="file" onchange="dropFile.handleFiles(this.files)" accept="image/png, image/jpeg, image/gif">
-    </div>
-  </div>
 </div>
 </form>
-</div>
+
 </body>
 </html>

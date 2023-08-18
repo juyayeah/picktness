@@ -10,15 +10,28 @@ request.setCharacterEncoding("utf-8");
 <head>
     <title>공지사항</title>
     <style>
+              .notice_inner {
+        position: relative;
+        width: 1100px;
+        margin: 0 auto;
+        margin-bottom:20px;
+       
+      }
 
+      .notice_btn{
+
+        float:right;
+        margin-right:10px;
+        margin-bottom:10px;
+      }
     </style>
 </head>
 <body>
-    <div>
-<h2>태풍 '카눈'으로 인한 배송 지연 및 결항 공지</h2>
+    <div class="notice_inner">
+<span><h2>태풍 '카눈'으로 인한 배송 지연 및 결항 공지</h2><button  class="notice_btn"type="button" onclick="alert('Hello World!')">목록으로</button></span>
+<p>2023.07.20</p>
 <hr width="100%" color="#959ea6" style="padding=30px">
-<p>2023.07.20</p><br>
-<br>
+
 <p>안녕하세요 픽트니스입니다.</p>
 
 <p>현재 태풍 '카눈'의 영향으로 전국적인 배송 지연이 발생할 수 있습니다.<br>
@@ -42,8 +55,8 @@ request.setCharacterEncoding("utf-8");
      안전한 배송할 수 있도록 노력하겠습니다.<br>
      감사합니다.
      </p>
+     
     </div>
-    <div></div>
-    <button type="button" onclick="alert('Hello World!')">목록으로</button>
+
 </body>
 </html>
