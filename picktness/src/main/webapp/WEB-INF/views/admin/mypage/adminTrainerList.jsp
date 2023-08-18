@@ -17,7 +17,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
  */
 .listcontent {
 	position: relative;
-	max-width: 1100px;
+	max-width: 860px;
 	margin: 0 auto;
 }
 
@@ -27,16 +27,36 @@ a {
 	color: inherit;
 }
 
+
+th.column_a {width: 7%;}
+th.column_b {width: 10%;}
+th.column_c {width: 6%;}
+th.column_d {width: 10%;}
+th.column_e {width: 7%;}
+th.column_f {width: 10%;}
+
+td
+{
+ max-width: 0;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+}
+.topbar{
+align:justify;
+width: 100%;
+}
+
 .tableWrapper {
-	width: 800px;
+	width: 860px;
 	height: auto;
 	max-height: 200px;
 	background-color: white;
 	overflow: auto;
 }
-
+/* 스크롤바 */
 #userListTable {
-	width: 1100px;
+	width: 1000px;
 	border: 0px;
 	border-collapse: collapse;
 }
@@ -111,14 +131,16 @@ table th:last-child {
 		<div class="listcontentinner"></div>
 		<h2 align="center">트레이너 관리</h2>
 
-		<div align="justify">
-			승인상태<select>
+		<div class="topbar">
+			승인상태 &nbsp;
+			
+			<select>
 				<option value="전체" selected>전체</option>
 				<option value="완료">완료</option>
 				<option value="승인요청">승인요청</option>
 				<option value="수정요청">수정요청</option>
-			</select> 조회기간<input name="search_date" type="date" size="40">~<input
-				name="search_date" type="date" size="40"> 상세검색 <select>
+			</select> 조회기간&nbsp;<input name="search_date" type="date" size="40">~<input
+				name="search_date" type="date" size="40"> 상세검색&nbsp;<select>
 				<option value="전체" selected>전체</option>
 				<option value="헬스">헬스</option>
 				<option value="크로스핏">크로스핏</option>
@@ -133,12 +155,12 @@ table th:last-child {
 		<div class="tableWrapper">
 			<table id="userListTable">
 				<tr style="cursor: default;">
-					<th width="4%">사업자명</th>
-					<th width="6%">시설명</th>
-					<th width="2%">카테고리</th>
-					<th width="10%">트레이너명</th>
-					<th width="4%">등록일</th>
-					<th width="7%">승인상태</th>
+					<th>사업자명</th>
+					<th>시설명</th>
+					<th>카테고리</th>
+					<th>트레이너명</th>
+					<th>등록일</th>
+					<th>승인상태</th>
 				</tr>
 				<c:forEach var="admin" items="${List }">
 					<tr align="center">
