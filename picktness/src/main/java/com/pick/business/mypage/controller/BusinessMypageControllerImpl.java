@@ -36,7 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 			}
 			//트레이너 등록//
 			@RequestMapping(value="/business/mypage/trainerForm.do", method=RequestMethod.GET)
-			private ModelAndView addTrainer(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			private ModelAndView trainerForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
 				ModelAndView mav = new ModelAndView();
 				String viewName = (String) request.getAttribute("viewName");
 				mav.setViewName(viewName);
