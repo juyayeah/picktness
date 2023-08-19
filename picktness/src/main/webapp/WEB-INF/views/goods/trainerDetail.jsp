@@ -19,12 +19,8 @@ request.setCharacterEncoding("utf-8");
 /* #tr_btn_modify{
 display: none;
 } */
-li {
+.bodybody li {
 	display: inline-block;
-}
-
-div {
-	margin-bottom: 10px;
 }
 
 .addressgym {
@@ -39,14 +35,13 @@ div {
 .bodybody {
 	width: 1100px;
 	margin: 0 auto;
-}
-
-* {
-	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-
+.bodybody p{
+margin:0 auto;
+margin-top:20px;
+}
 .img-size {
 	width: 300px;
 	height: 300px;
@@ -217,9 +212,9 @@ a:hover {
 	padding: 20px 70px;
 }
 
-nav {
+.info-nav {
 	background: #fff;
-	padding: 15px;
+	padding: 0;
 	text-align: center;
 }
 
@@ -273,7 +268,7 @@ nav {
 	padding: 5px;
 }
 
-textarea {
+.bodybody textarea {
 	width: 1000px;
 	border: 2px solid #c0c0c0;
 	border-top-left-radius: 5px;
@@ -294,7 +289,7 @@ textarea {
 	padding: 10px;
 }
 /*post slider*/
-* {
+.bobyboby * {
 	padding: 0 auto;
 	vertical-align: top;
 }
@@ -510,8 +505,6 @@ textarea {
                   name="imageFileName" id="imageFileName"
                   onchange="readURL(this);" disabled /></td> --> <!-- disabled 있으면 바꿀 수 없음 -->
 							<!-- 트레이너 정보 --></td>
-						<td>&nbsp;</td>
-					<tr>
 						<td align="left">
 							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">박지성 선생님</h2>
 							<a style="padding: 0 0 0 30px; font-size: 13px;"
@@ -549,7 +542,7 @@ textarea {
 			</div>
 			<hr>
 			<div>
-				<nav>
+				<nav class="info-nav">
 					<ul>
 						<li><a href="#" class="hover-underline" onclick="content()">상품정보</a></li>
 						<li><a href="#" class="hover-underline" onclick="review()">이용후기</a></li>
@@ -577,6 +570,8 @@ textarea {
 							<td class="addressgym" width="50%"><b>헬스보이짐&필라걸 둔산점</b><br>
 								대전 서구 대덕대로 226 명동프라자 2층 헬스보이짐<br> 연락처:0507-1441-8922</td>
 						</tr>
+						<tr><td colspan="2"><br><br><br></td>
+						</tr>
 					</table>
 				</div>
 			</div>
@@ -584,17 +579,15 @@ textarea {
 			<div class=gymdetail_review style="display: none"
 				id="gymdetail_review">
 				<p>이용후기</p>
-				<textarea rows="15" cols="60" name="" disabled /></textarea>
+				<textarea rows="15" cols="60" name="" disabled></textarea>
 			</div>
 			<!-- 상품문의 -->
 			<div class=gymdetail_inquiry style="display: none"
 				id="gymdetail_inquiry">
 				<p>상품문의</p>
-				<textarea rows="15" cols="60" name="" disabled /></textarea>
+				<textarea rows="15" cols="60" name="" disabled></textarea>
 			</div>
 		</form>
 	</div>
-
-
 </body>
 </html>
