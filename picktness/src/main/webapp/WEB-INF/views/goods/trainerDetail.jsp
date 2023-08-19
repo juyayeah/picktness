@@ -38,6 +38,10 @@ display: none;
 	padding: 0;
 	box-sizing: border-box;
 }
+/* .bodybody td{
+vertical-align: top;
+} */
+
 .bodybody p{
 margin:0 auto;
 margin-top:20px;
@@ -494,7 +498,7 @@ a:hover {
 								<!-- Next and previous buttons -->
 								<a class="prev" onclick="moveSlides(-1)">&#10094;</a> <a
 									class="next" onclick="moveSlides(1)">&#10095;</a>
-							</div> <br />
+							</div> <br>
 
 							<div style="text-align: center">
 								<span class="dot" onclick="currentSlide(0)"></span> <span
