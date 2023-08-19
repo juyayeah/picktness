@@ -22,9 +22,7 @@ display: none;
 .bodybody li {
 	display: inline-block;
 }
- .bodybody div {
-	margin-bottom: 50px;
-}
+
 .addressgym {
 	text-align: left;
 	vertical-align: middle;
@@ -507,8 +505,6 @@ a:hover {
                   name="imageFileName" id="imageFileName"
                   onchange="readURL(this);" disabled /></td> --> <!-- disabled 있으면 바꿀 수 없음 -->
 							<!-- 트레이너 정보 --></td>
-						<td>&nbsp;</td>
-					<tr>
 						<td align="left">
 							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">박지성 선생님</h2>
 							<a style="padding: 0 0 0 30px; font-size: 13px;"
@@ -573,6 +569,8 @@ a:hover {
 							<td width="10%"></td>
 							<td class="addressgym" width="50%"><b>헬스보이짐&필라걸 둔산점</b><br>
 								대전 서구 대덕대로 226 명동프라자 2층 헬스보이짐<br> 연락처:0507-1441-8922</td>
+						</tr>
+						<tr><td colspan="2"><br><br><br></td>
 						</tr>
 					</table>
 				</div>
