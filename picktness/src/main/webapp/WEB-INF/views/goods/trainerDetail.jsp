@@ -19,14 +19,12 @@ request.setCharacterEncoding("utf-8");
 /* #tr_btn_modify{
 display: none;
 } */
-li {
+.bodybody li {
 	display: inline-block;
 }
-
-div {
-	margin-bottom: 10px;
+ .bodybody div {
+	margin-bottom: 50px;
 }
-
 .addressgym {
 	text-align: left;
 	vertical-align: middle;
@@ -39,14 +37,13 @@ div {
 .bodybody {
 	width: 1100px;
 	margin: 0 auto;
-}
-
-* {
-	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-
+.bodybody p{
+margin:0 auto;
+margin-top:20px;
+}
 .img-size {
 	width: 300px;
 	height: 300px;
@@ -217,9 +214,9 @@ a:hover {
 	padding: 20px 70px;
 }
 
-nav {
+.info-nav {
 	background: #fff;
-	padding: 15px;
+	padding: 0;
 	text-align: center;
 }
 
@@ -273,7 +270,7 @@ nav {
 	padding: 5px;
 }
 
-textarea {
+.bodybody textarea {
 	width: 1000px;
 	border: 2px solid #c0c0c0;
 	border-top-left-radius: 5px;
@@ -294,7 +291,7 @@ textarea {
 	padding: 10px;
 }
 /*post slider*/
-* {
+.bobyboby * {
 	padding: 0 auto;
 	vertical-align: top;
 }
@@ -549,7 +546,7 @@ textarea {
 			</div>
 			<hr>
 			<div>
-				<nav>
+				<nav class="info-nav">
 					<ul>
 						<li><a href="#" class="hover-underline" onclick="content()">상품정보</a></li>
 						<li><a href="#" class="hover-underline" onclick="review()">이용후기</a></li>
@@ -584,17 +581,15 @@ textarea {
 			<div class=gymdetail_review style="display: none"
 				id="gymdetail_review">
 				<p>이용후기</p>
-				<textarea rows="15" cols="60" name="" disabled /></textarea>
+				<textarea rows="15" cols="60" name="" disabled></textarea>
 			</div>
 			<!-- 상품문의 -->
 			<div class=gymdetail_inquiry style="display: none"
 				id="gymdetail_inquiry">
 				<p>상품문의</p>
-				<textarea rows="15" cols="60" name="" disabled /></textarea>
+				<textarea rows="15" cols="60" name="" disabled></textarea>
 			</div>
 		</form>
 	</div>
-
-
 </body>
 </html>
