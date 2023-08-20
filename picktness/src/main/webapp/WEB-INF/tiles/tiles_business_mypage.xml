@@ -17,6 +17,14 @@
 		<put-attribute name="title" value="운동시설관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/gymCont.jsp"/>
 	</definition>
+	<definition name="/business/mypage/addGym" extends="busipageLayout">
+		<put-attribute name="title" value="운동시설등록"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/gymForm.jsp"/>
+	</definition>
+	<definition name="/business/mypage/modGym" extends="busipageLayout">
+		<put-attribute name="title" value="운동시설수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/gymForm.jsp"/>
+	</definition>
 	<definition name="/business/mypage/goodsAskCont" extends="busipageLayout">
 		<put-attribute name="title" value="상품문의 관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/goodsAskCont.jsp"/>
