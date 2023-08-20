@@ -18,6 +18,20 @@ import org.springframework.web.servlet.ModelAndView;
 			mav.setViewName(viewName);
 			return mav;
 		}
+		@RequestMapping(value="/business/mypage/addGym.do", method=RequestMethod.GET)
+		private ModelAndView addGym(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			String viewName = (String) request.getAttribute("viewName");
+			mav.setViewName(viewName);
+			return mav;
+		}
+		@RequestMapping(value="business/mypage/modGym.do", method=RequestMethod.GET)
+		private ModelAndView modGym(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			String viewName = (String) request.getAttribute("viewName");
+			mav.setViewName(viewName);
+			return mav;
+		}
 		//상품문의 관리//
 			@RequestMapping(value="business/mypage/goodsAskCont.do", method=RequestMethod.GET)
 			private ModelAndView goodsAskCont(HttpServletRequest request, HttpServletResponse response) throws Exception{
