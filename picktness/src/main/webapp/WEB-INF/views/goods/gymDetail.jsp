@@ -19,7 +19,7 @@ request.setCharacterEncoding("utf-8");
 /* #tr_btn_modify{
 display: none;
 } */
-li {
+.bobybody li {
 	display: inline-block;
 }
 
@@ -35,15 +35,10 @@ li {
 .bodybody {
 	width: 1100px;
 	margin: 0 auto;
-}
-
-* {
-	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-div{
-margin-bottom: 10px;}
+
 
 .img-size {
 	width: 300px;
@@ -215,7 +210,7 @@ a:hover {
 	padding: 20px 70px;
 }
 
-nav {
+.bodybody nav {
 	background: #fff;
 	padding: 15px;
 	text-align: center;
@@ -271,7 +266,7 @@ nav {
 	padding: 5px;
 }
 
-textarea {
+.bodybody textarea {
 	width: 1000px;
 	border: 2px solid #c0c0c0;
 	border-top-left-radius: 5px;
@@ -292,7 +287,7 @@ textarea {
 	padding: 10px;
 }
 /*post slider*/
-* {
+.bodybody * {
 	padding: 0 auto;
 	vertical-align: top;
 }
@@ -522,10 +517,10 @@ textarea {
 							</div> <!-- <img src="${contextPath }/download.do?imageFileName=${member.imageFileName }&num=${member.num}" id="preview" width="300px" height="300px" /><br> <input type="file"
                   name="imageFileName" id="imageFileName"
                   onchange="readURL(this);" disabled /></td> --> <!-- disabled 있으면 바꿀 수 없음 -->
-							<!-- 시설명 -->
+							<!-- 시설명 --></td>
 						<td align="left">
 							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">헬스보이짐&필라걸
-								그린아트점</h2> <a style="padding: 0 0 0 30px; font-size: 13px;"
+								둔산점</h2> <a style="padding: 0 0 0 30px; font-size: 13px;"
 							href="https://map.naver.com/v5/entry/place/1213678018?c=15,0,0,0,dh">대전광역시
 								서구 대덕대로 226 명동플라자 2층 헬스보이짐</a> <!-- 고객이 보는 창 --> <input
 							type="hidden" value="${member.num}" name="num" /> <!-- 인터페이스 -->

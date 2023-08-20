@@ -35,7 +35,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
       #quickmenu {
         position: sticky;
         z-index: 3;
-        top: 500px;
+        top: 10px;
       }
       #content {
         width: 100%;
