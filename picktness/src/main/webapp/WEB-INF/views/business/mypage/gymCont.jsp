@@ -634,17 +634,9 @@ color: #fff;}
 						</div>
 						</a>
 					</div>
-					<div class="post">
-						<a href="#"><img src="${contextPath}/images/member/tr4.png"
-							class="slider-image">
-							<div class="post-info">
-								<p>박길동 트레이너</p>
-								<b>80,000/1회</b>
-					</div>
-					</a>
+
 				</div>
 			</div>
-	</div>
 	</div>
 	</div>
 	<!--post slider end-->
@@ -656,7 +648,7 @@ color: #fff;}
 			<tr>
 				<td>
 					<div class="intro_etc" id="map"
-						style="width: 500px; height: 250px;">
+						style="width: 300px; height: 200px;">
 
 
 
@@ -691,7 +683,7 @@ color: #fff;}
 						</script>
 					</div>
 				</td>
-				<td width="10%"></td>
+				<td width="5%"></td>
 				<td width="50%" class="addressgym"><b>헬스보이짐&필라걸 둔산점</b><br>
 					대전 서구 대덕대로 226 명동프라자 2층 헬스보이짐<br> 연락처:0507-1441-8922</td>
 			</tr>
