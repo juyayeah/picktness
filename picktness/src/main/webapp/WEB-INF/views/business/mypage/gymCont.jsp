@@ -11,17 +11,15 @@ request.setCharacterEncoding("utf-8");
 <head>
 <script type="text/javascript"
 	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <meta charset="UTF-8">
 <title>운동시설 상세페이지</title>
 <style>
 /* #tr_btn_modify{
 display: none;
 } */
-.bobybody ul {
-	position: relative;
-}
-
-.bobybody li {
+.bodybody li {
 	display: inline-block;
 }
 
@@ -39,6 +37,13 @@ display: none;
 	margin: 0 auto;
 	padding: 0;
 	box-sizing: border-box;
+}
+/* .bodybody td{
+vertical-align: top;
+} */
+.bodybody p {
+	margin: 0 auto;
+	margin-top: 20px;
 }
 
 .img-size {
@@ -91,13 +96,17 @@ display: none;
 
 /* Caption text */
 .text {
-	color: #f2f2f2;
-	font-size: 15px;
+	color: #;
+	font-size: 10px;
 	padding: 8px 12px;
+	border-radius:10px;
+	margin-left:35%;
 	position: absolute;
 	bottom: 8px;
-	width: 100%;
+	width: 60px;
+	background-color:rgba(255,255,255,0.8);
 	text-align: center;
+	cursor: pointer;
 }
 
 /* Number text (1/3 etc) */
@@ -184,7 +193,7 @@ a:hover {
 	background-color: #fff;
 	color: #000;
 	font-size: 12px;
-	padding: 20px 70px;
+	padding: 10px 30px;
 }
 
 .button_white:hover {
@@ -208,12 +217,14 @@ a:hover {
 	background-color: #2890f1;
 	color: #fff;
 	font-size: 12px;
-	padding: 20px 70px;
+	padding: 10px 30px;
 }
+.button_blue a{
+color: #fff;}
 
-.bodybody nav {
+.info-nav {
 	background: #fff;
-	padding: 15px;
+	padding: 0;
 	text-align: center;
 }
 
@@ -268,7 +279,7 @@ a:hover {
 }
 
 .bodybody textarea {
-	width: 1000px;
+	width: 100%;
 	border: 2px solid #c0c0c0;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -288,7 +299,7 @@ a:hover {
 	padding: 10px;
 }
 /*post slider*/
-.bodybody * {
+.bobyboby * {
 	padding: 0 auto;
 	vertical-align: top;
 }
@@ -325,7 +336,7 @@ a:hover {
 
 .post-slider .post-wrapper {
 	width: 90%;
-	height: 210px;
+	height: 220px;
 	margin: 0px auto;
 	overflow: hidden;
 	padding: 10px 0px 10px 0px;
@@ -358,7 +369,7 @@ a:hover {
 /*post slider-end*/
 </style>
 
-<script language="javaScript">
+<script type="text/javascript">
 	var slideIndex = 0; //slide index
 
 	// HTML 로드가 끝난 후 동작
@@ -447,10 +458,10 @@ a:hover {
 </head>
 <body>
 	<div class="bodybody">
-		<form action="${contextPath }/business/addGymDetail.do" method="post"
+		<form action="${contextPath }/business/mypage/addGym.do" method="post"
 			name="frmGym" enctype="multipart/form-data">
 			<div>
-				<table border=0 align="center" width="1100px">
+				<table>
 					<tr>
 						<!-- 사진칸 -->
 						<td class="detail_gym_img" width="40%" height="40%" rowspan="7"><input
@@ -465,48 +476,48 @@ a:hover {
 									<div class="numbertext">1 / 6</div>
 									<img src="${contextPath}/images/member/gym1.png"
 										class="img-size" />
-									<div class="text">Picktness</div>
+									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">2 / 6</div>
 									<img src="${contextPath}/images/member/gym2.png"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">3 / 6</div>
 									<img src="${contextPath}/images/member/gym3.png"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">4 / 6</div>
 									<img src="${contextPath}/images/member/gym4.png"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">5 / 6</div>
 									<img src="${contextPath}/images/member/health1.jpg"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">6 / 6</div>
 									<img src="${contextPath}/images/member/health2.jpg"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<div class="text">전체사진보기</div>
 								</div>
 
 								<!-- Next and previous buttons -->
 								<a class="prev" onclick="moveSlides(-1)">&#10094;</a> <a
 									class="next" onclick="moveSlides(1)">&#10095;</a>
-							</div> <br>
+							</div> <br />
 
 							<div style="text-align: center">
 								<span class="dot" onclick="currentSlide(0)"></span> <span
@@ -549,16 +560,16 @@ a:hover {
 						<td align="center"><b style="font-size: 23px;">70,000원/월</b></td>
 					</tr>
 					<tr>
-						<td align="left" style="padding: 0 0 10px 30px;">
-							<button class=button_white value="장바구니">장바구니</button>&nbsp;&nbsp;
-							<button class=button_blue id="nowbuy" onclick="nowbuy()">바로구매</button>
+						<td align="left" style="padding: 0 0 10px 150px;">
+							<button class=button_white value="수정하기">수정하기</button>&nbsp;&nbsp;
+							<button class=button_blue value="등록하기"><a href="${contextPath }/business/mypage/addGym.do">등록하기</a></button>
 						</td>
 					</tr>
 				</table>
 			</div>
 			<hr>
 			<div>
-				<nav>
+				<nav class="info-nav">
 					<ul>
 						<li><a href="#" class="hover-underline" onclick="content()">상품정보</a></li>
 						<li><a href="#" class="hover-underline" onclick="review()">이용후기</a></li>
@@ -601,31 +612,41 @@ a:hover {
 										class="slider-image">
 										<div class="post-info">
 											<p>홍길동 트레이너</p>
-											<b>60,000/1회</b></a>
+											<b>60,000/1회</b>
 								</div>
+								</a>
+							</div>
 							<div class="post">
 								<a href="#"><img src="${contextPath}/images/member/tr2.png"
 									class="slider-image">
 									<div class="post-info">
 										<p>고길동 트레이너</p>
-										<b>120,000/1회</b></a>
+										<b>120,000/1회</b>
 							</div>
+							</a>
+						</div>
 						<div class="post">
 							<a href="#"><img src="${contextPath}/images/member/tr3.png"
 								class="slider-image">
 								<div class="post-info">
 									<p>김길동 트레이너</p>
-									<b>160,000/1회</b></a>
+									<b>160,000/1회</b>
 						</div>
+						</a>
+					</div>
 					<div class="post">
 						<a href="#"><img src="${contextPath}/images/member/tr4.png"
 							class="slider-image">
 							<div class="post-info">
 								<p>박길동 트레이너</p>
-								<b>80,000/1회</b></a>
+								<b>80,000/1회</b>
 					</div>
+					</a>
 				</div>
 			</div>
+	</div>
+	</div>
+	</div>
 	<!--post slider end-->
 
 	<!-- 지도 API -->
@@ -676,6 +697,7 @@ a:hover {
 			</tr>
 		</table>
 	</div>
+	</div>
 	<div class=gymdetail_review style="display: none" id="gymdetail_review">
 		<p>이용후기</p>
 		<textarea rows="15" cols="60" name="" disabled /></textarea>
@@ -689,6 +711,7 @@ a:hover {
 		<textarea rows="15" cols="60" name="" disabled /></textarea>
 	</div>
 	</form>
+	<br><br><br><br>
 	</div>
 </body>
 </html>
