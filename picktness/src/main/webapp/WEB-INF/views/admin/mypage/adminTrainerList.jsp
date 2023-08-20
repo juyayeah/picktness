@@ -17,7 +17,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
  */
 .listcontent {
 	position: relative;
-	max-width: 860px;
+	width: 860px;
 	margin: 0 auto;
 }
 
@@ -28,16 +28,9 @@ a {
 }
 
 
-th.column_a {width: 7%;}
-th.column_b {width: 10%;}
-th.column_c {width: 6%;}
-th.column_d {width: 10%;}
-th.column_e {width: 7%;}
-th.column_f {width: 10%;}
-
 td
 {
- max-width: 0;
+ max-width: 100%;
  overflow: hidden;
  text-overflow: ellipsis;
  white-space: nowrap;
@@ -48,7 +41,7 @@ width: 100%;
 }
 
 .tableWrapper {
-	width: 860px;
+	width: 100%;
 	height: auto;
 	max-height: 200px;
 	background-color: white;
@@ -56,7 +49,7 @@ width: 100%;
 }
 /* 스크롤바 */
 #userListTable {
-	width: 1000px;
+	width: 100%;
 	border: 0px;
 	border-collapse: collapse;
 }
@@ -72,9 +65,9 @@ width: 100%;
 	border-bottom: 1px solid lightgray;
 }
 
-#userListTable th:last-child, #userListTable td:last-child {
+ #userListTable th: first-child, #userListTable td:first-child {
 	border-right: 0px !important;
-}
+} 
 
 #userListTable tr:first-child {
 	background-color: #2890f1 !important;
@@ -117,6 +110,7 @@ table th:last-child {
 	color: #2890f1;
 	font-size: 12px;
 	padding: 2px 10px;
+	cursor: pointer;
 }
 
 #btn:hover {
@@ -132,15 +126,15 @@ table th:last-child {
 		<h2 align="center">트레이너 관리</h2>
 
 		<div class="topbar">
-			승인상태 &nbsp;
+			승인상태&nbsp;
 			
 			<select>
 				<option value="전체" selected>전체</option>
 				<option value="완료">완료</option>
 				<option value="승인요청">승인요청</option>
 				<option value="수정요청">수정요청</option>
-			</select> 조회기간&nbsp;<input name="search_date" type="date" size="40">~<input
-				name="search_date" type="date" size="40"> 상세검색&nbsp;<select>
+			</select> &nbsp;&nbsp;조회기간&nbsp;<input name="search_date" type="date" size="40">~<input
+				name="search_date" type="date" size="40"> &nbsp;&nbsp;상세검색&nbsp;<select>
 				<option value="전체" selected>전체</option>
 				<option value="헬스">헬스</option>
 				<option value="크로스핏">크로스핏</option>
@@ -162,6 +156,85 @@ table th:last-child {
 					<th>등록일</th>
 					<th>승인상태</th>
 				</tr>
+				<c:choose>
+			<c:when test="${empty adminTrainerList }">
+				<tr height="10">
+					<td colspan="11">
+						<p align="center">
+							<b><span style="font-size: 9pt;">등록된 트레이너가 없습니다.</span></b>
+						</p>
+					</td>
+				</tr>
+			</c:when>
+			<c:when test="${!empty adminTrainerList }">
+				<c:forEach var="admin" items="${adminTrainerList }"
+					varStatus="bno">
+					<tr align="center">
+						<td>${trainer.id}</td>
+						<td>${business.b_name}</td>
+						<td>${admin.num}</td>
+						<td>${trainer.cate}</td>
+						<td>${trainer.name}</td>
+						<td>${trainer.joindate}</td>
+						<td>${trainer.state}</td>
+					</tr>
+				</c:forEach>
+			</c:when>
+		</c:choose>
+	</table>
+
+
+	<div class="cls2">
+		<c:if test="${totTrainerList != null }">
+			<c:choose>
+				<c:when test="${totTrainerList > 100 }">
+					<c:forEach var="page" begin="1" end="10" step="1">
+						<c:if test="${section > 1 && page==1 }">
+							<a class="no-uline"
+								href="${contextPath }/admin/adminTrainerList.do?section=${section-1}&pageNum=${(section-1)*10 +1}">&nbsp;
+								pre </a>
+						</c:if>
+						<a class="no-uline"
+							href="${contextPath }/admin/adminTrainerList.do?section=${section}&pageNum=${page}">${(section-1)*10 + page}&nbsp;
+						</a>
+						<c:if test="${page == 10 }">
+							<a class="no-uline"
+								href="${contextPath }/admin/adminTrainerList.do?section=${section+1}&pageNum=${section*10 +1}">&nbsp;
+								next </a>
+						</c:if>
+					</c:forEach>
+				</c:when>
+				<c:when test="${totadmins == 100 }">
+					<c:forEach var="page" begin="1" end="10" step="1">
+						<a class="no-uline"
+							href="${contextPath }/admin/adminTrainerList.do?section=${section}&pageNum=${page}">${page  }</a>
+					</c:forEach>
+				</c:when>
+
+				<c:when test="${totadmins < 100 }">
+					<c:forEach var="page" begin="1" end="${totadmins/10+1 }" step="1">
+						<c:choose>
+							<c:when test="${page==pageNum }">
+								<a class="sel-page"
+									href="${contextPath }/admin/adminTrainerList.do?section=${section}&pageNum=${page}">${page }</a>
+							</c:when>
+							<c:otherwise>
+								<a class="no-uline"
+									href="${contextPath }/admin/adminTrainerList.do?section=${section}&pageNum=${page}">${page }</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</c:when>
+			</c:choose>
+		</c:if>
+	</div>
+	<br>
+	<br>
+				
+				
+				
+				
+				
 				<c:forEach var="admin" items="${List }">
 					<tr align="center">
 						<td>${trainer.e }</td>
