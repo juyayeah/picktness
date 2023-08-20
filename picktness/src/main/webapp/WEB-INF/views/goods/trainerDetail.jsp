@@ -14,7 +14,7 @@ request.setCharacterEncoding("utf-8");
 <script type="text/javascript"
 	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <meta charset="UTF-8">
-<title>운동시설 상세페이지</title>
+<title>트레이너 상세페이지</title>
 <style>
 /* #tr_btn_modify{
 display: none;
@@ -30,6 +30,7 @@ display: none;
 
 .detail_gym_img {
 	padding: 40px;
+	padding-right:70px;
 }
 
 .bodybody {
@@ -363,7 +364,7 @@ a:hover {
 /*post slider-end*/
 </style>
 
-<script language="javaScript">
+<script type="text/javascript">
 	var slideIndex = 0; //slide index
 
 	// HTML 로드가 끝난 후 동작
@@ -455,7 +456,7 @@ a:hover {
 		<form action="${contextPath }/member/modStudent.do" method="post"
 			name="frmStudent" enctype="multipart/form-data">
 			<div>
-				<table border=0 align="center" width="1100px">
+				<table>
 					<tr>
 						<!-- 사진칸 -->
 						<td class="detail_gym_img" width="40%" height="40%" rowspan="7"><input
@@ -470,28 +471,27 @@ a:hover {
 									<div class="numbertext">1 / 4</div>
 									<img src="${contextPath}/images/member/park1.jpg"
 										class="img-size" />
-									<div class="text">Picktness</div>
+									<div class="text"><a href="#">전체사진보기</a></div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">2 / 4</div>
 									<img src="${contextPath}/images/member/park2.jpg"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<div class="text"><a href="#">전체사진보기</a></div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">3 / 4</div>
 									<img src="${contextPath}/images/member/park3.jpg"
 										class="img-size">
-									<div class="text">Picktness</div>
-								</div>
+<div class="text"><a href="#">전체사진보기</a></div>								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">4 / 4</div>
 									<img src="${contextPath}/images/member/park4.jpg"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<div class="text"><a href="#">전체사진보기</a></div>
 								</div>
 
 
@@ -538,7 +538,8 @@ a:hover {
 						<td align="center"><b style="font-size: 23px;">10회
 								700,000원</b></td>
 					</tr>
-					<td align="left" style="padding: 0 0 10px 30px;">
+					<tr>
+					<td style="padding: 0 0 0 30px;">
 						<button class=button_white value="장바구니">장바구니</button>&nbsp;&nbsp;
 						<button class=button_blue id="nowbuy" onclick="nowbuy()">바로구매</button>
 					</td>
