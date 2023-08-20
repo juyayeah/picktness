@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <title>상품관리</title>
 <style>
-.bodybody {
+.bodybody{
 	position: absolute;
 	width: 860px;
 	margin: 0 auto;
