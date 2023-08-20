@@ -10,51 +10,51 @@ uri="http://tiles.apache.org/tags-tiles" %>
 <meta charset="utf-8">
 <title>Insert title here</title>
 <style>
-div {
+.bodybody div {
 position: relative;
 max-width: 1100px;
 min-height: 120px;
 margin: 0 auto;
 }
-a {
+.bodybody a {
 background: transparent;
 text-decoration: none;
 color: inherit;
 }
-ul {
+.bodybody ul {
 list-style: none;
 }
-em {
+.bodybody em {
 font-size : 15px;
 color: #2890f1;
 font-weight: 800;
 }
-tr th:first-child { 
+.bodybody tr th:first-child { 
   border-top-left-radius: 10px; 
   border-bottom-left-radius: 10px; 
 }
   
-tr td:first-child { 
+.bodybody tr td:first-child { 
  }
-tr td:last-child { 
+.bodybody tr td:last-child { 
   border-top-right-radius: 10px; 
   border-bottom-right-radius: 10px; 
 }
 
 
-  th {
+ .bodybody th {
   	width: 10%;
     background-color: #2890f1;
     color:#ffffff;
   }
-td {
+.bodybody td {
   padding: 10px;
   width: 10%;
   background-color: #fff;
   border: solid 1px #e7f3fd;
 }
 
-table {
+.bodybody table {
 	max-width: 800px;
 	min-width: 600px;
   border-collapse: collapse;
@@ -79,7 +79,8 @@ table {
     width: 10%;
     padding: 5px;
   }
- */  b {
+ */  
+ .bodybody b {
   color:#2089f1;
   font-size: 20px
   }
@@ -98,7 +99,7 @@ size: 40px;
 </style>
 </head>
 <body>
-<div>
+<div class="bodybody">
 <h2 align="center"> 상품 주문/결제관리</h2>
 <figure>
 <figcaption>

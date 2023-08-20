@@ -10,55 +10,54 @@ uri="http://tiles.apache.org/tags-tiles" %>
 <meta charset="utf-8">
 <title>상품관리</title>
 <style>
-div {
-	position: relative;
-	max-width: 1100px;
+.bodybody {
+	position: absolute;
+	width: 860px;
 	margin: 0 auto;
 	display: inline;
 }
 
-a {
+.bodybody a {
 	background: transparent;
 	text-decoration: none;
 	color: inherit;
 }
 
-ul {
+.bodybody ul {
 	list-style: none;
 }
-table {
-	max-width: 800px;
-	min-width: 600px;
+.bodybody table {
+	width: 860px;
   border-collapse: separate;
 }
 
-  th {
+  .bodybody th {
   	width: 10%;
     background-color: #2890f1;
     color:#ffffff;
   }
-  td {
+  .bodybody td {
   	width: 10%;
 	border: solid 1px #e7f3fd;
   }
 
-table th:first-child { 
+.bodybody table th:first-child { 
   border-top-left-radius: 8px; 
 }
-table th:last-child { 
+.bodybody table th:last-child { 
   border-top-right-radius: 8px; 
 }
-table td:first-child { 
+.bodybody table td:first-child { 
   border-bottom-left-radius: 8px; 
 }
-table td:last-child { 
+.bodybody table td:last-child { 
   border-bottom-right-radius: 8px; 
 }
 
 </style>
 </head>
 <body>
-	<div>
+	<div class="bodybody">
 	
 <h2 align="center"> 상품 주문/결제 리스트</h2>
 	<div>
@@ -89,8 +88,7 @@ table td:last-child {
 				<input type="text" placeholder="상세검색">
 				<input type="submit" value="검색">
 </div>		
-<div>총 #건</div>
-<div><input type="button" value="상품등록"></div>
+<div><div>총 #건</div><div><input type="button" value="상품등록"></div></div>
 		<table>
 			<tr>
 				<th width="4%">주문번호</th>
