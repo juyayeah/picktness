@@ -38,7 +38,7 @@ display: none;
 	padding: 0;
 	box-sizing: border-box;
 }
-/* .bodybody td{
+/*  .bodybody td{
 vertical-align: top;
 } */
 .bodybody p {
