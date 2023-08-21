@@ -26,7 +26,7 @@ display: none;
 	margin:0 auto;
 }
 
-* {
+.bodybody * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;

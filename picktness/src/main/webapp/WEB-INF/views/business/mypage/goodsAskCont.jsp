@@ -53,10 +53,11 @@ a {
 .topbar {
 	position: relative;
 	float: left;
+	padding-bottom:2px;
 }
 
 .topbar:first-child {
-	padding: 0 90px 0 0;
+	padding: 0 85px 0 0;
 }
 
 .topbar:last-child {
@@ -186,13 +187,11 @@ border:1px solid #c0c0c0;
 					name="search_date" type="date" size="40">
 			</div>
 			<div class="topbar">
-				상세검색&nbsp; <input type="text" placeholder="상세검색">
+				상세검색&nbsp;<input type="text" placeholder="상세검색">
 				<button id="btn" value="검색">검색</button>
 			</div>
 		</div>
-		<div>총 #건</div>
-
-		<div class="tableWrapper">
+			<div class="tableWrapper">
 			<table id="userListTable">
 				<tr style="cursor: default;">
 					<th width="5%">번호</th>

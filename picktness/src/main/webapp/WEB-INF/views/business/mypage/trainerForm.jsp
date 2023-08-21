@@ -184,14 +184,15 @@ textarea {
 	border: 4px dashed #d0d0d0;
 	background-color: #f0f0f0;
 	color: #000;
-	font-size: 12px;
+	font-size: 20px;
 	padding: auto;
-	width: 60px;
-	height: 70px;
+	width: 100px;
+	height: 140px;
 	text-align: center;
-	line-height: 70px;
+	line-height: 140px;
 	position:relative; 
 	display:inline-block;
+	margin-left:10px;
 }
 
 .imgadd:hover {
@@ -298,7 +299,7 @@ textarea {
 			</tr>
 			<tr>
 				<td colspan="3" align="right"><button class="button_white">취소</button>&nbsp;&nbsp;
-					<button class="button_blue">등록</button>
+					<a href="${contextPath }/business/mypage/trainerCont.do"><button class="button_blue">등록</button></a>
 			</tr>
 		</table>
 	</div>
