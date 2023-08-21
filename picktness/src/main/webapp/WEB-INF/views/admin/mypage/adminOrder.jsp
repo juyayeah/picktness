@@ -180,7 +180,6 @@ request.setCharacterEncoding("utf-8");
 				</tr>
 			</table>
 		</figure>
-
 	</div>
 
 </body>
