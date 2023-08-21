@@ -57,6 +57,18 @@
 		<put-attribute name="title" value="사업자정보"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/busiInfo.jsp"/>
 	</definition>
+	<definition name="/business/mypage/withdraw" extends="busipageLayout">
+		<put-attribute name="title" value="사업자탈퇴안내"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/withdraw.jsp"/>
+	</definition>
+	<definition name="/business/mypage/withdrawFixed" extends="busipageLayout">
+		<put-attribute name="title" value="사업자탈퇴안내"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/withdrawFixed.jsp"/>
+	</definition>
+	<definition name="/business/mypage/withdrawBye" extends="busipageLayout">
+		<put-attribute name="title" value="사업자탈퇴안내"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/withdrawBye.jsp"/>
+	</definition>
 	<!-- 정산내역 -->
 	<definition name="/business/mypage/settlementDetail" extends="busipageLayout">
 		<put-attribute name="title" value="정산내역"/>
