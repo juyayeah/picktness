@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 			mav.setViewName(viewName);
 			return mav;
 		}
-		@RequestMapping(value="/business/mypage/addGym.do", method=RequestMethod.GET)
+		@RequestMapping(value="/business/mypage/addGym.do", method= {RequestMethod.GET,RequestMethod.POST})
 		private ModelAndView addGym(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
