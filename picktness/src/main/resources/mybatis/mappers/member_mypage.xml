@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+ <mapper namespace="com.pick.member.mypage.dao.MemberMypageDAO">
+	<select id="allPointList" resultType="memberMypagePointVO" parameterType="String">
+	<![CDATA[
+	select * from point_history where member_id=#{id} order by pointdate desc;
+	]]>
+	</select> 
+	<select id="addPointList" resultType="memberMypagePointVO" parameterType="String">
+	<![CDATA[
+	select * from point_history where member_id=#{id} and state="적립" order by pointdate desc;
+	]]>
+	</select>
+		<select id="usePointList" resultType="memberMypagePointVO" parameterType="String">
+	<![CDATA[
+	select * from point_history where member_id=#{id} and state="사용" order by pointdate desc;
+	]]>
+	</select>
+ </mapper>

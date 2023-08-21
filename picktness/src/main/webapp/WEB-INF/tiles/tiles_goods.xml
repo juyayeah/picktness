@@ -20,7 +20,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/goods/placeList.jsp"/>
 	</definition>
 		<definition name="/goods/trainerList" extends="goodsBLayout">
-		<put-attribute name="title" value="운동시설"/>
+		<put-attribute name="title" value="트레이너"/>
 		<put-attribute name="body" value="/WEB-INF/views/goods/trainerList.jsp"/>
 	</definition>
 		<definition name="/goods/gymDetail" extends="baseLayout">

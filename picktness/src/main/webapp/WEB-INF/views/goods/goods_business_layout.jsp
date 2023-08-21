@@ -217,7 +217,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
         //
         //
 
-        if ("${member.addrBasic}== null" && '${member.addrBasic}==""') {
+        if (${member.addrBasic==} null && ${member.addrBasic==""}) {
           memberLocation = "대전 서구 둔산동";
         } else {
           memberLocation = "${member.addrBasic}";

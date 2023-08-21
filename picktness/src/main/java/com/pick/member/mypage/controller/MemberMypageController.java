@@ -3,6 +3,7 @@ package com.pick.member.mypage.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface MemberMypageController {
@@ -14,6 +15,6 @@ public interface MemberMypageController {
 	public ModelAndView boardList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView replyList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView reviewList(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView pointList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView pointList(@RequestParam("option") String option, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 }

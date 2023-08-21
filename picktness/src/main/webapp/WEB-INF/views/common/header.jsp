@@ -390,9 +390,6 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       <div class="header-search">
         <form method="get" action="${contextPath}/goods/searchGoods.do">
           <div class="top_search">
-            <div class="option_box">
-              검색 옵션<img src=${contextPath}/images/option_down.png>
-            </div>
             <input
               type="search"
               class="input-search"
@@ -469,7 +466,9 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               <li class="menu_list_a"><a href="">주짓수</a></li>
             </ul>
             <ul class="menu_list_traniner">
-              <li class="menu_list_title"><a href="">트레이너</a></li>
+              <li class="menu_list_title">
+                <a href="${contextPath}/goods/trainerList.do">트레이너</a>
+              </li>
               <li class="menu_list_a"><a href="">헬스</a></li>
               <li class="menu_list_a"><a href="">크로스핏</a></li>
               <li class="menu_list_a"><a href="">요가</a></li>
@@ -508,7 +507,9 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         </div>
         <!--/menu_sp-->
         <div class="menu_tr">
-          <span class="menu_tr_title" onClick="location.href='#'"
+          <span
+            class="menu_tr_title"
+            onClick="location.href='${contextPath}/goods/trainerList.do'"
             >트레이너</span
           >
           <ul class="menu_tr_dt">

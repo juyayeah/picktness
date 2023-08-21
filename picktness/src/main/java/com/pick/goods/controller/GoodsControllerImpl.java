@@ -23,7 +23,7 @@ public class GoodsControllerImpl implements GoodsController{
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
+	@Override
 	@RequestMapping(value="/goods/trainerList.do", method=RequestMethod.GET)
 	public ModelAndView trainerList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
