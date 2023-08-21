@@ -47,13 +47,28 @@ uri="http://tiles.apache.org/tags-tiles" %>
 
       <div class="search_line"></div>
       <c:choose>
-        <c:when test="${ empty result}">
+        <c:when test="${not empty result.buniness }">
+        </c:when>
+        <c:when test="${not empty result.trainer}">
+        </c:when>
+        <c:when test="${not empty result.shopping }">
+		<c:forEach var="item" items="${result.shopping }">
+		${item.goods_title }
+		<c:if test="${item.review_count != 0}">
+		${item.review_star }
+		${item.review_count }
+		</c:if>
+		${itme.priceRetail }
+		<br>
+		</c:forEach>
+        </c:when>
+        <c:otherwise>
           <div class="search_null">
             <img src="${contextPath}/images/goods/exclamation.png">
             <p><span class="search_null_title">${search_content}</span>에 대한 검색 결과가 없습니다.<br>
             검색어가 올바른지 확인 후 다시 검색해 주세요.</p>
           </div>
-        </c:when>
+		</c:otherwise>
       </c:choose>
     </div>
   </body>

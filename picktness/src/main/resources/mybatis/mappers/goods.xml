@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+ <mapper namespace="com.pick.goods.dao.GoodsDAO">
+ 
+	<select id="businessSearch" resultType="goodsBusinessVO" parameterType="String">
+	<![CDATA[
+	select b.*, i.filename from business_detail as b join business_detail_image as i on b.goods_id = i.goods_id where i.filetype="main_image" and (b.goods_title like #{search_content} or b.cate like #{search_content});
+	]]>
+	</select> 
+	<select id="trainerSearch" resultType="goodsTrainerVO" parameterType="String">
+	<![CDATA[
+	select t.*, i.filename from trainer as t join trainer_detail_image as i on t.goods_id = i.goods_id where i.filetype="main_image" and (t.name like #{search_content} or t.cate like #{search_content});
+	]]>
+	</select>
+		<select id="shoppingSearch" resultType="goodsShoppingVO" parameterType="String">
+	<![CDATA[
+select s.*, i.filename from shopping as s join shopping_detail_image as i on s.goods_id = i.goods_id where i.filetype="main_image" and (s.goods_title like #{search_content} or cate_sec like #{search_content});
+	]]>
+	</select>
+ </mapper>
