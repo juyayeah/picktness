@@ -13,36 +13,33 @@
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js" /></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 <script>
-     $(document).ready(function(){
-        $("#nextBtn").click(function(){    
-            if ($("#chkAll").is(":checked") == false) {
-                alert("모든 약관에 동의하셔야 다음 단계로 진행 가능합니다.");
-                return;
-            } else if ($("#chk_2").is(":checked") == false) {
-                alert("모든 약관에 동의하셔야 다음 단계로 진행 가능합니다.");
-                return;
-            } else if ($("#chk_3").is(":checked") == false) {
-                alert("모든 약관에 동의하셔야 다음 단계로 진행 가능합니다.");
-                return;
-            } else {
-                $("#terms_form").submit();
+    function checkId(){
+        var id = $('#id').val();
+        $.ajax({
+            url:'${contextPath}/member/idCheck',
+            type:'post',
+            data:{id:id},
+            success:function(cnt){
+                if(cnt != 1 && id.length > 3 ){
+                    $('.id_ok').css("display","inline-block");
+                    $('.id_already').css("display","none");
+                }else if (cnt == 1 && id.length > 3){
+                    $('.id_already').css("display","inline-block");
+                    $('.id_ok').css("display","none");
+                }else{
+                    $('.id_ok').css("display","none");
+                    $('.id_already').css("display","none");
+                }
+            },
+            error:function(request, error){
+                alert("에러입니다.");
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
-        });    
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-    const chkAll = document.getElementById('chkAll');
-    const checkboxes = document.querySelectorAll('.checkBox input[type="checkbox"]:not(#chkAll)');
-
-    chkAll.addEventListener('click', function() {
-        const isChecked = chkAll.checked;
-
-        checkboxes.forEach(function(checkbox) {
-            checkbox.checked = isChecked;
         });
-    });
-});
+    };
+    </script>
+<script>    
 function openZipSearch() {
     new daum.Postcode({
     	oncomplete: function(data) {     
@@ -110,12 +107,12 @@ $(function() {
             }
         })
     });
-
 </script>
 <style>
-*{margin: 0;padding: 0;box-sizing: border-box}
-body{background-color: #f7f7f7;}
-ul>li{list-style: none}
+.hrColor {
+    border-color: #2890F1;
+}
+
 a{text-decoration: none;}
 .clearfix::after{content: "";display: block;clear: both;}
 #joinForm{width: 460px;margin: 0 auto;}
@@ -124,7 +121,7 @@ ul.join_box{border: 1px solid #ddd;background-color: #fff;}
 .checkBox>ul>li{float: left;}
 .checkBox>ul>li:first-child{width: 85%;padding: 15px;font-weight: 600;color: black;}
 .checkBox>ul>li:nth-child(2){position: absolute;top: 50%;right: 30px;margin-top: -12px;}
-.checkBox textarea{width: 96%;height: 90px; margin: 0 2%;background-color: #f7f7f7;color: rgba(92, 91, 91, 0.815);; border: none;}
+.checkBox textarea{width: 96%;height: 90px; margin: 0 2%;background-color: #f7f7f7;color: rgba(92, 91, 91, 0.815); resize: none; }
 .footBtwrap{margin-top: 15px;}
 .footBtwrap>li{float: left;width: 50%;height: 60px;}
 .footBtwrap>li>button{display: block; width: 100%;height: 100%; font-size: 20px;text-align: center;line-height: 60px;}
@@ -139,6 +136,12 @@ input[type="checkbox"][name="chk"] {
         width: 20px;
         height: 20px;
     }
+
+
+    
+    .input-small {
+    width: 280px;
+}
 
 .cation{
     text-align: right;
@@ -175,14 +178,11 @@ input[type="checkbox"][name="chk"] {
     
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
 
-label {
+.form-row, .form-row2 {
     font-weight: bold;
     margin-bottom: 5px;
+    
 }
 
 input {
@@ -191,11 +191,11 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
-    width: 30%;
+    width: 35%;
     
 }
 
-select.box {
+.select-box {
  
   height: 35px;
   box-sizing: border-box;
@@ -208,15 +208,12 @@ select.box {
   font-family: 'Montserrat', 'Pretendard', sans-serif;
 }
 
-option {
-  font-size: 14px;
-}
 
 .info .box#domain-list option {
   font-size: 14px;
   background-color: #ffffff;
 }
-button {
+.joinButton {
     padding: 10px;
     background-color: #2890F1;
     color: white;
@@ -225,9 +222,10 @@ button {
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
+
 }
 
-button:hover {
+.joinButton:hover {
     background-color: #1d6fa5;
 }
 
@@ -237,9 +235,9 @@ button:hover {
 
 
 .phone-input{
-    width: 10%;
+    width: 50px;
 }
-textarea{
+.textarea{
 	width:500px; 
 	height:100px; 
     resize:none;
@@ -249,72 +247,74 @@ textarea{
 </style>
 <body style="background-color: white;">
     
-      <div class="signup-container">
+      <div class="signup-container" id="formContainer">
         <h1 style="text-align: center;">회원가입</h1><br>
         <div class="cation">
         <span class="label-with-star">*</span>은 필수입력
         </div>
         <form action="joinForm" method="post">
+            <div class="formTool">
             <div class="form-row">
-                 <label for="id">아이디<span class="label-with-star">*</span></label>
-                <input type="text" id="id" name="id" placeholder="영소문자/숫자 4 ~ 16자" required >
+                <label for="id">아이디<span class="label-with-star">*</span></label><br>
+                <input type="text" id="id" name="id" placeholder="아이디(4~16자 이내, 영문, 숫자 사용 가능)"  class="input-small" oninput="checkId()">
+                <span id="idCheck" class="validation-message"></span><br>
+                <span class="id_ok" style="color:#2890F1; font-size: 14px; font-weight: normal; display:none;">사용 가능한 아이디입니다.</span>
+                <span class="id_already" style="color:red; font-size: 14px; font-weight: normal; display:none;">중복된 아이디입니다.</span>
+            </div>
+            
+            <div class="form-row">
+                <label for="pwd">비밀번호<span class="label-with-star">*</span></label><br>
+                <input type="password" id="pwd" name="pwd" placeholder="비밀번호(6~16자 이내, 영문, 숫자 사용 가능)"  class="input-small"><br>
+                <span id="pwdError" class="validation-message"></span>
+            </div>
+            
+            <div class="form-row">
+                <label for="passwordConfirm">비밀번호 확인<span class="label-with-star">*</span></label><br>
+                <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호 재확인"  class="input-small"><br>
+                <span id="passwordError" style="color: red;"></span>
             </div>
             <div class="form-row">
-                <label for="pwd">비밀번호<span class="label-with-star">*</span></label>
-                <input type="password" id="pwd" name="pwd" placeholder="최소6자 이상(알파벳, 숫자 필수)" required>
-            </div>
-            <div class="form-row">
-                <label for="password">비밀번호 재확인<span class="label-with-star">*</span></label>
-                <input type="password" id="password" name="password" placeholder="비밀번호를 다시 입력해주세요." required>
-            </div>
-            <div class="form-row">
-                <label for="name">이름(실명)<span class="label-with-star">*</span></label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-row">
-        <label for="addr">주소<span class="label-with-star">*</span></label>
+        <label for="addr">주소<span class="label-with-star">*</span></label><br>
 		<input style="width: 100px;" type="text"  id="zip_code" name="addrbasic" onclick="openZipSearch();" readonly="readonly" placeholder="우편번호">
 		<button class="address-button" type="button" onclick="openZipSearch()">주소 찾기</button><br>
 		<input type="text"  id="addr" name="addr" readonly="readonly" placeholder="기본주소"  style="width:250px;"><br>
 		<input type="text"  id="addr_dtl" name="addrdetail" placeholder="상세주소"  style="width:250px;">
 	</div>
         <div class="form-row">
-        <label for="email">이메일<span class="label-with-star">*</span></label>
-        <input type="text" id="domain-txt1" name="email1" placeholder="인증 절차에 사용됩니다." required style="width: 150px;">
+        <label for="email">이메일<span class="label-with-star">*</span></label><br>
+        <input type="text" id="domain-txt1" name="email1" placeholder="인증에 사용됩니다."  style="width: 150px;">
         <span>@</span>
-        <input type="text" class="box" id="domain-txt2" name="email2" required style="width: 150px;">
-<select class="box" id="domain-list" style="width: 150px;">
+        <input type="text" class="box" id="domain-txt2" name="email2"  style="width: 150px;">
+<select class="select-box" id="domain-list" style="width: 150px;">
     <option value="">이메일 선택</option>
     <option value="">직접입력</option>
     <option value="google.com"> google.com </option>
     <option value="naver.com"> naver.com </option>
-    <option value="naver.com"> naver.com </option>
-    <option value="naver.com"> naver.com </option>
-    <option value="naver.com"> naver.com </option>
-    <option value="naver.com"> naver.com </option>
-    <option value="naver.com"> naver.com </option>
-    <option value="naver.com"> naver.com </option>
-    <option value="naver.com"> naver.com </option>
-    <option value="naver.com"> naver.com </option>
-    <option value="naver.com"> naver.com </option>
-    <option value="naver.com"> naver.com </option>
+    <option value="hanmail.com"> hanmail.com </option>
+    <option value="nate.com"> nate.com </option>
+    <option value="yahoo.com"> yahoo.com </option>
+    <option value="hotmail.com"> hotmail.com </option>
+    <option value="dreamwiz.com"> dreamwiz.com </option>
+    <option value="freechal.com"> freechal.com </option>
+    <option value="hanmir.com"> hanmir.com </option>
 </select>
           <button class="address-button" type="button" onclick="">인증번호 받기</button>
 </div>
 		<div class="form-row">
-                <label for="verification-code">인증번호<span class="label-with-star">*</span></label>
-                <input type="text" id="verification-code" name="verification-code"  placeholder="인증번호 6자리를 입력해주세요."  required>
+                <label for="verification-code">인증번호<span class="label-with-star">*</span></label><br>
+                <input type="text" id="verification-code" name="verification-code"  placeholder="인증번호를 입력해주세요."   class="input-small">
                 <button class="address-button" type="button" onclick="verifyCode()">확인</button>
             </div>
 		<div class="form-row2">
-		<label for="phoneNum">휴대전화<span class="label-with-star">*</span></label>
-                <input type="text" id="phone1" name="phone1" class="phone-input" maxlength="3" onkeyup="formatPhoneNumber()" required>
+		<label for="phoneNum">휴대전화<span class="label-with-star">*</span></label><br>
+                <input type="text" id="phone1" name="phone1" class="phone-input" maxlength="3" onkeyup="formatPhoneNumber()" >
                 <span>-</span>
-                <input type="text" id="phone2" name="phone2" class="phone-input" maxlength="4" onkeyup="formatPhoneNumber()" required>
+                <input type="text" id="phone2" name="phone2" class="phone-input" maxlength="4" onkeyup="formatPhoneNumber()" >
                 <span>-</span>
-                <input type="text" id="phone3" name="phone3" class="phone-input" maxlength="4" onkeyup="formatPhoneNumber()" required>
+                <input type="text" id="phone3" name="phone3" class="phone-input" maxlength="4" onkeyup="formatPhoneNumber()" >
             </div>
             <input type="hidden" id="formatted-phone" name="formatted-phone" readonly>
+        </div>
             <ul class="join_box">
                 <li class="checkBox check01">
                     <ul class="clearfix">
@@ -333,7 +333,7 @@ textarea{
                             <input type="checkbox" name="chk"> 
                         </li>
                     </ul>
-                    <textarea name="" id="" readonly>여러분을 환영합니다.
+                    <textarea name="" id="" disabled>여러분을 환영합니다.
 픽트니스 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 픽트니스 서비스의 이용과 관련하여 픽트니스 서비스를 제공하는 ㅍ 주식회사(이하 픽트니스)와 이를 이용하는 픽트니스 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 픽트니스 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
        </textarea>
                 </li>
@@ -345,7 +345,7 @@ textarea{
                         </li>
                     </ul>
  
-                    <textarea name="" id="" readonly>개인정보의 수집 및 이용목적
+                    <textarea name="" id="" disabled>개인정보의 수집 및 이용목적
 
 개인정보 이용목적
 
@@ -391,29 +391,189 @@ textarea{
                 </li>
                 <li class="checkBox check03">
                     <ul class="clearfix">
-                        <li>위치정보 이용약관 동의(선택)</li>
+                        <li>이벤트 등 프로모션 휴대폰 알림 수신(선택)</li>
                         <li class="checkBtn">
                             <input type="checkbox" name="chk">
                         </li>
                     </ul>
  
-                    <textarea name="" id="" readonly>제 2조 (정의) ① "판매자"라 함은 [사업자 등록번호], 주소 [주소], 연락처 [연락처]로 사업자 등록된 자로서, 상품 또는 용역을 이용자에게 제공하는 자를 말합니다. ② "구매자"라 함은 "판매자"와 이 약관에 따라 상품 또는 용역의 구매계약을 체결하는 자를 말합니다. ③ "이용자"라 함은 쇼핑몰에 접속하여 이 약관에 따라 판매자가 제공하는 상품 및 용역을 이용하는 자를 말합니다.</textarea>
+                    <textarea name="" id="" disabled>이용자가 본 약관에 동의하는 경우, [회사/서비스명]은 주기적으로 이벤트, 할인, 프로모션 등에
+관련된 정보를 전자메일을 통해 제공할 수 있습니다.
+정보 수신 동의 여부는 이용자의 개인정보 처리 방침과 별도로 관리됩니다.</textarea>
                 </li>
                 <li class="checkBox check04">
                     <ul class="clearfix">
-                        <li>이벤트 등 프로모션 알림 메일 수신(선택)</li>
+                        <li>이벤트 등 프로모션 메일 알림 수신(선택)</li>
                         <li class="checkBtn">
                             <input type="checkbox" name="chk">
                         </li>
                     </ul>
-                    <textarea name="" id="" readonly>개인정보의 수집 및 이용[선택]
-회사는 새로운 상품의 안내, 마케팅 (전화, 이메일)을 통하여 정보를 제공합니다</textarea>
+                    <textarea name="" id="" disabled>이용자가 본 약관에 동의하는 경우, [회사/서비스명]은 주기적으로 이벤트, 할인, 프로모션 등에
+관련된 정보를 휴대전화를 통해 제공할 수 있습니다.
+정보 수신 동의 여부는 이용자의 개인정보 처리 방침과 별도로 관리됩니다.</textarea>
                 </li>
             </ul>
         
 
-            <button type="submit">가입하기</button>
+            <button type="submit" class="joinButton" id="nextBtn">가입하기</button>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('pwd');
+            const passwordConfirmInput = document.getElementById('passwordConfirm');
+            const passwordError = document.getElementById('passwordError');
+    
+            function checkPasswordMatch() {
+                if (passwordInput.value !== passwordConfirmInput.value) {
+                    passwordError.textContent = '비밀번호가 일치하지 않습니다.';
+                    passwordError.style.color = 'red';
+                    passwordError.style.fontWeight = 'normal';
+                    passwordError.style.fontSize = '14px';
+                } else {
+                    passwordError.textContent = '비밀번호가 일치합니다.';
+                    passwordError.style.color = '#2890F1';
+                    passwordError.style.fontWeight = 'normal';
+                    passwordError.style.fontSize = '14px';
+                }
+            }
+    
+            const chkAll = document.getElementById('chkAll');
+            const chk_2 = document.getElementById('chk_2');
+            const chk_3 = document.getElementById('chk_3');
+            
+            const checkboxes = document.querySelectorAll('.checkBox input[type="checkbox"]:not(#chkAll)');
+    
+            chkAll.addEventListener('click', function() {
+                const isChecked = chkAll.checked;
+    
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.checked = isChecked;
+                });
+            });
+    
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.addEventListener('click', function(event) {
+                var formContainer = document.getElementById('formContainer');
+                var inputs = formContainer.querySelectorAll('input[type="text"], input[type="password"]');
+                var isEmpty = false;
+    
+                inputs.forEach(function(input) {
+                    if (input.value.trim() === '') {
+                        isEmpty = true;
+                        input.focus();
+                        event.preventDefault();
+                        return;
+                    }
+                });
+    
+                if (isEmpty) {
+                    alert('빈 칸을 모두 입력해주세요.');
+                    return;
+                }
+    
+                if (!chkAll.checked) {
+                    alert("모든 약관에 동의하셔야 다음 단계로 진행 가능합니다.");
+                    return;
+                }
+    
+                if (!chk_2.checked) {
+                    alert("필수 약관에 동의하셔야 가입이 가능합니다.");
+                    chk_2.focus(); // 포커스를 체크박스로 이동
+                    return;
+                }
+    
+                if (!chk_3.checked) {
+                    alert("모든 약관에 동의하셔야 다음 단계로 진행 가능합니다.");
+                    chk_3.focus(); // 포커스를 체크박스로 이동
+                    return;
+                }
+    
+                document.getElementById('terms_form').submit();
+            });
+        });
+    </script>
+    
 </body>
+<script>
+    const passwordInput = document.getElementById('pwd');
+    const passwordConfirmInput = document.getElementById('passwordConfirm');
+    const passwordError = document.getElementById('passwordError');
+
+    // 함수를 정의하여 비밀번호 일치 여부를 확인하는 로직을 구현
+    function checkPasswordMatch() {
+        if (passwordInput.value !== passwordConfirmInput.value) {
+            passwordError.textContent = '비밀번호가 일치하지 않습니다.';
+            passwordError.style.color = 'red';
+            passwordError.style.fontWeight = 'normal';
+            passwordError.style.fontSize = '14px';
+
+        } else {
+            passwordError.textContent = '비밀번호가 일치합니다.';
+            passwordError.style.color = '#2890F1';
+            passwordError.style.fontWeight = 'normal';
+            passwordError.style.fontSize = '14px';
+        }
+    }
+
+    // 비밀번호 입력 시 이벤트 처리
+    passwordInput.addEventListener('input', () => {
+        validatePassword(passwordInput.value);
+        checkPasswordMatch(); // 비밀번호 입력이 변경되면 재확인 입력도 확인
+    });
+
+    // 비밀번호 재확인 입력 시 이벤트 처리
+    passwordConfirmInput.addEventListener('input', () => {
+        checkPasswordMatch(); // 재확인 입력이 변경되면 확인
+    });
+</script>
+<script>
+const idInput = document.getElementById('id');
+const idCheck = document.createElement('span');
+idCheck.classList.add('validation-message'); 
+idInput.parentElement.appendChild(idCheck); 
+
+const pwdInput = document.getElementById('pwd');
+const pwdError = document.createElement('span');
+pwdError.classList.add('validation-message');
+pwdInput.parentElement.appendChild(pwdError);
+
+idInput.addEventListener('input', () => {
+    validateId(idInput.value);
+});
+
+pwdInput.addEventListener('input', () => {
+    validatePassword(pwdInput.value);
+});
+
+function validateId(id) {
+    // Check if the ID meets your conditions
+    if (/^[a-zA-Z0-9]{4,16}$/.test(id)) {
+        idCheck.textContent = '';
+        idCheck.style.color = '#2890F1';
+        idCheck.style.fontWeight = 'normal'
+        idCheck.style.fontSize = '14px';
+    } else {
+        idCheck.textContent = '4~16자 이내, 영문, 숫자를 사용해주세요.';
+        idCheck.style.color = '#FF0000';
+        idCheck.style.fontWeight = 'normal'
+        idCheck.style.fontSize = '14px';
+    }
+}
+
+function validatePassword(password) {
+    // Check if password meets the conditions
+    if (/^[a-zA-Z0-9]{6,16}$/.test(password)) {
+        pwdError.textContent = '사용 가능한 비밀번호입니다.';
+        pwdError.style.color = '#2890F1';
+        pwdError.style.fontWeight = 'normal'
+        pwdError.style.fontSize = '14px';
+    } else {
+        pwdError.textContent = '사용할 수 없는 비밀번호입니다.';
+        pwdError.style.color = '#FF0000';
+        pwdError.style.fontWeight = 'normal'
+        pwdError.style.fontSize = '14px';
+    }
+}
+</script>
 </html>

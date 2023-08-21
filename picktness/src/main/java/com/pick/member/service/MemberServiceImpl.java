@@ -22,6 +22,13 @@ public class MemberServiceImpl implements MemberService{
 		memberDAO.inserMember(memberVO);
 		
 	}
-
-
+	@Override
+	public int idCheck(String id) throws Exception {
+		int cnt = memberDAO.idCheck(id);
+		return cnt;
+	}
+	
+	
+	
+	
 }

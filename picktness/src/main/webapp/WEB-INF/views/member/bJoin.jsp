@@ -78,11 +78,22 @@ function formatPhoneNumber() {
     var phoneNumber = input1.value + '-' + input2.value + '-' + input3.value;
     document.getElementById('formatted-phone').value = phoneNumber;
 }
+$(function() {
+        $('#domain-list').change(function() {
+            if ($('#domain-list').val() == 'directly') {
+                $('#domain-txt2').attr("disabled", false);
+                $('#domain-txt2').val("");
+                $('#domain-txt2').focus();
+            } else {
+                $('#domain-txt2').val($('#domain-list').val());
+            }
+        })
+    });
 </script>
 <style>
-*{margin: 0;padding: 0;box-sizing: border-box}
-body{background-color: #f7f7f7;}
-ul>li{list-style: none}
+    hr{
+        border-color: #2890F1;
+    }
 a{text-decoration: none;}
 .clearfix::after{content: "";display: block;clear: both;}
 #joinForm{width: 460px;margin: 0 auto;}
@@ -91,11 +102,10 @@ ul.join_box{border: 1px solid #ddd;background-color: #fff;}
 .checkBox>ul>li{float: left;}
 .checkBox>ul>li:first-child{width: 85%;padding: 15px;font-weight: 600;color: black;}
 .checkBox>ul>li:nth-child(2){position: absolute;top: 50%;right: 30px;margin-top: -12px;}
-.checkBox textarea{width: 96%;height: 90px; margin: 0 2%;background-color: #f7f7f7;color: rgba(92, 91, 91, 0.815); border: none;}
+.checkBox textarea{width: 96%;height: 90px; margin: 0 2%;background-color: #f7f7f7;color: rgba(92, 91, 91, 0.815);; border: none;}
 .footBtwrap{margin-top: 15px;}
 .footBtwrap>li{float: left;width: 50%;height: 60px;}
 .footBtwrap>li>button{display: block; width: 100%;height: 100%; font-size: 20px;text-align: center;line-height: 60px;}
-
 #chkAll {
         /* 원하는 크기 값으로 조절 */
         width: 20px;
@@ -107,8 +117,10 @@ input[type="checkbox"][name="chk"] {
         height: 20px;
     }
 
-hr {
-    border-color: #2890F1;
+
+    
+    .input-small {
+    width: 280px;
 }
 
 .cation{
@@ -146,14 +158,11 @@ hr {
     
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
 
-label {
+.form-row, .form-row2 {
     font-weight: bold;
     margin-bottom: 5px;
+    
 }
 
 input {
@@ -162,11 +171,29 @@ input {
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
-    width: 40%;
+    width: 35%;
     
 }
 
-button {
+.select-box {
+ 
+  height: 35px;
+  box-sizing: border-box;
+  margin-left: 5px;
+  padding: 5px 0 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #d9d6d6;
+  color: #383838;
+  background-color: #ffffff;
+  font-family: 'Montserrat', 'Pretendard', sans-serif;
+}
+
+
+.info .box#domain-list option {
+  font-size: 14px;
+  background-color: #ffffff;
+}
+.joinButton {
     padding: 10px;
     background-color: #2890F1;
     color: white;
@@ -175,9 +202,10 @@ button {
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
+
 }
 
-button:hover {
+.joinButton:hover {
     background-color: #1d6fa5;
 }
 
@@ -187,9 +215,9 @@ button:hover {
 
 
 .phone-input{
-    width: 10%;
+    width: 50px;
 }
-textarea{
+.textarea{
 	width:500px; 
 	height:100px; 
     resize:none;
@@ -205,18 +233,18 @@ textarea{
         <span class="label-with-star">*</span>필수 입력 사항
         </div>
         <h2>사업자정보</h2>
-        <br><hr><br>
+        <hr><br>
         <form action="register.php" method="post">
             <div class="form-row">
-                <label for="b_number">사업자번호<span class="label-with-star">*</span></label>
+                <label for="b_number">사업자번호<span class="label-with-star">*</span></label><br>
                <input type="text" id="b_number" name="b_number" placeholder="영소문자/숫자 4 ~ 16자" required >
            </div>
             <div class="form-row">
-                 <label for="b_name">시설명<span class="label-with-star">*</span></label>
+                 <label for="b_name">시설명<span class="label-with-star">*</span></label><br>
                 <input type="text" id="b_name" name="b_name" placeholder="상호명을 입력해주세요" required >
             </div>
             <div class="form-row">
-                <label for="b_bank">은행선택<span class="label-with-star">*</span></label>
+                <label for="b_bank">은행선택<span class="label-with-star">*</span></label><br>
                 <select name="b_bank" id="b_bank" >
                     <option value=''>-선택-</option>
                     <option value='SC제일은행'>SC제일은행</option>
@@ -244,11 +272,11 @@ textarea{
                  </select>
 </div>
             <div class="form-row">
-                <label for="b_account">계좌번호<span class="label-with-star">*</span></label>
+                <label for="b_account">계좌번호<span class="label-with-star">*</span></label><br>
                 <input type="text" id="b_account" name="b_account" placeholder="1234567890(-없이 입력해주세요)" required>
             </div>
             <div class="form-row">
-        <label for="addr">사업자소재지<span class="label-with-star">*</span></label>
+        <label for="addr">사업자소재지<span class="label-with-star">*</span></label><br>
 		<input style="width: 100px;" type="text"  id="zip_code" name="zipcode" onclick="openZipSearch();" readonly="readonly" placeholder="우편번호">
 		<button class="address-button" type="button" onclick="openZipSearch()">주소 찾기</button><br>
 		<input type="text"  id="addr" name="addrbasic" readonly="readonly" placeholder="기본주소"  style="width:250px;"><br>
@@ -256,7 +284,7 @@ textarea{
 	
 	</div>
     <div class="form-row2">
-		<label for="phoneNum">휴대전화<span class="label-with-star">*</span></label>
+		<label for="phoneNum">휴대전화<span class="label-with-star">*</span></label><br>
                 <input type="text" id="phone1" class="phone-input" maxlength="3" onkeyup="formatPhoneNumber()">
                 <span>-</span>
                 <input type="text" id="phone2" class="phone-input" maxlength="4" onkeyup="formatPhoneNumber()">
@@ -266,48 +294,44 @@ textarea{
             <input type="hidden" id="formatted-phone" name="formatted-phone" readonly>
             <br><br>
             <h2>정보입력</h2>
-            <br><hr><br>
+            <hr><br>
             <div class="form-row">
-                <label for="id">아이디<span class="label-with-star">*</span></label>
+                <label for="id">아이디<span class="label-with-star">*</span></label><br>
                <input type="text" id="id" name="id" placeholder="영소문자/숫자 4 ~ 16자" required >
            </div>
            <div class="form-row">
-               <label for="pwd">비밀번호<span class="label-with-star">*</span></label>
+               <label for="pwd">비밀번호<span class="label-with-star">*</span></label><br>
                <input type="password" id="pwd" name="pwd" placeholder="최소6자 이상(알파벳, 숫자 필수)" required>
            </div>
            <div class="form-row">
-               <label for="password">비밀번호 재확인<span class="label-with-star">*</span></label>
+               <label for="password">비밀번호 재확인<span class="label-with-star">*</span></label><br>
                <input type="password" id="password" name="password" placeholder="비밀번호를 다시 입력해주세요." required>
            </div>
            <div class="form-row">
-               <label for="name">이름<span class="label-with-star">*</span></label>
+               <label for="name">이름<span class="label-with-star">*</span></label><br>
                <input type="text" id="name" name="name" required>
            </div>
 <div class="form-row">
-                <label for="email">이메일<span class="label-with-star">*</span></label>
-                <input type="text" id="email" name="email" placeholder="인증 절차에 사용됩니다." required>
-                <select name="mail">
-            <option value="">이메일 선택</option>
-            <option value="1">직접입력</option>
-            <option value="google.com"> google.com </option>
-            <option value="naver.com"> naver.com </option>
-            <option value="naver.com"> naver.com </option>
-            <option value="naver.com"> naver.com </option>
-            <option value="naver.com"> naver.com </option>
-            <option value="naver.com"> naver.com </option>
-            <option value="naver.com"> naver.com </option>
-            <option value="naver.com"> naver.com </option>
-            <option value="naver.com"> naver.com </option>
-            <option value="naver.com"> naver.com </option>
-            <option value="naver.com"> naver.com </option>
-            <option value="naver.com"> naver.com </option>
-            
-            <option value="none"> 선택 안함 </option>
-          </select>
+        <label for="email">이메일<span class="label-with-star">*</span></label><br>
+        <input type="text" id="domain-txt1" name="email1" placeholder="인증에 사용됩니다."  style="width: 150px;">
+        <span>@</span>
+        <input type="text" class="box" id="domain-txt2" name="email2"  style="width: 150px;">
+<select class="select-box" id="domain-list" style="width: 150px;">
+    <option value="">이메일 선택</option>
+    <option value="">직접입력</option>
+    <option value="google.com"> google.com </option>
+    <option value="naver.com"> naver.com </option>
+    <option value="hanmail.com"> hanmail.com </option>
+    <option value="nate.com"> nate.com </option>
+    <option value="yahoo.com"> yahoo.com </option>
+    <option value="hotmail.com"> hotmail.com </option>
+    <option value="dreamwiz.com"> dreamwiz.com </option>
+    <option value="freechal.com"> freechal.com </option>
+    <option value="hanmir.com"> hanmir.com </option>
+</select>
           <button class="address-button" type="button" onclick="">인증번호 받기</button>
-</div>
 		<div class="form-row">
-                <label for="verification-code">인증번호<span class="label-with-star">*</span></label>
+                <label for="verification-code">인증번호<span class="label-with-star">*</span></label><br>
                 <input type="text" id="verification-code" name="verification-code"  placeholder="인증번호 6자리를 입력해주세요."  required>
                 <button class="address-button" type="button" onclick="verifyCode()">확인</button>
             </div>
