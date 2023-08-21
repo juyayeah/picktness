@@ -156,7 +156,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
       <div class="modal_search">
         <input
           type="text"
-          spellcheck="flase"
+          spellcheck="false"
           id="input_location"
           maxlength="100"
           placeholder="동, 역으로 검색해서 지정하기"
@@ -217,7 +217,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
         //
         //
 
-        if ("${member.addrBasic}== null" && '${member.addrBasic}==""') {
+        if (${member.addrBasic==null}) {
           memberLocation = "대전 서구 둔산동";
         } else {
           memberLocation = "${member.addrBasic}";

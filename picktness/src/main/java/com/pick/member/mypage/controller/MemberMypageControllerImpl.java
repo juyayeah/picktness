@@ -1,14 +1,25 @@
 package com.pick.member.mypage.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.pick.member.mypage.service.MemberMypageService;
+import com.pick.member.mypage.vo.MemberMypagePointVO;
 @Controller("memberMypageController")
 public class MemberMypageControllerImpl implements MemberMypageController{
+	HttpSession session;
+	@Autowired
+	MemberMypageService mypageService;
 
 	@Override
 	@RequestMapping(value="/member/mypage/memberDetail.do", method=RequestMethod.GET)
@@ -84,9 +95,22 @@ public class MemberMypageControllerImpl implements MemberMypageController{
 
 	@Override
 	@RequestMapping(value="/member/mypage/pointList.do", method=RequestMethod.GET)
-	public ModelAndView pointList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView pointList(@RequestParam("option") String option, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		session = request.getSession();
+		String id = (String) session.getAttribute("id");
+		session.setAttribute("option", option);
+		if(option.equals("all")) {
+			List<MemberMypagePointVO> pointList =mypageService.allPointList("wuju");
+			mav.addObject("pointList", pointList);
+		} else if(option.equals("add")) {
+			List<MemberMypagePointVO> pointList = mypageService.addPointList("wuju");
+			mav.addObject("pointList", pointList);
+		} else {
+			List<MemberMypagePointVO> pointList = mypageService.usePointList("wuju");
+			mav.addObject("pointList", pointList);
+		}
 		mav.setViewName(viewName);
 		return mav;
 	}
