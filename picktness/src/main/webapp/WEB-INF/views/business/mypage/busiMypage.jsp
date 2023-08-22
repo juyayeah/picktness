@@ -187,7 +187,7 @@ li {
 						<ul class="hide">
 							<li class="current"><a
 								href="${contextPath }/business/mypage/goodsAskCont.do" class="minimi">상품문의
-									관리</a></li>
+									관리1</a></li>
 						</ul></li>
 					<li class="menu"><a
 						href="${contextPath }/business/mypage/trainerCont.do"> 트레이너 관리</a></li>
