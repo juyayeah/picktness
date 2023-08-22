@@ -43,6 +43,7 @@ request.setCharacterEncoding("utf-8");
       }
       #content {
         width: 860px;
+        min-height: 500px;
       }
       #footer {
         clear: both;

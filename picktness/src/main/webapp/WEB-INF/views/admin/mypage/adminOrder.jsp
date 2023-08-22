@@ -14,8 +14,7 @@ request.setCharacterEncoding("utf-8");
 <style>
 .bodybody div {
 	position: relative;
-	max-width: 1100px;
-	min-height: 120px;
+	width: 860px;
 	margin: 0 auto;
 }
 
@@ -35,24 +34,10 @@ request.setCharacterEncoding("utf-8");
 	font-weight: 800;
 }
 
-.bodybody tr th:first-child {
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-}
-
-.bodybody tr td:first-child {
-	
-}
-
-.bodybody tr td:last-child {
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-
 .bodybody th {
 	width: 10%;
-	background-color: #2890f1;
-	color: #ffffff;
+	background-color: #cfe6fc;
+	color: #000;
 }
 
 .bodybody td {
@@ -63,59 +48,70 @@ request.setCharacterEncoding("utf-8");
 }
 
 .bodybody table {
-	max-width: 800px;
+	width: 860px;
 	min-width: 600px;
 	border-collapse: collapse;
 }
-/*   table {
-	max-width: 800px;
-	min-width:600px;
-    border-collapse: collapse;
-  }
-  tr {
-    border: 0;
-    
-    display: block;
-}
-.solid {
-    border: 1px #2890f1 solid;
-    border-radius: 10px;
-}
 
-  
-  td {
-    width: 10%;
-    padding: 5px;
-  }
- */
 .bodybody b {
 	color: #2089f1;
 	font-size: 20px
 }
 
-.td_first {
-	width: 20%;
-	align: right;
+/* 테이블부분 */
+.tableWrapper {
+	width: 860px;
+	height: auto;
+	max-height: 300px;
+	background-color: white;
+	overflow: auto;
+}
+.tablebody table th:first-child {
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
 }
 
-.td_second {
-	width: 5%;
+.tablebody table th:last-child {
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
 }
 
-.td_third {
-	width: 40%;
+#btn {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	margin-right: -4px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin-left: -3px;
+	border: 1px solid #2890f1;
+	font-size: 12px;
+	padding: 2px 10px;
+	color: white;
+	background-color: #2890f1;
+}
+
+#btn:hover {
+	background-color: #cfe6fc;
+	color: #2890f1;
+}
+
+.oneline {
+	display: inline;
+}
+
+.bodybody h4 {
 	align: left;
-	size: 40px;
+	margin: 10px 0;
+	display: inline;
 }
 </style>
 </head>
 <body>
 	<div class="bodybody">
 		<h2 align="center">상품 주문/결제관리</h2>
-		<figure>
-			<figcaption>
-				<p>거래현황(당일)</p>
-			</figcaption>
+
+			<h4>거래현황(당일)</h4>
+			<div class="tablebody">
 			<table>
 				<tr class="solid">
 					<th>신규주문</th>
@@ -128,16 +124,15 @@ request.setCharacterEncoding("utf-8");
 					<td align="right"><a href="#"><b>{#}</b></a>건</td>
 				</tr>
 			</table>
+			<br>
+			<h4>주문/배송</h4>
+			<span style="padding-left:430px;"> 조회기간 <input
+				name="search_date" type="date" size="40">~<input
+				name="search_date" type="date" size="40">
+				<button id="btn" value="검색">검색</button></span>
 
-			<figcaption>
-				<p>
-					주문/배송 <span>조회기간<input name="search_date" type="date"
-						size="40">~<input name="search_date" type="date" size="40"><input
-						type="button" value="검색"></span>
-				</p>
-			</figcaption>
 			<table>
-				<tr class="solid">
+				<tr>
 					<th>배송준비</th>
 					<td align="right"><a href="#"><b>{#}</b></a>건</td>
 					<th>배송중</th>
@@ -150,14 +145,16 @@ request.setCharacterEncoding("utf-8");
 <td align="right"><a href="#"><b>2</b></a>건</td> -->
 				</tr>
 			</table>
-			<figcaption>
-				<p>
-					거래현황 <span>조회기간<input name="search_date" type="date"
-						size="40">~<input name="search_date" type="date" size="40"><input
-						type="button" value="검색"></span>
-				</p>
-			</figcaption>
-			<table class="solid">
+			</div>
+						<br>
+			<h4>거래 현황</h4>
+			<span style="padding-left:430px;"> 조회기간 <input
+				name="search_date" type="date" size="40">~<input
+				name="search_date" type="date" size="40">
+				<button id="btn" value="검색">검색</button></span>
+				
+				<div class="tablebodysec">
+			<table>
 				<tr>
 					<th>결제완료</th>
 					<td align="right"><a href="#"><b>2</b></a>건</td>
@@ -179,8 +176,9 @@ request.setCharacterEncoding("utf-8");
 					<td align="right"><a href="#"><b>{#}</b></a>건</td>
 				</tr>
 			</table>
-		</figure>
-	</div>
-
+			</div>
+	
+		</div>
+		
 </body>
 </html>

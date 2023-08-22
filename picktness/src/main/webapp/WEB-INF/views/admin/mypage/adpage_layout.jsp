@@ -47,6 +47,7 @@ body {
 
 #content {
 	width: 860px;
+	min-height: 500px;
 }
 
 #footer {
