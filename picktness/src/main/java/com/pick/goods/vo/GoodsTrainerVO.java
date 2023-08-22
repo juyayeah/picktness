@@ -1,5 +1,6 @@
 package com.pick.goods.vo;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import org.springframework.stereotype.Component;
@@ -9,9 +10,9 @@ public class GoodsTrainerVO {
 	private String goods_id;
 	private String id;
 	private String name;
-	private String phone1;
-	private String phone2;
-	private String phone3;
+	private String trPhone1;
+	private String trPhone2;
+	private String trPhone3;
 	private String certi;
 	private String detail;
 	private String prod10;
@@ -27,6 +28,15 @@ public class GoodsTrainerVO {
 	private Date joinDate;
 	private double review_star;
 	private int review_count;
+	private String b_name;
+	private String zipcode;
+	private String addrBasic;
+	private String addrDetail;
+	private String phone1;
+	private String phone2;
+	private String phone3;
+	private BigDecimal lat;
+	private BigDecimal lng;
 	private String fileName;
 	public String getGoods_id() {
 		return goods_id;
@@ -159,6 +169,60 @@ public class GoodsTrainerVO {
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	public String getTrPhone1() {
+		return trPhone1;
+	}
+	public void setTrPhone1(String trPhone1) {
+		this.trPhone1 = trPhone1;
+	}
+	public String getTrPhone2() {
+		return trPhone2;
+	}
+	public void setTrPhone2(String trPhone2) {
+		this.trPhone2 = trPhone2;
+	}
+	public String getTrPhone3() {
+		return trPhone3;
+	}
+	public void setTrPhone3(String trPhone3) {
+		this.trPhone3 = trPhone3;
+	}
+	public String getB_name() {
+		return b_name;
+	}
+	public void setB_name(String b_name) {
+		this.b_name = b_name;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	public String getAddrBasic() {
+		return addrBasic;
+	}
+	public void setAddrBasic(String addrBasic) {
+		this.addrBasic = addrBasic;
+	}
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
+	}
+	public BigDecimal getLat() {
+		return lat;
+	}
+	public void setLat(BigDecimal lat) {
+		this.lat = lat;
+	}
+	public BigDecimal getLng() {
+		return lng;
+	}
+	public void setLng(BigDecimal lng) {
+		this.lng = lng;
 	}
 	
 }

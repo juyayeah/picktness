@@ -1,5 +1,7 @@
 package com.pick.goods.vo;
 
+import java.math.BigDecimal;
+
 import org.springframework.stereotype.Component;
 
 @Component("goodsBusinessVO")
@@ -27,6 +29,15 @@ public class GoodsBusinessVO {
 	private String alltime;
 	private double review_star;
 	private int review_count;
+	private String b_name;
+	private String zipcode;
+	private String addrBasic;
+	private String addrDetail;
+	private String phone1;
+	private String phone2;
+	private String phone3;
+	private BigDecimal lat;
+	private BigDecimal lng;
 	private String fileName;
 	public String getGoods_id() {
 		return goods_id;
@@ -171,6 +182,60 @@ public class GoodsBusinessVO {
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	public String getB_name() {
+		return b_name;
+	}
+	public void setB_name(String b_name) {
+		this.b_name = b_name;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	public String getAddrBasic() {
+		return addrBasic;
+	}
+	public void setAddrBasic(String addrBasic) {
+		this.addrBasic = addrBasic;
+	}
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
+	}
+	public String getPhone1() {
+		return phone1;
+	}
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+	public String getPhone3() {
+		return phone3;
+	}
+	public void setPhone3(String phone3) {
+		this.phone3 = phone3;
+	}
+	public BigDecimal getLat() {
+		return lat;
+	}
+	public void setLat(BigDecimal lat) {
+		this.lat = lat;
+	}
+	public BigDecimal getLng() {
+		return lng;
+	}
+	public void setLng(BigDecimal lng) {
+		this.lng = lng;
 	}
 	
 
