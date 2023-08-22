@@ -17,4 +17,18 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO login(Map loginMap) throws DataAccessException{
 		return memberDAO.loginById(loginMap);
 	}
+	@Override
+	public void addMember(MemberVO memberVO) throws Exception {
+		memberDAO.insertMember(memberVO);
+		
+	}
+	@Override
+	public int idCheck(String id) throws Exception {
+		int cnt = memberDAO.idCheck(id);
+		return cnt;
+	}
+	
+	
+	
+	
 }

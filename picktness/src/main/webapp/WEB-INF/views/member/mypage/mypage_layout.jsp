@@ -37,14 +37,13 @@ uri="http://tiles.apache.org/tags-tiles" %>
         max-width: 1100px;
         min-height: 120px;
         margin: 0 auto;
+        display: flex;
       }
       #sidebar-left {
         width: 220px;
-        display: inline-block;
       }
       #content {
         width: 860px;
-        display: inline-block;
       }
       #footer {
         clear: both;

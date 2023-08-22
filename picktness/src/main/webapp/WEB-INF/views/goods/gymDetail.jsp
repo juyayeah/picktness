@@ -19,7 +19,7 @@ request.setCharacterEncoding("utf-8");
 /* #tr_btn_modify{
 display: none;
 } */
-li {
+.bodybody li {
 	display: inline-block;
 }
 
@@ -35,15 +35,16 @@ li {
 .bodybody {
 	width: 1100px;
 	margin: 0 auto;
-}
-
-* {
-	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-div{
-margin-bottom: 10px;}
+/*  .bodybody td{
+vertical-align: top;
+} */
+.bodybody p {
+	margin: 0 auto;
+	margin-top: 20px;
+}
 
 .img-size {
 	width: 300px;
@@ -95,13 +96,17 @@ margin-bottom: 10px;}
 
 /* Caption text */
 .text {
-	color: #f2f2f2;
-	font-size: 15px;
+	color: #;
+	font-size: 10px;
 	padding: 8px 12px;
+	border-radius:10px;
+	margin-left:35%;
 	position: absolute;
 	bottom: 8px;
-	width: 100%;
+	width: 60px;
+	background-color:rgba(255,255,255,0.8);
 	text-align: center;
+	cursor: pointer;
 }
 
 /* Number text (1/3 etc) */
@@ -215,9 +220,9 @@ a:hover {
 	padding: 20px 70px;
 }
 
-nav {
+.info-nav {
 	background: #fff;
-	padding: 15px;
+	padding: 0;
 	text-align: center;
 }
 
@@ -271,7 +276,7 @@ nav {
 	padding: 5px;
 }
 
-textarea {
+.bodybody textarea {
 	width: 1000px;
 	border: 2px solid #c0c0c0;
 	border-top-left-radius: 5px;
@@ -292,7 +297,7 @@ textarea {
 	padding: 10px;
 }
 /*post slider*/
-* {
+.bobyboby * {
 	padding: 0 auto;
 	vertical-align: top;
 }
@@ -329,7 +334,7 @@ textarea {
 
 .post-slider .post-wrapper {
 	width: 90%;
-	height: 210px;
+	height: 220px;
 	margin: 0px auto;
 	overflow: hidden;
 	padding: 10px 0px 10px 0px;
@@ -362,7 +367,7 @@ textarea {
 /*post slider-end*/
 </style>
 
-<script language="javaScript">
+<script type="text/javascript">
 	var slideIndex = 0; //slide index
 
 	// HTML 로드가 끝난 후 동작
@@ -451,10 +456,10 @@ textarea {
 </head>
 <body>
 	<div class="bodybody">
-		<form action="${contextPath }/member/modStudent.do" method="post"
-			name="frmStudent" enctype="multipart/form-data">
+		<form action="${contextPath }/business/addGymDetail.do" method="post"
+			name="frmGym" enctype="multipart/form-data">
 			<div>
-				<table border=0 align="center" width="1100px">
+				<table>
 					<tr>
 						<!-- 사진칸 -->
 						<td class="detail_gym_img" width="40%" height="40%" rowspan="7"><input
@@ -469,42 +474,42 @@ textarea {
 									<div class="numbertext">1 / 6</div>
 									<img src="${contextPath}/images/member/gym1.png"
 										class="img-size" />
-									<div class="text">Picktness</div>
+									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">2 / 6</div>
 									<img src="${contextPath}/images/member/gym2.png"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">3 / 6</div>
 									<img src="${contextPath}/images/member/gym3.png"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">4 / 6</div>
 									<img src="${contextPath}/images/member/gym4.png"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">5 / 6</div>
 									<img src="${contextPath}/images/member/health1.jpg"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">6 / 6</div>
 									<img src="${contextPath}/images/member/health2.jpg"
 										class="img-size">
-									<div class="text">Picktness</div>
+									<div class="text">전체사진보기</div>
 								</div>
 
 								<!-- Next and previous buttons -->
@@ -522,10 +527,10 @@ textarea {
 							</div> <!-- <img src="${contextPath }/download.do?imageFileName=${member.imageFileName }&num=${member.num}" id="preview" width="300px" height="300px" /><br> <input type="file"
                   name="imageFileName" id="imageFileName"
                   onchange="readURL(this);" disabled /></td> --> <!-- disabled 있으면 바꿀 수 없음 -->
-							<!-- 시설명 -->
+							<!-- 시설명 --></td>
 						<td align="left">
 							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">헬스보이짐&필라걸
-								그린아트점</h2> <a style="padding: 0 0 0 30px; font-size: 13px;"
+								둔산점</h2> <a style="padding: 0 0 0 30px; font-size: 13px;"
 							href="https://map.naver.com/v5/entry/place/1213678018?c=15,0,0,0,dh">대전광역시
 								서구 대덕대로 226 명동플라자 2층 헬스보이짐</a> <!-- 고객이 보는 창 --> <input
 							type="hidden" value="${member.num}" name="num" /> <!-- 인터페이스 -->
@@ -550,25 +555,23 @@ textarea {
 						</select></td>
 					</tr>
 					<tr>
-					<tr>
 						<td align="center"><b style="font-size: 23px;">70,000원/월</b></td>
 					</tr>
+					<tr>
+						<td align="left" style="padding: 0 0 10px 30px;">
+							<button class=button_white value="장바구니">장바구니</button>&nbsp;&nbsp;
+							<button class=button_blue id="nowbuy" onclick="nowbuy()">바로구매</button>
+						</td>
 					</tr>
-					<td align="left" style="padding: 0 0 10px 30px;">
-						<button class=button_white value="장바구니">장바구니</button>&nbsp;&nbsp;
-						<button class=button_blue id="nowbuy" onclick="nowbuy()">바로구매</button>
-					</td>
 				</table>
 			</div>
 			<hr>
 			<div>
-				<nav>
+				<nav class="info-nav">
 					<ul>
-						<li>
-						<a href="#" class="hover-underline" onclick="content()">상품정보</a></li>
-						<li>
-						<a href="#" class="hover-underline" onclick="review()">이용후기</a></li>
-						 <li><a href="#" class="hover-underline"  onclick="inquiry()">상품문의</a></li>
+						<li><a href="#" class="hover-underline" onclick="content()">상품정보</a></li>
+						<li><a href="#" class="hover-underline" onclick="review()">이용후기</a></li>
+						<li><a href="#" class="hover-underline" onclick="inquiry()">상품문의</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -578,19 +581,19 @@ textarea {
 				<p>시설소개</p>
 				<textarea rows="15" cols="60" name="" disabled /></textarea>
 				<p>공지사항</p>
-				<textarea rows="8" cols="60" name="" disabled >
+				<textarea rows="8" cols="60" name="" disabled>
 				사업자가 넣은 공지사항
 				</textarea>
 				<p>운영시간</p>
-				<textarea rows="8" cols="60" name="" disabled >
+				<textarea rows="8" cols="60" name="" disabled>
 				사업자가 넣은 운영시간 및 휴관일
 				</textarea>
 				<p>운영프로그램</p>
-				<textarea rows="3" cols="60" name="" disabled >
+				<textarea rows="3" cols="60" name="" disabled>
 				사업자가 넣은 운영프로그램
 				</textarea>
 				<p>부가서비스</p>
-				<textarea rows="2" cols="60" name="" disabled >
+				<textarea rows="2" cols="60" name="" disabled>
 				사업자가 넣은 부가서비스
 				</textarea>
 				<p>트레이너</p>
@@ -606,37 +609,42 @@ textarea {
 									<a href="#"><img src="${contextPath}/images/member/tr1.png"
 										class="slider-image">
 										<div class="post-info">
-											<p>홍길동 트레이너</p>																			<b>60,000/1회</b></a>
+											<p>홍길동 트레이너</p>
+											<b>60,000/1회</b>
 								</div>
+								</a>
 							</div>
 							<div class="post">
 								<a href="#"><img src="${contextPath}/images/member/tr2.png"
 									class="slider-image">
 									<div class="post-info">
 										<p>고길동 트레이너</p>
-																		<b>120,000/1회</b></a>
+										<b>120,000/1회</b>
 							</div>
+							</a>
 						</div>
 						<div class="post">
 							<a href="#"><img src="${contextPath}/images/member/tr3.png"
 								class="slider-image">
 								<div class="post-info">
 									<p>김길동 트레이너</p>
-																									<b>160,000/1회</b></a>
+									<b>160,000/1회</b>
 						</div>
+						</a>
 					</div>
 					<div class="post">
 						<a href="#"><img src="${contextPath}/images/member/tr4.png"
 							class="slider-image">
 							<div class="post-info">
 								<p>박길동 트레이너</p>
-															<b>80,000/1회</b></a>
+								<b>80,000/1회</b>
 					</div>
+					</a>
 				</div>
 			</div>
-			</div>
-			</div>
-			</div>
+	</div>
+	</div>
+	</div>
 	<!--post slider end-->
 
 	<!-- 지도 API -->
@@ -686,21 +694,22 @@ textarea {
 					대전 서구 대덕대로 226 명동프라자 2층 헬스보이짐<br> 연락처:0507-1441-8922</td>
 			</tr>
 		</table>
-</div>
-</div>
-		<div class=gymdetail_review style="display: none"
-			id="gymdetail_review">
-			<p>이용후기</p>
-			<textarea rows="15" cols="60" name="" disabled /></textarea>
-		</div>
-		<!-- 상품문의 -->
-		<div class=gymdetail_inquiry style="display: none"
-			id="gymdetail_inquiry">
-			<p>상품문의</p><button value="1:1문의하기" >1:1문의하기</button><button value="상품문의하기">상품문의하기</button>
-			<textarea rows="15" cols="60" name="" disabled /></textarea>
-		</div>
-		</form>
 	</div>
+	</div>
+	<div class=gymdetail_review style="display: none" id="gymdetail_review">
+		<p>이용후기</p>
+		<textarea rows="15" cols="60" name="" disabled /></textarea>
+	</div>
+	<!-- 상품문의 -->
+	<div class=gymdetail_inquiry style="display: none"
+		id="gymdetail_inquiry">
+		<p>상품문의</p>
+		<button value="1:1문의하기">1:1문의하기</button>
+		<button value="상품문의하기">상품문의하기</button>
+		<textarea rows="15" cols="60" name="" disabled /></textarea>
+	</div>
+	</form>
+	<br><br><br><br>
 	</div>
 </body>
 </html>

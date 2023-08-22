@@ -17,9 +17,18 @@
 		<put-attribute name="body" value="/WEB-INF/views/main.jsp"/>
 	</definition>
 	
-		<definition name="/footer/privacy" extends="baseLayout">
-		<put-attribute name="title" value="픽트니스"/>
+	<definition name="/footer/privacy" extends="baseLayout">
+		<put-attribute name="title" value="개인정보처리방침"/>
 		<put-attribute name="body" value="/WEB-INF/views/footer/privacy.jsp"/>
 	</definition>
+	
+	<definition name="/footer/uselaw" extends="baseLayout">
+		<put-attribute name="title" value="이용약관"/>
+		<put-attribute name="body" value="/WEB-INF/views/footer/uselaw.jsp"/>
+	</definition>
 
+	<definition name="/footer/service_location" extends="baseLayout">
+		<put-attribute name="title" value="이용약관"/>
+		<put-attribute name="body" value="/WEB-INF/views/footer/service_location.jsp"/>
+	</definition>
 </tiles-definitions>

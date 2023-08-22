@@ -52,23 +52,24 @@ ul {
 	width:20%;
 	transform: translateX(50%);
 	-webkit-transform: translateX(50%);
+	margin-top:330px;
 }
-.side-quick-area .side-quick {
+ .side-quick-area .side-quick {
 	position: absolute;
-	top: 70px;
+	top: 10px;
 	right: 0;
 	width: 90px;
-}
-    .sticky_box{
+} 
+/*     .sticky_box{
             position:sticky;
-            top:70px;
+            top:0px;
             right:20%;
             z-index:1;
-        }
+        } */
 
-.side-quick-area.fixed {
+/*  .side-quick-area.fixed {
 	position: fixed;
-}
+} 
 
 .side-quick-area.fixed>.side-quick {
 	top: 78px;
@@ -88,7 +89,7 @@ ul {
 	right: 0;
 	transition: none;
 	-webkit-transition: none
-}
+} */
 
 .side-quick .recent-list {
 	margin-bottom: 10px;
@@ -264,8 +265,8 @@ ul {
 	top: -5px;
 	right: -10px;
 	z-index: 3;
-	width: 243px;
-	height: calc(100% + 5px * 2); 
+	width: 150px;
+	height: calc(65% + 5px * 2); 
 	border: 1px solid #e6e6e6;
 	font-size: 12px;
 	padding: 12px 85px 12px 15px;
@@ -416,128 +417,15 @@ ul {
 	background-position: -79px 0;
 }
 
-.side-event-area {
-	position: absolute;
-	top: 640px;
-	left: 50%;
-	z-index: 8;
-	margin-left: -710px
-}
-
-.side-event-area .side-event {
-	opacity: 0;
-	overflow: hidden;
-	left: 0;
-	top: 0;
-	width: 120px
-}
-
-.side-event-area.fixed {
-	position: fixed;
-}
-
-.side-event-area.fixed>.side-event {
-	top: 60px;
-}
-
-.side-event-area .btn-open {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 25px;
-	height: 25px;
-	background: url(/resources/pc/images/icon/btn_wide.png) no-repeat;
-	opacity: 0
-}
-
-.side-event-wide {
-	overflow: hidden;
-	position: fixed;
-	bottom: 0;
-	right: calc(( 100% - 1100px)/2);
-	width: 500px;
-	height: 220px;
-	border-radius: 12px;
-	box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.4);
-	z-index: 10;
-	transition: transform 0.4s, opacity 0.4s;
-	transform: scale(1);
-	opacity: 1;
-	transform-origin: right center;
-	display: none;
-}
-
-.side-event-wide.content-min {
-	transform: scale(0);
-	opacity: 0;
-}
-
-.side-event-wide a {
-	display: block
-}
-
-.side-event-wide .btn-close {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	width: 40px;
-	height: 40px;
-	text-indent: -9999px;
-	background: url(/resources/pc/images/icon/btn_close.png);
-	background-size: 40px;
-	cursor: pointer
-}
-
-.side-event {
-	position: relative;
-	display: none;
-	opacity: 0;
-}
-
-.side-event .side-event-open {
-	display: block;
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	width: 28px;
-	height: 28px;
-}
-
-.side-event .side-event-open::before {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	border-width: 14px;
-	border-style: solid;
-	border-color: rgba(0, 0, 0, 0.5);
-	border-top-color: transparent;
-	border-left-color: transparent;
-}
-
-.side-event .side-event-open::after {
-	content: '';
-	position: absolute;
-	bottom: 2px;
-	right: 2px;
-	width: 15px;
-	height: 15px;
-	background-image: url('/resources/pc/images/icon/ico-button-open.png');
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-repeat: no-repeat;
-}
 </style>
 </head>
 
 <body>
 <div class="side-quick-area">
-<div class="sticky_box">
-
     <div class="side-quick">
         <div class="recent-list">
-            <a href="/common/recentProduct/list" class="recent-heading">
-                <h5 class="recent-title">최근 본 상품<span class="recent-cnt">(1)</span></h5>
+            <a href="#" class="recent-heading">
+                <h5 class="recent-title">최근 본 상품</h5>
             </a>
             <!-- 상품 목록 영역 -->
                     <div class="recent">
@@ -605,7 +493,6 @@ ul {
             <span class="aside-scroll-control">TOP &Lambda;</span> <img src="/resources/pc/images/icon/ico-go-up.png" alt="">
         </a>
 </div><!--// side-quick -->
-        </div>
         </div>
         </div>
         </div>

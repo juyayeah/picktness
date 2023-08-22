@@ -10,46 +10,46 @@ uri="http://tiles.apache.org/tags-tiles" %>
 <meta charset="utf-8">
 <title>배송관리</title>
 <style>
-div {
+.bodybody div {
 	position: relative;
 	max-width: 800px;
 	margin: 0 auto;
 	display: inline;
 }
 
-a {
+.bodybody a {
 	background: transparent;
 	text-decoration: none;
 	color: inherit;
 }
 
-ul {
+.bodybody ul {
 	list-style: none;
 }
-table {
+.bodybody table {
 	max-width: 900px;
 	min-width: 600px;
   border-collapse: collapse;
 }
 
-  th {
+ .bodybody th {
     background-color: #2890f1;
     color:#ffffff;
   }
-  td {
+.bodybody td {
 	border: solid 1px #e7f3fd;
   }
 
-table th:first-child { 
+.bodybody table th:first-child { 
   border-top-left-radius: 8px; 
 }
-table th:last-child { 
+.bodybody table th:last-child { 
   border-top-right-radius: 8px; 
 }
-table td:first-child { 
+.bodybody table td:first-child { 
   border-bottom-left-radius: 8px; 
 }
-table td:last-child { 
+.bodybody table td:last-child { 
   border-bottom-right-radius: 8px; 
 }
         #btn1{
@@ -75,7 +75,7 @@ table td:last-child {
     </style>
 </head>
 <body>
-	<div>
+	<div class="bodybody">
 <h2 align="center"> 상품 주문/결제 리스트</h2>
 	<div>
 	주문상태

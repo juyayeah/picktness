@@ -156,7 +156,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
       <div class="modal_search">
         <input
           type="text"
-          spellcheck="flase"
+          spellcheck="false"
           id="input_location"
           maxlength="100"
           placeholder="동, 역으로 검색해서 지정하기"
@@ -176,46 +176,60 @@ uri="http://tiles.apache.org/tags-tiles" %>
       <div id="map_map"></div>
     </div>
     <script>
+      var memberLocation;
+      var marker;
+      var coords;
+      var lat;
+      var lng;
+
       $(function () {
-        var memberLocation;
-        if ("{membersLocation}" == null && "${membersLocation}" == "") {
-          memberLocation = "대전 서구 둔산동";
+        $(".map_button1").click(function () {
+          $(".not_modal").css("visibility", "visible");
+          $(".modal_location").css("visibility", "visible");
+        });
+        $(".map-arrow").click(function () {
+          $(".not_modal").css("visibility", "hidden");
+          $(".modal_location").css("visibility", "hidden");
+          $("#input_location").val("");
+          geocoder.addressSearch(memberLocation, function (result, status) {
+            // 정상적으로 검색이 완료됐으면
+            if (status === kakao.maps.services.Status.OK) {
+              var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+              // 결과값으로 받은 위치를 마커로 표시합니다
+              marker = new kakao.maps.Marker({
+                map: map1,
+                position: coords,
+              });
+
+              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+              map1.setCenter(coords);
+            }
+          });
+        });
+        $(".map_button2").click(function () {
+          $(".not_modal").css("visibility", "visible");
+          $(".modal_map").css("visibility", "visible");
+        });
+        $(".map-arrow").click(function () {
+          $(".not_modal").css("visibility", "hidden");
+          $(".modal_map").css("visibility", "hidden");
+        });
+
+        //
+        //
+
+        if (${member.addrBasic==null}) {
+          memberLocation = "대전 서구 대덕대로 182";
         } else {
-          memberLocation = "${membersLocation}";
+          memberLocation = "${member.addrBasic}";
         }
         $(".member_location").append(memberLocation);
         $(".modal_title2").append(memberLocation);
-        $("#input_location").on(
-          "propertychange change paste input",
-          function () {
-            $memberLocation = $("#input_location").val();
-            geocoder.addressSearch($memberLocation, function (result, status) {
-              // 정상적으로 검색이 완료됐으면
-              if (status === kakao.maps.services.Status.OK) {
-                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-                // 결과값으로 받은 위치를 마커로 표시합니다
-                var marker = new kakao.maps.Marker({
-                  map: map1,
-                  position: coords,
-                });
-
-                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                map1.setCenter(coords);
-              }
-            });
-          }
-        );
-        $(".modal_fix").click(function () {
-          memberLocation = $("#input_location").val();
-          $(".not_modal").css("visibility", "hidden");
-          $(".modal_location").css("visibility", "hidden");
-          $(".member_location").html(memberLocation);
-          $(".modal_title2").html(memberLocation);
-        });
         var mapContainer1 = document.getElementById("location_map"), // 지도를 표시할 div
           mapOption = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            center: new kakao.maps.LatLng(36.3492596, 127.377687), // 지도의 중심좌표
             level: 3, // 지도의 확대 레벨
           };
 
@@ -230,9 +244,8 @@ uri="http://tiles.apache.org/tags-tiles" %>
           // 정상적으로 검색이 완료됐으면
           if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
             // 결과값으로 받은 위치를 마커로 표시합니다
-            var marker = new kakao.maps.Marker({
+            marker = new kakao.maps.Marker({
               map: map1,
               position: coords,
             });
@@ -242,6 +255,10 @@ uri="http://tiles.apache.org/tags-tiles" %>
           }
         });
 
+        //
+        //
+        //
+        //두번쨰 지도
         var mapContainer2 = document.getElementById("map_map"), // 지도를 표시할 div
           mapOption = {
             center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -252,12 +269,17 @@ uri="http://tiles.apache.org/tags-tiles" %>
 
         // 주소-좌표 변환 객체를 생성합니다
         var geocoder = new kakao.maps.services.Geocoder();
-
         // 주소로 좌표를 검색합니다
         geocoder.addressSearch(memberLocation, function (result, status) {
           // 정상적으로 검색이 완료됐으면
           if (status === kakao.maps.services.Status.OK) {
             var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            function setMarkers(map1) {
+              for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+              }
+            }
 
             // 결과값으로 받은 위치를 마커로 표시합니다
             var marker = new kakao.maps.Marker({
@@ -269,6 +291,33 @@ uri="http://tiles.apache.org/tags-tiles" %>
             map2.setCenter(coords);
           }
         });
+        // 주소 검색시 변경
+        $("#input_location").on(
+          "propertychange change paste input",
+          function () {
+            var changeLocation = $("#input_location").val();
+            geocoder.addressSearch(changeLocation, function (result, status) {
+              // 정상적으로 검색이 완료됐으면
+              if (status === kakao.maps.services.Status.OK) {
+                var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                lat = result[0].y;
+                lng = result[0].x;
+                // 결과값으로 받은 위치를 마커로 표시합니다
+                marker.setPosition(coords);
+
+                // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                map1.setCenter(coords);
+              }
+            });
+          }
+        );
+        // 위치지정 클릭시
+        $(".modal_fix").click(function () {
+        var Location = memberLocation = $("#input_location").val();
+		location.href="${contextPath}/goods/placeList.do?location="+location+"&lng"+lng+"&lat"+lat;
+        });
+        console.log(${lat});
+        console.log(${lng});
       });
     </script>
     <div class="not_modal"></div>

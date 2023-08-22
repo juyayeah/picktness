@@ -195,13 +195,13 @@ li {
 							주문결제 관리</a>
 						<ul class="hide">
 							<li><a class="minimi"
-								href="${contextPath }/business/mypage/orderPayList">주문/결제리스트</a></li>
+								href="${contextPath }/business/mypage/orderPayList.do">주문/결제리스트</a></li>
 						</ul></li>
 					<li class="menu"><a href="${contextPath }/business/mypage/reviewCont.do"> 리뷰 관리</a></li>
 					<li class="menu"><a
 						href="${contextPath }/business/mypage/busiInfo.do"> 사업자 정보</a></li>
 					<li class="menu"><a
-						href="${contextPath }/business/mypage/settlementDetail.do"> 정산내역</a></li>
+						href="${contextPath }/business/mypage/settlement.do"> 정산내역</a></li>
 				</ul>
 				</nav>
 		</div>

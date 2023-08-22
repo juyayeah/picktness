@@ -76,7 +76,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
           >리뷰 관리</a
         >
         <a
-          href="${contextPath}/member/mypage/pointList.do"
+          href="${contextPath}/member/mypage/pointList.do?option=all"
           class="menu_list_item"
           >포인트</a
         >

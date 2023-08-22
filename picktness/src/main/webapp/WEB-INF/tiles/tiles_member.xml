@@ -29,13 +29,23 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/joinSuccess.jsp"/>
 	</definition>
 	
-	<!-- <definition name="/main" extends="baseLayout">
-		<put-attribute name="title" value="회원가입창"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/memberJoin.jsp"/>
+	<definition name="/member/findById" extends="baseLayout">
+		<put-attribute name="title" value="아이디찾기"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/findById.jsp"/>
 	</definition>
 	
-	<definition name="/main" extends="baseLayout">
-		<put-attribute name="title" value="사업자가입창"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/businessJoin.jsp"/>
+	<!-- <definition name="/member/findByIdResult" extends="baseLayout">
+		<put-attribute name="title" value="아이디찾기결과"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/findByIdResult.jsp"/>
+	</definition> -->
+	
+	<definition name="/member/findByPwd" extends="baseLayout">
+		<put-attribute name="title" value="비밀번호찾기"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/findByPwd.jsp"/>
+	</definition>
+	
+	<!-- <definition name="/member/findByPwdResult" extends="baseLayout">
+		<put-attribute name="title" value="비밀번호찾기결과"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/findByPwdResult.jsp"/>
 	</definition> -->
 </tiles-definitions>
