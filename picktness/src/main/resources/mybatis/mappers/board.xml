@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+ <mapper namespace="com.pick.board.dao.BoardDAO">
+  	<resultMap id="BoardResult" type="boardVO">
+ 		<result property="bno" column="bno"/>
+ 		<result property="member_id" column="member_id"/>
+ 		<result property="title" column="title"/>
+ 		<result property="content" column="content"/>
+ 		<result property="freeDate" column="freeDate"/>
+ 		<result property="hastag" column="hastag"/>
+ 		<result property="millDate" column="millDate"/>
+ 		<result property="todaymill_img" column="todaymill_img"/>
+ 		
+ 		</resultMap>
+ 		
+ 		<select id="selectAllFreeBoardList" resultType="boardVO">
+ 		<![CDATA[
+ 		select * from freeboard
+ 		]]>
+ 		</select>
+ 		<insert id="insertNewFreeBoard" parameterType="java.util.Map">
+ 		<![CDATA[
+ 		INSERT into freeboard(title,content,member_id)
+ 		VALUES(#{title},#{content},#{member_id},)
+ 		]]>
+ 		</insert>
+ 		
+ 		<select id="selectAllMillList" resultType="boardVO">
+ 		<![CDATA[
+ 		INSERT into todaymill(member_id,title,hastag,content
+ 		]]>
+ 		</select>
+ 		
+</mapper>

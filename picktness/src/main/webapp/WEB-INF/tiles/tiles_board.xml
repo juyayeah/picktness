@@ -43,6 +43,21 @@
 		<put-attribute name="body" value="/WEB-INF/views/board/eventList.jsp" />
 	</definition>
 	
+				<definition name="/board/eventDetail" extends="baseLayout">
+		<put-attribute name="title" value="상세창" />
+		<put-attribute name="body" value="/WEB-INF/views/board/eventDetail.jsp" />
+	</definition>
+
+				<definition name="/board/oneOnOneForm" extends="baseLayout">
+		<put-attribute name="title" value="상세창" />
+		<put-attribute name="body" value="/WEB-INF/views/board/oneOnOneForm.jsp" />
+	</definition>
+
+				<definition name="/board/freeBoardList" extends="baseLayout">
+		<put-attribute name="title" value="상세창" />
+		<put-attribute name="body" value="/WEB-INF/views/board/freeBoardList.jsp" />
+	</definition>
+
 
 	
 </tiles-definitions>

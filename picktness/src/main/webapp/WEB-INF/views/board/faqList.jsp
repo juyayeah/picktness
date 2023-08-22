@@ -128,7 +128,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       <ul class="qna">
         <li>
           <input type="checkbox" id="qna-1" />
-          <label for="qna-1">다른 사람 명의의 계좌로 환불받을 수 있나요?</label>
+          <label for="qna-1">다른 사람 명의의 계좌로 환불받을 수 있나요?${ }</label>
           <div class="faq_bgc">
             <p>
               다른 사람 명의로는 환불할 수 없습니다. 고객님 본인 명의 계좌로만
