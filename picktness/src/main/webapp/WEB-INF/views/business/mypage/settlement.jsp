@@ -132,20 +132,20 @@ request.setCharacterEncoding("utf-8");
 	background-color: #2890f1 !important;
 }
 
-.listcontent th {
+.tableWrapper th {
 	background-color: #2890f1;
 	color: #ffffff;
 }
 
-.listcontent table th:first-child {
+.tableWrapper table th:first-child {
 	border-top-left-radius: 8px;
 }
 
-.listcontent table th:last-child {
+.tableWrapper table th:last-child {
 	border-top-right-radius: 8px;
 	
 }
-.bodybody table th:first-child {
+/* .bodybody table th:first-child {
 	border-top-left-radius: 8px;
 	border-bottom-left-radius: 8px;
 }
@@ -154,7 +154,7 @@ request.setCharacterEncoding("utf-8");
 	border-top-right-radius: 8px;
 	border-bottom-right-radius: 8px;
 	
-}
+} */
 
 #btn {
 	border-top-left-radius: 5px;
@@ -166,8 +166,8 @@ request.setCharacterEncoding("utf-8");
 	border: 1px solid #2890f1;
 	background-color: #cfe6fc;
 	color: #2890f1;
-	font-size: 15px;
-	padding: 3px 15px;
+	font-size: 12px;
+	padding: 2px 10px;
 }
 
 #btn:hover {
@@ -179,16 +179,17 @@ request.setCharacterEncoding("utf-8");
 </head>
 <body>
 	<div class="listcontent">
-		<h2 align="center">정산내역(회차)</h2>
+		<h2 align="center">정산내역</h2>
+				<div style="float:right; margin-bottom:2px;">조회기간<input name="search_date" type="date"
+					size="40">~<input name="search_date" type="date" size="40"> <button id="btn" value="검색"> 검색</button></div>
+					</div>
 <br>
 		<div class="tableWrapper">
 			<table id="userListTable">
 				<tr style="cursor: default;">
-					<th width="10%">상품</th>
-					<th width="20%">상품명</th>
-					<th width="20%">결제금액</th>
-					<th width="20%">수수료</th>
-					<th width="15%">결제날짜</th>
+					<th width="10%">회차</th>
+					<th width="20%">정산금액</th>
+					<th width="15%">정산날짜</th>
 				</tr>
 
 				<!-- 조건리스트 -->
@@ -203,10 +204,8 @@ request.setCharacterEncoding("utf-8");
 						</tr> --%>
 				<!-- 하드코딩 -->
 				<tr align="center">
-					<td>PT</td>
-					<td>이용권</td>
-					<td>800,000</td>
-					<td>16,000</td>
+					<td><a href="${contextPath}/business/mypage/settlementDetail.do">1</a></td>
+					<td><a href="${contextPath}/business/mypage/settlementDetail.do">800,000</a></td>
 					<td>2023-05-01</td>
 				</tr>
 				<!-- 하드코딩 끝-->
@@ -214,38 +213,15 @@ request.setCharacterEncoding("utf-8");
 					<c:when test="${!empty trainerList }">
 				<c:forEach var="trainer" items="${trainerList }">
 					<tr align="center">
-						<td>${}</td>
+						<td><a href="${contextPath}/business/mypage/settlementDetail.do">${}</a></td>
+						<td><a href="${contextPath}/business/mypage/settlementDetail.do">${}</a></td>
 						<td>${ }</td>
-						<td>${ }</td>
-						<td>${}</td>
-						<td>${ }</td>
-						<td><a href="${contextPath}/business/mypage/modTrainer.do?name=${trainer.name}"><button class="modbtn">수정</button></a> <a href="${contextPath}/business/mypage/delTrainer.do?name=${trainer.name}"><button class="delbtn">삭제</button></a></td>
 					</tr>
 				</c:forEach>
 				</c:when>
 				</c:choose> --%>
 			</table>
-			<br><br>
-			<div class="tableWrapper">
-			<table id="userListTable">
-				<tr style="cursor: default;">
-					<th width="20%">정산금액</th>
-					<th width="20%">결제금액</th>
-					<th width="20%">수수료</th>
-					<th width="15%">정산날짜</th>
-				</tr>
-				<tr align="center">
-					<td>780,000</td>
-					<td>800,000</td>
-					<td>20,000</td>
-					<td>2023-05-01</td>
-				</tr>
-			</table>
-			<br>
-			<div align="center"><a href="${contextPath }/business/mypage/settlement.do"><button id="btn">목록으로</button></a></div>
-			<br>
-		</div>
-		</div>
+			<div align="right"><span style="font-size: 13px; color: #2089f1;">* 정산금은 월(1일~말일) 단위로 다음달 15일(주말 및 공휴일 다음날)에 입금됩니다.</span></div>
 		</div>
 </body>
 </html>

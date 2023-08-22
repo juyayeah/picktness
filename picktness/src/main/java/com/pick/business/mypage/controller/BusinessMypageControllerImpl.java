@@ -110,6 +110,13 @@ import org.springframework.web.servlet.ModelAndView;
 				return mav;
 			}
 			//정산내역//
+			@RequestMapping(value="/business/mypage/settlement.do", method=RequestMethod.GET)
+			private ModelAndView settlement(HttpServletRequest request, HttpServletResponse response) throws Exception{
+				ModelAndView mav = new ModelAndView();
+				String viewName = (String) request.getAttribute("viewName");
+				mav.setViewName(viewName);
+				return mav;
+			}
 			@RequestMapping(value="/business/mypage/settlementDetail.do", method=RequestMethod.GET)
 			private ModelAndView settlementDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
 				ModelAndView mav = new ModelAndView();
