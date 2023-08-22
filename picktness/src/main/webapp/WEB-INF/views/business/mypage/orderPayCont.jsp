@@ -269,7 +269,7 @@ request.setCharacterEncoding("utf-8");
 					<td>이용권</td>
 					<td>1개월</td>
 					<td>2023-05-01</td>
-					<td><button>이용전</button></td>
+					<td><span id="use" onClick="change()">이용전</span></td>
 				</tr>
 				<!-- 하드코딩 끝-->
 				<%-- </c:when>
@@ -289,5 +289,16 @@ request.setCharacterEncoding("utf-8");
 			</table>
 		</div>
 	</div>
+	<script>
+document.getElementById("use").onclick = function() {state()};
+function state() {
+	var use=
+document.getElementById("use"); if(use.innerHTML == "이용전"){
+	use.innerHTML="이용중";} else if(use.innerHTML =="이용중"){
+		use.innerHTML="이용완료";}
+	}
+
+
+</script>
 </body>
 </html>
