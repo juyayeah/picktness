@@ -13,8 +13,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 50vh;
-            margin: 0;
+            
+            margin:70px 0px 150px 0px;
         }
         .login-container {
             width: 30%;
@@ -62,13 +62,13 @@
             box-sizing: border-box;
             outline: none;
         }
-        button[type="submit"] {
+        .loginB {
             background-color: #2890F1;
             color: white;
             border: none;
             cursor: pointer;
         }
-        button[type="submit"]:hover {
+        .loginB :hover {
             background-color: #1E73C6;
         }
         
@@ -160,8 +160,8 @@
                     </button>
                 </div>
                 <div class="footer-select">
-                    <a href="#">아이디 찾기</a> |
-                    <a href="#">비밀번호 찾기</a> |
+                    <a href="${contextPath}/member/findById.do">아이디 찾기</a> |
+                    <a href="${contextPath}/member/findByPwd.do">비밀번호 찾기</a> |
                     <a href="${contextPath}/member/selectJoin.do">회원가입</a>
                 </div>
             </div>
@@ -175,8 +175,8 @@
                     <button class="loginB" type="submit">로그인</button>
                 </form>
                 <div class="footer-select">
-                    <a href="#">아이디 찾기</a> |
-                    <a href="#">비밀번호 찾기</a> |
+                    <a href="${contextPath}/member/findById.do"">아이디 찾기</a> |
+                    <a href="${contextPath}/member/findByPwd.do">비밀번호 찾기</a> |
                     <a href="${contextPath}/member/selectJoin.do">회원가입</a>
                 </div>
             </div>
