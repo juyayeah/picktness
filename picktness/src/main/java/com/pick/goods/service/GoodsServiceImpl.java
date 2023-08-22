@@ -20,17 +20,16 @@ public class GoodsServiceImpl implements GoodsService{
 	public Map<String, List> searchGoods(String search_content) throws DataAccessException {
 		// TODO Auto-generated method stub
 		Map<String, List> result = new HashMap();
-		/*
 		List<GoodsBusinessVO> business = goodsDAO.businessSearch(search_content);
-		if(business != null) {
+		if(!(business == null || business.isEmpty())) {
 			result.put("business", business);
 		}
 		List<GoodsTrainerVO> trainer = goodsDAO.trainerSearch(search_content);
-		if(trainer != null) {
+		if(!(trainer == null || trainer.isEmpty())) {
 			result.put("trainer", trainer);
-		}*/
+		}
 		List<GoodsShoppingVO> shopping = goodsDAO.shoppingSearch(search_content);
-		if(shopping != null) {
+		if(!(shopping == null || shopping.isEmpty())) {
 			result.put("shopping", shopping);
 		}
 		return result;
