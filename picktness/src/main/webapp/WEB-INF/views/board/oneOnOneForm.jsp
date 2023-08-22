@@ -1,15 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix ="c" uri ="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value = "${pageContext.request.contextPath}" />
-<%
-request.setCharacterEncoding("UTF-8");
-%> 
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ì˜¤ëŠ˜ì‹ë‹¨ ê¸€ì“°ê¸°</title>
+<title>1:1¹®ÀÇ ±Û¾²±â</title>
 
   <style>
    .board_inner {
@@ -92,18 +87,6 @@ float:right;
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-$(function(){
-	$('#btn').click(function(){
-		alert("ë²„íŠ¼ í´ë¦­í–ˆìŒ");
-	if($("#title").val == ''){
-		alert("ê¸€ì„ ì“°ì„¸ìš”");
-	}
-	    
-	}); 
-});
-
-
-
 var cnt=1;
 
 function back() {
@@ -111,25 +94,17 @@ function back() {
     history.go(-1); 
 
 }
-var cnt=1;
-
-function fn_addFile(){
-	$("#dfile").append("<br>"+"<input type='file' name='file"+cnt+"' />");
-	cnt++;
-}
-
-
 
 
 </script>
 </head>
 <body>
 <div class ="board_inner">
-<h1>ê¸€ì“°ê¸°</h1>
-<form method="post" action="${contextPath}/upload.do" enctype="multipart/form-data">
-      <p><span style="font-size: 20px;">ì œëª©</span> <input  id="title" type="text" placeholder="ì œëª©ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”." name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
-      <p><span style="font-size: 20px;">íƒœê·¸</span> <input  type="text" name="hasTag" placeholder="#ì˜¤ìš´ì™„ #ì˜¤ëŠ˜ì‹ë‹¨" name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
-      <p class="content"><span style="font-size: 20px;">ë‚´ìš©</span> <textarea  style="margin-left: 5px;" placeholder="ë‚´ìš©ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”." name="content" style="width: 80%; margin-bottom: 50px;"></textarea></p>
+<h1>±Û¾²±â</h1>
+<form method="post" action="${contextPath}/upload" enctype="multipart/form-data">
+      <p><span style="font-size: 20px;">Á¦¸ñ</span> <input type="text" placeholder="Á¦¸ñÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä." name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
+      
+      <p class="content"><span style="font-size: 20px;">³»¿ë</span> <textarea style="margin-left: 5px;" placeholder="³»¿ëÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä." name="content" style="width: 80%; margin-bottom: 50px;"></textarea></p>
     <tr>
         
         <td colspan="3">
@@ -137,13 +112,13 @@ function fn_addFile(){
                 <div>
                     <span class="file_input">
                         
-                        <label> ì²¨ë¶€íŒŒì¼
+                        <label> Ã·ºÎÆÄÀÏ
                             <input type="file" name="files" onchange="selectFile(this);" />
                         </label>
                     </span>
                     <span class= "btn_right">
-                    <button type="button" onclick="back()" class="btns del_btn"><span>ëŒì•„ê°€ê¸°</span></button>
-                    <button class= "btn_margin" id="btn" type="button" class="btns fn_add_btn"><span>ë“±ë¡í•˜ê¸°</span></button>
+                    <button type="button" onclick="back()" class="btns del_btn"><span>µ¹¾Æ°¡±â</span></button>
+                    <button class= "btn_margin" type="submit" onclick="addFile();" class="btns fn_add_btn"><span>µî·ÏÇÏ±â</span></button>
                   </span>
                   </div>
             </div>
@@ -153,5 +128,5 @@ function fn_addFile(){
 </div>
 </form>
 
-</body>
+ </body> <!--  -->
 </html>
