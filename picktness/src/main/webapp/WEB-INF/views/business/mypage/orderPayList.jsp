@@ -12,7 +12,7 @@ request.setCharacterEncoding("utf-8");
 <meta charset="utf-8">
 <title>Insert title here</title>
 <style>
-.bodybody div {
+.bodybody {
 	position: relative;
 	width: 860px;
 	margin: 0 auto;
@@ -224,7 +224,8 @@ request.setCharacterEncoding("utf-8");
 <body>
 	<div class="bodybody">
 		<h2 align="center">주문/결제관리 리스트</h2>
-						<div>
+		
+		<div>
 			<div class="topbar">
 				처리상태 <select>
 					<option value="전체">전체</option>
