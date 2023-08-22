@@ -70,8 +70,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/withdrawBye.jsp"/>
 	</definition>
 	<!-- 정산내역 -->
-	<definition name="/business/mypage/settlementDetail" extends="busipageLayout">
+	<definition name="/business/mypage/settlement" extends="busipageLayout">
 		<put-attribute name="title" value="정산내역"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/settlement.jsp"/>
+	</definition>
+	<definition name="/business/mypage/settlementDetail" extends="busipageLayout">
+		<put-attribute name="title" value="정산내역상세"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/settlementDetail.jsp"/>
 	</definition>
 	
