@@ -6,12 +6,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
 	<select id="businessSearch" resultType="goodsBusinessVO" parameterType="String">
 	<![CDATA[
-	select b.*, i.filename from business_detail as b join business_detail_image as i on b.goods_id = i.goods_id where i.filetype="main_image" and (b.goods_title like #{search_content} or b.cate like #{search_content});
+	select t.*, i.fileName from (select d.*, b.b_name, b.zipcode, b.addrbasic, b.addrdetail, b.phone1, b.phone2, b.phone3, b.lat, b.lng from business as b join business_detail as d on b.id = d.id where b.b_name like #{search_content} or d.cate like #{search_content}) as t join business_detail_image as i on t.goods_id = i.goods_id where i.filetype = "main_image";
 	]]>
 	</select> 
 	<select id="trainerSearch" resultType="goodsTrainerVO" parameterType="String">
 	<![CDATA[
-	select t.*, i.filename from trainer as t join trainer_detail_image as i on t.goods_id = i.goods_id where i.filetype="main_image" and (t.name like #{search_content} or t.cate like #{search_content});
+	select t.*, i.fileName from (select tr.*,b.b_name, b.addrbasic, b.addrdetail, b.phone1, b.phone2, b.phone3, b.lat, b.lng from trainer as tr join business as b on tr.id = b.id where tr.state = "승인완료" and (tr.name like #{search_content} or tr.cate like #{search_content})) as t join trainer_detail_image as i on t.goods_id = i.goods_id where i.filetype = "main_image";
 	]]>
 	</select>
 		<select id="shoppingSearch" resultType="goodsShoppingVO" parameterType="String">

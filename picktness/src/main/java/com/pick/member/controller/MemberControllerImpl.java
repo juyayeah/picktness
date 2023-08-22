@@ -108,26 +108,26 @@ public class MemberControllerImpl implements MemberController{
 	
 	
 	@Override
-	@RequestMapping(value="/addMember.do" ,method = RequestMethod.POST)
+	@RequestMapping(value="/member/addMember.do" , method = RequestMethod.POST)
 	public ResponseEntity addMember(MemberVO member, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("utf-8");
-		String message = null;
-		ResponseEntity resEntity = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-		    memberService.addMember(memberVO);
-		    message  = "<script>";
-		    message += " location.href='"+request.getContextPath()+"/member/joinSuccess.do';";
-		    message += " </script>";
-		    
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-		return resEntity;
+	        throws Exception {
+	    response.setContentType("text/html; charset=UTF-8");
+	    request.setCharacterEncoding("utf-8");
+	    String message = null;
+	    ResponseEntity resEntity = null;
+	    HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	    try {
+	        // member 객체의 정보를 그대로 사용
+	        memberService.addMember(member);
+	        message  = "<script>";
+	        message += " location.href='"+request.getContextPath()+"/member/joinSuccess.do';";
+	        message += " </script>";
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	    }
+	    resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+	    return resEntity;
 	}
 
 	@RequestMapping(value="/member/joinSuccess.do", method=RequestMethod.GET)

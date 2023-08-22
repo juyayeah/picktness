@@ -19,7 +19,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	@Override
 	public void addMember(MemberVO memberVO) throws Exception {
-		memberDAO.inserMember(memberVO);
+		memberDAO.insertMember(memberVO);
 		
 	}
 	@Override
