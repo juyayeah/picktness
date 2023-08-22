@@ -13,31 +13,10 @@
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js" /></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<style>
-.container {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 50vh;
-            margin: 0;
-        }
-.findId-container {
-            width: 30%;
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
 
-</style>
 <body style="background-color: white;">
-    <div class="container">
-    <div class="findId-container">
     <h1>아이디 찾기</h1>
-    <h3>본인확인 이메일로 인증</h4>
+    <h4>본인확인 이메일로 인증</h4>
     <h5>본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</h5>
     <div class="form-row">
         <label for="id">이름</label><br>
@@ -54,7 +33,5 @@
         <button>확인</button>
     </div>  
     <button>아이디 찾기</button>
-</div>
-</div>
 </body>
 </html>

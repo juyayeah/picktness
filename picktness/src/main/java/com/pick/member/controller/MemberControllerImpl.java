@@ -43,6 +43,7 @@ public class MemberControllerImpl implements MemberController{
 	@RequestMapping(value="/member/login.do", method=RequestMethod.POST)
 	private ModelAndView login(@RequestParam Map<String, String> loginMap,HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
+		 String message = null;
 		String viewName = (String) request.getAttribute("viewName");
 		HttpSession session =request.getSession();
 		memberVO = memberService.login(loginMap);
@@ -137,4 +138,25 @@ public class MemberControllerImpl implements MemberController{
 		mav.setViewName(viewName);
 		return mav;
 	}
+
+	@RequestMapping(value="/member/findById.do", method=RequestMethod.GET)
+	private ModelAndView findById(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		return mav;
+	}
+
+	@RequestMapping(value="/member/findByPwd.do", method=RequestMethod.GET)
+	private ModelAndView findByPwd(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		return mav;
+	}
+
 }
+
+
+
+

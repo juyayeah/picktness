@@ -39,6 +39,51 @@
         });
     };
     </script>
+
+<script>
+    // 이메일 인증번호
+    $checkEmail.click(function() {
+       $.ajax({
+          type : "POST",
+          url : "login/mailConfirm",
+          data : {
+             "email" : $memail.val()
+          },
+          success : function(data){
+             alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
+             console.log("data : "+data);
+             chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt);
+          }
+       })
+    })
+    
+        // 이메일 인증번호 체크 함수
+        function chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt){
+            $memailconfirm.on("keyup", function(){
+                if (data != $memailconfirm.val()) { //
+                    emconfirmchk = false;
+                    $memailconfirmTxt.html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
+                    $("#emconfirmchk").css({
+                        "color" : "#FA3E3E",
+                        "font-weight" : "bold",
+                        "font-size" : "10px"
+    
+                    })
+                    //console.log("중복아이디");
+                } else { // 아니면 중복아님
+                    emconfirmchk = true;
+                    $memailconfirmTxt.html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
+    
+                    $("#emconfirmchk").css({
+                        "color" : "#0D6EFD",
+                        "font-weight" : "bold",
+                        "font-size" : "10px"
+    
+                    })
+                }
+            })
+        }
+    </script>
 <script>    
 function openZipSearch() {
     new daum.Postcode({
@@ -304,7 +349,9 @@ input {
     <option value="freechal.com"> freechal.com </option>
     <option value="hanmir.com"> hanmir.com </option>
 </select>
-          <button class="address-button" type="button" onclick="">인증번호 받기</button>
+        <button class="address-button" type="button" onclick="">인증번호 받기</button>
+        <span class="id_ok" style="color:#2890F1; font-size: 14px; font-weight: normal; display:none;">사용 가능한 이메일입니다.</span>
+        <span class="id_already" style="color:red; font-size: 14px; font-weight: normal; display:none;">중복된 이메일입니다.</span>
 </div>
 		<div class="form-row">
                 <label for="verification-code">인증번호<span class="label-with-star">*</span></label><br>
@@ -547,7 +594,7 @@ pwdInput.addEventListener('input', () => {
 });
 
 function validateId(id) {
-    // Check if the ID meets your conditions
+   
     if (/^[a-zA-Z0-9]{4,16}$/.test(id)) {
         idCheck.textContent = '';
         idCheck.style.color = '#2890F1';
@@ -562,7 +609,7 @@ function validateId(id) {
 }
 
 function validatePassword(password) {
-    // Check if password meets the conditions
+    
     if (/^[a-zA-Z0-9]{6,16}$/.test(password)) {
         pwdError.textContent = '사용 가능한 비밀번호입니다.';
         pwdError.style.color = '#2890F1';
