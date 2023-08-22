@@ -25,7 +25,6 @@ function change() {
     const subs = document.getElementById('subscriberBtn');
     subs.innerText = '답변완료'
 }
-
 </script>
 <style>
 /* * {
@@ -57,13 +56,6 @@ a {
 	padding-bottom:2px;
 }
 
-.topbar:first-child {
-	padding: 0 85px 0 0;
-}
-
-.topbar:last-child {
-	padding: 0 0 0 30px;
-}
 
 .tableWrapper {
 	width: 100%;
@@ -74,7 +66,7 @@ a {
 }
 /* 스크롤바 */
 #userListTable {
-	width: 100%;
+	width: 1000px;
 	border: 0px;
 	border-collapse: collapse;
 	text-align: center;
@@ -154,9 +146,11 @@ a {
 
 .comments table {
 border:1px solid #c0c0c0;
+border-collapse: collapse;
 }
 
 .comments th {
+border:1px solid #c0c0c0;
 	width: 90px;
 	padding: 3px 0; 
 	color : #fff;
@@ -164,6 +158,7 @@ border:1px solid #c0c0c0;
 }
 
 .comments td {
+border:1px solid #c0c0c0;
 	min-width: 130px;
 	border-bottom: 1px solid lightgray;
 }
@@ -173,7 +168,7 @@ border:1px solid #c0c0c0;
 <body>
 	<div class="listcontent">
 		<div class="listcontentinner"></div>
-		<h2 align="center">상품문의 관리</h2>
+		<h2 align="center">리뷰 관리</h2>
 
 		<div>
 			<div class="topbar">
@@ -184,23 +179,40 @@ border:1px solid #c0c0c0;
 				</select>
 			</div>
 			<div class="topbar">
-				조회기간 <input name="search_date" type="date" size="40">~<input
-					name="search_date" type="date" size="40">
+				상품 <select>
+					<option value="전체" selected>전체</option>
+					<option value="이용권">이용권</option>
+					<option value="PT">PT</option>
+				</select>
 			</div>
 			<div class="topbar">
-				상세검색&nbsp;<input type="text" placeholder="상세검색">
-				<button id="btn" value="검색">검색</button>
+				트레이너명 <select>
+					<option value="전체" selected>전체</option>
+					<c:forEach var="trainer.name" items="${trainerList }" varStatus="status">
+					<option><c:out value="${trainerVO.name}"/></option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="topbar">
+				조회기간 <input name="search_date" type="date" size="30">~<input
+					name="search_date" type="date" size="30">
+			</div>
+			<div class="topbar">
+			<input type="text" size="12px" placeholder="상세검색">
+				<button id="btn" style="size:20;" value="검색">검색</button>
 			</div>
 		</div>
 			<div class="tableWrapper">
 			<table id="userListTable">
 				<tr style="cursor: default;">
-					<th width="5%">번호</th>
-					<th width="20%">상품명</th>
-					<th width="15%">작성자ID</th>
-					<th width="30%">문의내용</th>
 					<th width="15%">작성일</th>
-					<th width="15%">처리상태</th>
+					<th width="10%">작성자ID</th>
+					<th width="15%">주문번호</th>
+					<th width="10%">상품</th>
+					<th width="10%">상품명</th>
+					<th width="20%">문의내용</th>
+					<th width="10%">만족도</th>
+					<th width="10%">처리상태</th>
 				</tr>
 				<tr>
 				<td>1</td>
@@ -208,6 +220,8 @@ border:1px solid #c0c0c0;
 				<td>3</td>
 				<td>4</td>
 				<td>5</td>
+				<td>6</td>
+				<td>6</td>
 				<td>6</td>
 				</tr>
 				<tr>
@@ -217,13 +231,7 @@ border:1px solid #c0c0c0;
 				<td>4</td>
 				<td>5</td>
 				<td>6</td>
-				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
+				<td>6</td>
 				<td>6</td>
 				</tr>
 				<tr>
@@ -233,6 +241,8 @@ border:1px solid #c0c0c0;
 				<td>4</td>
 				<td>5</td>
 				<td>6</td>
+				<td>6</td>
+				<td>6</td>
 				</tr>
 				<tr>
 				<td>1</td>
@@ -240,6 +250,18 @@ border:1px solid #c0c0c0;
 				<td>3</td>
 				<td>4</td>
 				<td>5</td>
+				<td>6</td>
+				<td>6</td>
+				<td>6</td>
+				</tr>
+				<tr>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+				<td>6</td>
+				<td>6</td>
 				<td>6</td>
 				</tr>
 			<%-- 	<c:choose>
@@ -333,28 +355,34 @@ border:1px solid #c0c0c0;
 	</div>
 	<div>
 		<div class="comments">
-			<b>문의글</b>
+			<b>리뷰</b>
 			<table>
 				<tr>
 					<th>작성일</th>
 					<td>${goods_ask.askdate}</td>
-					<th>작성자ID</th>
-					<td>${goods_ask.member_id }</td>
-				</tr>
-				<tr>
-					<th>상품명</th>
-					<td>${goods_ask.goods_title }</td>
 					<th>답변일</th>
 					<td>${goods_ask_answer.askadate }</td>
 				</tr>
 				<tr>
-					<th>문의내용</th>
+					<th>작성자ID</th>
+					<td>${goods_ask.member_id }</td>
+					<th>주문번호</th>
+					<td>${goods_ask.goods_title }</td>
+				</tr>
+				<tr>
+					<th>상품명</th>
+					<td>[${goods.goods}] ${goods.goods_id}</td>
+					<th>만족도</th>
+					<td>${goods_ask.goods_title }</td>
+				</tr>
+				<tr>
+					<th>리뷰내용</th>
 					<td colspan="3">${goods_ask.ask_content }</td>
 				</tr>
 			</table>
 		</div>
 		<div class="comments">
-			<b>문의답변</b>
+			<b>리뷰답변</b>
 			<table class="tables">
 				<tr>
 					<th>답변일</th>
@@ -364,7 +392,7 @@ border:1px solid #c0c0c0;
 				</tr>
 				<tr>
 					<th>상품명</th>
-					<td>${goods_ask.goods_title }</td>
+					<td>[${goods.goods}] ${goods.goods_id}</td>
 					<th>처리상태</th>
 					<td><a href="#" id="subscriberBtn" type="text" onclick='change()' >답변대기</a></td>
 				</tr>

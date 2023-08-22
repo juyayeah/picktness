@@ -23,6 +23,11 @@ padding: 10px;
 height:40px;
 }
 </style>
+<script>
+
+
+</script>
+
 <title>사업자정보</title>
 </head>
 <body>
@@ -76,7 +81,7 @@ height:40px;
 </tr>
 
 <tr>
-<td colspan="3" align="center"><a href="${contextPath }/business/mypage/"><button>취소</button></a> <input class="btn_blue" type="submit" value="수정반영"></td>
+<td colspan="3" align="center"><button type="reset">취소</button> <input class="btn_blue" type="submit" value="수정반영"></td>
 </tr>
 <tr>
 <td colspan="3" align="center"><a href="${contextPath}/business/mypage/withdraw.do" style="font-size: 10px; color: #2890f1;">*사업자 탈퇴신청</a></td>
