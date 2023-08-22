@@ -86,13 +86,13 @@
             cursor: pointer;
         }
 
-        .footer {
+        .footer-select {
             text-align: center;
             margin-top: 20px;
             color: black;
         }
-        .footer a {
-            text-decoration: none;
+        .footer-select a {
+            
             color: black;
             font-size: 14px;
         }
@@ -159,7 +159,7 @@
                         <img src="https://ifh.cc/g/8gHrO6.png" alt="카카오톡로그인" class="button-image button-image-kakao">
                     </button>
                 </div>
-                <div class="footer">
+                <div class="footer-select">
                     <a href="#">아이디 찾기</a> |
                     <a href="#">비밀번호 찾기</a> |
                     <a href="${contextPath}/member/selectJoin.do">회원가입</a>
@@ -174,7 +174,7 @@
                     <br>
                     <button class="loginB" type="submit">로그인</button>
                 </form>
-                <div class="footer">
+                <div class="footer-select">
                     <a href="#">아이디 찾기</a> |
                     <a href="#">비밀번호 찾기</a> |
                     <a href="${contextPath}/member/selectJoin.do">회원가입</a>

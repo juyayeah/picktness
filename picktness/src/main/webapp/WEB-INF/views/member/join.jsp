@@ -273,6 +273,12 @@ input {
                 <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호 재확인"  class="input-small"><br>
                 <span id="passwordError" style="color: red;"></span>
             </div>
+
+            <div class="form-row">
+                <label for="name">이름<span class="label-with-star">*</span></label><br>
+                <input type="text" name="name" class="input-small"><br>
+            </div>
+
             <div class="form-row">
         <label for="addr">주소<span class="label-with-star">*</span></label><br>
 		<input style="width: 100px;" type="text"  id="zip_code" name="zipcode" onclick="openZipSearch();" readonly="readonly" placeholder="우편번호">
@@ -472,11 +478,6 @@ input {
                     return;
                 }
     
-                if (!chkAll.checked) {
-                    alert("모든 약관에 동의하셔야 다음 단계로 진행 가능합니다.");
-                    return;
-                }
-    
                 if (!chk_2.checked) {
                     alert("필수 약관에 동의하셔야 가입이 가능합니다.");
                     chk_2.focus(); // 포커스를 체크박스로 이동
@@ -493,7 +494,6 @@ input {
             });
         });
     </script>
-    
 </body>
 <script>
     const passwordInput = document.getElementById('pwd');
