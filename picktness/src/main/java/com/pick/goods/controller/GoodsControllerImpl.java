@@ -1,10 +1,13 @@
 package com.pick.goods.controller;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,17 +17,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pick.goods.service.GoodsService;
+import com.pick.goods.vo.GoodsBusinessVO;
+import com.pick.member.vo.MemberVO;
 
 @Controller("goodsController")
 public class GoodsControllerImpl implements GoodsController{
 	@Autowired
 	GoodsService goodsService;
+	@Autowired
+	HttpSession session;
 
 	@Override
 	@RequestMapping(value="/goods/placeList.do", method=RequestMethod.GET)
-	public ModelAndView placeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView placeList(@RequestParam("cate") String cate, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		List<GoodsBusinessVO> placeList = new ArrayList<>();
 		String viewName = (String) request.getAttribute("viewName");
+		session = request.getSession();
+		session.setAttribute("cate", cate);
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		mav.addObject("placeList", placeList);
 		mav.setViewName(viewName);
 		return mav;
 	}

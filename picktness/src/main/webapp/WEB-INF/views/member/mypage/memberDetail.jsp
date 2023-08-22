@@ -14,6 +14,9 @@ uri="http://tiles.apache.org/tags-tiles" %>
         border: 1px solid tomato;
       }
     </style>
+    <script>
+
+    </script>
     <title>회원 정보 수정창</title>
   </head>
   <body>

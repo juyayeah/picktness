@@ -12,12 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FileDownloadController {
-	private static final String ARTICLE_IMAGE_REPO = "c:\\board\\article_image";
+	private static final String BUSINESS_IMAGE_REPO = "c:\\picktness\\business_image";
+	private static final String EVENT_IMMAGE_REPO = "c:\\picktness\\event_image";
+	private static final String REVIEW_IMAGE_REPO = "c:\\picktness\\review_image";
+	private static final String ONEONONE_IMAGE_REPO = "c:\\picktness\\oneonone_image";
+	private static final String SHOPPING_IMAGE_REPO = "c:\\picktness\\shopping_image";
+	private static final String TODAYMILL_IMAGE_REPO = "c:\\picktness\\todaymill_image";
+	private static final String TRAINER_IMAGE_REPO = "c:\\pickness\\trainer_image";
 	
 	@RequestMapping("/download.do")
-	protected void download(@RequestParam("imageFileName") String imageFileName, @RequestParam("articleNO") String articleNO, HttpServletResponse response) throws Exception{
+	protected void download(@RequestParam("cate") String cate, @RequestParam("imageFileName") String imageFileName, @RequestParam("articleNO") String articleNO, HttpServletResponse response) throws Exception{
 		OutputStream out = response.getOutputStream();
-		String downFile = ARTICLE_IMAGE_REPO + "\\" + articleNO + "\\" + imageFileName;
+		String downFile = fileName(cate, articleNO, imageFileName);
 		File file = new File(downFile);
 		
 		response.setHeader("Cache-Control", "no-cache");
@@ -33,4 +39,17 @@ public class FileDownloadController {
 		out.close();
 		
 	}
+
+	protected String fileName(String cate, String articleNO, String imageFileName) {
+		String fileName = null;
+		switch(cate) {
+		case "business": fileName=BUSINESS_IMAGE_REPO+"\\"+articleNO +"\\" + imageFileName;
+		break;
+		case "event": fileName = EVENT_IMMAGE_REPO+"\\"+articleNO+"\\"+imageFileName;
+		break;
+		case "review": fileName = REVIEW_IMAGE_REPO + "\\" +articleNO +"\\"+imageFileName;
+		}
+		return fileName;
+	}
+
 }

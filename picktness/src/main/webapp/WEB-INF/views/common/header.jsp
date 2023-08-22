@@ -8,6 +8,13 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
   <head>
     <script>
+    function List(id){
+    	if(${member.lat} != null && ${member.lat} != ''){
+    		location.href="${contextPath}/goods/placeList.do?cate="+id+"&lat=${member.lat}&lng=${member.lng}";
+    	} else {
+    		location.href="${contextPath}/goods/placeList.do?cate"
+    	}
+    }
       $(function () {
         $(".logo_h_i").click(function () {
           $(location).attr("href", "http://localhost:8080/main.do");
@@ -456,14 +463,14 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           <div class="menu_all_list">
             <ul class="menu_list_place">
               <li class="menu_list_title">
-                <a href="${contextPath}/goods/placeList.do">운동시설</a>
+                <a href="${contextPath}/goods/placeList.do?cate=all&lng=${member.lng}&lat=${member.lat}">운동시설</a>
               </li>
-              <li class="menu_list_a"><a href="">헬스</a></li>
-              <li class="menu_list_a"><a href="">크로스핏</a></li>
-              <li class="menu_list_a"><a href="">요가</a></li>
-              <li class="menu_list_a"><a href="">필라테스</a></li>
-              <li class="menu_list_a"><a href="">복싱</a></li>
-              <li class="menu_list_a"><a href="">주짓수</a></li>
+              <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=health">헬스</a></li>
+              <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=cross">크로스핏</a></li>
+              <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=yoga">요가</a></li>
+              <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=pila">필라테스</a></li>
+              <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=boxing">복싱</a></li>
+              <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=jiu">주짓수</a></li>
             </ul>
             <ul class="menu_list_traniner">
               <li class="menu_list_title">
@@ -493,16 +500,16 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         <div class="menu_sp">
           <span
             class="menu_sp_title"
-            onclick="location.href='${contextPath}/goods/placeList.do'"
+            onclick="location.href='${contextPath}/goods/placeList.do?cate=all'"
             >운동시설</span
           >
           <ul class="menu_sp_dt">
-            <li class="menu_list_a"><a href="">헬스</a></li>
-            <li class="menu_list_a"><a href="">크로스핏</a></li>
-            <li class="menu_list_a"><a href="">요가</a></li>
-            <li class="menu_list_a"><a href="">필라테스</a></li>
-            <li class="menu_list_a"><a href="">복싱</a></li>
-            <li class="menu_list_a"><a href="">주짓수</a></li>
+            <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=health">헬스</a></li>
+            <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=cross">크로스핏</a></li>
+            <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=yoga">요가</a></li>
+            <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=pila">필라테스</a></li>
+            <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=boxing">복싱</a></li>
+            <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=jiu">주짓수</a></li>
           </ul>
         </div>
         <!--/menu_sp-->
