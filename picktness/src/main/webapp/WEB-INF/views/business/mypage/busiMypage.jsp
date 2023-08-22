@@ -201,7 +201,7 @@ li {
 					<li class="menu"><a
 						href="${contextPath }/business/mypage/busiInfo.do"> 사업자 정보</a></li>
 					<li class="menu"><a
-						href="${contextPath }/business/mypage/settlementDetail.do"> 정산내역</a></li>
+						href="${contextPath }/business/mypage/settlement.do"> 정산내역</a></li>
 				</ul>
 				</nav>
 		</div>
