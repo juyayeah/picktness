@@ -42,9 +42,6 @@ request.setCharacterEncoding("utf-8");
 </script>
 
 <style>
-.starblue {
-	color: #2890f1;
-}
 
 table {
 	border-spacing: 0 20px;
@@ -63,6 +60,9 @@ table {
 	padding-top: 5px;
 }
 
+.starblue {
+	color: #2890f1;
+}
 .starbluetop {
 	color: #2890f1;
 	display: table-cell;

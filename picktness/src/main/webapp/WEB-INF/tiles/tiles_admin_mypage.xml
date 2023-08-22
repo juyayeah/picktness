@@ -23,6 +23,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/mypage/adminProdList.jsp" />
 	</definition>
+	<definition name="/admin/mypage/adminProdForm"
+		extends="adpageLayout">
+		<put-attribute name="title" value="상품등록" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/mypage/adminProdForm.jsp" />
+	</definition>
 	<definition name="/admin/mypage/adminQnAList"
 		extends="adpageLayout">
 		<put-attribute name="title" value="상품문의글" />

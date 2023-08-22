@@ -220,6 +220,8 @@ request.setCharacterEncoding("utf-8");
 	background-color: #fff;
 }
 </style>
+
+
 </head>
 <body>
 	<div class="bodybody">
@@ -227,10 +229,11 @@ request.setCharacterEncoding("utf-8");
 		
 		<div>
 			<div class="topbar">
-				처리상태 <select>
+				이용상태 <select>
 					<option value="전체">전체</option>
-					<option value="답변대기" selected>답변대기</option>
-					<option value="답변완료">답변완료</option>
+					<option value="이용전" selected>이용전</option>
+					<option value="이용시작">이용시작</option>
+					<option value="이용완료">이용완료</option>
 				</select>
 			</div>
 			<div class="topbar">
@@ -252,8 +255,8 @@ request.setCharacterEncoding("utf-8");
 				조회기간 <input name="search_date" type="date" size="30">~<input
 					name="search_date" type="date" size="30">
 			</div>
-			<div class="topbar">
-			<input type="text" size="12px" placeholder="상세검색">
+			<div>
+			<input type="text" size="10px" placeholder="상세검색">
 				<button id="btn" style="size:20;" value="검색" onclick="search()">검색</button>
 			</div>
 		</div>
@@ -292,7 +295,8 @@ request.setCharacterEncoding("utf-8");
 					<td>1개월</td>
 					<td>15,000,000</td>
 					<td>2023-05-01</td>
-					<td><button>이용전</button></td>
+					<td><span id="use" onClick="change()">이용전</span>
+					</td>
 				</tr>
 				<!-- 하드코딩 끝-->
 				<%-- </c:when>
@@ -313,5 +317,16 @@ request.setCharacterEncoding("utf-8");
 			</table>
 		</div>
 	</div>
+<script>
+document.getElementById("use").onclick = function() {state()};
+function state() {
+	var use=
+document.getElementById("use"); if(use.innerHTML == "이용전"){
+	use.innerHTML="이용중";} else if(use.innerHTML =="이용중"){
+		use.innerHTML="이용완료";}
+	}
+
+
+</script>
 </body>
 </html>
