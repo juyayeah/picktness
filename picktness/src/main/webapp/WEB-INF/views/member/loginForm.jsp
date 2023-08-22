@@ -28,16 +28,8 @@
         h1 {
             margin-bottom: 20px;
         }
-        form {
-            width: 100%;
-        }
-        label {
-            display: block;
-            text-align: left;
-            margin-bottom: 5px;
-        }
-
-        .button1 {
+        
+        .pBtn {
             color: black;
             width: 120px; 
             height: 50px;
@@ -47,7 +39,7 @@
             font-size: 20px;
         }
 
-        .button2 {
+        .bBtn {
             color: #2890F1;
             text-decoration: underline;
             width: 120px; 
@@ -60,11 +52,12 @@
 
         input[type="text"],
         input[type="password"],
-        button {
+        .loginB,
+        .custom-button {
             width: 300px;
             height: 50px; 
             padding: 10px;
-            border: 1px solid #2890F1;
+            border: 1px solid #c3c7ca;
             border-radius: 5px;
             box-sizing: border-box;
             outline: none;
@@ -116,8 +109,7 @@
             var businessLoginForm = document.getElementById('businessLoginForm');
 
             if (loginType === 'personal') {
-                personalButton.style.color = '#2890F1';
-                personalButton.style.textDecoration = 'underline';
+                personalButton.style.color = '#2890F1';              
                 businessButton.style.color = 'black';
                 businessButton.style.textDecoration = 'none';
                 personalLoginForm.style.display = 'block';
@@ -125,8 +117,7 @@
             } else if (loginType === 'business') {
                 personalButton.style.color = 'black';
                 personalButton.style.textDecoration = 'none';
-                businessButton.style.color = '#2890F1';
-                businessButton.style.textDecoration = 'underline';
+                businessButton.style.color = '#2890F1';            
                 personalLoginForm.style.display = 'none';
                 businessLoginForm.style.display = 'block';
             }
@@ -140,7 +131,6 @@
             var businessLoginForm = document.getElementById('businessLoginForm');
             
             personalButton.style.color = '#2890F1';
-            personalButton.style.textDecoration = 'underline';
             businessButton.style.color = 'black';
             businessButton.style.textDecoration = 'none';
             personalLoginForm.style.display = 'block';
@@ -153,19 +143,19 @@
 <body>
     <div class="container">
         <div class="login-container">
-            <button id="personalButton" class="button1" onclick="showLoginForm('personal')">개인회원</button> | 
-            <button id="businessButton" class="button2" onclick="showLoginForm('business')">사업자</button>
+            <button id="personalButton" class="pBtn" onclick="showLoginForm('personal')">개인회원</button> | 
+            <button id="businessButton" class="bBtn" onclick="showLoginForm('business')">사업자</button>
 
             <div id="personalLoginForm">
-                <form action="/login" method="post">
+                <form action="${contextPath}/member/login.do" method="post">
                     <input type="text" id="id" name="id" placeholder="아이디" required>
                     <br>
-                    <input type="password" id="password" name="password" placeholder="비밀번호" required>
+                    <input type="password" id="password" name="pwd" placeholder="비밀번호" required>
                     <br>
-                    <button type="submit">로그인</button>
+                    <button class="loginB" type="submit">로그인</button>
                 </form>
                 <div class="button3">
-                    <button type="button" class="custom-button"  onClick="https://kauth.kakao.com/oauth/authorize">
+                    <button type="button" class="custom-button"  class="kakaoLogin" onClick="https://kauth.kakao.com/oauth/authorize">
                         <img src="https://ifh.cc/g/8gHrO6.png" alt="카카오톡로그인" class="button-image button-image-kakao">
                     </button>
                 </div>
@@ -177,12 +167,12 @@
             </div>
             
             <div id="businessLoginForm" style="display: none;">
-                <form action="/login" method="post">
+                <form action="${contextPath}/member/login.do" method="post">
                     <input type="text" id="businessId" name="businessId" placeholder="사업자 아이디" required>
                     <br>
                     <input type="password" id="businessPassword" name="businessPassword" placeholder="비밀번호" required>
                     <br>
-                    <button type="submit">로그인</button>
+                    <button class="loginB" type="submit">로그인</button>
                 </form>
                 <div class="footer">
                     <a href="#">아이디 찾기</a> |

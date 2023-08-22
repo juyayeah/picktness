@@ -252,7 +252,7 @@ input {
         <div class="cation">
         <span class="label-with-star">*</span>은 필수입력
         </div>
-        <form action="joinForm" method="post">
+        <form action="${contextPath}/member/addMember.do" method="post">
             <div class="formTool">
             <div class="form-row">
                 <label for="id">아이디<span class="label-with-star">*</span></label><br>
@@ -275,10 +275,10 @@ input {
             </div>
             <div class="form-row">
         <label for="addr">주소<span class="label-with-star">*</span></label><br>
-		<input style="width: 100px;" type="text"  id="zip_code" name="addrbasic" onclick="openZipSearch();" readonly="readonly" placeholder="우편번호">
+		<input style="width: 100px;" type="text"  id="zip_code" name="zipcode" onclick="openZipSearch();" readonly="readonly" placeholder="우편번호">
 		<button class="address-button" type="button" onclick="openZipSearch()">주소 찾기</button><br>
-		<input type="text"  id="addr" name="addr" readonly="readonly" placeholder="기본주소"  style="width:250px;"><br>
-		<input type="text"  id="addr_dtl" name="addrdetail" placeholder="상세주소"  style="width:250px;">
+		<input type="text"  id="addr" name="addrBasic" readonly="readonly" placeholder="기본주소"  style="width:250px;"><br>
+		<input type="text"  id="addr_dtl" name="addrDetail" placeholder="상세주소"  style="width:250px;">
 	</div>
         <div class="form-row">
         <label for="email">이메일<span class="label-with-star">*</span></label><br>
