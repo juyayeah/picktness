@@ -146,9 +146,11 @@ a {
 
 .comments table {
 border:1px solid #c0c0c0;
+border-collapse: collapse;
 }
 
 .comments th {
+border:1px solid #c0c0c0;
 	width: 90px;
 	padding: 3px 0; 
 	color : #fff;
@@ -156,6 +158,7 @@ border:1px solid #c0c0c0;
 }
 
 .comments td {
+border:1px solid #c0c0c0;
 	min-width: 130px;
 	border-bottom: 1px solid lightgray;
 }
@@ -368,7 +371,7 @@ border:1px solid #c0c0c0;
 				</tr>
 				<tr>
 					<th>상품명</th>
-					<td>${goods.goods},${goods.goods_id}</td>
+					<td>[${goods.goods}] ${goods.goods_id}</td>
 					<th>만족도</th>
 					<td>${goods_ask.goods_title }</td>
 				</tr>
@@ -389,7 +392,7 @@ border:1px solid #c0c0c0;
 				</tr>
 				<tr>
 					<th>상품명</th>
-					<td>${goods_ask.goods_title }</td>
+					<td>[${goods.goods}] ${goods.goods_id}</td>
 					<th>처리상태</th>
 					<td><a href="#" id="subscriberBtn" type="text" onclick='change()' >답변대기</a></td>
 				</tr>
