@@ -8,13 +8,6 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
   <head>
     <script>
-    function List(id){
-    	if(${member.lat} != null && ${member.lat} != ''){
-    		location.href="${contextPath}/goods/placeList.do?cate="+id+"&lat=${member.lat}&lng=${member.lng}";
-    	} else {
-    		location.href="${contextPath}/goods/placeList.do?cate"
-    	}
-    }
       $(function () {
         $(".logo_h_i").click(function () {
           $(location).attr("href", "http://localhost:8080/main.do");
