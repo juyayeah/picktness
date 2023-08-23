@@ -21,14 +21,14 @@ uri="http://tiles.apache.org/tags-tiles" %>
 	margin: 0 auto;
 }
 
-a {
+.listcontent a {
 	background: transparent;
 	text-decoration: none;
 	color: inherit;
 }
 
 
-td
+.listcontent td
 {
  max-width: 100%;
  overflow: hidden;
@@ -86,16 +86,16 @@ margin-bottom:2px;
 	background-color: #2890f1 !important;
 }
 
-th {
+.listcontent th {
 	background-color: #2890f1;
 	color: #ffffff;
 }
 
-table th:first-child {
+.listcontent table th:first-child {
 	border-top-left-radius: 8px;
 }
 
-table th:last-child {
+.listcontent table th:last-child {
 	border-top-right-radius: 8px;
 }
 
