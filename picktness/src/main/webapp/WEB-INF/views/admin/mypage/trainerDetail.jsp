@@ -12,11 +12,6 @@ request.setCharacterEncoding("utf-8");
 <meta charset="UTF-8" />
 <title>트레이너 등록</title>
 <script>
-	function backToList(obj) {
-		obj.action = "${contextPath}/admin/mypage/adminTrainerList.do";
-		obj.submit();
-	}
-
 	var div2 = document.getElementsByClassName("div2");
 
 	function handleClick(event) {
@@ -258,33 +253,34 @@ margin:0 auto;
 			<tr>
 				<td class="tdfirst">이름</td>
 				<td class="starblue">*&nbsp;&nbsp;</td>
-				<td class="tdlast">${trainer.name}<input class="inputtext"
-					type="text" width="100%" name="name"></td>
+				<td class="tdlast">${trainer.name}
+				<!-- <input class="inputtext"
+					type="text" width="100%" name="name"> --></td>
 			</tr>
 			<tr>
 				<td class="tdfirst">연락처</td>
 				<td class="starblue">*&nbsp;&nbsp;</td>
 				<td class="tdlast">${trainer.phone1 }${trainer.phone2}
-					${trainer.phone3}<input class="inputtextnum" type="text"
-					width="25%" name="phone123">
+					${trainer.phone3}<!-- <input class="inputtextnum" type="text"
+					width="25%" name="phone123"> -->
 				</td>
 			</tr>
 			<tr>
 				<td class="tdfirsttop">자격증</td>
 				<td></td>
-				<td class="tdlast">${trainer.certi}<textarea rows="4" cols="60"
-						name=""></textarea></td>
+				<td class="tdlast">${trainer.certi}<!-- <textarea rows="4" cols="60"
+						name=""></textarea> --></td>
 			</tr>
 			<tr>
 				<td class="tdfirsttop">자기소개</td>
 				<td></td>
-				<td class="tdlast">${trainer.detail}<textarea rows="4"
-						cols="60" name=""></textarea></td>
+				<td class="tdlast">${trainer.detail}<!-- <textarea rows="4"
+						cols="60" name=""></textarea> --></td>
 			</tr>
 			<tr>
 				<td class="tdfirsttop">등록된 상품</td>
 				<td class="starbluetop">*&nbsp;&nbsp;</td>
-				<td class="tdlast">${trainer.prod10}:${trainer.prod10retail}</td>
+				<td class="tdlast">${trainer.prod10}: ${trainer.prod10retail}</td>
 
 			</tr>
 			<tr>
@@ -298,9 +294,9 @@ margin:0 auto;
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-					<button class="button_white" onclick="backToList(this.form)">목록으로</button>&nbsp;&nbsp;
+					<a href="${contextPath}/admin/mypage/adminTrainerList.do"><button class="button_white">목록으로</button></a>&nbsp;&nbsp;
 					<button class="button_white">수정요청</button>&nbsp;&nbsp; <a
-					href="${contextPath }/business/mypage/trainerCont.do"><button
+					href="${contextPath }/admin/mypage/adminTrainerList.do"><button
 							class="button_blue">승인</button></a>
 			</tr>
 		</table>
