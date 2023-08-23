@@ -5,11 +5,9 @@
 <configuration>
 	<mappers>
 		<mapper resource="mybatis/mappers/member.xml"/>
-<<<<<<< HEAD
 		<mapper resource="mybatis/mappers/board.xml"/>
-=======
 		<mapper resource="mybatis/mappers/member_mypage.xml"/>
 		<mapper resource="mybatis/mappers/goods.xml"/>
->>>>>>> branch 'master' of https://github.com/juyayeah/picktness.git
+
 	</mappers>
 </configuration>
