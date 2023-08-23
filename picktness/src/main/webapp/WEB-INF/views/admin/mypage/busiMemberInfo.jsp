@@ -74,7 +74,9 @@ height:40px;
 <td colspan="3" align="center"><button type="reset">목록으로</button> <input class="btn_blue" type="submit" value="수정반영"></td>
 </tr>
 <tr>
-<td colspan="3" align="center"><a href="${contextPath}/business/mypage/withdraw.do" style="font-size: 10px; color: #2890f1;">*사업자 정보를 삭제하시겠습니까?</a></td>
+<td colspan="3" align="center"><span style="font-size: 10px; color: #2890f1;">*사업자 정보를 삭제하시겠습니까?</span></td>
+</tr><tr>
+<td colspan="3" align="center"><a href="${contextPath}/board/removeRecord.do?num=${article.num} "><button class="btn_blue">삭제</button></a></td>
 </tr>
 </table>
 	</div>

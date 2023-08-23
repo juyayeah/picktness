@@ -50,6 +50,13 @@ import org.springframework.web.servlet.ModelAndView;
 			mav.setViewName(viewName);
 			return mav;
 		}
+		@RequestMapping(value="/admin/mypage/busiMemberInfo.do", method=RequestMethod.GET)
+		private ModelAndView busiMemberInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			String viewName = (String) request.getAttribute("viewName");
+			mav.setViewName(viewName);
+			return mav;
+		}
 		
 		//--------트레이너 관리------------//
 		@RequestMapping(value="/admin/mypage/adminTrainerList.do", method=RequestMethod.GET)
