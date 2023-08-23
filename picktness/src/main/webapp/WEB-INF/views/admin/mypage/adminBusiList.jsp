@@ -17,7 +17,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
  */
 .listcontent{
 	position: relative;
- 	max-width: 1100px;
+ 	width: 860px;
 	margin: 0 auto;
  }
 
@@ -28,7 +28,7 @@ a {
 }
 
 .tableWrapper {
-	width: 800px;
+	width: 860px;
 	height: auto;
 	max-height: 200px;
 	background-color: white;
@@ -36,7 +36,7 @@ a {
 }
 
 #userListTable {
-	width: 1100px;
+	width: 860px;
 	border: 0px;
 	border-collapse: collapse;
 }
@@ -52,14 +52,10 @@ a {
 	border-bottom: 1px solid lightgray;
 }
 
-#userListTable th:last-child, #userListTable td:last-child {
-	border-right: 0px !important;
-}
-
 #userListTable tr:first-child {
-	background-color: #2890f1 !important;
+	background-color: #2890f1;
 	color: white !important;
-	font-weight: bold !important;
+	font-weight: bold;
 }
 
 #userListTable tr:nth-child(odd) {
@@ -111,15 +107,27 @@ table th:last-child {
 		<div class="listcontentinner">
 	<h2 align="center">사업자 관리</h2>
 
-	<div align="justify">
- 조회기간<input name="search_date" type="date" size="40">~<input name="search_date" type="date" size="40"> 상세검색 <select>
+	<div align="justify" style="margin-bottom:2px;">
+ 조회기간 <input name="search_date" type="date" size="40">~<input name="search_date" type="date" size="40">
+ 				 &nbsp;&nbsp;&nbsp;&nbsp; 카테고리
+				<select>
+						<option value="전체" selected>전체</option>
+						<option value="헬스">헬스</option>
+						<option value="크로스핏">크로스핏</option>
+						<option value="요가">요가</option>
+						<option value="필라테스">필라테스</option>
+						<option value="복싱">복싱</option>
+						<option value="주짓수">주짓수</option>
+				</select>
+ 
+  &nbsp;&nbsp;상세검색 <select>
 			<option value="전체" selected>전체</option>
-			<option value="주문자번호">주문자번호</option>
-			<option value="주문자">주문자</option>
-			<option value="상품명">상품명</option>
-			<option value="결제일">결제일</option>
-			<option value="상태변경">상태변경</option>
-		</select> <input type="text" size="12px" placeholder="상세검색">
+			<option value="아이디">아이디</option>
+			<option value="사업자명">사업자명</option>
+			<option value="카테고리">카테고리</option>
+			<option value="시설명">시설명</option>
+			<option value="연락처">연락처</option>
+		</select> <input type="text" size="17px" placeholder="상세검색">
 			<button id="btn">검색</button>
 	</div>
 
@@ -127,21 +135,99 @@ table th:last-child {
 	<div class="tableWrapper">
 		<table id="userListTable">
 			<tr style="cursor: default;">
-				<th width="4%">주문번호</th>
-				<th width="6%">주문자</th>
-				<th width="2%"></th>
-				<th width="10%">상품명</th>
-				<th width="4%">결제금액</th>
-				<th width="7%">취소/환불 금액</th>
-				<th width="5%">결제일</th>
-				<th width="7%">주문상태</th>
-				<th width="7%">상태변경</th>
+				<th width="10%">아이디</th>
+				<th width="6%">사업자명</th>
+				<th width="10%">카테고리</th>
+				<th width="15%">연락처</th>
+				<th width="10%">등록일</th>
+				<th width="10%">시설명</th>
 			</tr>
+					<c:choose>
+			<c:when test="${empty BusinessList }">
+				<tr height="10">
+					<td colspan="11">
+						<p align="center">
+							<b><span style="font-size: 9pt;">등록된 사업자가 없습니다.</span></b>
+						</p>
+					</td>
+				</tr>
+			</c:when>
+			<c:when test="${!empty BusinessList }">
+				<c:forEach var="business" items="${BusinessList }"
+					varStatus="businessNum">
+					<tr align="center">
+						<td width="8%"><a href="${contextPath}/admin/mypage/adminBusiInfo.do">${business.id}</td>
+						<td width="12%">${business.name}</td>
+						<td width="12%">${business.cate}</td>
+						<td width="9%">${business.phone1} ${business.phone2} ${business.phone3}</td>
+						<td width="9%">${business.joindate}</td>
+						<td width="9%">${business.b_name}</td>
+					<%-- 	<td width="8%"><a href="${contextPath}/business/recordForm1.do?num=${business.num} ">수정</a></td>
+<td width="8%"><a href="${contextPath}/business/removeRecord.do?num=${business.num} ">삭제</a></td>
+ --%>					</tr>
+				</c:forEach>
+			</c:when>
+		</c:choose>
+	</table>
+
+	<div class="cls2">
+		<c:if test="${totBusiness != null }">
+			<c:choose>
+				<c:when test="${totBusiness > 100 }">
+					<c:forEach var="page" begin="1" end="10" step="1">
+						<c:if test="${section > 1 && page==1 }">
+							<a class="no-uline"
+								href="${contextPath }/business/listBusiness.do?section=${section-1}&pageNum=${(section-1)*10 +1}">&nbsp;
+								pre </a>
+						</c:if>
+						<a class="no-uline"
+							href="${contextPath }/business/listBusiness.do?section=${section}&pageNum=${page}">${(section-1)*10 + page}&nbsp;
+						</a>
+						<c:if test="${page == 10 }">
+							<a class="no-uline"
+								href="${contextPath }/business/listBusiness.do?section=${section+1}&pageNum=${section*10 +1}">&nbsp;
+								next </a>
+						</c:if>
+					</c:forEach>
+				</c:when>
+				<c:when test="${totBusiness == 100 }">
+					<c:forEach var="page" begin="1" end="10" step="1">
+						<a class="no-uline"
+							href="${contextPath }/business/listBusiness.do?section=${section}&pageNum=${page}">${page  }</a>
+					</c:forEach>
+				</c:when>
+
+				<c:when test="${totBusiness < 100 }">
+					<c:forEach var="page" begin="1" end="${totBusiness/10+1 }" step="1">
+						<c:choose>
+							<c:when test="${page==pageNum }">
+								<a class="sel-page"
+									href="${contextPath }/business/listBusiness.do?section=${section}&pageNum=${page}">${page }</a>
+							</c:when>
+							<c:otherwise>
+								<a class="no-uline"
+									href="${contextPath }/business/listBusiness.do?section=${section}&pageNum=${page}">${page }</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</c:when>
+			</c:choose>
+		</c:if>
+	</div>
+	<br>
+	<br>
+			
+			
+			
+			
+			
+			
+			
+			
 			<c:forEach var="admin" items="${List }">
 				<tr align="center">
 					<td>${admin.e }</td>
 					<td>${admin.num }</td>
-					<td><img src="C:\goods\1\chicken.jpg" alt="이미지" /></td>
 					<td><a
 						href="${contextPath}/admin/viewDetail.do?num=${admin.num }">${admin.num }</a></td>
 					<td>${admin.name }</td>
