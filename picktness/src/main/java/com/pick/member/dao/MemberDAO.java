@@ -13,5 +13,6 @@ import com.pick.member.vo.MemberVO;
 public interface MemberDAO {
 	public MemberVO loginById(Map loginMap) throws DataAccessException;
 	public void insertMember(MemberVO memberVO) throws DataAccessException;
+	public void eventInitPoint(MemberVO memberVO) throws DataAccessException;;
 	public int idCheck(String id) throws DataAccessException;
 }
