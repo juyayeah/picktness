@@ -182,12 +182,13 @@ request.setCharacterEncoding("utf-8");
 		<h2 align="center">정산관리</h2>
 				<div style="float:right; margin-bottom:2px;">상세검색&nbsp;<select>
 				<option value="전체" selected>전체</option>
-				<option value="헬스">헬스</option>
-				<option value="크로스핏">크로스핏</option>
-				<option value="요가">요가</option>
-				<option value="필라테스">필라테스</option>
-				<option value="복싱">복싱</option>
-				<option value="주짓수">주짓수</option>
+				<option value="사업자아이디">사업자아이디</option>
+				<option value="상품아이디">상품아이디</option>
+				<option value="소매가">소매가</option>
+				<option value="옵션">옵션</option>
+				<option value="수수료">수수료</option>
+				<option value="상태">상태</option>
+				<option value="정산금">정산금</option>
 			</select> <input type="text" placeholder="상세검색" size="17"> <button id="btn" value="검색">검색</button>
 		</div>
 <br>
@@ -203,6 +204,7 @@ request.setCharacterEncoding("utf-8");
 					<th width="10%">수수료</th>
 					<th width="7%">상태</th>
 					<th width="10%">정산금</th>
+					<th width="10%">정산일</th>
 				</tr>
 
 				<!-- 조건리스트 -->

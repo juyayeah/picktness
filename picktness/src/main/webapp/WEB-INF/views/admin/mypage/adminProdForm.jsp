@@ -180,6 +180,10 @@ request.setCharacterEncoding("utf-8");
 	margin-left:70px;
 	z-index: 1;
 }
+
+select option[value=""][disabled] {
+	display: none;
+}
 </style>
 
 </head>
@@ -195,7 +199,7 @@ request.setCharacterEncoding("utf-8");
 				<td class="tdfirsttop" align="right">카테고리</td>
 				<td class="starblue">*</td>
 				<td class="td_third"><select>
-						<option value="전체" selected>전체</option>
+						<option value="" disabled selected>전체</option>
 						<option value="프로틴쉐이크">프로틴쉐이크</option>
 						<option value="닭가슴살">닭가슴살</option>
 						<option value="스트레칭/마사지">스트레칭/마사지</option>
