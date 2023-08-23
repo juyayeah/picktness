@@ -3,20 +3,45 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
  <mapper namespace="com.pick.goods.dao.GoodsDAO">
- 
+  	<select id="goodsBusinessAllList" resultType="goodsBusinessVO" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance from (select t.*, i.fileName from (select b.id, d.goods_id, b.b_name, b.addrbasic, d.prod1retail, d.cate, d.alltime, d.review_star, d.review_count, b.lat, b.lng from business_detail as d join business as b on d.id = b.id) as t join business_detail_image as i on i.goods_id = t.goods_id where i.filetype = "main_image") as l where ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) <=5000 order by distance; 
+ 	]]>
+ 	</select>
+ 	
+ 	
+ 	<select id="goodsBusinessCateList" resultType="goodsBusinessVO" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance from (select t.*, i.fileName from (select b.id, d.goods_id, b.b_name, b.addrbasic, d.prod1retail, d.cate, d.alltime, d.review_star, d.review_count, b.lat, b.lng from business_detail as d join business as b on d.id = b.id where d.cate = #{cate}) as t join business_detail_image as i on i.goods_id = t.goods_id where i.filetype = "main_image") as l where ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) <=5000 order by distance; 
+ 	]]>
+ 	</select>
+ 	
+ 	<select id="goodsBusinessAllTimeList" resultType="goodsBusinessVO" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance from (select t.*, i.fileName from (select b.id, d.goods_id, b.b_name, b.addrbasic, d.prod1retail, d.cate, d.alltime, d.review_star, d.review_count, b.lat, b.lng from business_detail as d join business as b on d.id = b.id where d.alltime = #{allTime}) as t join business_detail_image as i on i.goods_id = t.goods_id where i.filetype = "main_image") as l where ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) <=5000 order by distance; 
+ 	]]>
+ 	</select>
+ 	
+ 	
 	<select id="businessSearch" resultType="goodsBusinessVO" parameterType="String">
 	<![CDATA[
 	select t.*, i.fileName from (select d.*, b.b_name, b.zipcode, b.addrbasic, b.addrdetail, b.phone1, b.phone2, b.phone3, b.lat, b.lng from business as b join business_detail as d on b.id = d.id where b.b_name like #{search_content} or d.cate like #{search_content}) as t join business_detail_image as i on t.goods_id = i.goods_id where i.filetype = "main_image";
 	]]>
 	</select> 
+	
+	
 	<select id="trainerSearch" resultType="goodsTrainerVO" parameterType="String">
 	<![CDATA[
 	select t.*, i.fileName from (select tr.*,b.b_name, b.addrbasic, b.addrdetail, b.phone1, b.phone2, b.phone3, b.lat, b.lng from trainer as tr join business as b on tr.id = b.id where tr.state = "승인완료" and (tr.name like #{search_content} or tr.cate like #{search_content})) as t join trainer_detail_image as i on t.goods_id = i.goods_id where i.filetype = "main_image";
 	]]>
 	</select>
-		<select id="shoppingSearch" resultType="goodsShoppingVO" parameterType="String">
+	
+	
+	<select id="shoppingSearch" resultType="goodsShoppingVO" parameterType="String">
 	<![CDATA[
 select s.*, i.filename from shopping as s join shopping_detail_image as i on s.goods_id = i.goods_id where i.filetype="main_image" and (s.goods_title like #{search_content} or cate_sec like #{search_content});
 	]]>
 	</select>
+	
+	
  </mapper>

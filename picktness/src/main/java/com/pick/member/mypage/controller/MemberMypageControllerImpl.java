@@ -104,16 +104,17 @@ public class MemberMypageControllerImpl implements MemberMypageController{
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		session = request.getSession();
-		String id = (String) session.getAttribute("id");
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		String id = member.getId();
 		session.setAttribute("option", option);
 		if(option.equals("all")) {
-			List<MemberMypagePointVO> pointList =mypageService.allPointList("id");
+			List<MemberMypagePointVO> pointList =mypageService.allPointList(id);
 			mav.addObject("pointList", pointList);
 		} else if(option.equals("add")) {
-			List<MemberMypagePointVO> pointList = mypageService.addPointList("id");
+			List<MemberMypagePointVO> pointList = mypageService.addPointList(id);
 			mav.addObject("pointList", pointList);
 		} else {
-			List<MemberMypagePointVO> pointList = mypageService.usePointList("id");
+			List<MemberMypagePointVO> pointList = mypageService.usePointList(id);
 			mav.addObject("pointList", pointList);
 		}
 		mav.setViewName(viewName);

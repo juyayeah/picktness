@@ -2,6 +2,7 @@ package com.pick.goods.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,14 +31,43 @@ public class GoodsControllerImpl implements GoodsController{
 	@Override
 	@RequestMapping(value="/goods/placeList.do", method=RequestMethod.GET)
 	public ModelAndView placeList(@RequestParam("cate") String cate, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, Object> option = new HashMap<>();
 		ModelAndView mav = new ModelAndView();
 		List<GoodsBusinessVO> placeList = new ArrayList<>();
 		String viewName = (String) request.getAttribute("viewName");
 		session = request.getSession();
 		session.setAttribute("cate", cate);
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		double memLat = (double) session.getAttribute("lat");
+		double memLng = (double) session.getAttribute("lng");
+		option.put("lat", memLat);
+		option.put("lng", memLng);
+		if(cate.equals("all")) {
+			placeList = goodsService.goodsBusinessAllList(option);
+		} else if(cate.equals("allTime")){
+			option.put("allTime", "Y");
+			placeList = goodsService.goodsBusinessAllTimeList(option);
+		}else {
+			switch(cate) {
+			case "health": cate="헬스";
+			break;
+			case "cross": cate="크로스핏";
+			break;
+			case "yoga": cate="요가";
+			break;
+			case "pila": cate="필라테스";
+			break;
+			case "boxing": cate="복싱";
+			break;
+			case "jiu": cate="주짓수";
+			break;
+			}
+			option.put("cate", cate);
+			placeList = goodsService.goodsBusinessCateList(option);
+		}
 		mav.addObject("placeList", placeList);
+		mav.addObject("totalGoods", placeList.size());
 		mav.setViewName(viewName);
+		option.clear();
 		return mav;
 	}
 	@Override

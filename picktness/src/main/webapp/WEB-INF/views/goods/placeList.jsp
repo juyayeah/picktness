@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%
 request.setCharacterEncoding("utf-8");
@@ -86,7 +87,7 @@ request.setCharacterEncoding("utf-8");
 
 .main_box {
 	clear: both;
-	text-align: center;
+	text-align: left;
 }
 
 .main_cate {
@@ -100,10 +101,10 @@ request.setCharacterEncoding("utf-8");
 	position: relative;
 	width: 200px;
 	display: inline-block;
-	margin: 10px 30px;
+	margin: 10px 0px 10px 57px;
 }
 
-.img {
+.main_img {
 	position: relative;
 	width: 200px;
 }
@@ -113,6 +114,7 @@ request.setCharacterEncoding("utf-8");
 	font-size: 15px;
 	display: block;
 	font-weight: bold;
+	height:40px;
 }
 
 .main_item .location {
@@ -151,10 +153,14 @@ request.setCharacterEncoding("utf-8");
 	font-size: 12px;
 	color: #555;
 }
+.list_null{
+clear:both;
+margin-top:100px;
+text-align:center;
+height:300px;
+}
 </style>
 <script>
-
-
 	$(function() {
 		switch ("${cate}") {
 		case "all":
@@ -178,17 +184,9 @@ request.setCharacterEncoding("utf-8");
 		case "jiu":
 			$("#jiu").css("font-weight", "bold");
 			break;
-		}
-		switch("${sort}"){
-		case "recom":
-			$("#recom").css("color", "#555");
-		break;
-		case "rowP":
-			$("#rowP").css("color", "#555");
-		break;
-		case "near":
-			$("#near").css("color", "#555");
-		break;
+		case "allTime":
+			$("#allTime").css("font-weight", "bold");
+			break;
 		}
 	});
 </script>
@@ -197,7 +195,7 @@ request.setCharacterEncoding("utf-8");
 <body>
 	<div class="content-inner">
 		<div class="content_title">운동시설</div>
-		<div class="member_location"></div>
+		<div class="member_location">${memLocation }</div>
 		<div class="change_location">
 			<div class="map_button1">
 				<img src="${contextPath}/images/main/location.png" /> <span>위치
@@ -210,62 +208,72 @@ request.setCharacterEncoding("utf-8");
 		</div>
 		<div class="pc_cate">
 			<ul>
-				<li id="allcate"><a href="${contextPath}/goods/placeList.do?cate=all">전체보기</a></li>
-				<li id="health"><a href="${contextPath}/goods/placeList.do?cate=health">헬스</a></li>
-				<li id="cross"><a href="${contextPath}/goods/placeList.do?cate=cross">크로스핏</a></li>
-				<li id="yoga"><a href="${contextPath}/goods/placeList.do?cate=yoga">요가</a></li>
-				<li id="pila"><a href="${contextPath}/goods/placeList.do?cate=pila">필라테스</a></li>
-				<li id="boxing"><a href="${contextPath}/goods/placeList.do?cate=boxing">복싱</a></li>
-				<li id="jiu"><a href="${contextPath}/goods/placeList.do?cate=jiu">주짓수</a></li>
-				<li id="all_time">24시간</li>
+				<li id="allcate"><a
+					href="${contextPath}/goods/placeList.do?cate=all">전체보기</a></li>
+				<li id="health"><a
+					href="${contextPath}/goods/placeList.do?cate=health">헬스</a></li>
+				<li id="cross"><a
+					href="${contextPath}/goods/placeList.do?cate=cross">크로스핏</a></li>
+				<li id="yoga"><a
+					href="${contextPath}/goods/placeList.do?cate=yoga">요가</a></li>
+				<li id="pila"><a
+					href="${contextPath}/goods/placeList.do?cate=pila">필라테스</a></li>
+				<li id="boxing"><a
+					href="${contextPath}/goods/placeList.do?cate=boxing">복싱</a></li>
+				<li id="jiu"><a
+					href="${contextPath}/goods/placeList.do?cate=jiu">주짓수</a></li>
+				<li id="allTime"><a href="${contextPath }/goods/placeList.do?cate=allTime">24시간</a></li>
 			</ul>
 		</div>
+		<c:choose>
+		<c:when test="${!empty placeList }">
 		<div class="main_box">
-			<div class="main_item"
-				onclick="location.href='${contextPath}/goods/gymDetail.do'">
-				<img class="img" src="${contextPath}/images/main/health4.jpg" /> <span
-					class="title">헬스보이짐&필라걸 둔산점</span> <span class="location">
-					대전 서구 둔산동 </span> <span class="price"> 70,000원/월 </span>
-				<div class="cates">
-					<div class="cate">24시간</div>
-					<div class="cate">헬스</div>
+			<c:forEach items="${placeList }" var="place">
+				<div class="main_item"
+					onclick="location.href='${contextPath}/goods/gymDetail.do'">
+					<img class="main_img" src="${contextPath}/images/main/health4.jpg" />
+					<span class="title">${place.b_name }</span>
+					<span class="location">${place.addrBasic } 
+					</span>
+					<span class="location"><fmt:formatNumber pattern="0.0" value="${place.distance/1000 }"/>km</span>
+					<span class="price">${place.prod1retail }/월 </span>
+					<div class="cates">
+						<c:if test="${place.allTime == 'Y' }">
+							<div class="cate">24시간</div>
+						</c:if>
+						<div class="cate">${place.cate }</div>
+					</div>
+					<c:if test="${place.review_count ne 0 }">
+					<div class="star">
+						<img src="${contextPath}/images/main/star.png" /> 
+						<span class="star">${place.review_star }(${place.review_count })</span>
+					</div>
+					</c:if> 
 				</div>
-				<div class="star">
-					<img src="${contextPath}/images/main/star.png" /> <span
-						class="star">4.5(2)</span>
-				</div>
+			</c:forEach>
 			</div>
-			<div class="main_item">
-				<img class="img" src="${contextPath}/images/main/health3.jpg" /> <span
-					class="title">비식스 대전 둔산점</span> <span class="location"> 대전
-					서구 둔산동 </span> <span class="price"> 70,000원/월 </span>
-				<div class="cates">
-					<div class="cate">헬스</div>
-				</div>
-				<div class="star"></div>
-			</div>
-			<div class="main_item">
-				<img class="img" src="${contextPath}/images/main/health2.jpg" /> <span
-					class="title">제이엠휘트니스 시청점</span> <span class="location"> 대전
-					서구 둔산동 </span> <span class="price"> 70,000원/월 </span>
-				<div class="cates">
-					<div class="cate">헬스</div>
-				</div>
-				<div class="star"></div>
-			</div>
-			<div class="main_item">
-				<img class="img" src="${contextPath}/images/main/health1.jpg" /> <span
-					class="title">제이엠휘트니스 시청점</span> <span class="location"> 대전
-					서구 둔산동 </span> <span class="price"> 70,000원/월 </span>
-				<div class="cates">
-					<div class="cate">헬스</div>
-				</div>
-				<div class="star">
-					<img src="${contextPath}/images/main/star.png" /> <span
-						class="star">4.5(2)</span>
-				</div>
-			</div>
+			<c:choose>
+			<c:when test="${totalGoods > 100}">
+			<c:forEach var="page" begin="1" end="10" step="1">
+			<c:if test="${section > 1 && page == 1 }">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate }&section=${section-1 }&page=${(section-1)*10 + 1 }">이전</a>
+			</c:if>
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&page=${page}">${(section-1)*10+page }</a>
+			<c:if test="${page==10 }">
+			<a href="${conteatPath }/goods/placeList.do?cate=${cate }&section=${section+1 }&page=${(section*10)+1 }">다음</a>
+			</c:if>
+			</c:forEach>
+			</c:when>
+			</c:choose>
+			</c:when>
+			<c:otherwise>
+			<div class="list_null">
+            <img src="${contextPath}/images/goods/exclamation.png">
+            <p>현재 위치 주변에 운동시설이 없습니다.<br>
+            위치를 바꾸고 다시 시도해 주세요.</p>
+          </div>
+			</c:otherwise>
+			</c:choose>
 		</div>
-	</div>
 </body>
 </html>

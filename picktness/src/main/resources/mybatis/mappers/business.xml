@@ -27,10 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <result property="alltime" column="alltime"/>
 <result property="review_star" column="review_star"/>
 <result property="review_count" column="review_count"/>
-
  </resultMap>
- 
- 
 	<select id="businessDetailSearch" resultType="businessVO" parameterType="String">
 	<![CDATA[
 select * from  business_detail

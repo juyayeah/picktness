@@ -2,6 +2,7 @@ package com.pick.member.controller;
 
 
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,8 +54,14 @@ public class MemberControllerImpl implements MemberController{
 				session.setAttribute("member", memberVO);
 				mav.setViewName("/main");
 			} else {
+				String memLocation = memberVO.getAddrBasic();
+				Double memLat = memberVO.getLat();
+				Double memLng = memberVO.getLng();
 				session.setAttribute("isLogOn", true);
-				session.setAttribute("member", memberVO);
+				session.setAttribute("member", memberVO);		
+				session.setAttribute("memLocation", memLocation);
+				session.setAttribute("lat", memLat);
+				session.setAttribute("lng", memLng);
 				mav.setViewName("/main");
 			}
 		} else {
@@ -69,6 +76,9 @@ public class MemberControllerImpl implements MemberController{
 			HttpSession session = request.getSession();
 			session.removeAttribute("isLogOn");
 			session.removeAttribute("member");
+			session.setAttribute("lat", 36.3492640);
+			session.setAttribute("lng", 127.3776557);
+			session.setAttribute("memLocation", "대전 서구 대덕대로 182");
 			mav.setViewName("/main");
 			return mav;
 		}
