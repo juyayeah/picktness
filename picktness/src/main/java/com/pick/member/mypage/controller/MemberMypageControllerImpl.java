@@ -108,25 +108,13 @@ public class MemberMypageControllerImpl implements MemberMypageController{
 		String id = member.getId();
 		session.setAttribute("option", option);
 		if(option.equals("all")) {
-<<<<<<< HEAD
 			List<MemberMypagePointVO> pointList =mypageService.allPointList(id);
-=======
-			List<MemberMypagePointVO> pointList =mypageService.allPointList("id");
->>>>>>> branch 'master' of https://github.com/juyayeah/picktness.git
 			mav.addObject("pointList", pointList);
 		} else if(option.equals("add")) {
-<<<<<<< HEAD
 			List<MemberMypagePointVO> pointList = mypageService.addPointList(id);
-=======
-			List<MemberMypagePointVO> pointList = mypageService.addPointList("id");
->>>>>>> branch 'master' of https://github.com/juyayeah/picktness.git
 			mav.addObject("pointList", pointList);
 		} else {
-<<<<<<< HEAD
 			List<MemberMypagePointVO> pointList = mypageService.usePointList(id);
-=======
-			List<MemberMypagePointVO> pointList = mypageService.usePointList("id");
->>>>>>> branch 'master' of https://github.com/juyayeah/picktness.git
 			mav.addObject("pointList", pointList);
 		}
 		mav.setViewName(viewName);
