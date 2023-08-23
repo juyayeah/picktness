@@ -178,6 +178,7 @@ request.setCharacterEncoding("utf-8");
 </style>
 </head>
 <body>
+
 	<div class="listcontent">
 		<h2 align="center">정산관리</h2>
 				<div style="float:right; margin-bottom:2px;">상세검색&nbsp;<select>

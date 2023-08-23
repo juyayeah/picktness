@@ -99,34 +99,48 @@ uri="http://tiles.apache.org/tags-tiles" %>
         <button id="btn">검색</button>
 </div>
 <br>		
-<div style="margin-right:730px">총 #건</div>
-<div><input id="btn" type="button" value="상품등록"></div>
+
 		<table>
 			<tr>
 				<th width="5%">주문번호</th>
 				<th width="5%">주문자</th>
 				<th width="10%">상품명</th>
 				<th width="5%">결제금액</th>
-				<th width="7%">취소/환불 금액</th>
-				<th width="5%">결제일</th>
+<!-- 				<th width="7%">취소/환불 금액</th>
+ -->				<th width="5%">결제일</th>
 				<th width="5%">주문상태</th>
 				<th width="7%">상태변경</th>
 			</tr>
+			<c:choose>
+			<c:when test="${empty adminDeliverList }">
+						<tr height="10">
+							<td colspan="9">
+								<p align="center">
+									<b><span style="font-size: 9pt;">등록된 배송내역이 없습니다.</span></b>
+								</p>
+							</td>
+						</tr>
+	
+	 </c:when>
+	 <c:when test="${!empty adminDeliverList}">
+	 <c:forEach var="deliver" items="${adminDeliverlist }">
 			<tr align="center">
-				<td>${}</td>
-				<td>${}</td>
-				<td>${}</td>
-				<td>${}</td>
-				<td>${}</td>
-				<td>${}</td>
+				<td>${order_shop.order_num}</td>
+				<td>${order_shop.delivery_name_}</td>
+				<td>${order_shop.goods_title}</td>
+				<td>${order_shop.goods_price}</td>
+				<td>${order_shop.orderdate}</td>
 				<td><select>
 						<option value="배송준비중">배송준비중</option>
 						<option value="배송중">배송중</option>
 						<option value="배송완료">배송완료</option>
 						<option value="환불완료">환불완료</option>
 				</select></td>
-				<td><span id="button" >환불승인</span></td>
+				<td><span id="button">환불승인</span></td>
 			</tr>
+			</c:forEach>
+			</c:when>
+			</c:choose>
 		</table>
 	</div>
 	<script>

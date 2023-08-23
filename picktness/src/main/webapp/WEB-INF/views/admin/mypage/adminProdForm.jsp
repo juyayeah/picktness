@@ -199,12 +199,16 @@ select option[value=""][disabled] {
 				<td class="tdfirsttop" align="right">카테고리</td>
 				<td class="starblue">*</td>
 				<td class="td_third"><select>
+				<optgroup name="cate_fir" label="식품">
 						<option value="" disabled selected>전체</option>
-						<option value="프로틴쉐이크">프로틴쉐이크</option>
-						<option value="닭가슴살">닭가슴살</option>
-						<option value="스트레칭/마사지">스트레칭/마사지</option>
-						<option value="테이프/아대">테이프/아대</option>
-						<option value="근력/유산소용품">근력/유산소용품</option>
+						<option name="cate_sec" value="프로틴쉐이크">프로틴쉐이크</option>
+						<option name="cate_sec" value="닭가슴살">닭가슴살</option>
+						</optgroup>
+						<optgroup name="cate_fir" label="기구/용품/장비">
+						<option name="cate_sec" value="스트레칭/마사지">스트레칭/마사지</option>
+						<option name="cate_sec" value="테이프/아대">테이프/아대</option>
+						<option name="cate_sec" value="근력/유산소용품">근력/유산소용품</option>
+						</optgroup>
 				</select>
 			</tr>
 			<tr>
