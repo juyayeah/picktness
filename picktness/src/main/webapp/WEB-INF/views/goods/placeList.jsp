@@ -104,7 +104,7 @@ request.setCharacterEncoding("utf-8");
 	margin: 10px 0px 10px 57px;
 }
 
-.img {
+.main_img {
 	position: relative;
 	width: 200px;
 }
@@ -152,6 +152,10 @@ request.setCharacterEncoding("utf-8");
 	text-align: left;
 	font-size: 12px;
 	color: #555;
+}
+.list_null{
+clear:both;
+text-align:center;
 }
 </style>
 <script>
@@ -213,21 +217,23 @@ request.setCharacterEncoding("utf-8");
 					href="${contextPath}/goods/placeList.do?cate=boxing">복싱</a></li>
 				<li id="jiu"><a
 					href="${contextPath}/goods/placeList.do?cate=jiu">주짓수</a></li>
-				<li id="all_time">24시간</li>
+				<li id="all_time"><a href="${contextPath }/goods/placeList.do?cate=allTime">24시간</a></li>
 			</ul>
 		</div>
+		<c:choose>
+		<c:when test="${!empty placeList }">
 		<div class="main_box">
 			<c:forEach items="${placeList }" var="place">
 				<div class="main_item"
 					onclick="location.href='${contextPath}/goods/gymDetail.do'">
-					<img class="img" src="${contextPath}/images/main/health4.jpg" />
+					<img class="main_img" src="${contextPath}/images/main/health4.jpg" />
 					<span class="title">${place.b_name }</span>
 					<span class="location">${place.addrBasic } 
 					</span>
 					<span class="location"><fmt:formatNumber pattern="0.0" value="${place.distance/1000 }"/>km</span>
 					<span class="price">${place.prod1retail }/월 </span>
 					<div class="cates">
-						<c:if test="${place.alltime eq Y }">
+						<c:if test="${place.allTime == 'Y' }">
 							<div class="cate">24시간</div>
 						</c:if>
 						<div class="cate">${place.cate }</div>
@@ -240,7 +246,16 @@ request.setCharacterEncoding("utf-8");
 					</c:if> 
 				</div>
 			</c:forEach>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="list_null">
+            <img src="${contextPath}/images/goods/exclamation.png">
+            <p>현재 위치 주변에 운동시설이 없습니다.<br>
+            위치를 바꾸고 다시 시도해 주세요.</p>
+          </div>
+			</c:otherwise>
+			</c:choose>
 		</div>
-	</div>
 </body>
 </html>

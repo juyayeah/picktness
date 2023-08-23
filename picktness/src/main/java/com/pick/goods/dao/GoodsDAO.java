@@ -15,6 +15,7 @@ import com.pick.goods.vo.GoodsTrainerVO;
 public interface GoodsDAO {
 	public List<GoodsBusinessVO> goodsBusinessAllList(Map option) throws DataAccessException;
 	public List<GoodsBusinessVO> goodsBusinessCateList(Map option ) throws DataAccessException;
+	public List<GoodsBusinessVO> goodsBusinessAllTimeList(Map option ) throws DataAccessException;
 	public List<GoodsBusinessVO> businessSearch(String search_content) throws DataAccessException;
 	public List<GoodsTrainerVO> trainerSearch(String search_content) throws DataAccessException;
 	public List<GoodsShoppingVO> shoppingSearch(String search_content) throws DataAccessException;

@@ -18,17 +18,19 @@ public class GoodsServiceImpl implements GoodsService{
 	GoodsDAO goodsDAO;
 
 	@Override
-	public List<GoodsBusinessVO> goodsBusinessAllList(double lat, double lng) throws DataAccessException {
-		Map<String, Object> option = new HashMap<>();
-		option.put("lat", lat);
-		option.put("lng", lng);
+	public List<GoodsBusinessVO> goodsBusinessAllList(Map option) throws DataAccessException {
 		return goodsDAO.goodsBusinessAllList(option);
 	}
 
 	@Override
-	public List<GoodsBusinessVO> goodsBusinessCateList(double lat, double lng, String cate) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GoodsBusinessVO> goodsBusinessCateList(Map option) throws DataAccessException {
+		return goodsDAO.goodsBusinessCateList(option);
+	}
+	
+
+	@Override
+	public List<GoodsBusinessVO> goodsBusinessAllTimeList(Map option) throws DataAccessException {
+		return goodsDAO.goodsBusinessAllTimeList(option);
 	}
 
 	@Override

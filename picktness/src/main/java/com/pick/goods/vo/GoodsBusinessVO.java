@@ -26,7 +26,7 @@ public class GoodsBusinessVO {
 	private String prod6retail;
 	private String prod12retail;
 	private String cate;
-	private String alltime;
+	private String allTime;
 	private double review_star;
 	private int review_count;
 	private String b_name;
@@ -160,11 +160,12 @@ public class GoodsBusinessVO {
 	public void setCate(String cate) {
 		this.cate = cate;
 	}
-	public String getAlltime() {
-		return alltime;
+
+	public String getAllTime() {
+		return allTime;
 	}
-	public void setAlltime(String alltime) {
-		this.alltime = alltime;
+	public void setAllTime(String allTime) {
+		this.allTime = allTime;
 	}
 	public double getReview_star() {
 		return review_star;
