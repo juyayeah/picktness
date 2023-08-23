@@ -155,7 +155,7 @@ request.setCharacterEncoding("utf-8");
 	border-bottom-right-radius: 5px;
 	margin-left: -3px;
 	border: 1px solid #2890f1;
-	background-color: #cfe6fc;
+	background-color: #fff;
 	color: #2890f1;
 	font-size: 12px;
 	padding: 2px 10px;
