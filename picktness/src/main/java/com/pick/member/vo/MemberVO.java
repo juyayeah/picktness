@@ -17,7 +17,7 @@ public class MemberVO {
 	private String phone1;
 	private String phone2;
 	private String phone3;
-	private int point;
+	private int memberPoint;
 	private String emailConsent;
 	private String phoneConsent;
 	private String del_yn;
@@ -90,11 +90,12 @@ public class MemberVO {
 	public void setPhone3(String phone3) {
 		this.phone3 = phone3;
 	}
-	public int getPoint() {
-		return point;
+	
+	public int getMemberPoint() {
+		return memberPoint;
 	}
-	public void setPoint(int point) {
-		this.point = point;
+	public void setMemberPoint(int memberPoint) {
+		this.memberPoint = memberPoint;
 	}
 	public String getEmailConsent() {
 		return emailConsent;

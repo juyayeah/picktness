@@ -413,7 +413,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         <button
           type="button"
           class="btn_top_mypage"
-          onclick="location.href='${contextPath}/member/mypage/memberDetail.do'"
+          onclick="location.href='${contextPath}/member/mypage/memberDetail.do?id=${member.id}'"
         >
           <img
             class="btn_top_mypage_img"
