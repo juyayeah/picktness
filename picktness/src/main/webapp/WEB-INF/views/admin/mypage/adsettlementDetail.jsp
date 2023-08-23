@@ -10,7 +10,7 @@ request.setCharacterEncoding("utf-8");
 <html>
 <head>
 <meta charset="utf-8">
-<title>정산내역</title>
+<title>정산관리</title>
 <style>
 .bodybody div {
 	position: relative;
@@ -96,7 +96,7 @@ request.setCharacterEncoding("utf-8");
 }
 /* 스크롤바 */
 #userListTable {
-	width: 860px;
+	width: 1000px;
 	border: 0px;
 	border-collapse: collapse;
 }
@@ -179,49 +179,62 @@ request.setCharacterEncoding("utf-8");
 </head>
 <body>
 	<div class="listcontent">
-		<h2 align="center">정산내역</h2>
-				<div style="float:right; margin-bottom:2px;">조회기간<input name="search_date" type="date"
-					size="40">~<input name="search_date" type="date" size="40"> <button id="btn" value="검색"> 검색</button></div>
-					</div>
+		<h2 align="center">정산관리</h2>
+				<div style="float:right; margin-bottom:2px;">상세검색&nbsp;<select>
+				<option value="전체" selected>전체</option>
+				<option value="헬스">헬스</option>
+				<option value="크로스핏">크로스핏</option>
+				<option value="요가">요가</option>
+				<option value="필라테스">필라테스</option>
+				<option value="복싱">복싱</option>
+				<option value="주짓수">주짓수</option>
+			</select> <input type="text" placeholder="상세검색" size="17"> <button id="btn" value="검색">검색</button>
+		</div>
 <br>
 		<div class="tableWrapper">
 			<table id="userListTable">
 				<tr style="cursor: default;">
-					<th width="10%">회차</th>
-					<th width="20%">정산금액</th>
-					<th width="15%">정산날짜</th>
+					<th width="5%">번호</th>
+					<th width="12%">사업자아이디</th>
+					<th width="10%">주문날짜</th>
+					<th width="12%">상품아이디</th>
+					<th width="11%">소매가</th>
+					<th width="10%">옵션</th>
+					<th width="10%">수수료</th>
+					<th width="7%">상태</th>
+					<th width="10%">정산금</th>
 				</tr>
 
 				<!-- 조건리스트 -->
-				<%-- 				<c:choose>
-					<c:when test="${empty trainerList}">
+			<c:choose>
+					<c:when test="${empty adSettlementList}">
 						<tr height="10">
-							<td colspan="6">
+							<td colspan="9">
 								<p align="center">
-									<b><span style="font-size: 9pt;">등록된 트레이너가 없습니다.</span></b>
+									<b><span style="font-size: 9pt;">등록된 정산내역이 없습니다.</span></b>
 								</p>
 							</td>
-						</tr> --%>
-				<!-- 하드코딩 -->
-				<tr align="center">
-					<td><a href="${contextPath}/business/mypage/settlementDetail.do">1</a></td>
-					<td><a href="${contextPath}/business/mypage/settlementDetail.do">800,000</a></td>
-					<td>2023-05-01</td>
+						</tr>
+	
+	 </c:when>
+					<c:when test="${!empty adSettlementList }">
+				<c:forEach var="trainer" items="${adSettlementList }">
+								<tr align="center">
+					<td>${business_balance.bno}</td>
+					<td>${business_balance.id}</td>
+					<td>${business_balance.orderDate}</td>
+					<td>${business_balance.goods_id}</td>
+					<td>${business_balance.retailPrice}</td>
+					<td>${business_balance.option}</td>
+					<td>${business_balance.charge}</td>
+					<td>${business_balance.state}</td>
+					<td>${business_balance.balancePrice}</td>
 				</tr>
-				<!-- 하드코딩 끝-->
-				<%-- </c:when>
-					<c:when test="${!empty trainerList }">
-				<c:forEach var="trainer" items="${trainerList }">
-					<tr align="center">
-						<td><a href="${contextPath}/business/mypage/settlementDetail.do">${}</a></td>
-						<td><a href="${contextPath}/business/mypage/settlementDetail.do">${}</a></td>
-						<td>${ }</td>
-					</tr>
 				</c:forEach>
 				</c:when>
-				</c:choose> --%>
+				</c:choose> 
 			</table>
-			<div align="right"><span style="font-size: 13px; color: #2089f1;">* 정산금은 월(1일~말일) 단위로 다음달 15일(주말 및 공휴일 다음날)에 입금됩니다.</span></div>
+		</div>
 		</div>
 </body>
 </html>
