@@ -101,7 +101,7 @@ a {
 #userListTable th {
 	position: sticky;
 	top: 0px;
-	background-color: #2890f1 !important;
+	background-color: #2890f1;
 }
 
 .listcontent th {
@@ -179,26 +179,22 @@ border:1px solid #c0c0c0;
 				</select>
 			</div>
 			<div class="topbar">
-				상품 <select>
+				&nbsp;&nbsp;&nbsp;&nbsp;만족도 <select>
 					<option value="전체" selected>전체</option>
-					<option value="이용권">이용권</option>
-					<option value="PT">PT</option>
+					<option name="star">&#10029;</option>
+					<option name="star">&#10029;&#10029;</option>
+					<option name="star">&#10029;&#10029;&#10029;</option>
+					<option name="star">&#10029;&#10029;&#10029;&#10029;</option>
+					<option name="star">&#10029;&#10029;&#10029;&#10029;&#10029;</option>
 				</select>
 			</div>
+		
 			<div class="topbar">
-				트레이너명 <select>
-					<option value="전체" selected>전체</option>
-					<c:forEach var="trainer.name" items="${trainerList }" varStatus="status">
-					<option><c:out value="${trainerVO.name}"/></option>
-					</c:forEach>
-				</select>
-			</div>
-			<div class="topbar">
-				조회기간 <input name="search_date" type="date" size="30">~<input
+				&nbsp;&nbsp;&nbsp; 조회기간 <input name="search_date" type="date" size="30">~<input
 					name="search_date" type="date" size="30">
 			</div>
-			<div class="topbar">
-			<input type="text" size="12px" placeholder="상세검색">
+			<div class="topbar">&nbsp;&nbsp;
+			<input type="text" size="18px" placeholder="상세검색">
 				<button id="btn" style="size:20;" value="검색">검색</button>
 			</div>
 		</div>
@@ -207,77 +203,28 @@ border:1px solid #c0c0c0;
 				<tr style="cursor: default;">
 					<th width="15%">작성일</th>
 					<th width="10%">작성자ID</th>
-					<th width="15%">주문번호</th>
-					<th width="10%">상품</th>
-					<th width="10%">상품명</th>
-					<th width="20%">문의내용</th>
+					<th width="15%"><a href="#"></a>주문번호</th>
+					<th width="20%">리뷰내용</th>
 					<th width="10%">만족도</th>
+					<th width="10%">상품번호</th>
+					<th width="10%">상품명</th>
 					<th width="10%">처리상태</th>
-				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				<td>6</td>
-				<td>6</td>
-				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				<td>6</td>
-				<td>6</td>
-				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				<td>6</td>
-				<td>6</td>
-				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				<td>6</td>
-				<td>6</td>
-				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				<td>6</td>
-				<td>6</td>
-				</tr>
-			<%-- 	<c:choose>
-					<c:when test="${empty goodsAskList }">
+					</tr>
+			<c:choose>
+					<c:when test="${empty adminReviewCont }">
 						<tr height="10">
-							<td colspan="6">
+							<td colspan="8">
 								<p align="center">
-									<b><span style="font-size: 9pt;">등록된 상품문의가 없습니다.</span></b>
+									<b><span style="font-size: 9pt;">등록된 리뷰가 없습니다.</span></b>
 								</p>
 							</td>
 						</tr>
 					</c:when>
-					<c:when test="${!empty goodsAskList }">
-						<c:forEach var="business" items="${goodsAskList }" varStatus="bno">
+					<c:when test="${!empty adminReviewCont }">
+						<c:forEach var="business" items="${adminReviewCont }" varStatus="bno">
 							<tr align="center">
-							
+															<td>${goods_ask.bno}</td>
+								<td>${goods_ask.bno}</td>
 								<td>${goods_ask.bno}</td>
 								<td>${goods_ask.goods_title}</td>
 								<td>${goods_ask.member_id}</td>
@@ -287,7 +234,7 @@ border:1px solid #c0c0c0;
 							</tr>
 						</c:forEach>
 					</c:when>
-				</c:choose> --%>
+				</c:choose>
 			</table>
 
 
@@ -298,15 +245,15 @@ border:1px solid #c0c0c0;
 							<c:forEach var="page" begin="1" end="10" step="1">
 								<c:if test="${section > 1 && page==1 }">
 									<a class="no-uline"
-										href="${contextPath }/business/goodsAskList.do?section=${section-1}&pageNum=${(section-1)*10 +1}">&nbsp;
+										href="${contextPath }/business/adminReviewCont.do?section=${section-1}&pageNum=${(section-1)*10 +1}">&nbsp;
 										pre </a>
 								</c:if>
 								<a class="no-uline"
-									href="${contextPath }/business/goodsAskList.do?section=${section}&pageNum=${page}">${(section-1)*10 + page}&nbsp;
+									href="${contextPath }/business/adminReviewCont.do?section=${section}&pageNum=${page}">${(section-1)*10 + page}&nbsp;
 								</a>
 								<c:if test="${page == 10 }">
 									<a class="no-uline"
-										href="${contextPath }/business/goodsAskList.do?section=${section+1}&pageNum=${section*10 +1}">&nbsp;
+										href="${contextPath }/business/adminReviewCont.do?section=${section+1}&pageNum=${section*10 +1}">&nbsp;
 										next </a>
 								</c:if>
 							</c:forEach>
@@ -314,7 +261,7 @@ border:1px solid #c0c0c0;
 						<c:when test="${totbusinesss == 100 }">
 							<c:forEach var="page" begin="1" end="10" step="1">
 								<a class="no-uline"
-									href="${contextPath }/business/goodsAskList.do?section=${section}&pageNum=${page}">${page  }</a>
+									href="${contextPath }/business/adminReviewCont.do?section=${section}&pageNum=${page}">${page  }</a>
 							</c:forEach>
 						</c:when>
 
@@ -324,11 +271,11 @@ border:1px solid #c0c0c0;
 								<c:choose>
 									<c:when test="${page==pageNum }">
 										<a class="sel-page"
-											href="${contextPath }/business/goodsAskList.do?section=${section}&pageNum=${page}">${page }</a>
+											href="${contextPath }/business/adminReviewCont.do?section=${section}&pageNum=${page}">${page }</a>
 									</c:when>
 									<c:otherwise>
 										<a class="no-uline"
-											href="${contextPath }/business/goodsAskList.do?section=${section}&pageNum=${page}">${page }</a>
+											href="${contextPath }/business/adminReviewCont.do?section=${section}&pageNum=${page}">${page }</a>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
