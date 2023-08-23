@@ -66,8 +66,9 @@ request.setCharacterEncoding("utf-8");
 </script>
 
 <style>
-table {
+.bodybody table {
 	border-spacing: 0 20px;
+margin:0 auto;
 }
 
 .tdfirst {
@@ -103,11 +104,11 @@ table {
 	align: left;
 }
 
-label {
+.bodybody label {
 	display: inline-block;
 }
 
-textarea {
+.bodybody textarea {
 	width: 95%;
 	border: 2px solid #c0c0c0;
 	border-top-left-radius: 5px;
@@ -242,8 +243,8 @@ textarea {
 </style>
 </head>
 <body>
-	<div>
-		<h2 align="center">트레이너 등록</h2>
+	<div class="bodybody">
+		<h2 align="center">트레이너 상세</h2>
 		<table>
 			<tr>
 				<td colspan="3" align="right"><span class="starblue"
@@ -292,8 +293,8 @@ textarea {
 				<td class="tdlast"><input type="hidden" name="originalFileName"
 					value="${trainer_detail_image.fileName }" /> <img
 					src="${contextPath }/download.do?imageFileName=${trainer_detail_image.fileNamee }&goods_id=${trainer.goods_id}"
-					id="preview" width="100px" /><br> <input type="file"
-					name="fileName" id="fileName" onchange="readURL(this);" disabled /></td>
+					id="preview" width="100px" /><br><!--  <input type="file"
+					name="fileName" id="fileName" onchange="readURL(this);" disabled /></td> -->
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
