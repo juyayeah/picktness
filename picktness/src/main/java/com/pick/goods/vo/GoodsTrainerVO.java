@@ -38,6 +38,7 @@ public class GoodsTrainerVO {
 	private BigDecimal lat;
 	private BigDecimal lng;
 	private String fileName;
+	private double distance;
 	public String getGoods_id() {
 		return goods_id;
 	}
@@ -223,6 +224,12 @@ public class GoodsTrainerVO {
 	}
 	public void setLng(BigDecimal lng) {
 		this.lng = lng;
+	}
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
 	}
 	
 }

@@ -35,7 +35,14 @@ public class GoodsControllerImpl implements GoodsController{
 		String viewName = (String) request.getAttribute("viewName");
 		session = request.getSession();
 		session.setAttribute("cate", cate);
-		MemberVO member = (MemberVO) session.getAttribute("member");
+		double memLat = (double) session.getAttribute("lat");
+		double memLng = (double) session.getAttribute("lng");
+		if(cate.equals("all")) {
+			
+			placeList = goodsService.goodsBusinessAllList(memLat, memLng);
+		} else {
+			placeList = goodsService.goodsBusinessCateList(memLat, memLng, cate);
+		}
 		mav.addObject("placeList", placeList);
 		mav.setViewName(viewName);
 		return mav;

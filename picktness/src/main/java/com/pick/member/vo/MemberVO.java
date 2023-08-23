@@ -22,8 +22,8 @@ public class MemberVO {
 	private String phoneConsent;
 	private String del_yn;
 	private Date joinDate;
-	private BigDecimal lat;
-	private BigDecimal lng;
+	private double lat;
+	private double lng;
 	public String getId() {
 		return id;
 	}
@@ -120,17 +120,18 @@ public class MemberVO {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
-	public BigDecimal getLat() {
+	public double getLat() {
 		return lat;
 	}
-	public void setLat(BigDecimal lat) {
+	public void setLat(double lat) {
 		this.lat = lat;
 	}
-	public BigDecimal getLng() {
+	public double getLng() {
 		return lng;
 	}
-	public void setLng(BigDecimal lng) {
+	public void setLng(double lng) {
 		this.lng = lng;
 	}
-	
+
+
 }

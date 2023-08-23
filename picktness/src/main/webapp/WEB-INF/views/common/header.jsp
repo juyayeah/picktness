@@ -456,7 +456,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           <div class="menu_all_list">
             <ul class="menu_list_place">
               <li class="menu_list_title">
-                <a href="${contextPath}/goods/placeList.do?cate=all&lng=${member.lng}&lat=${member.lat}">운동시설</a>
+                <a href="${contextPath}/goods/placeList.do?cate=all">운동시설</a>
               </li>
               <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=health">헬스</a></li>
               <li class="menu_list_a"><a href="${contextPath}/goods/placeList.do?cate=cross">크로스핏</a></li>
