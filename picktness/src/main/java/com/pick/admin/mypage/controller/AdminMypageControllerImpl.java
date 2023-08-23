@@ -66,6 +66,13 @@ import org.springframework.web.servlet.ModelAndView;
 			mav.setViewName(viewName);
 			return mav;
 		}
+		@RequestMapping(value="/admin/mypage/trainerDetail.do", method=RequestMethod.GET)
+		private ModelAndView trainerDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			String viewName = (String) request.getAttribute("viewName");
+			mav.setViewName(viewName);
+			return mav;
+		}
 		
 		//--------주문 결제 배송관리------------//
 

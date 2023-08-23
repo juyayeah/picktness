@@ -38,12 +38,13 @@ td
 .topbar{
 align:justify;
 width: 100%;
+margin-bottom:2px;
 }
 
 .tableWrapper {
 	width: 100%;
 	height: auto;
-	max-height: 200px;
+	max-height: 300px;
 	background-color: white;
 	overflow: auto;
 }
@@ -122,10 +123,9 @@ table th:last-child {
 
 <body>
 	<div class="listcontent">
-		<div class="listcontentinner"></div>
 		<h2 align="center">트레이너 관리</h2>
 
-		<div class="topbar">
+		<div class="topbar" >
 			승인상태&nbsp;
 			
 			<select>
@@ -142,19 +142,18 @@ table th:last-child {
 				<option value="필라테스">필라테스</option>
 				<option value="복싱">복싱</option>
 				<option value="주짓수">주짓수</option>
-			</select> <input type="text" placeholder="상세검색"> <button id="btn" value="검색">검색</button>
+			</select> <input type="text" placeholder="상세검색" size="17"> <button id="btn" value="검색">검색</button>
 		</div>
-		<div>총 #건</div>
 
 		<div class="tableWrapper">
 			<table id="userListTable">
 				<tr style="cursor: default;">
-					<th>사업자명</th>
-					<th>시설명</th>
-					<th>카테고리</th>
-					<th>트레이너명</th>
-					<th>등록일</th>
-					<th>승인상태</th>
+					<th width="10px">사업자명</th>
+					<th width="10px">시설명</th>
+					<th width="10px">카테고리</th>
+					<th width="10px">트레이너명</th>
+					<th width="10px">등록일</th>
+					<th width="10px">승인상태</th>
 				</tr>
 				<c:choose>
 			<c:when test="${empty adminTrainerList }">
@@ -174,7 +173,7 @@ table th:last-child {
 						<td>${business.b_name}</td>
 						<td>${admin.num}</td>
 						<td>${trainer.cate}</td>
-						<td>${trainer.name}</td>
+						<td><a href="${contextPath }/admin/mypage/trainerDetail.do">${trainer.name}</a></td>
 						<td>${trainer.joindate}</td>
 						<td>${trainer.state}</td>
 					</tr>

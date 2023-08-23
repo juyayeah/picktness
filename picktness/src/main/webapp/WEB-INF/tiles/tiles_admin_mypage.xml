@@ -56,6 +56,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/mypage/adminTrainerList.jsp" />
 	</definition>
+	<definition name="/admin/mypage/trainerDetail"
+		extends="adpageLayout">
+		<put-attribute name="title" value="트레이너리스트" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/mypage/trainerDetail.jsp" />
+	</definition>
 
 	<!-- order -->
 	<definition name="/admin/mypage/adminDeliverList"
