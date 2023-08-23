@@ -156,7 +156,7 @@ table th:last-child {
 				<c:forEach var="business" items="${BusinessList }"
 					varStatus="businessNum">
 					<tr align="center">
-						<td width="8%"><a href="${contextPath}/admin/mypage/adminBusiInfo.do">${business.id}</td>
+						<td width="8%"><a href="${contextPath}/admin/mypage/busiMemberInfo.do">${business.id}</td>
 						<td width="12%">${business.name}</td>
 						<td width="12%">${business.cate}</td>
 						<td width="9%">${business.phone1} ${business.phone2} ${business.phone3}</td>
