@@ -65,6 +65,7 @@ public class GoodsControllerImpl implements GoodsController{
 			placeList = goodsService.goodsBusinessCateList(option);
 		}
 		mav.addObject("placeList", placeList);
+		mav.addObject("totalGoods", placeList.size());
 		mav.setViewName(viewName);
 		option.clear();
 		return mav;

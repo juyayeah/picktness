@@ -155,7 +155,9 @@ request.setCharacterEncoding("utf-8");
 }
 .list_null{
 clear:both;
+margin-top:100px;
 text-align:center;
+height:300px;
 }
 </style>
 <script>
@@ -181,6 +183,9 @@ text-align:center;
 			break;
 		case "jiu":
 			$("#jiu").css("font-weight", "bold");
+			break;
+		case "allTime":
+			$("#allTime").css("font-weight", "bold");
 			break;
 		}
 	});
@@ -217,7 +222,7 @@ text-align:center;
 					href="${contextPath}/goods/placeList.do?cate=boxing">복싱</a></li>
 				<li id="jiu"><a
 					href="${contextPath}/goods/placeList.do?cate=jiu">주짓수</a></li>
-				<li id="all_time"><a href="${contextPath }/goods/placeList.do?cate=allTime">24시간</a></li>
+				<li id="allTime"><a href="${contextPath }/goods/placeList.do?cate=allTime">24시간</a></li>
 			</ul>
 		</div>
 		<c:choose>
@@ -247,6 +252,19 @@ text-align:center;
 				</div>
 			</c:forEach>
 			</div>
+			<c:choose>
+			<c:when test="${totalGoods > 100}">
+			<c:forEach var="page" begin="1" end="10" step="1">
+			<c:if test="${section > 1 && page == 1 }">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate }&section=${section-1 }&page=${(section-1)*10 + 1 }">이전</a>
+			</c:if>
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&page=${page}">${(section-1)*10+page }</a>
+			<c:if test="${page==10 }">
+			<a href="${conteatPath }/goods/placeList.do?cate=${cate }&section=${section+1 }&page=${(section*10)+1 }">다음</a>
+			</c:if>
+			</c:forEach>
+			</c:when>
+			</c:choose>
 			</c:when>
 			<c:otherwise>
 			<div class="list_null">
