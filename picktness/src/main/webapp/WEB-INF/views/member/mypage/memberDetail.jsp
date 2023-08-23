@@ -168,9 +168,7 @@
           });
         </script>
         <style>
-          .hrColor {
-            border-color: #2890F1;
-          }
+          
 
           input[type="checkbox"][name="chk"] {
             /* 원하는 크기 값으로 조절 */
@@ -301,19 +299,20 @@
         <body style="background-color: white;">
 
           <div class="confrim-container" id="formContainer">
-            <h1 style="text-align: center;">회원정보 수정</h1><br>
+            <h1 style="text-align: center;">회원정보 수정</h1><hr style="background-color: #2890F1; height: 1px; width: 60%;"><br>
+           
             <div class="cation">
             </div>
             <form action="${contextPath}/member/addMember.do" method="post">
               <div class="formTool">
                 <div class="form-row">
                   <label for="name">이름</label><br>
-                  <input type="text" name="name" class="input-small" disabled><br>
+                  <input type="text" value="${member.name }" name="name" class="input-small" disabled><br>
                 </div>
 
                 <div class="form-row">
                   <label for="id">아이디</label><br>
-                  <input type="text" id="id" name="id" class="input-small" disabled>
+                  <input type="text" value="${member.id }" id="id" name="id" class="input-small" disabled>
 
                 </div>
 
@@ -327,18 +326,18 @@
                 </script>
                 <div class="form-row">
                   <label for="addr">주소</label><br>
-                  <input style="width: 100px;" type="text" id="zip_code" name="zipcode" onclick="openZipSearch();"
+                  <input value="${member.zipcode }" style="width: 100px;" type="text" id="zip_code" name="zipcode" onclick="openZipSearch();"
                     disabled>
                   <button class="address-button" type="button" onclick="openZipSearch()" hidden>주소 찾기</button><br>
-                  <input type="text" id="addr" name="addrBasic" readonly="readonly" placeholder="기본주소"
+                  <input type="text" value="${member.addrBasic }" id="addr" name="addrBasic" readonly="readonly" placeholder="기본주소"
                     style="width:250px;" disabled><br>
-                  <input type="text" id="addr_dtl" name="addrDetail" placeholder="상세주소" style="width:250px;" disabled>
+                  <input type="text" value="${member.addrDetail }"id="addr_dtl" name="addrDetail" placeholder="상세주소" style="width:250px;" disabled>
                 </div>
                 <div class="form-row">
                   <label for="email">이메일</label><br>
-                  <input type="text" id="domain-txt1" name="email1" style="width: 150px;" disabled>
+                  <input type="text" value="${member.email1 }" id="domain-txt1" name="email1" style="width: 150px;" disabled>
                   <span>@</span>
-                  <input type="text" class="box" id="domain-txt2" name="email2" style="width: 150px;" disabled>
+                  <input type="text" value="${member.email2 }" class="box" id="domain-txt2" name="email2" style="width: 150px;" disabled>
                   <select class="select-box" id="domain-list" style="width: 150px;" hidden>
                     <option value="">이메일 선택</option>
                     <option value="">직접입력</option>
@@ -366,13 +365,13 @@
                 </div>
                 <div class="form-row2">
                   <label for="phoneNum">휴대전화</label><br>
-                  <input type="text" id="phone1" name="phone1" class="phone-input" maxlength="3"
+                  <input type="text" value="${member.phone1 }"id="phone1" name="phone1" class="phone-input" maxlength="3"
                     onkeyup="formatPhoneNumber()" disabled>
                   <span>-</span>
-                  <input type="text" id="phone2" name="phone2" class="phone-input" maxlength="4"
+                  <input type="text" value="${member.phone2 }" id="phone2" name="phone2" class="phone-input" maxlength="4"
                     onkeyup="formatPhoneNumber()" disabled>
                   <span>-</span>
-                  <input type="text" id="phone3" name="phone3" class="phone-input" maxlength="4"
+                  <input type="text" value="${member.phone3 }" id="phone3" name="phone3" class="phone-input" maxlength="4"
                     onkeyup="formatPhoneNumber()" disabled>
                 </div>
                 <input type="hidden" id="formatted-phone" name="formatted-phone" readonly>
@@ -380,14 +379,14 @@
               <div class="form-row">
                 <label for="point">내 포인트</label><br>
                 <div class="input-with-text">
-                  <input type="text" id="point" name="point" class="input-small" disabled>
+                  <input type="text" value="${member.memberPoint }" id="point" name="point" class="input-small" disabled>
                   <span class="point-text">포인트</span>
                 </div>
               </div>
               <button class="conforBtn" type="button">수정하기</button>
               <br>
               <div style="text-align: center;">
-                <a href="" style="color: rgb(197, 194, 194); display: inline-block; margin-bottom: 20px;">탈퇴하기</a>
+                <a href="${contextPath}/member/mypage/delAccount.do" style="color: rgb(197, 194, 194); display: inline-block; margin-bottom: 20px;">탈퇴하기</a>
               </div>
 
           </div>

@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result property="phone1" column="phone1"/>
  		<result property="phone2" column="phone2"/>
  		<result property="phone3" column="phone3"/>
- 		<result property="point" column="point"/>
+ 		<result property="memberPoint" column="memberPoint"/>
  		<result property="emailConsent" column="emailConsent"/>
  		<result property="phoneConsent" column="phoneConsent"/>
  		<result property="del_yn" column="del_yn"/>
@@ -39,9 +39,16 @@ select count(id) from member where id=#{id}
 
 <insert id="insertMember" parameterType="memberVO">
     <![CDATA[
-    insert into member(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3)
-    values(#{id}, #{pwd}, #{name}, #{zipcode}, #{addrBasic}, #{addrDetail}, #{email1}, #{email2}, #{phone1}, #{phone2}, #{phone3})
+    insert into member(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3, memberPoint)
+    values(#{id}, #{pwd}, #{name}, #{zipcode}, #{addrBasic}, #{addrDetail}, #{email1}, #{email2}, #{phone1}, #{phone2}, #{phone3}, 5000)
     ]]>
 </insert>
+<insert id="eventInitPoint" parameterType="memberVO">
+    <![CDATA[
+   insert into point_history(member_id, member_point, content)
+    values(#{id}, #{memberPoint}, "회원가입 이벤트")
+    ]]>
+</insert>
+
 
  </mapper>
