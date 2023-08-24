@@ -20,11 +20,9 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void addMember(MemberVO memberVO) throws Exception {
 		memberDAO.insertMember(memberVO);
-<<<<<<< HEAD
-=======
+
 		memberDAO.eventInitPoint(memberVO);
 		
->>>>>>> branch 'master' of https://github.com/juyayeah/picktness.git
 	}
 	@Override
 	public int idCheck(String id) throws Exception {
