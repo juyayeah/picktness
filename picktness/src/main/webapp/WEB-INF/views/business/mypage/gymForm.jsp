@@ -10,7 +10,7 @@ request.setCharacterEncoding("utf-8");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>트레이너 등록</title>
+<title>운동시설 등록</title>
 <script  src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src ="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
