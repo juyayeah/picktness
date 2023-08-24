@@ -35,12 +35,18 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/mypage/adminQnAList.jsp" />
 	</definition>
-	<!-- qym -->
+	<!-- busi-member info -->
 	<definition name="/admin/mypage/adminBusiList"
 		extends="adpageLayout">
 		<put-attribute name="title" value="사업자리스트" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/mypage/adminBusiList.jsp" />
+	</definition>
+	<definition name="/admin/mypage/busiMemberInfo"
+		extends="adpageLayout">
+		<put-attribute name="title" value="사업자정보" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/mypage/busiMemberInfo.jsp" />
 	</definition>
 
 	<!-- trainer -->
@@ -49,6 +55,12 @@
 		<put-attribute name="title" value="트레이너리스트" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/mypage/adminTrainerList.jsp" />
+	</definition>
+	<definition name="/admin/mypage/trainerDetail"
+		extends="adpageLayout">
+		<put-attribute name="title" value="트레이너리스트" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/mypage/trainerDetail.jsp" />
 	</definition>
 
 	<!-- order -->
@@ -71,12 +83,19 @@
 			value="/WEB-INF/views/admin/mypage/adminOrderList.jsp" />
 	</definition>
 	<!-- review -->
-	<!-- busi-member info -->
-	<definition name="/admin/mypage/busimemberInfo"
+	<definition name="/admin/mypage/adminReviewCont"
 		extends="adpageLayout">
-		<put-attribute name="title" value="사업자정보" />
+		<put-attribute name="title" value="리뷰관리" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/admin/mypage/busimemberInfo.jsp" />
+			value="/WEB-INF/views/admin/mypage/adminReviewCont.jsp" />
+	</definition>
+	
+	<!-- memberCont -->
+	<definition name="/admin/mypage/memberCont"
+		extends="adpageLayout">
+		<put-attribute name="title" value="회원관리" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/mypage/memberCont.jsp" />
 	</definition>
 	<!-- settlement detail -->
 	<definition name="/admin/mypage/adsettlementDetail"

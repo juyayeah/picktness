@@ -9,7 +9,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
 
 <head>
 <meta charset="UTF-8">
-<title>table</title>
+<title>회원관리</title>
 <style>
 /* * {
 	box-sizing: border-box;
@@ -21,14 +21,14 @@ uri="http://tiles.apache.org/tags-tiles" %>
 	margin: 0 auto;
 }
 
-.listcontent a {
+a {
 	background: transparent;
 	text-decoration: none;
 	color: inherit;
 }
 
 
-.listcontent td
+td
 {
  max-width: 100%;
  overflow: hidden;
@@ -86,16 +86,16 @@ margin-bottom:2px;
 	background-color: #2890f1 !important;
 }
 
-.listcontent th {
+th {
 	background-color: #2890f1;
 	color: #ffffff;
 }
 
-.listcontent table th:first-child {
+table th:first-child {
 	border-top-left-radius: 8px;
 }
 
-.listcontent table th:last-child {
+table th:last-child {
 	border-top-right-radius: 8px;
 }
 
@@ -119,63 +119,59 @@ margin-bottom:2px;
 	background-color: #2890f1;
 }
 </style>
+<script type="text/javascript">
+$(function(){
+	$("input:radio[name='state']:radio[value='leaving']").prop('checked', true); // 선택하기
+	$("input:radio[name='state']:radio[value='using']").prop('checked', true); // 해제하기
+	});
+</script>
 </head>
 
 <body>
 	<div class="listcontent">
-		<h2 align="center">트레이너 관리</h2>
+		<h2 align="center">회원 관리</h2>
 
 		<div class="topbar" >
-			승인상태&nbsp;
-			
-			<select>
-				<option value="전체" selected>전체</option>
-				<option value="완료">완료</option>
-				<option value="승인요청">승인요청</option>
-				<option value="수정요청">수정요청</option>
-			</select> &nbsp;&nbsp;조회기간&nbsp;<input name="search_date" type="date" size="40">~<input
+		<input type='radio' name='state' value='using' />활동중 <input type='radio' name='state' value='leaving' />활동정지
+		
+			<span style="margin-left:50px;">가입일&nbsp;</span><input name="search_date" type="date" size="40">~<input
 				name="search_date" type="date" size="40"> &nbsp;&nbsp;상세검색&nbsp;<select>
 				<option value="전체" selected>전체</option>
-				<option value="헬스">헬스</option>
-				<option value="크로스핏">크로스핏</option>
-				<option value="요가">요가</option>
-				<option value="필라테스">필라테스</option>
-				<option value="복싱">복싱</option>
-				<option value="주짓수">주짓수</option>
+				<option value="아이디">아이디</option>
+				<option value="이름">이름</option>
 			</select> <input type="text" placeholder="상세검색" size="17"> <button id="btn" value="검색">검색</button>
 		</div>
 
 		<div class="tableWrapper">
 			<table id="userListTable">
 				<tr style="cursor: default;">
-					<th width="10px">사업자명</th>
-					<th width="10px">시설명</th>
-					<th width="10px">카테고리</th>
-					<th width="10px">트레이너명</th>
-					<th width="10px">등록일</th>
-					<th width="10px">승인상태</th>
+					<th width="10px">아이디</th>
+					<th width="10px">이름</th>
+					<th width="10px">휴대전화</th>
+					<th width="10px">이메일</th>
+					<th width="10px">가입일</th>
+					<th width="10px">관리</th>
 				</tr>
 				<c:choose>
-			<c:when test="${empty adminTrainerList }">
+			<c:when test="${empty memberCont }">
 				<tr height="10">
 					<td colspan="11">
 						<p align="center">
-							<b><span style="font-size: 9pt;">등록된 트레이너가 없습니다.</span></b>
+							<b><span style="font-size: 9pt;">등록된 회원이 없습니다.</span></b>
 						</p>
 					</td>
 				</tr>
 			</c:when>
-			<c:when test="${!empty adminTrainerList }">
-				<c:forEach var="admin" items="${adminTrainerList }"
+			<c:when test="${!empty memberCont }">
+				<c:forEach var="admin" items="${memberCont }"
 					varStatus="bno">
 					<tr align="center">
-						<td>${trainer.id}</td>
-						<td>${business.b_name}</td>
-						<td>${admin.num}</td>
-						<td>${trainer.cate}</td>
-						<td><a href="${contextPath }/admin/mypage/trainerDetail.do">${trainer.name}</a></td>
+						<td><a href="${contextPath}/admin/mypage/adminMemberDetail.do">${member.id}</a></td>
+						<td>${member.name}</td>
+						<td>${member.phone1} ${member.phone2} ${member.phone3}</td>
+						<td>${member.email1}${member.email2}</td>
 						<td>${trainer.joindate}</td>
-						<td>${trainer.state}</td>
+						<td>${member.del_yn}</td>
 					</tr>
 				</c:forEach>
 			</c:when>
@@ -190,15 +186,15 @@ margin-bottom:2px;
 					<c:forEach var="page" begin="1" end="10" step="1">
 						<c:if test="${section > 1 && page==1 }">
 							<a class="no-uline"
-								href="${contextPath }/admin/adminTrainerList.do?section=${section-1}&pageNum=${(section-1)*10 +1}">&nbsp;
+								href="${contextPath }/admin/memberCont.do?section=${section-1}&pageNum=${(section-1)*10 +1}">&nbsp;
 								pre </a>
 						</c:if>
 						<a class="no-uline"
-							href="${contextPath }/admin/adminTrainerList.do?section=${section}&pageNum=${page}">${(section-1)*10 + page}&nbsp;
+							href="${contextPath }/admin/memberCont.do?section=${section}&pageNum=${page}">${(section-1)*10 + page}&nbsp;
 						</a>
 						<c:if test="${page == 10 }">
 							<a class="no-uline"
-								href="${contextPath }/admin/adminTrainerList.do?section=${section+1}&pageNum=${section*10 +1}">&nbsp;
+								href="${contextPath }/admin/memberCont.do?section=${section+1}&pageNum=${section*10 +1}">&nbsp;
 								next </a>
 						</c:if>
 					</c:forEach>
@@ -206,7 +202,7 @@ margin-bottom:2px;
 				<c:when test="${totadmins == 100 }">
 					<c:forEach var="page" begin="1" end="10" step="1">
 						<a class="no-uline"
-							href="${contextPath }/admin/adminTrainerList.do?section=${section}&pageNum=${page}">${page  }</a>
+							href="${contextPath }/admin/memberCont.do?section=${section}&pageNum=${page}">${page  }</a>
 					</c:forEach>
 				</c:when>
 
@@ -215,11 +211,11 @@ margin-bottom:2px;
 						<c:choose>
 							<c:when test="${page==pageNum }">
 								<a class="sel-page"
-									href="${contextPath }/admin/adminTrainerList.do?section=${section}&pageNum=${page}">${page }</a>
+									href="${contextPath }/admin/memberCont.do?section=${section}&pageNum=${page}">${page }</a>
 							</c:when>
 							<c:otherwise>
 								<a class="no-uline"
-									href="${contextPath }/admin/adminTrainerList.do?section=${section}&pageNum=${page}">${page }</a>
+									href="${contextPath }/admin/memberCont.do?section=${section}&pageNum=${page}">${page }</a>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>

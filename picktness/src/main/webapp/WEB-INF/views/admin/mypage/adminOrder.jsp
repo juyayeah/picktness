@@ -115,7 +115,7 @@ request.setCharacterEncoding("utf-8");
 			<table>
 				<tr class="solid">
 					<th>신규주문</th>
-					<td align="right"><a href="#"><b>2</b></a>건</td>
+					<td align="right"><a href="${contextPath }/admin/mypage/adminOrderList.do?state='neworder'"><b>2</b></a>건</td>
 					<th>취소완료</th>
 					<td align="right"><a href="#"><b>{#}</b></a>건</td>
 					<th>환불요청</th>
