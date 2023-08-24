@@ -27,12 +27,12 @@ uri="http://tiles.apache.org/tags-tiles" %>
       }
       .prev {
         position: absolute;
-        top: 340px;
+        top: 330px;
         left: 100px;
       }
       .next {
         position: absolute;
-        top: 340px;
+        top: 330px;
         right: 100px;
       }
       .prev img,

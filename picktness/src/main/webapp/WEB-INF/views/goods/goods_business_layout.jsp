@@ -140,6 +140,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
       <div class="modal_head">
         <img
           class="map-arrow"
+          id="arrow1"
           src="${contextPath}/images/goods/map-arrow.png"
         />
         <div class="modal_title">지도에서 위치 지정</div>
@@ -160,6 +161,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
       <div class="modal_head">
         <img
           class="map-arrow"
+          id="arrow2"
           src="${contextPath}/images/goods/map-arrow.png"
         />
         <div class="modal_title2"></div>
@@ -168,7 +170,55 @@ uri="http://tiles.apache.org/tags-tiles" %>
       <div id="map_map"></div>
     </div>
     <script>
+		var geocoder = new kakao.maps.services.Geocoder();
+	$(function(){
+		//지도 보이게 하기
+        $(".map_button1").click(function () {
+        $(".not_modal").css("visibility", "visible");
+        $(".modal_location").css("visibility", "visible");
+          });
+		//위치 지정가능 지도
+		var mapContainer1 = document.getElementById('location_map'), // 지도를 표시할 div 
+    	mapOption1 = { 
+        center: new kakao.maps.LatLng(${lat}, ${lng}), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+		var map1 = new kakao.maps.Map(mapContainer1, mapOption1); // 지도를 생성합니다
+    	var marker = new kakao.maps.Marker({
+        	map: map1,
+        	position: new kakao.maps.LatLng(${lat}, ${lng})
+    });
+		
+		//주소 검색시
+    	 $("#input_location").on("propertychange change paste input",function () {
+    	     var changeLocation = $("#input_location").val();
+    	     geocoder.addressSearch(changeLocation, function (result, status) {
+    	     // 정상적으로 검색이 완료됐으면
+    	     if (status === kakao.maps.services.Status.OK) {
+    	     var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+    	     lat = result[0].y;
+    	     lng = result[0].x;
+    	     // 결과값으로 받은 위치를 마커로 표시합니다
+    	     marker.setPosition(coords);
 
+    	     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    	     map1.setCenter(coords);
+					}
+				});
+			}
+		);
+		// map1에서 뒤로가기 클릭시
+		  $("#arrow1").click(function () {
+          $(".not_modal").css("visibility", "hidden");
+          $(".modal_location").css("visibility", "hidden");
+          $("#input_location").val("");
+		  });
+		// map1 위치지정 클릭시 controller에 전송하기
+	      $(".modal_fix").click(function () {
+		    var memberLocation = $("#input_location").val();
+		    location.href="${contextPath}/goods/placeList.do?lat="+lat+"&lng="+lng+"&memLocation="+memberLocation;
+	      });
+	      });
     </script>
     <div class="not_modal"></div>
   </body>

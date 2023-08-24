@@ -15,7 +15,7 @@ request.setCharacterEncoding("utf-8");
 .content-inner {
 	position: relative;
 	max-width: 1100px;
-	margin: 0 auto 100px auto;
+	margin: 0 auto 50px auto;
 }
 
 .content_title {
@@ -159,6 +159,38 @@ margin-top:100px;
 text-align:center;
 height:300px;
 }
+.pageBar{
+width:100%;
+margin-top:40px;
+text-align:center;
+}
+.pageButton{
+display:inline-block;
+width:30px;
+height:25px;
+padding-top:5px;
+text-align:center;
+font-weight:bold;
+}
+.pageButtonNow{
+display:inline-block;
+width:30px;
+height:25px;
+padding-top:4px;
+text-align:center;
+border:1px solid #2890f1;
+font-weight:bold;
+color:#2890f1;
+}
+.pageButtonText{
+display:inline-block;
+width:100px;
+height:24px;
+padding-top:6px;
+margin:0px 10px;
+color:#a6a6a6;
+font-size:14px;
+}
 </style>
 <script>
 	$(function() {
@@ -252,19 +284,68 @@ height:300px;
 				</div>
 			</c:forEach>
 			</div>
+			<div class="pageBar">
 			<c:choose>
 			<c:when test="${totalGoods > 100}">
 			<c:forEach var="page" begin="1" end="10" step="1">
 			<c:if test="${section > 1 && page == 1 }">
-			<a href="${contextPath }/goods/placeList.do?cate=${cate }&section=${section-1 }&page=${(section-1)*10 + 1 }">이전</a>
+			<div class="pageButtonText">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate }&section=${section-1 }&pageNum=${(section-1)*10 + 1 }">이전페이지</a>
+			</div>
 			</c:if>
-			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&page=${page}">${(section-1)*10+page }</a>
+			<c:choose>
+			<c:when test="${page==pageNum }">
+			<div class="pageButtonNow">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&pageNum=${page}">${(section-1)*10+page }</a>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="pageButton">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&pageNum=${page}">${(section-1)*10+page }</a>
+			</div>
+			</c:otherwise>
+			</c:choose>
 			<c:if test="${page==10 }">
-			<a href="${conteatPath }/goods/placeList.do?cate=${cate }&section=${section+1 }&page=${(section*10)+1 }">다음</a>
+			<div class="pageButtonText">
+			<a href="${conteatPath }/goods/placeList.do?cate=${cate }&section=${section+1 }&pageNum=${(section*10)+1 }">다음페이지</a>
+			</div>
 			</c:if>
 			</c:forEach>
 			</c:when>
+			<c:when test="${totalGoods == 100 }">
+			<c:forEach var="page" begin="1" end="10" step="1">
+			<c:choose>
+			<c:when test="${page==pageNum }">
+			<div class="pageButtonNow">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&pageNum=${page}">${page }</a>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="pageButton">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&pageNum=${page}">${page }</a>
+			</div>
+			</c:otherwise>
 			</c:choose>
+			</c:forEach>
+			</c:when>
+			<c:when test="${totalGoods <100 }">
+			<c:forEach var="page" begin="1" end="${(totalGoods-1)/12+1 }" step="1">
+			<c:choose>
+			<c:when test="${page==pageNum }">
+			<div class="pageButtonNow">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&pageNum=${page}">${page }</a>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="pageButton">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate }&section=${section }&pageNum=${page }">${page }</a>
+			</div>
+			</c:otherwise>
+			</c:choose>
+			</c:forEach>
+			</c:when>
+			</c:choose>
+			</div>
 			</c:when>
 			<c:otherwise>
 			<div class="list_null">

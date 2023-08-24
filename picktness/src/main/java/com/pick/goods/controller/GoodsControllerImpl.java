@@ -30,22 +30,34 @@ public class GoodsControllerImpl implements GoodsController{
 
 	@Override
 	@RequestMapping(value="/goods/placeList.do", method=RequestMethod.GET)
-	public ModelAndView placeList(@RequestParam("cate") String cate, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView placeList(@RequestParam(value="section", defaultValue="1") int section, @RequestParam(value="pageNum", defaultValue="1") int pageNum,@RequestParam(value="cate", defaultValue="all") String cate, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, Object> option = new HashMap<>();
 		ModelAndView mav = new ModelAndView();
+		List<GoodsBusinessVO> placeAllList = new ArrayList<>();
 		List<GoodsBusinessVO> placeList = new ArrayList<>();
 		String viewName = (String) request.getAttribute("viewName");
+		double memLat = 0;
+		double memLng = 0;
 		session = request.getSession();
 		session.setAttribute("cate", cate);
-		double memLat = (double) session.getAttribute("lat");
-		double memLng = (double) session.getAttribute("lng");
+		if(request.getParameter("lat") != null) {
+			memLat = Double.parseDouble(request.getParameter("lat"));
+			memLng = Double.parseDouble(request.getParameter("lng"));
+			String memLocation = request.getParameter("memLocation");
+			session.setAttribute("memLocation", memLocation);
+			session.setAttribute("lat", memLat);
+			session.setAttribute("lng", memLng);
+		} else {
+			memLat = (double) session.getAttribute("lat");
+			memLng = (double) session.getAttribute("lng");	
+		}
 		option.put("lat", memLat);
 		option.put("lng", memLng);
 		if(cate.equals("all")) {
-			placeList = goodsService.goodsBusinessAllList(option);
+			placeAllList = goodsService.goodsBusinessAllList(option);
 		} else if(cate.equals("allTime")){
 			option.put("allTime", "Y");
-			placeList = goodsService.goodsBusinessAllTimeList(option);
+			placeAllList = goodsService.goodsBusinessAllTimeList(option);
 		}else {
 			switch(cate) {
 			case "health": cate="헬스";
@@ -62,14 +74,24 @@ public class GoodsControllerImpl implements GoodsController{
 			break;
 			}
 			option.put("cate", cate);
-			placeList = goodsService.goodsBusinessCateList(option);
+			placeAllList = goodsService.goodsBusinessCateList(option);
 		}
+		try {
+			for(int i=(pageNum-1)*12; i<pageNum*12; i++) {
+				placeList.add(placeAllList.get(i));
+			}
+		} catch(IndexOutOfBoundsException  e) {
+			e.printStackTrace();
+		}
+		mav.addObject("section", section);
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("totalGoods", placeAllList.size());
 		mav.addObject("placeList", placeList);
-		mav.addObject("totalGoods", placeList.size());
 		mav.setViewName(viewName);
 		option.clear();
 		return mav;
 	}
+
 	@Override
 	@RequestMapping(value="/goods/trainerList.do", method=RequestMethod.GET)
 	public ModelAndView trainerList(HttpServletRequest request, HttpServletResponse response) throws Exception {
