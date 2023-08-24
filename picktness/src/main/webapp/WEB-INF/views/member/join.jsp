@@ -41,49 +41,39 @@
     </script>
 
 <script>
-    // 이메일 인증번호
-    $checkEmail.click(function() {
-       $.ajax({
-          type : "POST",
-          url : "login/mailConfirm",
-          data : {
-             "email" : $memail.val()
-          },
-          success : function(data){
-             alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.")
-             console.log("data : "+data);
-             chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt);
-          }
-       })
-    })
-    
-        // 이메일 인증번호 체크 함수
-        function chkEmailConfirm(data, $memailconfirm, $memailconfirmTxt){
-            $memailconfirm.on("keyup", function(){
-                if (data != $memailconfirm.val()) { //
-                    emconfirmchk = false;
-                    $memailconfirmTxt.html("<span id='emconfirmchk'>인증번호가 잘못되었습니다</span>")
-                    $("#emconfirmchk").css({
-                        "color" : "#FA3E3E",
-                        "font-weight" : "bold",
-                        "font-size" : "10px"
-    
-                    })
-                    //console.log("중복아이디");
-                } else { // 아니면 중복아님
-                    emconfirmchk = true;
-                    $memailconfirmTxt.html("<span id='emconfirmchk'>인증번호 확인 완료</span>")
-    
-                    $("#emconfirmchk").css({
-                        "color" : "#0D6EFD",
-                        "font-weight" : "bold",
-                        "font-size" : "10px"
-    
-                    })
-                }
-            })
+    var serverVerificationCode = ""; // 서버에서 받은 인증번호를 저장할 변수
+
+    function sendVerificationCode() {
+        // 이메일 주소 조합
+        var email = $("#domain-txt1").val() + "@" + $("#domain-txt2").val();
+
+        // 서버에 이메일 전송
+        $.ajax({
+            type: "POST",
+            url: "${contextPath}/member/emailCheck", 
+            data: {
+                "email": email
+            },
+            success: function (data) {
+                alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.");
+                console.log("data: " + data);
+                serverVerificationCode = data; // 서버에서 받은 인증번호를 변수에 저장
+            }
+        });
+    }
+
+    function verifyCode() {
+        // 사용자가 입력한 인증번호
+        var userEnteredCode = $("#verification-code").val();
+
+        if (userEnteredCode === serverVerificationCode) {
+            alert("인증이 성공했습니다!");
+            // 인증 성공 시 추가 동작을 여기에 추가할 수 있음
+        } else {
+            alert("인증번호가 일치하지 않습니다. 다시 확인해주세요.");
         }
-    </script>
+    }
+</script>        
 <script>    
 function openZipSearch() {
     new daum.Postcode({
@@ -330,13 +320,12 @@ input {
 		<button class="address-button" type="button" onclick="openZipSearch()">주소 찾기</button><br>
 		<input type="text"  id="addr" name="addrBasic" readonly="readonly" placeholder="기본주소"  style="width:250px;"><br>
 		<input type="text"  id="addr_dtl" name="addrDetail" placeholder="상세주소"  style="width:250px;">
-	</div>
         <div class="form-row">
-        <label for="email">이메일<span class="label-with-star">*</span></label><br>
-        <input type="text" id="domain-txt1" name="email1" placeholder="인증에 사용됩니다."  style="width: 150px;">
-        <span>@</span>
-        <input type="text" class="box" id="domain-txt2" name="email2"  style="width: 150px;">
-<select class="select-box" id="domain-list" style="width: 150px;">
+            <label for="email">이메일<span class="label-with-star">*</span></label><br>
+            <input type="text" id="domain-txt1" name="email1" placeholder="인증에 사용됩니다." style="width: 150px;">
+            <span>@</span>
+            <input type="text" class="box" id="domain-txt2" name="email2" style="width: 150px;">
+            <select class="select-box" id="domain-list" style="width: 150px;">
     <option value="">이메일 선택</option>
     <option value="">직접입력</option>
     <option value="google.com"> google.com </option>
@@ -349,15 +338,16 @@ input {
     <option value="freechal.com"> freechal.com </option>
     <option value="hanmir.com"> hanmir.com </option>
 </select>
-        <button class="address-button" type="button" onclick="">인증번호 받기</button>
-        <span class="id_ok" style="color:#2890F1; font-size: 14px; font-weight: normal; display:none;">사용 가능한 이메일입니다.</span>
-        <span class="id_already" style="color:red; font-size: 14px; font-weight: normal; display:none;">중복된 이메일입니다.</span>
+<button class="address-button" type="button" onclick="sendVerificationCode()">인증번호 받기</button>
+<span class="id_ok" style="color:#2890F1; font-size: 14px; font-weight: normal; display:none;">사용 가능한 이메일입니다.</span>
+<span class="id_already" style="color:red; font-size: 14px; font-weight: normal; display:none;">중복된 이메일입니다.</span>
 </div>
-		<div class="form-row">
-                <label for="verification-code">인증번호<span class="label-with-star">*</span></label><br>
-                <input type="text" id="verification-code" name="verification-code"  placeholder="인증번호를 입력해주세요."   class="input-small">
-                <button class="address-button" type="button" onclick="verifyCode()">확인</button>
-            </div>
+
+<div class="form-row">
+<label for="verification-code">인증번호<span class="label-with-star">*</span></label><br>
+<input type="text" id="verification-code" name="verification-code" placeholder="인증번호를 입력해주세요." class="input-small">
+<button class="address-button" type="button" onclick="verifyCode()">확인</button>
+</div>
 		<div class="form-row2">
 		<label for="phoneNum">휴대전화<span class="label-with-star">*</span></label><br>
                 <input type="text" id="phone1" name="phone1" class="phone-input" maxlength="3" onkeyup="formatPhoneNumber()" >
@@ -383,7 +373,7 @@ input {
                     <ul class="clearfix">
                         <li>회원 이용 약관<span class="label-with-star">(필수)*</span></li>
                         <li class="checkBtn">
-                            <input type="checkbox" name="chk"> 
+                            <input id="chk_2" type="checkbox" name="chk"> 
                         </li>
                     </ul>
                     <textarea name="" id="" disabled>여러분을 환영합니다.
@@ -394,7 +384,7 @@ input {
                     <ul class="clearfix">
                         <li>개인정보 수집 및 이용에 대한 안내<span class="label-with-star">(필수)*</span></li>
                         <li class="checkBtn">
-                            <input type="checkbox" name="chk">
+                            <input  id="chk_3" type="checkbox" name="chk">
                         </li>
                     </ul>
  
@@ -446,7 +436,7 @@ input {
                     <ul class="clearfix">
                         <li>이벤트 등 프로모션 휴대폰 알림 수신(선택)</li>
                         <li class="checkBtn">
-                            <input type="checkbox" name="chk">
+                            <input type="checkbox" name="phoneConsent">
                         </li>
                     </ul>
  
@@ -458,7 +448,7 @@ input {
                     <ul class="clearfix">
                         <li>이벤트 등 프로모션 메일 알림 수신(선택)</li>
                         <li class="checkBtn">
-                            <input type="checkbox" name="chk">
+                            <input type="checkbox" name="emailConsent">
                         </li>
                     </ul>
                     <textarea name="" id="" disabled>이용자가 본 약관에 동의하는 경우, [회사/서비스명]은 주기적으로 이벤트, 할인, 프로모션 등에
@@ -473,44 +463,14 @@ input {
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const passwordInput = document.getElementById('pwd');
-            const passwordConfirmInput = document.getElementById('passwordConfirm');
-            const passwordError = document.getElementById('passwordError');
-    
-            function checkPasswordMatch() {
-                if (passwordInput.value !== passwordConfirmInput.value) {
-                    passwordError.textContent = '비밀번호가 일치하지 않습니다.';
-                    passwordError.style.color = 'red';
-                    passwordError.style.fontWeight = 'normal';
-                    passwordError.style.fontSize = '14px';
-                } else {
-                    passwordError.textContent = '비밀번호가 일치합니다.';
-                    passwordError.style.color = '#2890F1';
-                    passwordError.style.fontWeight = 'normal';
-                    passwordError.style.fontSize = '14px';
-                }
-            }
-    
-            const chkAll = document.getElementById('chkAll');
-            const chk_2 = document.getElementById('chk_2');
-            const chk_3 = document.getElementById('chk_3');
-            
-            const checkboxes = document.querySelectorAll('.checkBox input[type="checkbox"]:not(#chkAll)');
-    
-            chkAll.addEventListener('click', function() {
-                const isChecked = chkAll.checked;
-    
-                checkboxes.forEach(function(checkbox) {
-                    checkbox.checked = isChecked;
-                });
-            });
-    
+            // ... (기존 코드)
+        
             const nextBtn = document.getElementById('nextBtn');
             nextBtn.addEventListener('click', function(event) {
                 var formContainer = document.getElementById('formContainer');
                 var inputs = formContainer.querySelectorAll('input[type="text"], input[type="password"]');
                 var isEmpty = false;
-    
+        
                 inputs.forEach(function(input) {
                     if (input.value.trim() === '') {
                         isEmpty = true;
@@ -519,28 +479,34 @@ input {
                         return;
                     }
                 });
-    
+        
                 if (isEmpty) {
                     alert('빈 칸을 모두 입력해주세요.');
                     return;
                 }
-    
-                if (!chk_2.checked) {
-                    alert("필수 약관에 동의하셔야 가입이 가능합니다.");
-                    chk_2.focus(); // 포커스를 체크박스로 이동
+        
+                const requiredCheckboxes = [chk_2, chk_3];
+                let missingCheckbox = null;
+        
+                requiredCheckboxes.forEach(function(checkbox) {
+                    if (!checkbox.checked) {
+                        missingCheckbox = checkbox;
+                        return;
+                    }
+                });
+        
+                if (missingCheckbox) {
+                    const checkboxLabel = missingCheckbox.closest('li').querySelector('span.label-with-star').innerText;
+                    alert(`"${checkboxLabel}"에 동의하셔야 다음 단계로 진행 가능합니다.`);
+                    missingCheckbox.focus();
+                    event.preventDefault();
                     return;
                 }
-    
-                if (!chk_3.checked) {
-                    alert("모든 약관에 동의하셔야 다음 단계로 진행 가능합니다.");
-                    chk_3.focus(); // 포커스를 체크박스로 이동
-                    return;
-                }
-    
+        
                 document.getElementById('terms_form').submit();
             });
         });
-    </script>
+        </script>
 </body>
 <script>
     const passwordInput = document.getElementById('pwd');

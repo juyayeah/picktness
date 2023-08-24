@@ -120,7 +120,10 @@ public class MemberControllerImpl implements MemberController{
 	
 	@Override
 	@RequestMapping(value="/member/addMember.do" , method = RequestMethod.POST)
-	public ResponseEntity addMember(MemberVO member, HttpServletRequest request, HttpServletResponse response)
+	public ResponseEntity addMember(MemberVO member,
+			 @RequestParam(name = "emailConsent", required = false) boolean emailConsentChecked,
+			 @RequestParam(name = "phoneConsent", required = false) boolean phoneConsentChecked,
+		        HttpServletRequest request, HttpServletResponse response)
 	        throws Exception {
 	    response.setContentType("text/html; charset=UTF-8");
 	    request.setCharacterEncoding("utf-8");
@@ -129,8 +132,12 @@ public class MemberControllerImpl implements MemberController{
 	    HttpHeaders responseHeaders = new HttpHeaders();
 	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 	    try {
+	    	 member.setEmailConsent(emailConsentChecked ? "Y" : "N");
+	         member.setPhoneConsent(phoneConsentChecked ? "Y" : "N");
+	    	
 	        // member 객체의 정보를 그대로 사용
 	        memberService.addMember(member);
+	       
 	        message  = "<script>";
 	        message += " location.href='"+request.getContextPath()+"/member/joinSuccess.do';";
 	        message += " </script>";
