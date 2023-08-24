@@ -42,9 +42,16 @@ import org.springframework.web.servlet.ModelAndView;
 			return mav;
 		}
 		
-		//--------운동시설 관리------------//
+		//--------사업자 운동시설 관리------------//
 		@RequestMapping(value="/admin/mypage/adminBusiList.do", method=RequestMethod.GET)
 		private ModelAndView adminBusiList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			String viewName = (String) request.getAttribute("viewName");
+			mav.setViewName(viewName);
+			return mav;
+		}
+		@RequestMapping(value="/admin/mypage/busiMemberInfo.do", method=RequestMethod.GET)
+		private ModelAndView busiMemberInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
@@ -54,6 +61,13 @@ import org.springframework.web.servlet.ModelAndView;
 		//--------트레이너 관리------------//
 		@RequestMapping(value="/admin/mypage/adminTrainerList.do", method=RequestMethod.GET)
 		private ModelAndView adminTrainerList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			String viewName = (String) request.getAttribute("viewName");
+			mav.setViewName(viewName);
+			return mav;
+		}
+		@RequestMapping(value="/admin/mypage/trainerDetail.do", method=RequestMethod.GET)
+		private ModelAndView trainerDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
@@ -84,9 +98,30 @@ import org.springframework.web.servlet.ModelAndView;
 			return mav;
 		}
 		//--------리뷰관리------------//
+		@RequestMapping(value="/admin/mypage/adminReviewCont.do", method=RequestMethod.GET)
+		private ModelAndView adminReviewCont(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			String viewName = (String) request.getAttribute("viewName");
+			mav.setViewName(viewName);
+			return mav;
+		}
 		
-		//--------사업자정보------------//
+		//--------회원관리------------//
+		@RequestMapping(value="/admin/mypage/memberCont.do", method=RequestMethod.GET)
+		private ModelAndView memberCont(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			String viewName = (String) request.getAttribute("viewName");
+			mav.setViewName(viewName);
+			return mav;
+		}
 		
 		//--------정산내역------------//
+		@RequestMapping(value="/admin/mypage/adsettlementDetail.do", method=RequestMethod.GET)
+		private ModelAndView adsettlementDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			ModelAndView mav = new ModelAndView();
+			String viewName = (String) request.getAttribute("viewName");
+			mav.setViewName(viewName);
+			return mav;
+		}
 		
 	}

@@ -11,7 +11,7 @@ request.setCharacterEncoding("utf-8");
 
 <head>
 <meta charset="UTF-8">
-<title>table</title>
+<title>상품문의관리</title>
 <script>
 const subs = document.getElementById("subscriberBtn")
 
@@ -201,47 +201,7 @@ border:1px solid #c0c0c0;
 					<th width="15%">작성일</th>
 					<th width="15%">처리상태</th>
 				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				</tr>
-				<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				</tr>
-			<%-- 	<c:choose>
+	<c:choose>
 					<c:when test="${empty goodsAskList }">
 						<tr height="10">
 							<td colspan="6">
@@ -264,7 +224,7 @@ border:1px solid #c0c0c0;
 							</tr>
 						</c:forEach>
 					</c:when>
-				</c:choose> --%>
+				</c:choose> 
 			</table>
 
 
@@ -314,7 +274,7 @@ border:1px solid #c0c0c0;
 				</c:if>
 			</div>
 			<br> <br>
-			<%-- <c:forEach var="business" items="${List }">
+ <c:forEach var="business" items="${List }">
 				<tr align="center">
 								<td>${goods_ask.goods_title}</td>
 								<td>${goods_ask.member_id}</td>
@@ -327,7 +287,6 @@ border:1px solid #c0c0c0;
 				</tr>
 			</c:forEach>
 			</table>
- --%>
 		</div>
 	</div>
 	<div>
