@@ -6,12 +6,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pick.member.vo.MemberVO;
 
 public interface MemberController {
 	public ResponseEntity addMember(@ModelAttribute("member") MemberVO member,
+			 @RequestParam(name = "emailConsent", required = false) boolean emailConcentChecked,
+			 @RequestParam(name = "phoneConsent", required = false) boolean phoneConcentChecked,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	

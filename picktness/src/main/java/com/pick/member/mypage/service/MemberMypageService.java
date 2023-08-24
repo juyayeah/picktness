@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.pick.member.mypage.vo.MemberMypagePointVO;
+import com.pick.member.vo.MemberVO;
 
 public interface MemberMypageService {
 	public List<MemberMypagePointVO> allPointList(String id) throws DataAccessException;
 	public List<MemberMypagePointVO> addPointList(String id) throws DataAccessException;
 	public List<MemberMypagePointVO> usePointList(String id) throws DataAccessException;
-	
+	public MemberVO memberDetail(String id) throws DataAccessException;
 }

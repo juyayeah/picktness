@@ -13,6 +13,7 @@ public class GoodsTrainerVO {
 	private String trPhone1;
 	private String trPhone2;
 	private String trPhone3;
+	private String cate;
 	private String certi;
 	private String detail;
 	private String prod10;
@@ -38,6 +39,7 @@ public class GoodsTrainerVO {
 	private BigDecimal lat;
 	private BigDecimal lng;
 	private String fileName;
+	private double distance;
 	public String getGoods_id() {
 		return goods_id;
 	}
@@ -73,6 +75,14 @@ public class GoodsTrainerVO {
 	}
 	public void setPhone3(String phone3) {
 		this.phone3 = phone3;
+	}
+	
+	
+	public String getCate() {
+		return cate;
+	}
+	public void setCate(String cate) {
+		this.cate = cate;
 	}
 	public String getCerti() {
 		return certi;
@@ -223,6 +233,12 @@ public class GoodsTrainerVO {
 	}
 	public void setLng(BigDecimal lng) {
 		this.lng = lng;
+	}
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
 	}
 	
 }

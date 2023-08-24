@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.pick.member.mypage.dao.MemberMypageDAO;
 import com.pick.member.mypage.vo.MemberMypagePointVO;
+import com.pick.member.vo.MemberVO;
 @Service("memberMypageService")
 public class MemberMypageServiceImpl implements MemberMypageService{
 	@Autowired
@@ -30,5 +31,9 @@ public class MemberMypageServiceImpl implements MemberMypageService{
 		return mypageDAO.usePointList(id);
 	}
 	
-	
+	@Override
+	public MemberVO memberDetail(String id) throws DataAccessException {
+		MemberVO memberVO = mypageDAO.selectMember(id);
+		return memberVO;
+	}
 }
