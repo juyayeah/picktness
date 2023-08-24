@@ -56,7 +56,7 @@
         <input type="text" placeholder="인증번호 숫자 6자리 입력">
         <button>확인</button>
     </div>  
-    <button >아이디 찾기</button>
+    <button>아이디 찾기</button>
 </div>
 </div>
 </body>
