@@ -9,38 +9,64 @@ request.setCharacterEncoding("utf-8");
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>운동시설 등록</title>
-<script  src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src ="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
+<meta charset="UTF-8" />
+<title>트레이너 등록</title>
+<script>
 
-function mon1(){
+function 1mon() {
 	alert("테스트");
 	document.getElementById("pricebox").style.display = "block";
 	document.getElementById("pricebox1").style.display = "none";
 	document.getElementById("pricebox2").style.display = "none";
 	document.getElementById("pricebox3").style.display = "none";
 };
-function mon3(){
+function 3mon() {
 	alert("테스트2");
 	document.getElementById("pricebox").style.display = "none";
 	document.getElementById("pricebox1").style.display = "block";
 	document.getElementById("pricebox2").style.display = "none";
 	document.getElementById("pricebox3").style.display = "none";
 };
-function mon6(){
+function 6mon() {
 	document.getElementById("pricebox").style.display = "none";
 	document.getElementById("pricebox1").style.display = "none";
 	document.getElementById("pricebox2").style.display = "block";
 	document.getElementById("pricebox3").style.display = "none";
 };
-function mon12(){
+function 12mon() {
 	document.getElementById("pricebox").style.display = "none";
 	document.getElementById("pricebox1").style.display = "none";
 	document.getElementById("pricebox2").style.display = "none";
 	document.getElementById("pricebox3").style.display = "block";
 };
+
+	var div2 = document.getElementsByClassName("div2");
+
+	function handleClick(event) {
+		console.log(event.target);
+		// console.log(this);
+		// 콘솔창을 보면 둘다 동일한 값이 나온다
+
+		console.log(event.target.classList);
+
+		if (event.target.classList[1] === "clicked") {
+			event.target.classList.remove("clicked");
+		} else {
+			for (var i = 0; i < div2.length; i++) {
+				div2[i].classList.remove("clicked");
+			}
+
+			event.target.classList.add("clicked");
+		}
+	}
+
+	function init() {
+		for (var i = 0; i < div2.length; i++) {
+			div2[i].addEventListener("click", handleClick);
+		}
+	}
+
+	init();
 </script>
 
 <style>
@@ -211,30 +237,6 @@ textarea {
 	border-bottom-right-radius: 5px;
 	padding: 10px;
 }
-.pricebox1 {
-	border: 2px solid #c0c0c0;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	padding: 10px;
-}
-.pricebox2 {
-	border: 2px solid #c0c0c0;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	padding: 10px;
-}
-.pricebox3 {
-	border: 2px solid #c0c0c0;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	padding: 10px;
-}
 /* 원버튼 */
 .circlebtn {
 	border: 2px solid #c0c0c0;
@@ -244,16 +246,15 @@ textarea {
 	cursor: pointer;
 }
 </style>
-
-
 </head>
 <body>
-<form action="${contextPath }/business/mypage/addGymDetail.do" method="post" name ="frmBusiness" enctype="multipart/form-data">
+<form action="${contextPath }/business/mypage/addGymDetail.do" method="POST" name ="frmBusiness" enctype="multipart/form-data">
 	<div>
 		<h2 align="center">운동시설 등록</h2>
 		<table>
 			<tr>
-				<td colspan="3" align="right"><span class="starblue" style="font-size: small;">*필수항목</span>
+				<td colspan="3" align="right"><span class="starblue"
+					style="font-size: small;">*필수항목</span>
 			</tr>
 			<tr>
 				<td class="tdfirst">카테고리</td>
@@ -272,7 +273,7 @@ textarea {
 			<tr>
 				<td class="tdfirsttop">시설소개</td>
 				<td class="starbluetop">*&nbsp;&nbsp;</td>
-				<td class="tdlast"><textarea rows="4" cols="60" name="detail"></textarea></td>
+				<td class="tdlast"><textarea rows="4" cols="60" name="detail">$</textarea></td>
 			</tr>
 			<tr>
 				<td class="tdfirsttop">공지사항</td>
@@ -300,12 +301,10 @@ textarea {
 				<td class="starbluetop">*&nbsp;&nbsp;</td>
 				<td class="tdlast">
 					<div class="div1">
-						<button class="div2" type = "button" onclick ="mon1()">1개월</button>
-						<button class="div2" type = "button" onclick ="mon3()">3개월</button>
-						<button class="div2" type = "button" onclick ="mon6()">6개월</button>
-						<button class="div2" type = "button" onclick ="mon12()">12개월</button>  
-	
-		
+						<button class="div2" type = "button" onclick ="1mon()">1개월</button>
+						<button class="div2" type = "button" onclick ="3mon()">3개월</button>
+						<button class="div2" type = "button" onclick ="6mon()">6개월</button>
+						<button class="div2" type = "button" onclick ="12mon()">12개월</button>
 					</div> 
 				</td>
 			</tr>
@@ -313,14 +312,14 @@ textarea {
 			<tr>
 				<td class="tdfirsttop">판매가</td>
 				<td class="starbluetop">*&nbsp;&nbsp;</td>
-				<td class="blue">정가	<input class="pricebox" id = "pricebox" type="number" name="prod1" placeholder="숫자만 작성해 주세요" style="display: block;"> &ndash; 할인 
-				<input class="pricebox" id = "pricebox" type="number" placeholder="숫자만 작성해 주세요" name="prod1sale" style="display: blcok;">
-				<input class="pricebox1" id = "pricebox1" type="number" name="prod3" placeholder="숫자만 작성해 주세요" style="display: none;"> 
-				<input class="pricebox1" id = "pricebox1" type="number" placeholder="숫자만 작성해 주세요" name="prod3sale" style="display: none;">
-				<input class="pricebox2" id = "pricebox2" type="number" name="prod6" placeholder="숫자만 작성해 주세요" style="display: none;"> 
-				<input class="pricebox2" id = "pricebox2" type="number" placeholder="숫자만 작성해 주세요" name="prod6sale" style="display: none;">
-				<input class="pricebox3" id = "pricebox3" type="number" name="prod12" placeholder="숫자만 작성해 주세요" style="display: none;"> 
-				<input class="pricebox3" id = "pricebox3" type="number" placeholder="숫자만 작성해 주세요" name="prod12sale" style="display: none;">
+				<td class="blue">정가	<input class="pricebox" type="number" name="prod1" placeholder="숫자만 작성해 주세요" style="display: block;"> &ndash; 할인 
+				<input class="pricebox" type="number" placeholder="숫자만 작성해 주세요" name="prod1sale" style="display: blcok;">
+				<input class="pricebox1" type="number" name="prod3" placeholder="숫자만 작성해 주세요" style="display: none;"> 
+				<input class="pricebox1" type="number" placeholder="숫자만 작성해 주세요" name="prod3sale" style="display: none;">
+				<input class="pricebox2" type="number" name="prod6" placeholder="숫자만 작성해 주세요" style="display: none;"> 
+				<input class="pricebox2" type="number" placeholder="숫자만 작성해 주세요" name="prod6sale" style="display: none;">
+				<input class="pricebox3" type="number" name="prod12" placeholder="숫자만 작성해 주세요" style="display: none;"> 
+				<input class="pricebox3" type="number" placeholder="숫자만 작성해 주세요" name="prod12sale" style="display: none;">
 
 					<button class="circlebtn" value="+">+</button>
 					<br><span class="starblue" style="font-size: 11px;">* 픽트니스을 통한
@@ -336,20 +335,18 @@ textarea {
 				<td class="starbluetop">*&nbsp;&nbsp;</td>
 				<td class="tdlast">
 				<div>
-				<input type="file" name="imgageFileName" id="imageFileName">
 					<div class="imgadd">+</div>
 					<div class="imgadd">+</div>
 					<div class="imgadd">+</div>
 					<div class="imgadd">+</div>
-					<div class="imgadd">+</div> 
-				</div><br> <span
+					<div class="imgadd">+</div> </div><br> <span
 					style="font-size: small;">대표이미지 권장 크기:1000*1000(윈도대상
 						750*1000)입니다.</span>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3" align="right"><button type="reset" class="button_white">취소</button>&nbsp;&nbsp;
-					<button class="button_blue" type="submit">등록</button>
+					<button class="button_blue" type="button">등록</button>
 			</tr>
 		</table>
 	</div>
