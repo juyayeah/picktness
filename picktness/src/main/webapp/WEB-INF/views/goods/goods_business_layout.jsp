@@ -2,6 +2,7 @@
 pageEncoding="UTF-8" isELIgnored="false"%> <%@taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@taglib prefix="tiles"
 uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
@@ -136,40 +137,6 @@ uri="http://tiles.apache.org/tags-tiles" %>
     <div id="talk">
       <tiles:insertAttribute name="talk" />
     </div>
-    <div class="modal_location">
-      <div class="modal_head">
-        <img
-          class="map-arrow"
-          src="${contextPath}/images/goods/map-arrow.png"
-        />
-        <div class="modal_title">지도에서 위치 지정</div>
-        <div class="modal_fix">위치지정</div>
-      </div>
-      <div class="modal_search">
-        <input
-          type="text"
-          spellcheck="false"
-          id="input_location"
-          maxlength="100"
-          placeholder="동, 역으로 검색해서 지정하기"
-        />
-      </div>
-      <div id="location_map"></div>
-    </div>
-    <div class="modal_map">
-      <div class="modal_head">
-        <img
-          class="map-arrow"
-          src="${contextPath}/images/goods/map-arrow.png"
-        />
-        <div class="modal_title2"></div>
-        <div class="modal_fix">위치지정</div>
-      </div>
-      <div id="map_map"></div>
-    </div>
-    <script>
-
-    </script>
     <div class="not_modal"></div>
   </body>
 </html>

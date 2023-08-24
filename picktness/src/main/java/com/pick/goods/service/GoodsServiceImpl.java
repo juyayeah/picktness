@@ -33,6 +33,20 @@ public class GoodsServiceImpl implements GoodsService{
 		return goodsDAO.goodsBusinessAllTimeList(option);
 	}
 
+	
+	@Override
+	public List<GoodsTrainerVO> goodsTrainerAllList(Map option) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.goodsTrainerAllList(option);
+	}
+
+	@Override
+	public List<GoodsTrainerVO> goodsTrainerCateList(Map option) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.goodsTrainerCateList(option);
+	}
+
+
 	@Override
 	public Map<String, List> searchGoods(String search_content) throws DataAccessException {
 		// TODO Auto-generated method stub

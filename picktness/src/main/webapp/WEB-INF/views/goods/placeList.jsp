@@ -15,7 +15,7 @@ request.setCharacterEncoding("utf-8");
 .content-inner {
 	position: relative;
 	max-width: 1100px;
-	margin: 0 auto 100px auto;
+	margin: 0 auto 50px auto;
 }
 
 .content_title {
@@ -100,6 +100,7 @@ request.setCharacterEncoding("utf-8");
 	vertical-align: top;
 	position: relative;
 	width: 200px;
+	height:350px;
 	display: inline-block;
 	margin: 10px 0px 10px 57px;
 }
@@ -159,6 +160,38 @@ margin-top:100px;
 text-align:center;
 height:300px;
 }
+.pageBar{
+width:100%;
+margin-top:40px;
+text-align:center;
+}
+.pageButton{
+display:inline-block;
+width:30px;
+height:25px;
+padding-top:5px;
+text-align:center;
+font-weight:bold;
+}
+.pageButtonNow{
+display:inline-block;
+width:30px;
+height:25px;
+padding-top:4px;
+text-align:center;
+border:1px solid #2890f1;
+font-weight:bold;
+color:#2890f1;
+}
+.pageButtonText{
+display:inline-block;
+width:100px;
+height:24px;
+padding-top:6px;
+margin:0px 10px;
+color:#a6a6a6;
+font-size:14px;
+}
 </style>
 <script>
 	$(function() {
@@ -200,10 +233,6 @@ height:300px;
 			<div class="map_button1">
 				<img src="${contextPath}/images/main/location.png" /> <span>위치
 					변경하기</span>
-			</div>
-			<div class="map_button2">
-				<img src="${contextPath}/images/goods/map.png" /> <span>지도로
-					보기</span>
 			</div>
 		</div>
 		<div class="pc_cate">
@@ -252,28 +281,161 @@ height:300px;
 				</div>
 			</c:forEach>
 			</div>
+			<div class="pageBar">
 			<c:choose>
 			<c:when test="${totalGoods > 100}">
 			<c:forEach var="page" begin="1" end="10" step="1">
 			<c:if test="${section > 1 && page == 1 }">
-			<a href="${contextPath }/goods/placeList.do?cate=${cate }&section=${section-1 }&page=${(section-1)*10 + 1 }">이전</a>
+			<div class="pageButtonText">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate }&section=${section-1 }&pageNum=${(section-1)*10 + 1 }">이전페이지</a>
+			</div>
 			</c:if>
-			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&page=${page}">${(section-1)*10+page }</a>
+			<c:choose>
+			<c:when test="${page==pageNum }">
+			<div class="pageButtonNow">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&pageNum=${page}">${(section-1)*10+page }</a>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="pageButton">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&pageNum=${page}">${(section-1)*10+page }</a>
+			</div>
+			</c:otherwise>
+			</c:choose>
 			<c:if test="${page==10 }">
-			<a href="${conteatPath }/goods/placeList.do?cate=${cate }&section=${section+1 }&page=${(section*10)+1 }">다음</a>
+			<div class="pageButtonText">
+			<a href="${conteatPath }/goods/placeList.do?cate=${cate }&section=${section+1 }&pageNum=${(section*10)+1 }">다음페이지</a>
+			</div>
 			</c:if>
 			</c:forEach>
 			</c:when>
+			<c:when test="${totalGoods == 100 }">
+			<c:forEach var="page" begin="1" end="10" step="1">
+			<c:choose>
+			<c:when test="${page==pageNum }">
+			<div class="pageButtonNow">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&pageNum=${page}">${page }</a>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="pageButton">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&pageNum=${page}">${page }</a>
+			</div>
+			</c:otherwise>
 			</c:choose>
+			</c:forEach>
+			</c:when>
+			<c:when test="${totalGoods <100 }">
+			<c:forEach var="page" begin="1" end="${(totalGoods-1)/12+1 }" step="1">
+			<c:choose>
+			<c:when test="${page==pageNum }">
+			<div class="pageButtonNow">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate}&section=${section}&pageNum=${page}">${page }</a>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div class="pageButton">
+			<a href="${contextPath }/goods/placeList.do?cate=${cate }&section=${section }&pageNum=${page }">${page }</a>
+			</div>
+			</c:otherwise>
+			</c:choose>
+			</c:forEach>
+			</c:when>
+			</c:choose>
+			</div>
 			</c:when>
 			<c:otherwise>
 			<div class="list_null">
             <img src="${contextPath}/images/goods/exclamation.png">
-            <p>현재 위치 주변에 운동시설이 없습니다.<br>
+            <p>현재 위치 주변에 등록된 운동시설이 없습니다.<br>
             위치를 바꾸고 다시 시도해 주세요.</p>
           </div>
 			</c:otherwise>
 			</c:choose>
 		</div>
+		 <div class="modal_location">
+      <div class="modal_head">
+        <img
+          class="map-arrow"
+          id="arrow1"
+          src="${contextPath}/images/goods/map-arrow.png"
+        />
+        <div class="modal_title">지도에서 위치 지정</div>
+        <div class="modal_fix">위치지정</div>
+      </div>
+      <div class="modal_search">
+        <input
+          type="text"
+          spellcheck="false"
+          id="input_location"
+          maxlength="100"
+          placeholder="동, 역으로 검색해서 지정하기"
+        />
+      </div>
+      <div id="location_map"></div>
+    </div>
+    <div class="modal_map">
+      <div class="modal_head">
+        <img
+          class="map-arrow"
+          id="arrow2"
+          src="${contextPath}/images/goods/map-arrow.png"
+        />
+        <div class="modal_title2"></div>
+        <div class="modal_fix">위치지정</div>
+      </div>
+      <div id="map_map"></div>
+    </div>
+    <script>
+		var geocoder = new kakao.maps.services.Geocoder();
+	$(function(){
+		//지도 보이게 하기
+        $(".map_button1").click(function () {
+        $(".not_modal").css("visibility", "visible");
+        $(".modal_location").css("visibility", "visible");
+          });
+		//위치 지정가능 지도
+		var mapContainer1 = document.getElementById('location_map'), // 지도를 표시할 div 
+    	mapOption1 = { 
+        center: new kakao.maps.LatLng(${lat}, ${lng}), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+		var map1 = new kakao.maps.Map(mapContainer1, mapOption1); // 지도를 생성합니다
+    	var marker = new kakao.maps.Marker({
+        	map: map1,
+        	position: new kakao.maps.LatLng(${lat}, ${lng})
+    });
+		
+		//주소 검색시
+    	 $("#input_location").on("propertychange change paste input",function () {
+    	     var changeLocation = $("#input_location").val();
+    	     geocoder.addressSearch(changeLocation, function (result, status) {
+    	     // 정상적으로 검색이 완료됐으면
+    	     if (status === kakao.maps.services.Status.OK) {
+    	     var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+    	     lat = result[0].y;
+    	     lng = result[0].x;
+    	     // 결과값으로 받은 위치를 마커로 표시합니다
+    	     marker.setPosition(coords);
+
+    	     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    	     map1.setCenter(coords);
+					}
+				});
+			}
+		);
+		// map1에서 뒤로가기 클릭시
+		  $("#arrow1").click(function () {
+          $(".not_modal").css("visibility", "hidden");
+          $(".modal_location").css("visibility", "hidden");
+          $("#input_location").val("");
+		  });
+		// map1 위치지정 클릭시 controller에 전송하기
+	      $(".modal_fix").click(function () {
+		    var memberLocation = $("#input_location").val();
+		    location.href="${contextPath}/goods/placeList.do?lat="+lat+"&lng="+lng+"&memLocation="+memberLocation;
+	      });
+	      });
+    </script>
 </body>
 </html>
