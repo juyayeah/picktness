@@ -16,6 +16,7 @@
 <script>
     function checkId(){
         var id = $('#id').val();
+        
         $.ajax({
             url:'${contextPath}/member/idCheck',
             type:'post',
@@ -50,12 +51,13 @@
         // 서버에 이메일 전송
         $.ajax({
             type: "POST",
-            url: "${contextPath}/member/emailCheck", 
+            url: "${contextPath}/api/mail", 
             data: {
-                "email": email
+                "email": email,
+                "type": "join"
             },
             success: function (data) {
-                alert("해당 이메일로 인증번호 발송이 완료되었습니다. \n 확인부탁드립니다.");
+                alert("인증번호가 발송되었습니다");
                 console.log("data: " + data);
                 serverVerificationCode = data; // 서버에서 받은 인증번호를 변수에 저장
             }
@@ -105,22 +107,6 @@ function updateEmailInput() {
     }
 }
 
-function sendVerificationCode() {
-    // 이메일 인증번호를 전송하는 로직을 구현.
-    
-    alert("이메일 인증번호를 전송했습니다.");
-}
-
-function verifyCode() {
-    var inputCode = document.getElementById('verification-code').value;
-    var generatedCode = "123456"; // 여기에 실제로 생성된 인증번호
-    
-    if (inputCode === generatedCode) {
-        alert("인증되었습니다.");
-    } else {
-        alert("인증번호가 일치하지 않습니다.");
-    }
-}
 //휴대폰 입력 넘기기
 function formatPhoneNumber() {
     var input1 = document.getElementById('phone1');
@@ -339,8 +325,8 @@ input {
     <option value="hanmir.com"> hanmir.com </option>
 </select>
 <button class="address-button" type="button" onclick="sendVerificationCode()">인증번호 받기</button>
-<span class="id_ok" style="color:#2890F1; font-size: 14px; font-weight: normal; display:none;">사용 가능한 이메일입니다.</span>
-<span class="id_already" style="color:red; font-size: 14px; font-weight: normal; display:none;">중복된 이메일입니다.</span>
+<span class="email_ok" style="color:#2890F1; font-size: 14px; font-weight: normal; display:none;">사용 가능한 이메일입니다.</span>
+<span class="email_already" style="color:red; font-size: 14px; font-weight: normal; display:none;">중복된 이메일입니다.</span>
 </div>
 
 <div class="form-row">

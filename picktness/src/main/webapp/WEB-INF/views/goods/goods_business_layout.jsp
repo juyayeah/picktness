@@ -28,6 +28,11 @@ uri="http://tiles.apache.org/tags-tiles" %>
         z-index: 20;
         background-color: #fff;
       }
+      #quickmenu {
+        position: sticky;
+        z-index: 3;
+        top: 10px;
+      }
       #content {
         width: 100%;
         border: 0px solid #bcbcbc;
@@ -127,6 +132,9 @@ uri="http://tiles.apache.org/tags-tiles" %>
   <body>
     <div id="header">
       <tiles:insertAttribute name="header" />
+    </div>
+    <div id="quickmenu">
+      <tiles:insertAttribute name="quickmenu" />
     </div>
     <div id="content">
       <tiles:insertAttribute name="body" />

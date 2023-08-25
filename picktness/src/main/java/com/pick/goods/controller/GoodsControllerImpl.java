@@ -153,6 +153,36 @@ public class GoodsControllerImpl implements GoodsController{
 		option.clear();
 		return mav;
 	}
+	
+
+	@Override
+	@RequestMapping(value="/goods/shoppingMain.do", method=RequestMethod.GET)
+	public ModelAndView shoppingMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		return mav;
+	}
+
+	@Override
+	@RequestMapping(value="/goods/shopFoodList.do", method=RequestMethod.GET)
+	public ModelAndView shopFoodList(String cate, String orderBy, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		return null;
+	}
+
+	@Override
+	@RequestMapping(value="/goods/shopGoodsList.do", method=RequestMethod.GET)
+	public ModelAndView shopGoodsList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+		return mav;
+	}
+
 	//--------운동시설------------//
 	@RequestMapping(value="/goods/gymDetail.do", method=RequestMethod.GET)
 	private ModelAndView gymDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
