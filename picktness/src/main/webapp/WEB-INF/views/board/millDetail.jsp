@@ -122,11 +122,12 @@
     <button class="button">목록으로</button>
   </div>
   <!-- 여기에 식단 내용을 추가하세요 -->
+  
   <div class="divider" style="margin-bottom:5px;"></div>
   <div class="content">
     <div class="image">
-    <p class="content-date">작성일:<fmt:parseDate value="${millDetail.millDate}" var="millDate" pattern="yyyy-MM-dd HH:ss:mm"/>
-    <fmt:formatDate value="${millDate }" pattern="yyyy-MM-dd"/></p>
+    <p class="content-date"> 작성일: <fmt:parseDate value="${millDetail.boardDate}" var="millDate" pattern="yyyy-MM-dd" />
+    <fmt:formatDate value="${millDate}" pattern="yyyy-MM-dd" /></p>
       
       <img  class="image_pic" src="${contextPath}/images/board/food.png" alt="이미지 설명">
       
@@ -142,23 +143,24 @@
       <p class="content-text">${millDetail.content}</p>
     </div>
   </div>
+  <c:if test ="${!empty commentList}">
+  
   <div class="divider"></div>
   <h3>전체 댓글</h3>
   <div class="divider"></div>
+   <c:forEach var="item" items="${commentList}" >
   <div class="comments-section">
     <div class="comment">
-      <p> dbal****</p>
-      <p class="comment-text">정말 믓찌당 !!</p>
-      <p> 2023-08-16 11:12</p>
+      <p> ${item.member_id}</p>
+      <p class="comment-text">${item.content}</p>
+      <p> 
+      <fmt:parseDate value="${item.millrDate} " var="millrDate" pattern="yyyy-MM-dd" />
+    <fmt:formatDate value="${millDate}" pattern="yyyy-MM-dd" /></p>
     </div>
-    <div class="comment">
-      <p>dnwn****</p>
-      <p class="comment-text">구매처 알려주세요 !</p>
-      <p>2023-08-17 23:12</p>
     </div>
-    <!-- 댓글 내용을 추가하려면 위와 같은 형식으로 추가하시면 됩니다. -->
+    </c:forEach>
+    </c:if>
   </div>
-  
   <div class="divider"></div>
  <h3>댓글 등록</h3> 
   <form method="post" action="${contextPath}/board/addReply">
@@ -167,7 +169,7 @@
     <button type="submit" class="comment-button">댓글 등록</button>
   </div>
   </form>
-  </div>
+ 
 
 </body>
 </html>

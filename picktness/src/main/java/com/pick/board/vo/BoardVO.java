@@ -1,5 +1,7 @@
 package com.pick.board.vo;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 
 @Component("boardVO")
@@ -9,7 +11,7 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private String hastag;
-	private String boardDate;
+	private Date boardDate;
 	private String todaymill_img;
 	
 	public String getHastag() {
@@ -19,10 +21,11 @@ public class BoardVO {
 		this.hastag = hastag;
 	}
 
-	public String getBoardDate() {
+
+	public Date getBoardDate() {
 		return boardDate;
 	}
-	public void setBoardDate(String boardDate) {
+	public void setBoardDate(Date boardDate) {
 		this.boardDate = boardDate;
 	}
 	public String getTodaymill_img() {

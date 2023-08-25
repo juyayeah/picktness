@@ -547,7 +547,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           >
           <ul class="menu_cm_dt">
             <li class="menu_list_a"><a href="">자유게시판</a></li>
-            <li class="menu_list_a"><a href="">오늘 식단</a></li>
+            <li class="menu_list_a"><a href="${conterxPath }/board/millBoardList.do">오늘 식단</a></li>
           </ul>
         </div>
       </div>

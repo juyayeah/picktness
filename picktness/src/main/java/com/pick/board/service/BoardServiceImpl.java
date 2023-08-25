@@ -49,7 +49,7 @@ public class BoardServiceImpl {
     }
     
     public List<CommentVO> getComments(int bno) {
-        return boardDAO.getComments(bno);
+    	return boardDAO.getComments(bno);
     }
     
     public void deleteComment(int cno) {
