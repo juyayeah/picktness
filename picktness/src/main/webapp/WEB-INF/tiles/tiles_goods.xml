@@ -6,11 +6,11 @@
 	<definition name="goodsBLayout" template="/WEB-INF/views/goods/goods_business_layout.jsp">
 		<put-attribute name="title" value=""/>
 		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="quickmenu" value="/WEB-INF/views/common/quickmenu.jsp"/>
 		<put-attribute name="body" value=""/>
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
 		<put-attribute name="talk" value="/WEB-INF/views/common/talk.jsp"/>
 	</definition>
-	
 	<definition name="/goods/searchGoods" extends="baseLayout">
 		<put-attribute name="title" value="검색결과"/>
 		<put-attribute name="body" value="/WEB-INF/views/goods/searchGoods.jsp"/>
@@ -22,6 +22,19 @@
 		<definition name="/goods/trainerList" extends="goodsBLayout">
 		<put-attribute name="title" value="트레이너"/>
 		<put-attribute name="body" value="/WEB-INF/views/goods/trainerList.jsp"/>
+	</definition>
+	<definition name="/goods/shoppingMain" extends="baseLayout">
+		<put-attribute name="title" value="픽트니스 쇼핑"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/shoppingMain.jsp"/>
+	</definition>
+		<definition name="/goods/shopFoodList" extends="baseLayout">
+	<put-attribute name="title" value="식품"/>
+	<put-attribute name="body" value="/WEB-INF/views/goods/shopFoodList.jsp"/>
+	</definition>
+	
+	<definition name="/goods/shopGoodsList" extends="baseLayout">
+	<put-attribute name="title" value="기구/용품/장비"/>
+	<put-attribute name="body" value="/WEB-INF/views/goods/shopGoodsList.jsp"/>
 	</definition>
 		<definition name="/goods/gymDetail" extends="baseLayout">
 		<put-attribute name="title" value="시설정보"/>

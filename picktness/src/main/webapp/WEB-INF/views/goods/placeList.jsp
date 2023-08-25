@@ -75,16 +75,8 @@ request.setCharacterEncoding("utf-8");
 	float: left;
 	margin: 0px 20px 30px 0px;
 	cursor: pointer;
+	font-size:14px;
 }
-
-.order_by li {
-	font-size: 13px;
-	float: right;
-	margin: 0px 0px 30px 10px;
-	color: #ccc;
-	cursor: pointer;
-}
-
 .main_box {
 	clear: both;
 	text-align: left;

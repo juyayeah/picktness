@@ -10,4 +10,8 @@ public interface GoodsController {
 	public ModelAndView placeList(@RequestParam(value="section", defaultValue="1") int section, @RequestParam(value="pageNum", defaultValue="1") int pageNum, @RequestParam(value="cate", defaultValue="all") String cate, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView trainerList(@RequestParam(value="section", defaultValue="1") int section, @RequestParam(value="pageNum", defaultValue="1") int pageNum, @RequestParam(value="cate", defaultValue="all") String cate, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView searchGoods(@RequestParam("search_content") String search_content, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView shoppingMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView shopFoodList(@RequestParam(value="cate", defaultValue="all") String cate,@RequestParam(value="orderBy", defaultValue="best") String orderBy,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView shopGoodsList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }

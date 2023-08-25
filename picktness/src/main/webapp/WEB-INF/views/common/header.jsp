@@ -523,17 +523,17 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         </div>
         <!--/menu_tr-->
         <div class="menu_sh">
-          <span class="menu_sh_title" onclick="location.href='#'">쇼핑</span>
+          <span class="menu_sh_title" onclick="location.href='${contextPath}/goods/shoppingMain.do'">쇼핑</span>
           <div class="menu_sh_fd">
             <ul class="menu_sh_fd_2">
-              <li class="menu_list_title"><a href="">식품</a></li>
+              <li class="menu_list_title"><a href="${contextPath }/goods/shopFoodList.do">식품</a></li>
               <li class="menu_list_a"><a href="">프로틴 쉐이크</a></li>
               <li class="menu_list_a"><a href="">닭가슴살</a></li>
             </ul>
           </div>
           <div class="menu_sh_gd">
             <ul class="menu_sh_gd_2">
-              <li class="menu_list_title"><a href="">기구/용품/장비</a></li>
+              <li class="menu_list_title"><a href="${contextPath }/goods/shopGoodsList.do">기구/용품/장비</a></li>
               <li class="menu_list_a"><a href="">스트레칭/마사지</a></li>
               <li class="menu_list_a"><a href="">테이프/아대</a></li>
               <li class="menu_list_a"><a href="">근력/유산소 용품</a></li>
