@@ -84,7 +84,7 @@ import org.springframework.web.servlet.ModelAndView;
 		         }
 		         message = "<script>";
 		         message += " alert('관리자정보를 수정했습니다.');";
-		         message += " location.href='" + multipartRequest.getContextPath() + "/member/viewAdminDetail.do?id="
+		         message += " location.href='" + multipartRequest.getContextPath() + "/business/mypage/addGym.do?id="
 		               + id + "';";
 		         message += "</script>";
 		         resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
@@ -95,7 +95,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 		         message = " <script>";
 		         message += " alert('수정 중 오류가 발생했습니다.');";
-		         message += " location.href='" + multipartRequest.getContextPath() + "/member/viewAdminDetail.do?id="
+		         message += " location.href='" + multipartRequest.getContextPath() + "/business/mypage/addGym.do?id="
 		               + id + "';";
 		         message += " </script>";
 		         resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
