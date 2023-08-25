@@ -542,7 +542,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         </div>
         <!--/menu_sp-->
         <div class="menu_cm">
-          <span class="menu_cm_title" onclick="location.href='#'"
+          <span class="menu_cm_title" onclick="location.href='${contextPath}/board/freeBoardList.do'"
             >커뮤니티</span
           >
           <ul class="menu_cm_dt">

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
+/*
 @Controller
 public class FileUploadController {
 	private static final String TODAYMILL_IMAGE_REPO = "c:\\picktness\\todaymill_image";
@@ -92,4 +92,4 @@ public class FileUploadController {
 		// 첨부한 파일 이름이 저장된 fileList 반환해줘라
 		return fileList;
 	}
-}
+}*/

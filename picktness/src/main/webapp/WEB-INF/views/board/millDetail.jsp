@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath }" />
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-      .faq_inner {
-        position: relative;
-        width: 1100px;
-        margin: 0 auto;
-      }
+    .mill_inner{
+    margin:30px 0 0 30px;
+    }
   body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -101,34 +104,42 @@
   height:300px;
   }
   textarea{
-
+    width:90%;
     margin-bottom: 20px;
     resize: none;
+  }
+  .content-date{
+  margin-top:0px;
   }
 </style>
 <title>오늘 식단</title>
 </head>
 <body>
-<div class=faq_inner>
+<div class="mill_inner">
+
   <div class="header">
     <h3>오늘 식단</h3>
     <button class="button">목록으로</button>
   </div>
   <!-- 여기에 식단 내용을 추가하세요 -->
-  <div class="divider"></div>
+  <div class="divider" style="margin-bottom:5px;"></div>
   <div class="content">
     <div class="image">
-    <p class="content-date">작성일: 2023-07-20</p>
+    <p class="content-date">작성일:<fmt:parseDate value="${millDetail.millDate}" var="millDate" pattern="yyyy-MM-dd HH:ss:mm"/>
+    <fmt:formatDate value="${millDate }" pattern="yyyy-MM-dd"/></p>
+      
       <img  class="image_pic" src="${contextPath}/images/board/food.png" alt="이미지 설명">
       
     </div>
     <div class="info" style ="margin-left: 200px;">
-      <h4 class="id">dltk*****</h4>
-      <p class="subtitle">#저녁식단</p>
+   <b> ${fn:substring(millDetail.member_id,0,4) }
+     <c:forEach begin="5" end="${fn:length(millDetail.member_id)}" step="1">
+        *
+      </c:forEach></b>
+      
+      <p class="subtitle">${millDetail.hastag}</p>
       <div class="subtitle-divider"></div>
-      <p class="content-text">저녁 과카몰리,통밀식빵 두장, 삶은 계란 두알 간식 캐모마일티,(다죽어가던) 남작복숭아 두개 점심 오트밀김치토마토죽어제 배탈이 나서 점심엔 오트밀죽을 먹었는데 김치를 넣으니생각보다
-      자극적이였던.. 하지만 내 튼튼위장은 끄떡없지 납복은 후숙한답시고 며칠 실온에 방치해뒀더니 금방 곰팡이가 펴서 두 개만 살아남았다... 그래서 냉큼 조져줌 
-      건강식으로 과식하면 과연 살이 빠질까? 암튼 오늘 유산소운동 근려운동도 완료</p>
+      <p class="content-text">${millDetail.content}</p>
     </div>
   </div>
   <div class="divider"></div>
@@ -150,11 +161,14 @@
   
   <div class="divider"></div>
  <h3>댓글 등록</h3> 
+  <form method="post" action="${contextPath}/board/addReply">
   <div class="comment-input-container">
-    <textarea class="comment-input" rows="4" placeholder="댓글을 작성해주세요!"></textarea>
-    <button class="comment-button">댓글 등록</button>
+    <textarea class="comment-input" rows="4" name="content"placeholder="댓글을 작성해주세요!"></textarea>
+    <button type="submit" class="comment-button">댓글 등록</button>
   </div>
+  </form>
   </div>
+
 </body>
 </html>
 

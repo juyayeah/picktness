@@ -27,13 +27,14 @@ request.setCharacterEncoding("UTF-8");
 
 
 .btn_right {
-float:right;
+float:right; 
+margin-right:0px;
 
 
 }
 .btn_margin{
 
-  margin-right:150px;
+  /* margin-right:150px; */
 }
 #file {
   display: none;
@@ -87,21 +88,29 @@ margin-right:10px;
 .span1{
 float:right;
 }
+.file_list{
+float:right;
+}
   </style>
   
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-$(function(){
-	$('#btn').click(function(){
-		alert("버튼 클릭했음");
-	if($("#title").val == ''){
-		alert("글을 쓰세요");
-	}
-	    
-	}); 
-});
+$(function() {
+    $('#btn').click(function() {
+        if ($("#title").val() === '' || $("textarea[name='content']").val() === '') {
+            alert("제목과 내용을 입력하세요.");
+            return false; 
+        }
 
+        
+        var fileInput = $("input[type='file'][name='files']");
+        if (fileInput.get(0).files.length === 0) {
+            alert("이미지를 첨부하세요.");
+            return false; 
+        }
+    });
+});
 
 
 var cnt=1;
@@ -118,18 +127,21 @@ function fn_addFile(){
 	cnt++;
 }
 
-
+.btns del_btn{
+	float:right;
+}
 
 
 </script>
 </head>
 <body>
-<div class ="board_inner">
+<div class ="board_inner"></div>
 <h1>글쓰기</h1>
-<form method="post" action="${contextPath}/upload.do" enctype="multipart/form-data">
-      <p><span style="font-size: 20px;">제목</span> <input  id="title" type="text" placeholder="제목을 입력해 주세요." name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
+<form method="post" action="${contextPath}/board/addMillBoard.do" enctype="multipart/form-data">
+     
       <p><span style="font-size: 20px;">태그</span> <input  type="text" name="hasTag" placeholder="#오운완 #오늘식단" name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
       <p class="content"><span style="font-size: 20px;">내용</span> <textarea  style="margin-left: 5px;" placeholder="내용을 입력해 주세요." name="content" style="width: 80%; margin-bottom: 50px;"></textarea></p>
+    <table>
     <tr>
         
         <td colspan="3">
@@ -138,20 +150,22 @@ function fn_addFile(){
                     <span class="file_input">
                         
                         <label> 첨부파일
-                            <input type="file" name="files" onchange="selectFile(this);" />
+                            <input type="file" name="todaymill_img" onchange="selectFile(this);" />
                         </label>
                     </span>
+                    </td>
+                    <td>
                     <span class= "btn_right">
                     <button type="button" onclick="back()" class="btns del_btn"><span>돌아가기</span></button>
-                    <button class= "btn_margin" id="btn" type="button" class="btns fn_add_btn"><span>등록하기</span></button>
+                    <button class= "btn_margin" id="btn" type="submit" class="btns fn_add_btn"><span>등록하기</span></button>
                   </span>
                   </div>
             </div>
         </td>
     </tr>
+    </table>
 <div id="root">
 </div>
 </form>
-
 </body>
 </html>

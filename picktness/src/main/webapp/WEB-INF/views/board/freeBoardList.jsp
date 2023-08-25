@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix ="c" uri ="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+
 <c:set var="contextPath" value = "${pageContext.request.contextPath}" />
 <%
 request.setCharacterEncoding("UTF-8");
@@ -38,6 +42,9 @@ text-align:center;
             padding: 10px;
             text-align: left;
         }
+        .jb-th-1{
+        width:300px;
+        }
 </style>
 </head>
 <body>
@@ -68,7 +75,7 @@ text-align:center;
 <c:forEach var="freeBoard" items="${freeBoardList}">
 <tr align="center">
 <td >${freeBoard.bno}</td>
-<td >${freeBoard.title}</td>
+<td class="jb-th-1" >${freeBoard.title}</td>
 <td >${freeBoard.member_id}</td>
 <td >${freeBoard.freeDate}</td>
 </tr>
@@ -77,7 +84,7 @@ text-align:center;
 </c:choose>
 </table> 
 <div>
-<input type="button" onclick="javascript:fn_boardForm('${isLogOn }','${contextPath}/board/freeBoardInsert.do','${contextPath}/member/loginForm.do')" value="글쓰기">
+<input type="button" onclick="javascript:fn_boardForm('${isLogOn }','${contextPath}/board/freeBoardForm.do','${contextPath}/member/loginForm.do')" value="글쓰기">
 </div>
 </div> 
 </body>

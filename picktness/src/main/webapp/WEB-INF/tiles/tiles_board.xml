@@ -3,11 +3,19 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-	<definition name="/board/noticeList" extends="baseLayout">
+	<definition name="boardLayout" template="/WEB-INF/views/board/board_layout.jsp">
+		<put-attribute name="title" value=""/>
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="side" value="/WEB-INF/views/board/boardMenu.jsp"/>
+		<put-attribute name="body" value=""/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+		<put-attribute name="talk" value="/WEB-INF/views/common/talk.jsp"/>
+	</definition>
+	<definition name="/board/noticeList" extends="boardLayout">
 		<put-attribute name="title" value="목록창" />
 		<put-attribute name="body" value="/WEB-INF/views/board/noticeList.jsp" />
 	</definition>
-	<definition name="/board/noticeDetail" extends="baseLayout">
+	<definition name="/board/noticeDetail" extends="boardLayout">
 		<put-attribute name="title" value="상세창" />
 		<put-attribute name="body" value="/WEB-INF/views/board/noticeDetail.jsp" />
 	</definition>
@@ -18,24 +26,24 @@
 		<put-attribute name="body" value="/WEB-INF/views/board/faqList.jsp" />
 	</definition>
 	
-		<definition name="/board/millDetail" extends="baseLayout">
+		<definition name="/board/millDetail" extends="boardLayout">
 		<put-attribute name="title" value="상세창" />
 		<put-attribute name="body" value="/WEB-INF/views/board/millDetail.jsp" />
 	</definition>
 	
-		<definition name="/board/millList" extends="baseLayout">
+		<definition name="/board/millBoardList" extends="boardLayout">
 		<put-attribute name="title" value="상세창" />
-		<put-attribute name="body" value="/WEB-INF/views/board/millList.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/board/millBoardList.jsp" />
 	</definition>
 
-		<definition name="/board/freeBoardInsert" extends="baseLayout">
+		<definition name="/board/freeBoardForm" extends="boardLayout">
 		<put-attribute name="title" value="글쓰기창" />
-		<put-attribute name="body" value="/WEB-INF/views/board/freeBoardInsert.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/board/freeBoardForm.jsp" />
 	</definition>
 			
-		<definition name="/board/millBoardInsert" extends="baseLayout">
+		<definition name="/board/millBoardForm" extends="boardLayout">
 		<put-attribute name="title" value="글쓰기창" />
-		<put-attribute name="body" value="/WEB-INF/views/board/millBoardInsert.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/board/millBoardForm.jsp" />
 	</definition>
 	
 			<definition name="/board/eventList" extends="baseLayout">
@@ -53,10 +61,17 @@
 		<put-attribute name="body" value="/WEB-INF/views/board/oneOnOneForm.jsp" />
 	</definition>
 
-				<definition name="/board/freeBoardList" extends="baseLayout">
+				<definition name="/board/freeBoardList" extends="boardLayout">
 		<put-attribute name="title" value="상세창" />
 		<put-attribute name="body" value="/WEB-INF/views/board/freeBoardList.jsp" />
 	</definition>
+	
+					<definition name="/board/freeDetail" extends="boardLayout">
+		<put-attribute name="title" value="상세창" />
+		<put-attribute name="body" value="/WEB-INF/views/board/freeDetail.jsp" />
+	</definition>
+	
+	
 
 
 	

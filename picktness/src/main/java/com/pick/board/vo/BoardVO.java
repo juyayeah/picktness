@@ -8,21 +8,22 @@ public class BoardVO {
 	private String member_id;
 	private String title;
 	private String content;
-	private String freeDate;
 	private String hastag;
-	private String millDate;
+	private String boardDate;
 	private String todaymill_img;
+	
 	public String getHastag() {
 		return hastag;
 	}
 	public void setHastag(String hastag) {
 		this.hastag = hastag;
 	}
-	public String getMillDate() {
-		return millDate;
+
+	public String getBoardDate() {
+		return boardDate;
 	}
-	public void setMillDate(String millDate) {
-		this.millDate = millDate;
+	public void setBoardDate(String boardDate) {
+		this.boardDate = boardDate;
 	}
 	public String getTodaymill_img() {
 		return todaymill_img;
@@ -54,12 +55,7 @@ public class BoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getFreeDate() {
-		return freeDate;
-	}
-	public void setFreeDate(String freeDate) {
-		this.freeDate = freeDate;
-	}
+
 	
 	
 }

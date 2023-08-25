@@ -3,19 +3,35 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
  <mapper namespace="com.pick.board.dao.BoardDAO">
-  	<resultMap id="BoardResult" type="boardVO">
+  	<resultMap id="freeBoardResult" type="boardVO">
+ 		<result property="bno" column="bno"/>
+ 		<result property="member_id" column="member_id"/>
+ 		<result property="content" column="content"/>
+ 		<result property="hastag" column="hastag"/>
+ 		<result property="boardDate" column="millDate"/>
+ 		<result property="todaymill_img" column="todaymill_img"/>
+ 		</resultMap>
+ 		  	
+ 		  	<resultMap id="millBoardResult" type="boardVO">
  		<result property="bno" column="bno"/>
  		<result property="member_id" column="member_id"/>
  		<result property="title" column="title"/>
  		<result property="content" column="content"/>
- 		<result property="freeDate" column="freeDate"/>
- 		<result property="hastag" column="hastag"/>
- 		<result property="millDate" column="millDate"/>
- 		<result property="todaymill_img" column="todaymill_img"/>
- 		
+ 		<result property="boardDate" column="freeDate"/>
  		</resultMap>
  		
- 		<select id="selectAllFreeBoardList" resultType="boardVO">
+ 		 		  	<resultMap id="millreplyResult" type="comentVO">
+ 		<result property="bno" column="bno"/>
+ 		<result property="member_id" column="member_id"/>
+ 		<result property="title" column="title"/>
+ 		<result property="content" column="content"/>
+ 		<result property="boardDate" column="freeDate"/>
+ 		</resultMap>
+ 		  	
+ 
+ 		
+ 		
+ 		<select id="selectAllFreeBoardList" resultMap="freeBoardResult">
  		<![CDATA[
  		select * from freeboard
  		]]>
@@ -27,10 +43,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		]]>
  		</insert>
  		
- 		<select id="selectAllMillList" resultType="boardVO">
+<!--  		<select id="selectAllMillList" resultType="boardVO">
  		<![CDATA[
- 		INSERT into todaymill(member_id,title,hastag,content
+ 		INSERT into todaymill(member_id,title,hastag,content,todaymill_img)
+ 		VALUES(#{member_id}
+ 		]]>
+ 		</select> -->
+ 		
+ 		
+ 		<insert id="insertNewMillBoard" parameterType="java.util.Map">
+<![CDATA[
+ insert into todaymill(bno, member_id,hastag, content,todaymill_img)
+ values(#{bno},#{member_id},#{hastag}, #{content},#{todaymill_img})
+ ]]>
+</insert>
+
+      
+      <select id="selectAllMillList" resultMap="millBoardResult">
+      <![CDATA[
+ 		select * from todaymill
+ 		]]>
+      </select>
+      <select id="selectNewBoardNO" resultType="int">
+ 		<![CDATA[
+ 			select ifnull(max(bno),0)+1 from todaymill
  		]]>
  		</select>
- 		
+    
+    <select id="getMillByBno" resultMap="millBoardResult" parameterType="int">
+        <![CDATA[
+        SELECT * FROM todaymill WHERE bno = #{bno}
+        ]]>
+    </select>
+    
+    <insert id="millreplyResult" parameterType="java.util.Map">
+     <![CDATA[
+    INSERT INTO comments (bno, p_bno, content, member_id, miirdate)
+    VALUES (#{bno}, #{p_bno}, #{content}, #{member_id}, #{miirdate})
+    ]]>
+</insert>
+ 	
+
+ 	
+
+ 	
+      
 </mapper>
