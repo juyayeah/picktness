@@ -47,6 +47,13 @@ public class GoodsServiceImpl implements GoodsService{
 	}
 
 
+
+	@Override
+	public List<GoodsShoppingVO> goodsFoodCateList(Map option) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.goodsFoodCateList(option);
+	}
+
 	@Override
 	public Map<String, List> searchGoods(String search_content) throws DataAccessException {
 		// TODO Auto-generated method stub

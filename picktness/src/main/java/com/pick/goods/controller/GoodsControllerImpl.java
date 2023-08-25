@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pick.goods.service.GoodsService;
 import com.pick.goods.vo.GoodsBusinessVO;
+import com.pick.goods.vo.GoodsShoppingVO;
 import com.pick.goods.vo.GoodsTrainerVO;
 
 @Controller("goodsController")
@@ -164,14 +165,39 @@ public class GoodsControllerImpl implements GoodsController{
 		return mav;
 	}
 
+
+
 	@Override
 	@RequestMapping(value="/goods/shopFoodList.do", method=RequestMethod.GET)
-	public ModelAndView shopFoodList(String cate, String orderBy, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ModelAndView shopFoodList(String cate, String orderBy, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		Map<String, Object> option = new HashMap<String, Object>();
+		List<GoodsShoppingVO> goodsFoodList;
+		session.setAttribute("cate", cate);
+		session.setAttribute("orderBy", orderBy);
+		if(cate.equals("all")) {
+			cate = "";
+			option.put("cate", cate);
+		} else {
+			switch(cate) {
+			case "tender": cate = "&& s.cate_sec = 닭가슴살";
+			break;
+			case "protain": cate= "&& s.cate_sec = 프로틴";
+			break;
+			}
+			option.put("cate", cate);
+
+		}
+		
+		switch(orderBy) {
+		case "best": orderBy =  ", review_star DESC,";
+		break;
+		}
+		option.put("orderBY", orderBy);
+		goodsFoodList = goodsService.goodsFoodCateList(option);
 		mav.setViewName(viewName);
-		return null;
+		return mav;
 	}
 
 	@Override

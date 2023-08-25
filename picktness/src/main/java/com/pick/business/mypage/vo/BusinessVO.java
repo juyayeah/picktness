@@ -1,7 +1,5 @@
 package com.pick.business.mypage.vo;
 
-import java.math.BigDecimal;
-
 import org.springframework.stereotype.Component;
 
 @Component("BusinessVO")
