@@ -88,7 +88,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
     <div class="point_inner">
       <div class="point_title">포인트</div>
       <div class="point_have">
-        보유 포인트<br /><span class="point_now">${member.point}</span>
+        보유 포인트<br /><span class="point_now">${member.memberPoint}</span>
       </div>
       <div class="point_table">
         <div class="point_option">

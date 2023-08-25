@@ -23,11 +23,6 @@ padding: 10px;
 height:40px;
 }
 </style>
-<script>
-
-
-</script>
-
 <title>사업자정보</title>
 </head>
 <body>

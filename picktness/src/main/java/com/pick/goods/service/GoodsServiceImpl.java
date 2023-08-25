@@ -1,6 +1,5 @@
 package com.pick.goods.service;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,20 +17,33 @@ public class GoodsServiceImpl implements GoodsService{
 	@Autowired
 	GoodsDAO goodsDAO;
 
-
 	@Override
-	public List<GoodsBusinessVO> goodsBusinessAllList(BigDecimal lat, BigDecimal lng, String sort)
-			throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GoodsBusinessVO> goodsBusinessAllList(Map option) throws DataAccessException {
+		return goodsDAO.goodsBusinessAllList(option);
 	}
 
+	@Override
+	public List<GoodsBusinessVO> goodsBusinessCateList(Map option) throws DataAccessException {
+		return goodsDAO.goodsBusinessCateList(option);
+	}
+	
 
 	@Override
-	public List<GoodsBusinessVO> goodsBusinessCateList(BigDecimal lat, BigDecimal lng, String cate, String sort)
-			throws DataAccessException {
+	public List<GoodsBusinessVO> goodsBusinessAllTimeList(Map option) throws DataAccessException {
+		return goodsDAO.goodsBusinessAllTimeList(option);
+	}
+
+	
+	@Override
+	public List<GoodsTrainerVO> goodsTrainerAllList(Map option) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return goodsDAO.goodsTrainerAllList(option);
+	}
+
+	@Override
+	public List<GoodsTrainerVO> goodsTrainerCateList(Map option) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.goodsTrainerCateList(option);
 	}
 
 

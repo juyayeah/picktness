@@ -9,22 +9,28 @@ uri="http://tiles.apache.org/tags-tiles" %>
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<script>
+let result ={};
+const cate = document.getElementById('cate');
+
+result.cate = cate.options[cate.selectedIndex].value;
+</script>
 <style>
-body {
+.bodybody body {
 position: relative;
 max-width: 1100px;
 min-height: 120px;
 margin: 0 auto;
 }
-a {
+.bodybody a {
 background: transparent;
 text-decoration: none;
 color: inherit;
 }
-ul {
+.bodybody ul {
 list-style: none;
 }
-em {
+.bodybody em {
 font-size : 15px;
 color: #2890f1;
 font-weight: 800;
@@ -44,7 +50,7 @@ size: 40px;
 </style>
 </head>
 <body>
-<div>
+<div class="bodybody">
 <h2 align="center"> 상품 등록</h2>
 <table >
 <tr>
@@ -55,14 +61,16 @@ size: 40px;
 <td width="20%" align="right">카테고리<em>* </em></td>
 <td width="5%"></td>
 <td class="td_third">
-<select>
-<option value="전체" selected>전체</option>
-<option value="프로틴쉐이크">프로틴쉐이크</option>
-<option value="닭가슴살">닭가슴살</option>
-<option value="스트레칭/마사지">스트레칭/마사지</option>
-<option value="테이프/아대">테이프/아대</option>
-<option value="근력/유산소용품">근력/유산소용품</option>
-</select>
+<select id="cate" onclick="changeFn()">
+<optgroup name="cate_fir" label="식품">						<option value="" disabled selected>전체</option>
+						<option name="cate_sec" value="프로틴쉐이크">프로틴쉐이크</option>
+						<option name="cate_sec" value="닭가슴살">닭가슴살</option>
+						</optgroup>
+						<optgroup name="cate_fir" label="기구/용품/장비">
+						<option name="cate_sec" value="스트레칭/마사지">스트레칭/마사지</option>
+						<option name="cate_sec" value="테이프/아대">테이프/아대</option>
+						<option name="cate_sec" value="근력/유산소용품">근력/유산소용품</option>
+						</optgroup></select>
 </tr>
 <tr>
 <td width="20%" align="right">상품명<em>* </em></td>

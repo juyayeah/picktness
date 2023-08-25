@@ -205,8 +205,8 @@ li {
 						href="${contextPath }/admin/mypage/adminBusiList.do"> 사업자 관리</a></li>
 					<li class="menu"><a
 						href="${contextPath }/admin/mypage/adminTrainerList.do"> 트레이너 관리</a></li>
-					<li class="menu"><a href="${contextPath }"> 회원관리</a></li>
-					<li class="menu"><a href="${contextPath }"> 리뷰 관리</a></li>
+					<li class="menu"><a href="${contextPath }/admin/mypage/memberCont.do"> 회원관리</a></li>
+					<li class="menu"><a href="${contextPath }/admin/mypage/adminReviewCont.do"> 리뷰 관리</a></li>
 					<li class="menu"><a
 						href="${contextPath }/admin/mypage/adsettlementDetail.do"> 정산관리</a></li>
 				</ul>

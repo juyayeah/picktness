@@ -81,7 +81,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
           >포인트</a
         >
         <a
-          href="${contextPath}/member/mypage/memberDetail.do"
+          href="${contextPath}/member/mypage/memberDetail.do?id=${member.id}"
           class="menu_list_item"
           >회원정보 수정</a
         >
