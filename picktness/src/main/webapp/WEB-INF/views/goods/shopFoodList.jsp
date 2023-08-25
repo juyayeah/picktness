@@ -29,7 +29,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
 	cursor: pointer;
 	font-size:14px;
 }
-.order_by li {
+.order_by li a {
 	font-size: 12px;
 	float: right;
 	margin: 0px 0px 30px 10px;
@@ -38,6 +38,31 @@ uri="http://tiles.apache.org/tags-tiles" %>
 }
 
     </style>
+    <script>
+	$(function() {
+		switch ("${cate}") {
+		case "all":
+			$("#allcate").css("font-weight", "bold");
+			break;
+		case "tender":
+			$("#tender").css("font-weight", "bold");
+			break;
+		case "protain":
+			$("#protain").css("font-weight", "bold");
+			break;
+		}
+		switch("${orderBy}"){
+		case "best":
+			$("#best").css("font-weight", "bold");
+			$("#best").children("a").css("color", "#555");
+			break;
+		case "row":
+			$("#row").css("font-weight", "bold");
+			$("#row").children("a").css("color", "#555");
+			break;
+		}
+	});
+    </script>
     <title>식품</title>
   </head>
   <body>
@@ -57,9 +82,6 @@ uri="http://tiles.apache.org/tags-tiles" %>
 		<ul>
 		<li id="row">
 		<a href="${contextPath }/goods/shopFoodList.do?orderBy=row">가격낮은순</a>
-		</li>
-		<li id="new">
-		<a href="${contextPath }/goods/shopFoodList.do?orderBy=new">신상품순</a>
 		</li>
 		<li id="best">
 		<a href="${contextPath }/goods/shopFoodList.do?orderBy=best">추천순</a>

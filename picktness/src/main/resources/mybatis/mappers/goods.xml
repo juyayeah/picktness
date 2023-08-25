@@ -32,6 +32,12 @@ select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance 
  	]]>
  	</select>
  	
+ 	<select id="goodsFoodCateList" resultType="goodsShoppingVO" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" #{cate} ORDER BY SIGN(goods_qty) DESC #{orderBy} goods_qty DESC;
+ 	]]>
+ 	</select>
+ 	
 	<select id="businessSearch" resultType="goodsBusinessVO" parameterType="String">
 	<![CDATA[
 	select t.*, i.fileName from (select d.*, b.b_name, b.zipcode, b.addrbasic, b.addrdetail, b.phone1, b.phone2, b.phone3, b.lat, b.lng from business as b join business_detail as d on b.id = d.id where b.b_name like #{search_content} or d.cate like #{search_content}) as t join business_detail_image as i on t.goods_id = i.goods_id where i.filetype = "main_image";
