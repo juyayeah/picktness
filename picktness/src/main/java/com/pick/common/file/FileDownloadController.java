@@ -21,9 +21,9 @@ public class FileDownloadController {
 	private static final String TRAINER_IMAGE_REPO = "c:\\pickness\\trainer_image";
 	
 	@RequestMapping("/download.do")
-	protected void download(@RequestParam("cate") String cate, @RequestParam("imageFileName") String imageFileName, @RequestParam("articleNO") String articleNO, HttpServletResponse response) throws Exception{
+	protected void download(@RequestParam("cate") String cate, @RequestParam("imageFileName") String imageFileName, @RequestParam("bno") String bno, HttpServletResponse response) throws Exception{
 		OutputStream out = response.getOutputStream();
-		String downFile = fileName(cate, articleNO, imageFileName);
+		String downFile = fileName(cate, bno, imageFileName);
 		File file = new File(downFile);
 		
 		response.setHeader("Cache-Control", "no-cache");
@@ -40,14 +40,11 @@ public class FileDownloadController {
 		
 	}
 
-	protected String fileName(String cate, String articleNO, String imageFileName) {
+	protected String fileName(String cate, String bno, String imageFileName) {
 		String fileName = null;
 		switch(cate) {
-		case "business": fileName=BUSINESS_IMAGE_REPO+"\\"+articleNO +"\\" + imageFileName;
+		case "mill":fileName = TODAYMILL_IMAGE_REPO+"\\"+bno+"\\"+imageFileName;
 		break;
-		case "event": fileName = EVENT_IMMAGE_REPO+"\\"+articleNO+"\\"+imageFileName;
-		break;
-		case "review": fileName = REVIEW_IMAGE_REPO + "\\" +articleNO +"\\"+imageFileName;
 		}
 		return fileName;
 	}

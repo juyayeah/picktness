@@ -20,11 +20,9 @@ height: 30px;
 <!DOCTYPE html>
 <html>
   <style>
-              .faq_inner {
-        position: relative;
-        width: 1100px;
-        margin: 0 auto;
-      }
+    .free_inner{
+    margin:30px 0 0 30px;
+    }
       .divider {
     border-top: 1px solid #ccc;
     margin-top: 20px;
@@ -74,7 +72,7 @@ margin-right:10px;
 </head>
 <body>
 
-  <div class="faq_inner">
+  <div class="free_inner">
   <h1 style="margin-bottom: 5px;">자유게시판</h1>
   <div class="divider"></div>
   <h2 class="center" style="margin-right: 120px;">글쓰기</h2>
