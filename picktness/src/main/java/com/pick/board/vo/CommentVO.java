@@ -1,17 +1,18 @@
 package com.pick.board.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
 
-@Component("comentVO")
+@Component("commentVO")
 public class CommentVO {
 
 	private int bno;
 	private int p_bno;
 	private String content;
 	private String member_id;
-	private Date millrDate;
+	private Timestamp millrDate;
 	
 	public int getBno() {
 		return bno;
@@ -37,12 +38,13 @@ public class CommentVO {
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-	public Date getMillrDate() {
+	public Timestamp getMillrDate() {
 		return millrDate;
 	}
-	public void setMillrDate(Date millrDate) {
+	public void setMillrDate(Timestamp millrDate) {
 		this.millrDate = millrDate;
 	}
+
 
 
 }

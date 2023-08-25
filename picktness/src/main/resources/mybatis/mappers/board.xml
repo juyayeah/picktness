@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result property="member_id" column="member_id"/>
  		<result property="content" column="content"/>
  		<result property="hastag" column="hastag"/>
- 		<result property="boardDate" column="millDate"/>
+ 		<result property="boardDate" column="freeDate"/>
  		<result property="todaymill_img" column="todaymill_img"/>
  		</resultMap>
  		  	
@@ -17,15 +17,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result property="member_id" column="member_id"/>
  		<result property="title" column="title"/>
  		<result property="content" column="content"/>
- 		<result property="boardDate" column="freeDate"/>
+ 		<result property="boardDate" column="millDate"/>
  		</resultMap>
  		
- 		 		  	<resultMap id="millreplyResult" type="comentVO">
+ 		 		  	<resultMap id="millreplyResult" type="commentVO">
  		<result property="bno" column="bno"/>
  		<result property="member_id" column="member_id"/>
  		<result property="title" column="title"/>
  		<result property="content" column="content"/>
- 		<result property="boardDate" column="freeDate"/>
+ 		<result property="boardDate" column="millrDate"/>
  		</resultMap>
  		  	
  
@@ -82,7 +82,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     VALUES (#{bno}, #{p_bno}, #{content}, #{member_id}, #{miirdate})
     ]]>
 </insert>
- 	
+ 	    <select id="getComments" resultType="commentVO" parameterType="int">
+        <![CDATA[
+        SELECT * FROM todaymill_reply WHERE p_bno = #{bno}
+        ]]>
+    </select>
 
  	
 

@@ -60,12 +60,12 @@ public class BoardControllerImpl {
 	public ModelAndView millDetail(@RequestParam("bno") int bno, HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
 		BoardVO millDetail = boardService.getMillByBno(bno); 
-
+		List<CommentVO> commentList = boardService.getComments(bno);
 	    ModelAndView modelAndView = new ModelAndView();
 	    modelAndView.setViewName(viewName); // millDetail.jsp와 같이 실제 상세 페이지의 뷰 이름으로 설정
-	    
+	    modelAndView.addObject("commentList",commentList);
 	    modelAndView.addObject("millDetail", millDetail);
-
+        System.out.println(commentList);
 	    return modelAndView;
 	}
 
@@ -156,7 +156,7 @@ public class BoardControllerImpl {
 	public ModelAndView millBoardList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
-		List millList = boardService.millBoardList();
+		List<BoardVO> millList = boardService.millBoardList();
 		mav.setViewName(viewName);
 		mav.addObject("millList", millList);
 		return mav;
@@ -243,12 +243,9 @@ public class BoardControllerImpl {
 		return image;
 	}
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-	@RequestMapping(value = "board/addComment", method = RequestMethod.POST)
-    public String addComment(CommentVO comment) throws Exception{
-        boardService.addComment(comment);
-        return "redirect:/board/view?bno=" + comment.getBno();
-    }
-    
+
+	
+
 
 
 }
