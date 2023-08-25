@@ -16,30 +16,44 @@ request.setCharacterEncoding("utf-8");
 <script type="text/javascript">
 
 function mon1(){
-	alert("테스트");
 	document.getElementById("pricebox").style.display = "block";
-	document.getElementById("pricebox1").style.display = "none";
-	document.getElementById("pricebox2").style.display = "none";
-	document.getElementById("pricebox3").style.display = "none";
-};
-function mon3(){
-	alert("테스트2");
-	document.getElementById("pricebox").style.display = "none";
 	document.getElementById("pricebox1").style.display = "block";
 	document.getElementById("pricebox2").style.display = "none";
 	document.getElementById("pricebox3").style.display = "none";
+	document.getElementById("pricebox4").style.display = "none";
+	document.getElementById("pricebox5").style.display = "none";
+	document.getElementById("pricebox6").style.display = "none";
+	document.getElementById("pricebox7").style.display = "none";
+};
+function mon3(){
+	document.getElementById("pricebox").style.display = "none";
+	document.getElementById("pricebox1").style.display = "none";
+	document.getElementById("pricebox2").style.display = "block";
+	document.getElementById("pricebox3").style.display = "block";
+	document.getElementById("pricebox4").style.display = "none";
+	document.getElementById("pricebox5").style.display = "none";
+	document.getElementById("pricebox6").style.display = "none";
+	document.getElementById("pricebox7").style.display = "none";
 };
 function mon6(){
 	document.getElementById("pricebox").style.display = "none";
 	document.getElementById("pricebox1").style.display = "none";
-	document.getElementById("pricebox2").style.display = "block";
+	document.getElementById("pricebox2").style.display = "none";
 	document.getElementById("pricebox3").style.display = "none";
+	document.getElementById("pricebox4").style.display = "block";
+	document.getElementById("pricebox5").style.display = "block";
+	document.getElementById("pricebox6").style.display = "none";
+	document.getElementById("pricebox7").style.display = "none";
 };
 function mon12(){
 	document.getElementById("pricebox").style.display = "none";
 	document.getElementById("pricebox1").style.display = "none";
 	document.getElementById("pricebox2").style.display = "none";
-	document.getElementById("pricebox3").style.display = "block";
+	document.getElementById("pricebox3").style.display = "none";
+	document.getElementById("pricebox4").style.display = "none";
+	document.getElementById("pricebox5").style.display = "none";
+	document.getElementById("pricebox6").style.display = "block";
+	document.getElementById("pricebox7").style.display = "block";
 };
 </script>
 
@@ -313,14 +327,15 @@ textarea {
 			<tr>
 				<td class="tdfirsttop">판매가</td>
 				<td class="starbluetop">*&nbsp;&nbsp;</td>
-				<td class="blue">정가	<input class="pricebox" id = "pricebox" type="number" name="prod1" placeholder="숫자만 작성해 주세요" style="display: block;"> &ndash; 할인 
-				<input class="pricebox" id = "pricebox" type="number" placeholder="숫자만 작성해 주세요" name="prod1sale" style="display: blcok;">
-				<input class="pricebox1" id = "pricebox1" type="number" name="prod3" placeholder="숫자만 작성해 주세요" style="display: none;"> 
-				<input class="pricebox1" id = "pricebox1" type="number" placeholder="숫자만 작성해 주세요" name="prod3sale" style="display: none;">
-				<input class="pricebox2" id = "pricebox2" type="number" name="prod6" placeholder="숫자만 작성해 주세요" style="display: none;"> 
-				<input class="pricebox2" id = "pricebox2" type="number" placeholder="숫자만 작성해 주세요" name="prod6sale" style="display: none;">
-				<input class="pricebox3" id = "pricebox3" type="number" name="prod12" placeholder="숫자만 작성해 주세요" style="display: none;"> 
-				<input class="pricebox3" id = "pricebox3" type="number" placeholder="숫자만 작성해 주세요" name="prod12sale" style="display: none;">
+				<td class="blue">정가	
+				<input class="pricebox" id = "pricebox" type="number" name="prod1" placeholder="숫자만 작성해 주세요" style="display: block;"> &ndash; 할인 
+				<input class="pricebox" id = "pricebox1" type="number" placeholder="숫자만 작성해 주세요" name="prod1sale" style="display: blcok;">
+				<input class="pricebox1" id = "pricebox2" type="number" name="prod3" placeholder="숫자만 작성해 주세요" style="display: none;"> 
+				<input class="pricebox1" id = "pricebox3" type="number" placeholder="숫자만 작성해 주세요" name="prod3sale" style="display: none;">
+				<input class="pricebox2" id = "pricebox4" type="number" name="prod6" placeholder="숫자만 작성해 주세요" style="display: none;"> 
+				<input class="pricebox2" id = "pricebox5" type="number" placeholder="숫자만 작성해 주세요" name="prod6sale" style="display: none;">
+				<input class="pricebox3" id = "pricebox6" type="number" name="prod12" placeholder="숫자만 작성해 주세요" style="display: none;"> 
+				<input class="pricebox3" id = "pricebox7" type="number" placeholder="숫자만 작성해 주세요" name="prod12sale" style="display: none;">
 
 					<button class="circlebtn" value="+">+</button>
 					<br><span class="starblue" style="font-size: 11px;">* 픽트니스을 통한
