@@ -135,8 +135,23 @@
             businessButton.style.textDecoration = 'none';
             personalLoginForm.style.display = 'block';
             businessLoginForm.style.display = 'none';
+			
+          var uri = "/goods/placeList.do";
+          $.ajax({
+          	url : "${contextPath}/redirectUri.do",
+          	type : "POST",
+				data : {str : uri},
+				success : function(data, status, xhr){
+					alert("uri 저장 성공");
+				},
+				error : function(data,status, error){
+					alert("uri 저장 실패")
+				}
+				
+          });
+
+
         };
-        
     </script>
     <meta charset="UTF-8">
     <title>로그인창</title>
