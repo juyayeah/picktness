@@ -34,13 +34,25 @@ select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance 
  	
  	<select id="goodsFoodAllList" resultType="goodsShoppingVO" parameterType="java.util.Map">
  	<![CDATA[
- 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" ORDER BY SIGN(goods_qty) DESC, #{orderBy}, goods_qty DESC;
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_fir = "food" order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC;
  	]]>
  	</select>
  	
  	<select id="goodsFoodCateList" resultType="goodsShoppingVO" parameterType="java.util.Map">
  	<![CDATA[
- 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && #{cate} ORDER BY SIGN(goods_qty) DESC, #{orderBy}, goods_qty DESC;
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_sec = #{cate} order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC;
+ 	]]>
+ 	</select>
+ 	
+ 	 <select id="goodsGoodsAllList" resultType="goodsShoppingVO" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_fir = "goods" order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC;
+ 	]]>
+ 	</select>
+ 	
+ 	<select id="goodsGoodsCateList" resultType="goodsShoppingVO" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_sec = #{cate} order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC;
  	]]>
  	</select>
  	
