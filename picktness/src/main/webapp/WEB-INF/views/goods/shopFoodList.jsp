@@ -39,6 +39,9 @@ uri="http://tiles.apache.org/tags-tiles" %>
 
     </style>
     <script>
+    $(function(){
+    	
+    });
 	$(function() {
 		switch ("${cate}") {
 		case "all":
@@ -81,10 +84,10 @@ uri="http://tiles.apache.org/tags-tiles" %>
 		<div class="order_by">
 		<ul>
 		<li id="row">
-		<a href="${contextPath }/goods/shopFoodList.do?orderBy=row">가격낮은순</a>
+		<a href="${contextPath }/goods/shopFoodList.do?cate=${cate }&orderBy=row">가격낮은순</a>
 		</li>
 		<li id="best">
-		<a href="${contextPath }/goods/shopFoodList.do?orderBy=best">추천순</a>
+		<a href="${contextPath }/goods/shopFoodList.do?cate=${cate }&orderBy=best">추천순</a>
 		</li>
 		</ul>
 		</div>

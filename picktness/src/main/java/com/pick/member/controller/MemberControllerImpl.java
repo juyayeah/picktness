@@ -42,17 +42,17 @@ public class MemberControllerImpl implements MemberController{
 	}
 	
 	@RequestMapping(value="/member/login.do", method=RequestMethod.POST)
-	private ModelAndView login(@RequestParam Map<String, String> loginMap,HttpServletRequest request, HttpServletResponse response) throws Exception{
+	private String login(@RequestParam Map<String, String> loginMap,HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		 String message = null;
-		String viewName = (String) request.getAttribute("viewName");
 		HttpSession session =request.getSession();
+		System.out.println("로그인 메소드 진입");
+		String uri = (String) session.getAttribute("uri");
+		session.removeAttribute("uri");
 		memberVO = memberService.login(loginMap);
 		if(memberVO != null) {
 			if(memberVO.getId().equals("admin")) {
 				session.setAttribute("isLogOn", true);
 				session.setAttribute("member", memberVO);
-				mav.setViewName("/main");
 			} else {
 				String memLocation = memberVO.getAddrBasic();
 				Double memLat = memberVO.getLat();
@@ -62,12 +62,14 @@ public class MemberControllerImpl implements MemberController{
 				session.setAttribute("memLocation", memLocation);
 				session.setAttribute("lat", memLat);
 				session.setAttribute("lng", memLng);
-				mav.setViewName("/main");
 			}
-		} else {
-			mav.setViewName("/member/loginForm");
+			if(uri != null) {
+				return "redirect:" + uri;
+			} else {
+				return "redirect:/main.do";
+			}
 		}
-	return mav;
+	return "redirect:/member/loginForm.do";
 	}
 	
 	@RequestMapping(value="/member/logout.do", method=RequestMethod.GET)
