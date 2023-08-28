@@ -15,6 +15,7 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=abeab8cce28d6c80ad107bfe4e602d58&libraries=services"></script>
 <script>
+    //아이디 실시간 검사
     function checkId(){
         var id = $('#id').val();
         
@@ -35,14 +36,91 @@
                 }
             },
             error:function(request, error){
-                alert("에러입니다.");
                 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
         });
     };
-    </script>
 
-<script>
+    window.onload = function(){
+    const passwordInput = document.getElementById('pwd');
+    const passwordConfirmInput = document.getElementById('passwordConfirm');
+    const passwordError = document.getElementById('passwordError');
+
+    //비밀번호 일치 여부 확인
+    function checkPasswordMatch() {
+        if (passwordInput.value !== passwordConfirmInput.value) {
+            passwordError.textContent = '비밀번호가 일치하지 않습니다.';
+            passwordError.style.color = 'red';
+            passwordError.style.fontWeight = 'normal';
+            passwordError.style.fontSize = '14px';
+
+        } else {
+            passwordError.textContent = '비밀번호가 일치합니다.';
+            passwordError.style.color = '#2890F1';
+            passwordError.style.fontWeight = 'normal';
+            passwordError.style.fontSize = '14px';
+        }
+    }
+
+    // 비밀번호 입력 시 이벤트 처리
+    passwordInput.addEventListener('input', () => {
+        validatePassword(passwordInput.value);
+        checkPasswordMatch(); // 비밀번호 입력이 변경되면 재확인 입력도 확인
+    });
+
+    // 비밀번호 재확인 입력 시 이벤트 처리
+    passwordConfirmInput.addEventListener('input', () => {
+        checkPasswordMatch(); // 재확인 입력이 변경되면 확인
+    });
+
+const idInput = document.getElementById('id');
+const idCheck = document.createElement('span');
+idCheck.classList.add('validation-message'); 
+idInput.parentElement.appendChild(idCheck); 
+
+const pwdInput = document.getElementById('pwd');
+const pwdError = document.createElement('span');
+pwdError.classList.add('validation-message');
+pwdInput.parentElement.appendChild(pwdError);
+
+idInput.addEventListener('input', () => {
+    validateId(idInput.value);
+});
+
+pwdInput.addEventListener('input', () => {
+    validatePassword(pwdInput.value);
+});
+
+function validateId(id) {
+   
+    if (/^[a-zA-Z0-9]{4,16}$/.test(id)) {
+        idCheck.textContent = '';
+        idCheck.style.color = '#2890F1';
+        idCheck.style.fontWeight = 'normal'
+        idCheck.style.fontSize = '14px';
+    } else {
+        idCheck.textContent = '4~16자 이내, 영문, 숫자를 사용해주세요.';
+        idCheck.style.color = '#FF0000';
+        idCheck.style.fontWeight = 'normal'
+        idCheck.style.fontSize = '14px';
+    }
+}
+
+function validatePassword(password) {
+    
+    if (/^[a-zA-Z0-9]{6,16}$/.test(password)) {
+        pwdError.textContent = '사용 가능한 비밀번호입니다.';
+        pwdError.style.color = '#2890F1';
+        pwdError.style.fontWeight = 'normal'
+        pwdError.style.fontSize = '14px';
+    } else {
+        pwdError.textContent = '사용할 수 없는 비밀번호입니다.';
+        pwdError.style.color = '#FF0000';
+        pwdError.style.fontWeight = 'normal'
+        pwdError.style.fontSize = '14px';
+    }
+}
+    }
     var serverVerificationCode = ""; // 서버에서 받은 인증번호를 저장할 변수
 
     function sendVerificationCode() {
@@ -68,16 +146,18 @@
     function verifyCode() {
         // 사용자가 입력한 인증번호
         var userEnteredCode = $("#verification-code").val();
+        var isEmailVerified = false;
 
         if (userEnteredCode === serverVerificationCode) {
             alert("인증이 성공했습니다!");
+            isEmailVerified = true;
             // 인증 성공 시 추가 동작을 여기에 추가할 수 있음
         } else {
             alert("인증번호가 일치하지 않습니다. 다시 확인해주세요.");
         }
+        return isEmailVerified;
     }
-</script>        
-<script>    
+//주소 입력  
 function openZipSearch() {
     new daum.Postcode({
     	oncomplete: function(data) {     
@@ -108,16 +188,6 @@ function updateEmailInput() {
     }
 }
 
-//휴대폰 입력 넘기기
-function formatPhoneNumber() {
-    var input1 = document.getElementById('phone1');
-    var input2 = document.getElementById('phone2');
-    var input3 = document.getElementById('phone3');
-    
-    var phoneNumber = input1.value + '-' + input2.value + '-' + input3.value;
-    document.getElementById('formatted-phone').value = phoneNumber;
-}
-
 //이메일 셀렉트 박스
 $(function() {
         $('#domain-list').change(function() {
@@ -130,6 +200,183 @@ $(function() {
             }
         })
     });
+
+//휴대폰 입력 넘기기
+function formatPhoneNumber() {
+    var input1 = document.getElementById('phone1');
+    var input2 = document.getElementById('phone2');
+    var input3 = document.getElementById('phone3');
+    
+    var phoneNumber = input1.value + '-' + input2.value + '-' + input3.value;
+    document.getElementById('formatted-phone').value = phoneNumber;
+}
+
+//약관동의 전체선택
+function checkboxAll(checkbox) {
+    var allCheckboxes = checkbox.closest('.join_box').querySelectorAll('input[type="checkbox"]');
+    
+    for (var i = 0; i < allCheckboxes.length; i++) {
+        allCheckboxes[i].checked = checkbox.checked;
+    }
+}
+
+//필수란 체크
+function validateAndSubmitForm() {
+    var idInput = document.getElementById('id');
+    var pwdInput = document.getElementById('pwd');
+    var passwordConfirmInput = document.getElementById('passwordConfirm');
+    var nameInput = document.getElementById('name');
+    var zip_codeInput = document.getElementById('zip_code');
+    var email1Input = document.getElementById('domain-txt1');
+    var email2Input = document.getElementById('domain-txt2');
+    var phone1Input = document.getElementById('phone1');
+    var phone2Input = document.getElementById('phone2');
+    var phone3Input = document.getElementById('phone3');
+    var agreementCheck1 = document.getElementById('chk_2');
+    var agreementCheck2 = document.getElementById('chk_3');
+   
+    
+    // 입력 값 검사
+    if (idInput.value.trim() === '') {
+        alert('아이디를 입력해주세요.');
+        idInput.focus();
+        return;
+    }
+
+    // 아이디 유효성 검사
+    var username = idInput.value.trim();
+    if (!/^[a-zA-Z0-9]{4,16}$/.test(username)) {
+    idInput.focus();
+    return;
+    } else {
+    var idCheckMessage = document.getElementById('idCheck');
+    idCheckMessage.textContent = '';
+    }
+
+
+    
+
+
+    if (pwdInput.value.trim() === '') {
+    alert('비밀번호를 입력해주세요.');
+    pwdInput.focus();
+    return;
+}
+
+    // 비밀번호 유효성 검사
+    var password = pwdInput.value.trim();
+    if (!/^[a-zA-Z0-9]{6,16}$/.test(password)) {
+    pwdInput.focus();
+    return;
+    } else {
+        pwdError.textContent = '';
+    }
+
+    if (pwdInput.value.trim() !== passwordConfirmInput.value.trim()) {
+        alert('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+        passwordConfirmInput.focus();
+        return;
+    }
+
+    if (nameInput.value.trim() === '') {
+        alert('이름을 입력해주세요.');
+        nameInput.focus();
+        return;
+    }
+
+    if (zip_codeInput.value.trim() === '') {
+        alert('주소를 입력해주세요.');
+        zip_codeInput.focus();
+        return;
+    }
+
+    //이메일
+    
+    if (email1Input.value.trim() === '') {
+        alert('이메일을 입력해주세요.');
+        email1Input.focus();
+        return;
+    }
+    
+    if (email2Input.value.trim() === '') {
+        alert('도메인 이메일을 입력해주세요.');
+        email2Input.focus();
+        return;
+    }
+
+    if (phone1Input.value.trim() !== '010') {
+        alert('올바른 번호를 입력해주세요.');
+        phone1Input.focus();
+        return;
+    }
+
+    if (phone2Input.value.trim() === '') { 
+        alert('번호를 입력해주세요.');
+        phone2Input.focus();
+        return;
+    }
+
+    if (phone3Input.value.trim() === '') { 
+        alert('번호를 입력해주세요.');
+        phone3Input.focus();
+        return;
+    }
+
+    if (!agreementCheck1.checked) {
+        alert('회원 이용 약관에 동의해주세요.');
+        return;
+    }
+
+    if (!agreementCheck2.checked) {
+        alert('개인정보 수집 및 이용에 대한 안내에 동의해주세요.');
+        return;
+    }
+   // latLng(document.querySelector('form'));
+    // 모든 필드가 유효한 경우 폼 제출
+    document.querySelector('form').submit();
+
+/*    // 도메인 유효성 검사 함수
+function isValidEmailDomain(domain) {
+    var validDomains = [
+        "google.com", "naver.com", "hanmail.com", "nate.com",
+        "yahoo.com", "hotmail.com", "dreamwiz.com", "freechal.com", "hanmir.com"
+    ];
+
+    return validDomains.includes(domain);
+}  */
+
+    /*
+    //위도 경도 찾는 함수
+    function latLng(f){
+        var geocoder = new kakao.maps.services.Geocoder();
+           var rocation = $("#addr").val();
+           alert(rocation);
+        
+            geocoder.addressSearch(rocation, function (result, status) {
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
+        var lat = result[0].y;
+        var lng = result[0].x;
+        alert("위도" + lat + "경도" + lng);
+        var input1 = document.createElement("input");
+        var input2 = document.createElement("input");
+        input1.setAttribute("type", "hidden");
+        input1.setAttribute("name", "lat");
+        input1.setAttribute("value", lat);
+        input2.setAttribute("type", "hidden");
+        input2.setAttribute("name", "lng");
+        input2.setAttribute("value", lng);
+        
+        f.appendChild(input1);
+        f.appendChild(input2);
+        f.submit();
+                }
+                return;
+            });
+    }
+    */    
+
+}
 </script>
 <style>
 .hrColor {
@@ -150,17 +397,18 @@ ul.join_box{border: 1px solid #ddd;background-color: #fff;}
 .footBtwrap>li>button{display: block; width: 100%;height: 100%; font-size: 20px;text-align: center;line-height: 60px;}
 
 #chkAll {
-        /* 원하는 크기 값으로 조절 */
         width: 20px;
         height: 20px;
     }
-input[type="checkbox"][name="chk"] {
-        /* 원하는 크기 값으로 조절 */
+input[name="chk"] {
         width: 20px;
         height: 20px;
     }
 
-
+    input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
     
     .input-small {
     width: 280px;
@@ -281,7 +529,7 @@ input {
                 <label for="id">아이디<span class="label-with-star">*</span></label><br>
                 <input type="text" id="id" name="id" placeholder="아이디(4~16자 이내, 영문, 숫자 사용 가능)"  class="input-small" oninput="checkId()">
                 <span id="idCheck" class="validation-message"></span><br>
-                <span class="id_ok" style="color:#2890F1; font-size: 14px; font-weight: normal; display:none;">사용 가능한 아이디입니다.</span>
+                <span class="id_ok" style="color:#2890F1; font-size: 14px; font-weight: normal; display:none;">중복되지 않은 아이디입니다.</span>
                 <span class="id_already" style="color:red; font-size: 14px; font-weight: normal; display:none;">중복된 아이디입니다.</span>
             </div>
             
@@ -299,7 +547,7 @@ input {
 
             <div class="form-row">
                 <label for="name">이름<span class="label-with-star">*</span></label><br>
-                <input type="text" name="name" class="input-small"><br>
+                <input type="text" id="name" name="name" class="input-small"><br>
             </div>
 
             <div class="form-row">
@@ -353,7 +601,7 @@ input {
                             위치정보 이용약관(선택)<br> 프로모션 안내
                             메일 수신(선택)에 모두 동의합니다.</li>
                         <li class="checkAllBtn">
-                            <input type="checkbox" name="chkAll" id="chkAll" class="chkAll">
+                            <input type="checkbox" name="chkAll" id="chkAll" class="chkAll" onclick="checkboxAll(this)">
                         </li>
                     </ul>
                 </li>
@@ -365,7 +613,7 @@ input {
                         </li>
                     </ul>
                     <textarea name="" id="" disabled>여러분을 환영합니다.
-픽트니스 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 픽트니스 서비스의 이용과 관련하여 픽트니스 서비스를 제공하는 ㅍ 주식회사(이하 픽트니스)와 이를 이용하는 픽트니스 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 픽트니스 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+픽트니스 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 픽트니스 서비스의 이용과 관련하여 픽트니스 서비스를 제공하는 주식회사(이하 픽트니스)와 이를 이용하는 픽트니스 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 픽트니스 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
        </textarea>
                 </li>
                 <li class="checkBox check03">
@@ -445,166 +693,9 @@ input {
                 </li>
             </ul>
         
-
-            <button type="button" class="joinButton" id="nextBtn" onclick="latLng(this.form)">가입하기</button>
+<!--latLng(this.form)-->
+            <button type="button" class="joinButton" id="nextBtn" onclick="validateAndSubmitForm()">가입하기</button>
         </form>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // ... (기존 코드)
-        
-            /* const nextBtn = document.getElementById('nextBtn');
-            nextBtn.addEventListener('click', function(event) {
-                var formContainer = document.getElementById('formContainer');
-                var inputs = formContainer.querySelectorAll('input[type="text"], input[type="password"]');
-                var isEmpty = false;
-        
-                inputs.forEach(function(input) {
-                    if (input.value.trim() === '') {
-                        isEmpty = true;
-                        input.focus();
-                        event.preventDefault();
-                        return;
-                    }
-                });
-        
-                if (isEmpty) {
-                    alert('빈 칸을 모두 입력해주세요.');
-                    return;
-                }
-        
-                const requiredCheckboxes = [chk_2, chk_3];
-                let missingCheckbox = null;
-        
-                requiredCheckboxes.forEach(function(checkbox) {
-                    if (!checkbox.checked) {
-                        missingCheckbox = checkbox;
-                        return;
-                    }
-                });
-        
-                if (missingCheckbox) {
-                    const checkboxLabel = missingCheckbox.closest('li').querySelector('span.label-with-star').innerText;
-                    alert(`"${checkboxLabel}"에 동의하셔야 다음 단계로 진행 가능합니다.`);
-                    missingCheckbox.focus();
-                    event.preventDefault();
-                    return;
-                }
-        		
-                
-                
-                //document.getElementById('terms_form').submit();
-            }); */
-        });
-        
-        //위도 경도 찾는 함수
-        function latLng(f){
-        	var geocoder = new kakao.maps.services.Geocoder();
-       	    var rocation = $("#addr").val();
-       	    alert(rocation);
-            
-   	     	geocoder.addressSearch(rocation, function (result, status) {
-    	    // 정상적으로 검색이 완료됐으면
-    	    if (status === kakao.maps.services.Status.OK) {
-    	    var lat = result[0].y;
-    	    var lng = result[0].x;
-    	    alert("위도" + lat + "경도" + lng);
-			var input1 = document.createElement("input");
-			var input2 = document.createElement("input");
-			input1.setAttribute("type", "hidden");
-			input1.setAttribute("name", "lat");
-			input1.setAttribute("value", lat);
-			input2.setAttribute("type", "hidden");
-			input2.setAttribute("name", "lng");
-			input2.setAttribute("value", lng);
-			
-			f.appendChild(input1);
-			f.appendChild(input2);
-			f.submit();
-					}
-				});
-        }
-        </script>
 </body>
-<script>
-    const passwordInput = document.getElementById('pwd');
-    const passwordConfirmInput = document.getElementById('passwordConfirm');
-    const passwordError = document.getElementById('passwordError');
-
-    // 함수를 정의하여 비밀번호 일치 여부를 확인하는 로직을 구현
-    function checkPasswordMatch() {
-        if (passwordInput.value !== passwordConfirmInput.value) {
-            passwordError.textContent = '비밀번호가 일치하지 않습니다.';
-            passwordError.style.color = 'red';
-            passwordError.style.fontWeight = 'normal';
-            passwordError.style.fontSize = '14px';
-
-        } else {
-            passwordError.textContent = '비밀번호가 일치합니다.';
-            passwordError.style.color = '#2890F1';
-            passwordError.style.fontWeight = 'normal';
-            passwordError.style.fontSize = '14px';
-        }
-    }
-
-    // 비밀번호 입력 시 이벤트 처리
-    passwordInput.addEventListener('input', () => {
-        validatePassword(passwordInput.value);
-        checkPasswordMatch(); // 비밀번호 입력이 변경되면 재확인 입력도 확인
-    });
-
-    // 비밀번호 재확인 입력 시 이벤트 처리
-    passwordConfirmInput.addEventListener('input', () => {
-        checkPasswordMatch(); // 재확인 입력이 변경되면 확인
-    });
-</script>
-<script>
-const idInput = document.getElementById('id');
-const idCheck = document.createElement('span');
-idCheck.classList.add('validation-message'); 
-idInput.parentElement.appendChild(idCheck); 
-
-const pwdInput = document.getElementById('pwd');
-const pwdError = document.createElement('span');
-pwdError.classList.add('validation-message');
-pwdInput.parentElement.appendChild(pwdError);
-
-idInput.addEventListener('input', () => {
-    validateId(idInput.value);
-});
-
-pwdInput.addEventListener('input', () => {
-    validatePassword(pwdInput.value);
-});
-
-function validateId(id) {
-   
-    if (/^[a-zA-Z0-9]{4,16}$/.test(id)) {
-        idCheck.textContent = '';
-        idCheck.style.color = '#2890F1';
-        idCheck.style.fontWeight = 'normal'
-        idCheck.style.fontSize = '14px';
-    } else {
-        idCheck.textContent = '4~16자 이내, 영문, 숫자를 사용해주세요.';
-        idCheck.style.color = '#FF0000';
-        idCheck.style.fontWeight = 'normal'
-        idCheck.style.fontSize = '14px';
-    }
-}
-
-function validatePassword(password) {
-    
-    if (/^[a-zA-Z0-9]{6,16}$/.test(password)) {
-        pwdError.textContent = '사용 가능한 비밀번호입니다.';
-        pwdError.style.color = '#2890F1';
-        pwdError.style.fontWeight = 'normal'
-        pwdError.style.fontSize = '14px';
-    } else {
-        pwdError.textContent = '사용할 수 없는 비밀번호입니다.';
-        pwdError.style.color = '#FF0000';
-        pwdError.style.fontWeight = 'normal'
-        pwdError.style.fontSize = '14px';
-    }
-}
-</script>
 </html>
