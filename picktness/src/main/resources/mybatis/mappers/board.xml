@@ -42,6 +42,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		VALUES(#{title},#{content},#{member_id},)
  		]]>
  		</insert>
+ 		<insert id ="insertComment" parameterType="commentVO">
+ 		<![CDATA[ 
+ 		INSERT into todaymill_reply(p_bno,content,member_id )
+ 		VALUES(#{p_bno} ,#{content},#{member_id})
+ 		]]>
+ 		
+ 		</insert>
  		
 <!--  		<select id="selectAllMillList" resultType="boardVO">
  		<![CDATA[

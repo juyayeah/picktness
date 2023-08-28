@@ -163,7 +163,10 @@
   </div>
   <div class="divider"></div>
  <h3>댓글 등록</h3> 
-  <form method="post" action="${contextPath}/board/addReply">
+ ${millDetail.bno}
+  <form method="post" action="${contextPath}/board/addReply.do">
+  <input type="hidden" name="p_bno" value="${millDetail.bno}">
+  <input type="hidden" name="member_id" value="${member.id }">
   <div class="comment-input-container">
     <textarea class="comment-input" rows="4" name="content"placeholder="댓글을 작성해주세요!"></textarea>
     <button type="submit" class="comment-button">댓글 등록</button>
