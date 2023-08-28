@@ -136,6 +136,7 @@
             personalLoginForm.style.display = 'block';
             businessLoginForm.style.display = 'none';
         };
+        
     </script>
     <meta charset="UTF-8">
     <title>로그인창</title>

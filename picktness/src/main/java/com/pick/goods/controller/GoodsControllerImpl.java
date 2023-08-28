@@ -176,26 +176,26 @@ public class GoodsControllerImpl implements GoodsController{
 		List<GoodsShoppingVO> goodsFoodList;
 		session.setAttribute("cate", cate);
 		session.setAttribute("orderBy", orderBy);
+		switch(orderBy) {
+		case "best" : orderBy =  "review_star DESC";
+		break;
+		case "row" : orderBy = "priceretail asc";
+		}
+		option.put("orderBy", orderBy);
+		
 		if(cate.equals("all")) {
-			cate = "";
-			option.put("cate", cate);
+			goodsFoodList = goodsService.goodsFoodAllList(option);
 		} else {
 			switch(cate) {
-			case "tender": cate = "&& s.cate_sec = 닭가슴살";
+			case "tender": cate = "s.cate_sec = 닭가슴살";
 			break;
-			case "protain": cate= "&& s.cate_sec = 프로틴";
+			case "protain": cate= "s.cate_sec = 프로틴";
 			break;
 			}
 			option.put("cate", cate);
-
+			goodsFoodList = goodsService.goodsFoodCateList(option);
 		}
 		
-		switch(orderBy) {
-		case "best": orderBy =  ", review_star DESC,";
-		break;
-		}
-		option.put("orderBY", orderBy);
-		goodsFoodList = goodsService.goodsFoodCateList(option);
 		mav.setViewName(viewName);
 		return mav;
 	}

@@ -18,6 +18,7 @@ public interface GoodsDAO {
 	public List<GoodsBusinessVO> goodsBusinessAllTimeList(Map option ) throws DataAccessException;
 	public List<GoodsTrainerVO> goodsTrainerAllList(Map option) throws DataAccessException;
 	public List<GoodsTrainerVO> goodsTrainerCateList(Map option ) throws DataAccessException;
+	public List<GoodsShoppingVO> goodsFoodAllList(Map option ) throws DataAccessException;
 	public List<GoodsShoppingVO> goodsFoodCateList(Map option) throws DataAccessException;
 	public List<GoodsShoppingVO> goodsGoodsCateList(Map option) throws DataAccessException;
 	public List<GoodsBusinessVO> businessSearch(String search_content) throws DataAccessException;
