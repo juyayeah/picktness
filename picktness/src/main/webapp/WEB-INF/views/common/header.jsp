@@ -477,15 +477,15 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               <li class="menu_list_a"><a href="${contextPath}/goods/trainerList.do?cate=jiu">주짓수</a></li>
             </ul>
             <ul class="menu_list_food">
-              <li class="menu_list_title"><a href="">식품</a></li>
-              <li class="menu_list_a"><a href="">프로틴 쉐이크</a></li>
-              <li class="menu_list_a"><a href="">닭가슴살</a></li>
+              <li class="menu_list_title"><a href="${contextPath }/goods/shopFoodList.do">식품</a></li>
+              <li class="menu_list_a"><a href="${contextPath }/goods/shopFoodList.do?cate=tender">닭가슴살</a></li>
+              <li class="menu_list_a"><a href="${contextPath }/goods/shopFoodList.do?cate=protain">프로틴 쉐이크</a></li>
             </ul>
             <ul class="menu_list_goods">
-              <li class="menu_list_title"><a href="">기구/용품/장비</a></li>
-              <li class="menu_list_a"><a href="">스트레칭/마사지</a></li>
-              <li class="menu_list_a"><a href="">테이프/아대</a></li>
-              <li class="menu_list_a"><a href="">근력/유산소 용품</a></li>
+              <li class="menu_list_title"><a href="${contextPath }/goods/shopGoodsList.do">기구/용품/장비</a></li>
+              <li class="menu_list_a"><a href="${contextPath }/goods/shopGoodsList.do?cate=masage">스트레칭/마사지</a></li>
+              <li class="menu_list_a"><a href="${contextPath }/goods/shopGoodsList.do?cate=tape">테이프/아대</a></li>
+              <li class="menu_list_a"><a href="${contextPath }/goods/shopGoodsList.do?cate=aerobic">근력/유산소 용품</a></li>
             </ul>
           </div>
         </div>
@@ -527,16 +527,16 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           <div class="menu_sh_fd">
             <ul class="menu_sh_fd_2">
               <li class="menu_list_title"><a href="${contextPath }/goods/shopFoodList.do">식품</a></li>
-              <li class="menu_list_a"><a href="">프로틴 쉐이크</a></li>
-              <li class="menu_list_a"><a href="">닭가슴살</a></li>
+              <li class="menu_list_a"><a href="${contextPath }/goods/shopFoodList.do?cate=tender">닭가슴살</a></li>
+              <li class="menu_list_a"><a href="${contextPath }/goods/shopFoodList.do?cate=protain">프로틴 쉐이크</a></li>
             </ul>
           </div>
           <div class="menu_sh_gd">
             <ul class="menu_sh_gd_2">
               <li class="menu_list_title"><a href="${contextPath }/goods/shopGoodsList.do">기구/용품/장비</a></li>
-              <li class="menu_list_a"><a href="">스트레칭/마사지</a></li>
-              <li class="menu_list_a"><a href="">테이프/아대</a></li>
-              <li class="menu_list_a"><a href="">근력/유산소 용품</a></li>
+              <li class="menu_list_a"><a href="${contextPath }/goods/shopGoodsList.do?cate=masage">스트레칭/마사지</a></li>
+              <li class="menu_list_a"><a href="${contextPath }/goods/shopGoodsList.do?cate=tape">테이프/아대</a></li>
+              <li class="menu_list_a"><a href="${contextPath }/goods/shopGoodsList.do?cate=aerobic">근력/유산소 용품</a></li>
             </ul>
           </div>
         </div>

@@ -17,5 +17,7 @@ public interface GoodsService {
 	public List<GoodsTrainerVO> goodsTrainerCateList(Map option) throws DataAccessException;
 	public List<GoodsShoppingVO> goodsFoodAllList(Map option) throws DataAccessException;
 	public List<GoodsShoppingVO> goodsFoodCateList(Map option) throws DataAccessException;
+	public List<GoodsShoppingVO> goodsGoodsAllList(Map option) throws DataAccessException;
+	public List<GoodsShoppingVO> goodsGoodsCateList(Map option) throws DataAccessException;
 	public Map<String, List> searchGoods(String search_content) throws DataAccessException;
 }
