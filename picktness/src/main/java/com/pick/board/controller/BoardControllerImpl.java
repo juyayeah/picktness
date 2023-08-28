@@ -51,13 +51,7 @@ public class BoardControllerImpl {
 		mav.setViewName(viewName);
 		return mav;
  }
-		/* 
-		 * @RequestMapping(value="/board/millDetail.do") public ModelAndView
-		 * millDetail(HttpServletRequest request, HttpServletResponse response) throws
-		 * Exception{ ModelAndView mav = new ModelAndView(); String viewName = (String)
-		 * request.getAttribute("viewName"); mav.setViewName(viewName); return mav;
-		 
-}*/
+
 	@RequestMapping(value = "/board/millDetail.do")
 	public ModelAndView millDetail(@RequestParam("bno") int bno, HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
@@ -227,14 +221,14 @@ public class BoardControllerImpl {
 	}
 	@RequestMapping(value = "board/addReply.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView millrInsert(@RequestParam("member_id") String member_id, @RequestParam("content") String content, @RequestParam("p_bno") int p_bno, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		System.out.println();
+		System.out.println(member_id);
 		ModelAndView mav = new ModelAndView();
 		commentVO.setP_bno(p_bno);
 		commentVO.setContent(content);
 		commentVO.setMember_id(member_id);
 		boardService.millrInsert(commentVO);
-		mav.addObject("p_bno",p_bno);
-		mav.setViewName("/board/millDetail.do?+bno=+p_bno");
+		mav.addObject("bno",p_bno);
+		mav.setViewName("redirect:/board/millDetail.do?bno="+p_bno);
 		
 		return mav;
 		
