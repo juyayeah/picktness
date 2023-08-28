@@ -13,6 +13,7 @@
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js" /></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=abeab8cce28d6c80ad107bfe4e602d58&libraries=services"></script>
 <script>
     function checkId(){
         var id = $('#id').val();
@@ -116,6 +117,7 @@ function formatPhoneNumber() {
     var phoneNumber = input1.value + '-' + input2.value + '-' + input3.value;
     document.getElementById('formatted-phone').value = phoneNumber;
 }
+
 //이메일 셀렉트 박스
 $(function() {
         $('#domain-list').change(function() {
@@ -393,7 +395,7 @@ input {
                         
 개인정보의 수집범위
 1. 회원가입 시 수집하는 개인정보의 범위
-<일반회원 가입 시>
+<!-- 일반회원 가입 시 -->>
 * 필수항목 : 회원 ID, 비밀번호, 이름, 생년월일, 이메일, 주소, 전화번호, 휴대폰 번호
                         
 2. 유료 결제 이용 시 수집하는 개인정보의 범위
@@ -444,14 +446,14 @@ input {
             </ul>
         
 
-            <button type="submit" class="joinButton" id="nextBtn">가입하기</button>
+            <button type="button" class="joinButton" id="nextBtn" onclick="latLng(this.form)">가입하기</button>
         </form>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // ... (기존 코드)
         
-            const nextBtn = document.getElementById('nextBtn');
+            /* const nextBtn = document.getElementById('nextBtn');
             nextBtn.addEventListener('click', function(event) {
                 var formContainer = document.getElementById('formContainer');
                 var inputs = formContainer.querySelectorAll('input[type="text"], input[type="password"]');
@@ -488,10 +490,40 @@ input {
                     event.preventDefault();
                     return;
                 }
-        
-                document.getElementById('terms_form').submit();
-            });
+        		
+                
+                
+                //document.getElementById('terms_form').submit();
+            }); */
         });
+        
+        //위도 경도 찾는 함수
+        function latLng(f){
+        	var geocoder = new kakao.maps.services.Geocoder();
+       	    var rocation = $("#addr").val();
+       	    alert(rocation);
+            
+   	     	geocoder.addressSearch(rocation, function (result, status) {
+    	    // 정상적으로 검색이 완료됐으면
+    	    if (status === kakao.maps.services.Status.OK) {
+    	    var lat = result[0].y;
+    	    var lng = result[0].x;
+    	    alert("위도" + lat + "경도" + lng);
+			var input1 = document.createElement("input");
+			var input2 = document.createElement("input");
+			input1.setAttribute("type", "hidden");
+			input1.setAttribute("name", "lat");
+			input1.setAttribute("value", lat);
+			input2.setAttribute("type", "hidden");
+			input2.setAttribute("name", "lng");
+			input2.setAttribute("value", lng);
+			
+			f.appendChild(input1);
+			f.appendChild(input2);
+			f.submit();
+					}
+				});
+        }
         </script>
 </body>
 <script>
