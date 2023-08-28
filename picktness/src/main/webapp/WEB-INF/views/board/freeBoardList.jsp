@@ -13,14 +13,21 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <script>
-function fn_boardForm(isLogOn,freeBoardInsert,loginForm){
-	if(isLogOn != '' && isLogOn){
-		location.href=freeBoardInsert;
-	}else{
-		alert("로그인 후 글쓰기가 가능합니다.")
-		location.href=loginForm+"?action=/board/freeBoardInsert.do"
-	}
+function fn_millBoardForm(isLogOn, millDetail, loginForm) {
+    if (isLogOn !== '' && isLogOn !== 'false') {
+        location.href = millDetail;
+    } else {
+        alert("로그인 후 글 쓰기가 가능합니다.");
+        
+        var encodedBno = encodeURIComponent('${millDetail.bno}');
+        
+        var loginForm = "/member/loginForm.do"; 
+        location.href = loginForm + "?action=/board/millDetail.do&bno=" + encodedBno;
+        
+        
+    }
 }
+
 </script>
 <meta charset="UTF-8">
 <title>자유게시판</title>
@@ -51,7 +58,7 @@ text-align:center;
 <div class="free_inner">
 <h2>자유게시판</h2>
 
-
+<input type="button" onclick="javascript:fn_boardForm('${isLogOn }','${contextPath}/board/freeBoardForm.do','${contextPath}/member/loginForm.do')" value="글쓰기">
    <table class="table">
         <thead>
           <tr>
@@ -82,10 +89,11 @@ text-align:center;
 </c:forEach>
 </c:when>
 </c:choose>
+
 </table> 
-<div>
-<input type="button" onclick="javascript:fn_boardForm('${isLogOn }','${contextPath}/board/freeBoardForm.do','${contextPath}/member/loginForm.do')" value="글쓰기">
-</div>
+
+
+
 </div> 
 </body>
 </html>

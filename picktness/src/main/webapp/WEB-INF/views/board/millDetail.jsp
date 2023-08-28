@@ -10,6 +10,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript">
+function fn_millBoardForm(isLogOn, millDetail, loginForm) {
+    if (isLogOn !== '' && isLogOn !== 'false') {
+        location.href = millDetail;
+    } else {
+        alert("로그인 후 글 쓰기가 가능합니다.");
+        
+        var encodedBno = encodeURIComponent('${millDetail.bno}');
+        var loginForm = '/member/loginForm.do'; 
+        
+      
+        location.href = loginForm + "?action=/board/millDetail.do&bno=" + encodedBno;
+    }
+}
+
+
+
+
+
+fn_millBoardForm('false', "/path-to-millDetail", loginForm);
+
+/* }
+ function fn_boardForm(isLogOn,addReply,loginForm){
+	if(isLogOn != '' && isLogOn){
+		location.href=addReply;
+	}else{
+		alert("로그인 후 글쓰기가 가능합니다.")
+		location.href=loginForm+"?action=/board/millDetail.do?$bno={millDetail.bno}'"
+	}
+}    */
+
+
+/* 			
+function fn_validate(){
+	var frm
+}
+ */
+
+/* function fn_boardForm(isLogOn, addReply, loginForm) {
+    if (isLogOn !== '' && isLogOn) {
+        location.href = addReply;
+    } else {
+        alert("로그인 후 글쓰기가 가능합니다.");
+        
+    
+        var memberId = "example_member_id";
+        
+        location.href = loginForm + "?action=/board/millDetail.do?bno=${millDetail.bno}&member_id= ${millDetail.member_id}" };
+    }
+} */
+</script>
 <style>
     .mill_inner{
     margin:30px 0 0 30px;
@@ -119,7 +170,7 @@
 
   <div class="header">
     <h3>오늘 식단</h3>
-    <button class="button">목록으로</button>
+    <button class="button" >목록으로</button>
   </div>
   <!-- 여기에 식단 내용을 추가하세요 -->
   
@@ -129,7 +180,7 @@
     <p class="content-date"> 작성일: <fmt:parseDate value="${millDetail.boardDate}" var="millDate" pattern="yyyy-MM-dd" />
     <fmt:formatDate value="${millDate}" pattern="yyyy-MM-dd" /></p>
       
-      <img  class="image_pic" src="${contextPath}/images/board/food.png" alt="이미지 설명">
+      <img  class="image_pic" src="${contextPath}/download.do?cate=mill&imageFileName=${millDetail.todaymill_img}&bno=${millDetail.bno}" alt="이미지 설명">
       
     </div>
     <div class="info" style ="margin-left: 200px;">
@@ -151,7 +202,8 @@
    <c:forEach var="item" items="${commentList}" >
   <div class="comments-section">
     <div class="comment">
-      <p> ${item.member_id}</p>
+      <p>
+       ${item.member_id}</p>
       <p class="comment-text">${item.content}</p>
       <p> 
       <fmt:parseDate value="${item.millrDate} " var="millrDate" pattern="yyyy-MM-dd" />
@@ -163,16 +215,27 @@
   </div>
   <div class="divider"></div>
  <h3>댓글 등록</h3> 
- ${millDetail.bno}
+ <c:choose>
+ <c:when test="${! empty member}">
   <form method="post" action="${contextPath}/board/addReply.do">
   <input type="hidden" name="p_bno" value="${millDetail.bno}">
-  <input type="hidden" name="member_id" value="${member.id }">
+  <input type="hidden" name="member_id" value="${member.id}">
+  
+ 
   <div class="comment-input-container">
-    <textarea class="comment-input" rows="4" name="content"placeholder="댓글을 작성해주세요!"></textarea>
-    <button type="submit" class="comment-button">댓글 등록</button>
+    <textarea class="comment-input" rows="4"  name="content"placeholder="댓글을 작성해주세요!"></textarea>
+ <button type="submit" class="comment-button" onclick="">댓글 등록</button>
   </div>
   </form>
- 
+  </c:when>
+  <c:otherwise>
+    <div class="comment-input-container">
+    <textarea class="comment-input" rows="4"   name="content" placeholder="로그인 후 댓글 작성이 가능합니다" disabled></textarea>
+<button type="button" onClick="fn_millBoardForm('${isLogOn}', '${millDetailForm}', '${loginForm}')" class="comment-button">댓글 등록</button>
+
+  </div>
+  </c:otherwise>
+ </c:choose>
 
 </body>
 </html>
