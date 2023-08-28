@@ -40,6 +40,8 @@ public class BoardControllerImpl {
 	@Autowired
 	BoardVO boardVO;
 	@Autowired
+	CommentVO commentVO;
+	@Autowired
 	HttpSession session;
 
 	@RequestMapping(value="/board/faqList.do")
@@ -166,7 +168,7 @@ public class BoardControllerImpl {
 
 	@RequestMapping(value = "/form")
 	public String form() {
-		return "miiBoardForm";
+		return "millBoardForm";
 	}
 
 	@RequestMapping(value = "board/addMillBoard.do", method = RequestMethod.POST)
@@ -223,7 +225,21 @@ public class BoardControllerImpl {
 		}
 		return resEnt;
 	}
-
+	@RequestMapping(value = "board/addReply.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView millrInsert(@RequestParam("member_id") String member_id, @RequestParam("content") String content, @RequestParam("p_bno") int p_bno, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		System.out.println();
+		ModelAndView mav = new ModelAndView();
+		commentVO.setP_bno(p_bno);
+		commentVO.setContent(content);
+		commentVO.setMember_id(member_id);
+		boardService.millrInsert(commentVO);
+		mav.addObject("p_bno",p_bno);
+		mav.setViewName("/board/millDetail.do?+bno=+p_bno");
+		
+		return mav;
+		
+	}
+	
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
 		String image = null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();

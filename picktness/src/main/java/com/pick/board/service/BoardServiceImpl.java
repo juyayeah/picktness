@@ -44,7 +44,7 @@ public class BoardServiceImpl {
         return boardDAO.getMillByBno(bno);
     }
 
-    public void addComment(CommentVO comment) {
+    public void millrInsert(CommentVO comment) {
         boardDAO.insertComment(comment);
     }
     
