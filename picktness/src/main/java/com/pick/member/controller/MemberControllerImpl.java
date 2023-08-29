@@ -2,7 +2,6 @@ package com.pick.member.controller;
 
 
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pick.member.service.MemberService;
+import com.pick.member.vo.BusinessVO;
 import com.pick.member.vo.MemberVO;
 
 @Controller("memberController")
@@ -28,6 +28,8 @@ import com.pick.member.vo.MemberVO;
 public class MemberControllerImpl implements MemberController{
 	@Autowired
 	MemberVO memberVO;
+	@Autowired
+	BusinessVO businessVO;
 	@Autowired
 	MemberService memberService;
 	
@@ -93,6 +95,13 @@ public class MemberControllerImpl implements MemberController{
 		return cnt;
 	}
 	
+	@RequestMapping(value="/member/emailCheck")
+	@ResponseBody
+	public int emailCheck(@RequestParam("id") String id) throws Exception{
+		int cnt = memberService.idCheck(id);
+		return cnt;
+	}
+	
 	
 	@RequestMapping(value="/member/join.do", method=RequestMethod.GET)
 	private ModelAndView join(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -140,6 +149,33 @@ public class MemberControllerImpl implements MemberController{
 	    	
 	        // member 객체의 정보를 그대로 사용
 	        memberService.addMember(member);
+	       
+	        message  = "<script>";
+	        message += " location.href='"+request.getContextPath()+"/member/joinSuccess.do';";
+	        message += " </script>";
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	    }
+	    resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+	    return resEntity;
+	}
+
+	
+	
+	@Override
+	@RequestMapping(value="/member/addB_Member.do" , method = RequestMethod.POST)
+	public ResponseEntity addB_Member(BusinessVO business, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		System.out.println("회원가입 메소드 진입");
+	    response.setContentType("text/html; charset=UTF-8");
+	    request.setCharacterEncoding("utf-8");
+	    String message = null;
+	    ResponseEntity resEntity = null;
+	    HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	    try {
+	        // member 객체의 정보를 그대로 사용
+	        memberService.addB_Member(business);
 	       
 	        message  = "<script>";
 	        message += " location.href='"+request.getContextPath()+"/member/joinSuccess.do';";

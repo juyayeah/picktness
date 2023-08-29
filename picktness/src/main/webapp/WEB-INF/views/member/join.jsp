@@ -151,28 +151,71 @@ function validatePassword(password) {
     }
 }
     }
-    var serverVerificationCode = ""; // 서버에서 받은 인증번호를 저장할 변수
 
     function sendVerificationCode() {
-        // 이메일 주소 조합
-        var email = $("#domain-txt1").val() + "@" + $("#domain-txt2").val();
+    // 이메일 주소의 앞자리와 뒷자리
+    var domain1 = $("#domain-txt1").val();
+    var domain2 = $("#domain-txt2").val();
+    
+    // 이메일 주소가 유효한지 확인 (뒷자리 길이, 지정된 도메인)
+    if (domain2.length > 0 && domain2.length <= 20) {
+        // 지정된 도메인 값들
+        var allowedDomains = [
+            "google.com", "naver.com", "hanmail.com", "nate.com",
+            "yahoo.com", "hotmail.com", "dreamwiz.com", "freechal.com", "hanmir.com"
+        ];
 
-        // 서버에 이메일 전송
-        $.ajax({
-            type: "POST",
-            url: "${contextPath}/api/mail", 
-            data: {
-                "email": email,
-                "type": "join"
-            },
-            success: function (data) {
-                alert("인증번호가 발송되었습니다");
-                console.log("data: " + data);
-                serverVerificationCode = data; // 서버에서 받은 인증번호를 변수에 저장
-            }
-        });
+        // 입력된 도메인이 지정된 값 중 하나인지 확인
+        if (allowedDomains.includes(domain2)) {
+            // 서비스에 전달할 이메일 주소 (임의로 @ 기호 추가)
+            var email = domain1 + "@" + domain2;
+
+            // 이메일 중복 검사
+            $.ajax({
+                url: '${contextPath}/member/emailCheck',
+                type: 'post',
+                data: { id: email },
+                success: function (cnt) {
+                    if (cnt != 1) {
+                        console.log("이메일 중복체크2");
+                        // 서버에 이메일 전송
+                        $.ajax({
+                            type: "POST",
+                            url: "${contextPath}/api/mail",
+                            data: {
+                                "email": email,
+                                "type": "join"
+                            },
+                            success: function (data) {
+                                alert("인증번호가 발송되었습니다");
+                                console.log("data: " + data);
+                                serverVerificationCode = data; // 서버에서 받은 인증번호를 변수에 저장
+                            }
+                        });
+                    } else {
+                        alert("이미 사용 중인 이메일 주소입니다.");
+                    }
+                },
+                error: function (request, error) {
+                    alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                }
+            });
+        } else {
+            alert("올바른 이메일 형식이 아닙니다.");
+            $("#domain-txt2").focus(); // 해당 입력란으로 포커스 이동
+        }
+    } else {
+        alert("올바른 이메일 형식이 아닙니다.");
+        if (domain2.length === 0) {
+            $("#domain-txt2").focus();
+        } else if (domain2.length > 20) {
+            $("#domain-txt2").focus();
+        }
     }
+}
 
+
+    var serverVerificationCode = ""; // 서버에서 받은 인증번호를 저장할 변수
     function verifyCode() {
         // 사용자가 입력한 인증번호
         var userEnteredCode = $("#verification-code").val();
@@ -364,7 +407,7 @@ function validateAndSubmitForm() {
     }
    
     // 모든 필드가 유효한 경우 폼 제출
-    return true;
+    document.querySelector('form').submit();
 
 /*    // 도메인 유효성 검사 함수
 function isValidEmailDomain(domain) {
@@ -577,6 +620,7 @@ input {
     <option value="hanmir.com"> hanmir.com </option>
 </select>
 <button class="address-button" type="button" onclick="sendVerificationCode()">인증번호 받기</button>
+<!--<br><span style="color:red; font-size: 14px; font-weight: normal;">정확한 이메일 번호를 입력해 주세요.</span> -->
 <span class="email_ok" style="color:#2890F1; font-size: 14px; font-weight: normal; display:none;">사용 가능한 이메일입니다.</span>
 <span class="email_already" style="color:red; font-size: 14px; font-weight: normal; display:none;">중복된 이메일입니다.</span>
 </div>
@@ -614,7 +658,7 @@ input {
                             <input id="chk_2" type="checkbox" name="chk"> 
                         </li>
                     </ul>
-                    <textarea name="" id="" disabled>여러분을 환영합니다.
+                    <textarea disabled>여러분을 환영합니다.
 픽트니스 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 픽트니스 서비스의 이용과 관련하여 픽트니스 서비스를 제공하는 주식회사(이하 픽트니스)와 이를 이용하는 픽트니스 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 픽트니스 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
        </textarea>
                 </li>
@@ -626,7 +670,7 @@ input {
                         </li>
                     </ul>
  
-                    <textarea name="" id="" disabled>개인정보의 수집 및 이용목적
+                    <textarea disabled>개인정보의 수집 및 이용목적
 
 개인정보 이용목적
 
@@ -678,7 +722,7 @@ input {
                         </li>
                     </ul>
  
-                    <textarea name="" id="" disabled>이용자가 본 약관에 동의하는 경우, [회사/서비스명]은 주기적으로 이벤트, 할인, 프로모션 등에
+                    <textarea disabled>이용자가 본 약관에 동의하는 경우, [회사/서비스명]은 주기적으로 이벤트, 할인, 프로모션 등에
 관련된 정보를 전자메일을 통해 제공할 수 있습니다.
 정보 수신 동의 여부는 이용자의 개인정보 처리 방침과 별도로 관리됩니다.</textarea>
                 </li>
@@ -689,14 +733,17 @@ input {
                             <input type="checkbox" name="emailConsent">
                         </li>
                     </ul>
-                    <textarea name="" id="" disabled>이용자가 본 약관에 동의하는 경우, [회사/서비스명]은 주기적으로 이벤트, 할인, 프로모션 등에
+                    <textarea disabled>이용자가 본 약관에 동의하는 경우, [회사/서비스명]은 주기적으로 이벤트, 할인, 프로모션 등에
 관련된 정보를 휴대전화를 통해 제공할 수 있습니다.
 정보 수신 동의 여부는 이용자의 개인정보 처리 방침과 별도로 관리됩니다.</textarea>
                 </li>
             </ul>
         
 <!--latLng(this.form)-->
-            <button type="submit" class="joinButton" id="nextBtn" onsubmit="return validateAndSubmitForm()">가입하기</button>
+
+            <button type="button" class="joinButton" id="nextBtn" onclick="validateAndSubmitForm()">가입하기</button>
+
+            
         </form>
     </div>
 </body>

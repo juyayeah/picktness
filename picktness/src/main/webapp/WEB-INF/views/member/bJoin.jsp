@@ -234,7 +234,7 @@ input {
         </div>
         <h2>사업자정보</h2>
         <hr><br>
-        <form action="register.php" method="post">
+        <form action="${contextPath}/member/addB_Member.do" method="post">
             <div class="form-row">
                 <label for="b_number">사업자번호<span class="label-with-star">*</span></label><br>
                <input type="text" id="b_number" name="b_number" placeholder="영소문자/숫자 4 ~ 16자" required >
@@ -279,17 +279,17 @@ input {
         <label for="addr">사업자소재지<span class="label-with-star">*</span></label><br>
 		<input style="width: 100px;" type="text"  id="zip_code" name="zipcode" onclick="openZipSearch();" readonly="readonly" placeholder="우편번호">
 		<button class="address-button" type="button" onclick="openZipSearch()">주소 찾기</button><br>
-		<input type="text"  id="addr" name="addrbasic" readonly="readonly" placeholder="기본주소"  style="width:250px;"><br>
-		<input type="text"  id="addr_dtl" name="addrdetail" placeholder="상세주소"  style="width:250px;">
+		<input type="text"  id="addr" name="addrBasic" readonly="readonly" placeholder="기본주소"  style="width:250px;"><br>
+		<input type="text"  id="addr_dtl" name="addrDetail" placeholder="상세주소"  style="width:250px;">
 	
 	</div>
     <div class="form-row2">
 		<label for="phoneNum">휴대전화<span class="label-with-star">*</span></label><br>
-                <input type="text" id="phone1" class="phone-input" maxlength="3" onkeyup="formatPhoneNumber()">
+                <input type="text" id="phone1" name="phone1" class="phone-input" maxlength="3" onkeyup="formatPhoneNumber()">
                 <span>-</span>
-                <input type="text" id="phone2" class="phone-input" maxlength="4" onkeyup="formatPhoneNumber()">
+                <input type="text" id="phone2" name="phone2" class="phone-input" maxlength="4" onkeyup="formatPhoneNumber()">
                 <span>-</span>
-                <input type="text" id="phone3" class="phone-input" maxlength="4" onkeyup="formatPhoneNumber()">
+                <input type="text" id="phone3" name="phone3" class="phone-input" maxlength="4" onkeyup="formatPhoneNumber()">
             </div>
             <input type="hidden" id="formatted-phone" name="formatted-phone" readonly>
             <br><br>
@@ -305,7 +305,7 @@ input {
            </div>
            <div class="form-row">
                <label for="password">비밀번호 재확인<span class="label-with-star">*</span></label><br>
-               <input type="password" id="password" name="password" placeholder="비밀번호를 다시 입력해주세요." required>
+               <input type="password" id="password" placeholder="비밀번호를 다시 입력해주세요." required>
            </div>
            <div class="form-row">
                <label for="name">이름<span class="label-with-star">*</span></label><br>
