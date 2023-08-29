@@ -17,7 +17,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,7 +50,19 @@ public class BoardControllerImpl {
 		mav.setViewName(viewName);
 		return mav;
  }
-
+	@RequestMapping(value="/board/removeMillBoard.do", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getDelete(@RequestParam("bno") int bno,HttpServletRequest request, HttpServletResponse response)throws Exception{
+		System.out.println(bno);
+		ModelAndView mav = new ModelAndView();
+		boardService.delete(bno);
+		boardService.deleteComment(bno);
+		mav.setViewName("redirect:/board/millBoardList.do");
+		
+		return mav;
+	
+	
+	}
 	@RequestMapping(value = "/board/millDetail.do")
 	public ModelAndView millDetail(@RequestParam("bno") int bno, HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");

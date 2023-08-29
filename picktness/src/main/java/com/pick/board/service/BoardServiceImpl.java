@@ -52,12 +52,15 @@ public class BoardServiceImpl {
     	return boardDAO.getComments(bno);
     }
     
-    public void deleteComment(int cno) {
-        boardDAO.deleteComment(cno);
+    public void deleteComment(int p_bno) {
+        boardDAO.deleteComment(p_bno);
     }
     
     public void updateComment(CommentVO comment) {
         boardDAO.updateComment(comment);
+    }
+    public void delete(int bno) {
+    	boardDAO.deleteMillBoard(bno);
     }
 
 

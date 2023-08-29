@@ -4,14 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
-    
+<%
+
+String uri =pageContext.getAttribute("contextPath").toString()+request.getRequestURI();
+session.setAttribute("uri",uri);
+System.out.println(request.getRequestURI());
+System.out.println(uri);
+
+%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type="text/javascript">
-function fn_millBoardForm(isLogOn, millDetail, loginForm) {
+/* function fn_millBoardForm(isLogOn, millDetail, loginForm) {
     if (isLogOn !== '' && isLogOn !== 'false') {
         location.href = millDetail;
     } else {
@@ -23,43 +30,26 @@ function fn_millBoardForm(isLogOn, millDetail, loginForm) {
       
         location.href = loginForm + "?action=/board/millDetail.do&bno=" + encodedBno;
     }
-}
+} */ 
+
+ $(function(){
+	var uri = window.location.href;
+	
+    $.ajax({
+    	url : "${contextPath}/redirectUri.do",
+    	type : "POST",
+		data : {str : uri},
+		success : function(data, status, xhr){
+			
+		},
+		error : function(data,status, error){
+			
+		}
+		
+    });
+}); 
 
 
-
-
-
-fn_millBoardForm('false', "/path-to-millDetail", loginForm);
-
-/* }
- function fn_boardForm(isLogOn,addReply,loginForm){
-	if(isLogOn != '' && isLogOn){
-		location.href=addReply;
-	}else{
-		alert("로그인 후 글쓰기가 가능합니다.")
-		location.href=loginForm+"?action=/board/millDetail.do?$bno={millDetail.bno}'"
-	}
-}    */
-
-
-/* 			
-function fn_validate(){
-	var frm
-}
- */
-
-/* function fn_boardForm(isLogOn, addReply, loginForm) {
-    if (isLogOn !== '' && isLogOn) {
-        location.href = addReply;
-    } else {
-        alert("로그인 후 글쓰기가 가능합니다.");
-        
-    
-        var memberId = "example_member_id";
-        
-        location.href = loginForm + "?action=/board/millDetail.do?bno=${millDetail.bno}&member_id= ${millDetail.member_id}" };
-    }
-} */
 </script>
 <style>
     .mill_inner{
@@ -169,10 +159,15 @@ function fn_validate(){
 <div class="mill_inner">
 
   <div class="header">
+
     <h3>오늘 식단</h3>
-    <button class="button" >목록으로</button>
+    <c:if test="${member.id == millDetail.member_id }">
+    <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" class="button" >삭제하기</a>
+
+    </c:if>
+    <a class="button" href="${contextPath}/board/millBoardList.do">목록으로</a>
   </div>
-  <!-- 여기에 식단 내용을 추가하세요 -->
+  
   
   <div class="divider" style="margin-bottom:5px;"></div>
   <div class="content">
@@ -194,7 +189,7 @@ function fn_validate(){
       <p class="content-text">${millDetail.content}</p>
     </div>
   </div>
-  <c:if test ="${!empty commentList}">
+   <c:if test ="${!empty commentList}">
   
   <div class="divider"></div>
   <h3>전체 댓글</h3>
@@ -203,7 +198,12 @@ function fn_validate(){
   <div class="comments-section">
     <div class="comment">
       <p>
-       ${item.member_id}</p>
+        <b> ${fn:substring(item.member_id,0,4) }
+     <c:forEach begin="5" end="${fn:length(item.member_id)}" step="1">
+        *
+      </c:forEach></b>
+       
+       </p>
       <p class="comment-text">${item.content}</p>
       <p> 
       <fmt:parseDate value="${item.millrDate} " var="millrDate" pattern="yyyy-MM-dd" />
@@ -211,8 +211,7 @@ function fn_validate(){
     </div>
     </div>
     </c:forEach>
-    </c:if>
-  </div>
+    </c:if> 
   <div class="divider"></div>
  <h3>댓글 등록</h3> 
  <c:choose>
@@ -223,20 +222,20 @@ function fn_validate(){
   
  
   <div class="comment-input-container">
-    <textarea class="comment-input" rows="4"  name="content"placeholder="댓글을 작성해주세요!"></textarea>
- <button type="submit" class="comment-button" onclick="">댓글 등록</button>
+    <textarea id="content"  class="comment-input" rows="4"  name="content"placeholder="댓글을 작성해주세요!"></textarea>
+ <button  type="submit"  class="comment-button" >댓글 등록</button>
   </div>
   </form>
   </c:when>
   <c:otherwise>
     <div class="comment-input-container">
     <textarea class="comment-input" rows="4"   name="content" placeholder="로그인 후 댓글 작성이 가능합니다" disabled></textarea>
-<button type="button" onClick="fn_millBoardForm('${isLogOn}', '${millDetailForm}', '${loginForm}')" class="comment-button">댓글 등록</button>
+<button type="button" class="comment-button" onClick="location.href='${contextPath}/member/loginForm.do'">댓글 등록</button>
 
   </div>
   </c:otherwise>
  </c:choose>
-
+</div>
 </body>
 </html>
 
