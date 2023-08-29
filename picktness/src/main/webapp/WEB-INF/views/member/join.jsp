@@ -333,7 +333,7 @@ function validateAndSubmitForm() {
     }
    // latLng(document.querySelector('form'));
     // 모든 필드가 유효한 경우 폼 제출
-    document.querySelector('form').submit();
+    return true;
 
 /*    // 도메인 유효성 검사 함수
 function isValidEmailDomain(domain) {
@@ -694,7 +694,7 @@ input {
             </ul>
         
 <!--latLng(this.form)-->
-            <button type="button" class="joinButton" id="nextBtn" onclick="validateAndSubmitForm()">가입하기</button>
+            <button type="submit" class="joinButton" id="nextBtn" onsubmit="validateAndSubmitForm()">가입하기</button>
         </form>
     </div>
 </body>

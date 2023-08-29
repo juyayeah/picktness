@@ -127,6 +127,7 @@ public class MemberControllerImpl implements MemberController{
 			 @RequestParam(name = "phoneConsent", required = false) boolean phoneConsentChecked,
 		        HttpServletRequest request, HttpServletResponse response)
 	        throws Exception {
+		System.out.println("회원가입 메소드 진입");
 	    response.setContentType("text/html; charset=UTF-8");
 	    request.setCharacterEncoding("utf-8");
 	    String message = null;
