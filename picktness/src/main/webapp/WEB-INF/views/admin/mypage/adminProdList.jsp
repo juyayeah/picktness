@@ -189,10 +189,10 @@ request.setCharacterEncoding("utf-8");
 		<div>
 			<div class="topbar">
 				판매상태<select>
-					<option value="전체">전체</option>
+					<option value="전체" selected>전체</option>
 					<option value="판매중">판매중</option>
 					<option value="판매종료">판매종료</option>
-					<option value="재고없음" selected>재고없음</option>
+					<option value="재고없음">재고없음</option>
 				</select>
 			</div>
 			<div class="topbar" style="padding-left: 20px;">
