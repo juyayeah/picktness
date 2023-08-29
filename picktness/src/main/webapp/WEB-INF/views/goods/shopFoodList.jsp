@@ -217,7 +217,7 @@ font-size:14px;
 					onclick="location.href='${contextPath}/goods/gymDetail.do'">
 					<img class="main_img" src="${contextPath}/images/main/health4.jpg" />
 					<span class="title">${food.goods_title }</span>
-					<span class="price">${food.priceRetail }월 </span>
+					<span class="price">${food.priceRetail }원 </span>
 					<c:if test="${food.review_count ne 0 }">
 					<div class="star">
 						<img src="${contextPath}/images/main/star.png" /> 
