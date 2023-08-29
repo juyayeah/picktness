@@ -24,7 +24,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result property="lng" column="lng"/>
  	</resultMap>
 
- 
+ 	<resultMap id="b_MemberResult" type="businessVO">
+ 		<result property="id" column="id"/>
+ 		<result property="pwd" column="pwd"/>
+ 		<result property="name" column="name"/>
+ 		<result property="zipcode" column="zipcode"/>
+ 		<result property="addrBasic" column="addrBasic"/>
+ 		<result property="addrDetail" column="addrDetail"/>
+ 		<result property="email1" column="email1"/>
+ 		<result property="email2" column="email2"/>
+ 		<result property="phone1" column="phone1"/>
+ 		<result property="phone2" column="phone2"/>
+ 		<result property="phone3" column="phone3"/>
+ 		<result property="b_number" column="b_number"/>
+ 		<result property="b_name" column="b_name"/>
+ 		<result property="b_bank" column="b_bank"/>
+ 		<result property="b_account" column="b_account"/>
+ 		<result property="del_yn" column="del_yn"/>
+ 		<result property="joinDate" column="joinDate"/>
+ 		<result property="lat" column="lat"/>
+ 		<result property="lng" column="lng"/>
+ 	</resultMap>
+ 	
+ 	
  <select id="loginById" resultType="memberVO" parameterType="java.util.Map">
  	<![CDATA[
  	select * from member
@@ -45,12 +67,25 @@ select count(id) from member where id=#{id}
         #{email1}, #{email2}, #{phone1}, #{phone2}, #{phone3}, 5000, #{emailConsent}, #{phoneConsent}, #{lat}, #{lng})
     ]]>
 </insert>
+
+<insert id="insertB_Member" parameterType="businessVO">
+    <![CDATA[
+    insert into business(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3, b_number, b_bank, b_name, b_account)
+    values(
+        #{id}, #{pwd}, #{name}, #{zipcode}, #{addrBasic}, #{addrDetail}, 
+        #{email1}, #{email2}, #{phone1}, #{phone2}, #{phone3}, #{b_number}, #{b_bank}, #{b_name}, #{b_account})
+    ]]>
+</insert>
+
 <insert id="eventInitPoint" parameterType="memberVO">
     <![CDATA[
    insert into point_history(member_id, member_point, content)
     values(#{id}, #{memberPoint}, "회원가입 이벤트")
     ]]>
 </insert>
-
-
+<select id="emailCheck" parameterType="String" resultType="String">
+        SELECT CONCAT(email1, '@', email2) AS email FROM member 
+</select>
+    
  </mapper>
+ 

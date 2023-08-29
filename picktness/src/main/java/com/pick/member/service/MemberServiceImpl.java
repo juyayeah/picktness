@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.pick.member.dao.MemberDAO;
+import com.pick.member.vo.BusinessVO;
 import com.pick.member.vo.MemberVO;
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
@@ -20,8 +21,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void addMember(MemberVO memberVO) throws Exception {
 		memberDAO.insertMember(memberVO);
-
-		memberDAO.eventInitPoint(memberVO);
+		memberDAO.eventInitPoint(memberVO);	
+	}
+	
+	@Override
+	public void addB_Member(BusinessVO businessVO) throws Exception {
+		memberDAO.insertB_Member(businessVO);
 		
 	}
 	@Override
@@ -30,7 +35,12 @@ public class MemberServiceImpl implements MemberService{
 		return cnt;
 	}
 	
-	
+	@Override
+    public int emailCheck(String id) throws Exception {
+        int cnt = memberDAO.emailCheck(id);
+      
+        return cnt;
+    }
 	
 	
 }
