@@ -13,6 +13,4 @@ public interface GoodsController {
 	public ModelAndView shoppingMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView shopFoodList(@RequestParam(value="section", defaultValue="1") int section, @RequestParam(value="pageNum", defaultValue="1") int pageNum, @RequestParam(value="cate", defaultValue="all") String cate,@RequestParam(value="orderBy", defaultValue="best") String orderBy,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView shopGoodsList(@RequestParam(value="section", defaultValue="1") int section, @RequestParam(value="pageNum", defaultValue="1") int pageNum, @RequestParam(value="cate", defaultValue="all") String cate,@RequestParam(value="orderBy", defaultValue="best") String orderBy,HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
-	
 }

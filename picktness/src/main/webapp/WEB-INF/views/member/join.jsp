@@ -15,6 +15,36 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=abeab8cce28d6c80ad107bfe4e602d58&libraries=services"></script>
 <script>
+
+//위도 경도 찾는 함수
+function latLng(f){
+    var geocoder = new kakao.maps.services.Geocoder();
+       var rocation = $("#addr").val();
+       alert(rocation);
+    
+        geocoder.addressSearch(rocation, function (result, status) {
+    // 정상적으로 검색이 완료됐으면
+    if (status === kakao.maps.services.Status.OK) {
+    var lat = result[0].y;
+    var lng = result[0].x;
+    alert("위도" + lat + "경도" + lng);
+    var input1 = document.createElement("input");
+    var input2 = document.createElement("input");
+    input1.setAttribute("type", "hidden");
+    input1.setAttribute("name", "lat");
+    input1.setAttribute("value", lat);
+    input2.setAttribute("type", "hidden");
+    input2.setAttribute("name", "lng");
+    input2.setAttribute("value", lng);
+    
+    f.appendChild(input1);
+    f.appendChild(input2);
+    f.submit();
+            }
+            return;
+        });
+}
+   
     //아이디 실시간 검사
     function checkId(){
         var id = $('#id').val();
@@ -222,6 +252,7 @@ function checkboxAll(checkbox) {
 
 //필수란 체크
 function validateAndSubmitForm() {
+	latLng(document.querySelector('form'));
     var idInput = document.getElementById('id');
     var pwdInput = document.getElementById('pwd');
     var passwordConfirmInput = document.getElementById('passwordConfirm');
@@ -331,7 +362,7 @@ function validateAndSubmitForm() {
         alert('개인정보 수집 및 이용에 대한 안내에 동의해주세요.');
         return;
     }
-   // latLng(document.querySelector('form'));
+   
     // 모든 필드가 유효한 경우 폼 제출
     return true;
 
@@ -345,36 +376,7 @@ function isValidEmailDomain(domain) {
     return validDomains.includes(domain);
 }  */
 
-    /*
-    //위도 경도 찾는 함수
-    function latLng(f){
-        var geocoder = new kakao.maps.services.Geocoder();
-           var rocation = $("#addr").val();
-           alert(rocation);
-        
-            geocoder.addressSearch(rocation, function (result, status) {
-        // 정상적으로 검색이 완료됐으면
-        if (status === kakao.maps.services.Status.OK) {
-        var lat = result[0].y;
-        var lng = result[0].x;
-        alert("위도" + lat + "경도" + lng);
-        var input1 = document.createElement("input");
-        var input2 = document.createElement("input");
-        input1.setAttribute("type", "hidden");
-        input1.setAttribute("name", "lat");
-        input1.setAttribute("value", lat);
-        input2.setAttribute("type", "hidden");
-        input2.setAttribute("name", "lng");
-        input2.setAttribute("value", lng);
-        
-        f.appendChild(input1);
-        f.appendChild(input2);
-        f.submit();
-                }
-                return;
-            });
-    }
-    */    
+
 
 }
 </script>
@@ -694,7 +696,7 @@ input {
             </ul>
         
 <!--latLng(this.form)-->
-            <button type="submit" class="joinButton" id="nextBtn" onsubmit="validateAndSubmitForm()">가입하기</button>
+            <button type="submit" class="joinButton" id="nextBtn" onsubmit="return validateAndSubmitForm()">가입하기</button>
         </form>
     </div>
 </body>
