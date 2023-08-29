@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface MemberMypageController {
-	public ModelAndView memberDetail(@RequestParam("id")String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView memberDetail(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView calcelList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView goodsAskList(HttpServletRequest request, HttpServletResponse response) throws Exception;
