@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<select id="goodsBusinessCateList" resultType="goodsBusinessVO" parameterType="java.util.Map">
  	<![CDATA[
- 	select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance from (select t.*, i.fileName from (select b.id, d.goods_id, b.b_name, b.addrbasic, d.prod1retail, d.cate, d.alltime, d.review_star, d.review_count, b.lat, b.lng from business_detail as d join business as b on d.id = b.id where d.cate = #{cate}) as t join business_detail_image as i on i.goods_id = t.goods_id where i.filetype = "main_image") as l where ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) <=5000 order by distance; 
+ 	select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance from (select t.*, i.fileName from (select b.id, d.goods_id, b.b_name, b.addrbasic, d.prod1retail, d.cate, d.alltime, d.review_star, d.review_count, b.lat, b.lng from business_detail as d join business as b on d.id = b.id where d.cate = #{cate}) as t join business_detail_image as i on i.goods_id = t.goods_id where i.filetype = "main_image") as l where ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) <=5000 order by distance ${limit};
  	]]>
  	</select>
  	
@@ -34,19 +34,19 @@ select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance 
  	
  	<select id="goodsFoodAllList" resultType="goodsShoppingVO" parameterType="java.util.Map">
  	<![CDATA[
- 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_fir = "food" order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC;
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_fir = "food" ${where} order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC ${limit}
  	]]>
  	</select>
  	
  	<select id="goodsFoodCateList" resultType="goodsShoppingVO" parameterType="java.util.Map">
  	<![CDATA[
- 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_sec = #{cate} order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC;
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_sec = #{cate} ${where} order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC;
  	]]>
  	</select>
  	
  	 <select id="goodsGoodsAllList" resultType="goodsShoppingVO" parameterType="java.util.Map">
  	<![CDATA[
- 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_fir = "goods" order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC;
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_fir = "goods" order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC ${limit}
  	]]>
  	</select>
  	

@@ -49,7 +49,6 @@ public class GoodsControllerImpl implements GoodsController{
 			session.setAttribute("lng", memLng);
 		} else {
 			memLat = (double) session.getAttribute("lat");
-			System.out.println(memLat);
 			memLng = (double) session.getAttribute("lng");	
 		}
 		option.put("lat", memLat);
@@ -162,6 +161,13 @@ public class GoodsControllerImpl implements GoodsController{
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
+		Map<String, Object> option = new HashMap<String, Object>();
+		option.put("orderBy", "review_star DESC");
+		option.put("limit", "limit 4");
+		List<GoodsShoppingVO> goodsFoodList = goodsService.goodsFoodAllList(option);
+		List<GoodsShoppingVO> goodsGoodsList = goodsService.goodsGoodsAllList(option);
+		mav.addObject("foodList", goodsFoodList);
+		mav.addObject("goodsList", goodsGoodsList);
 		return mav;
 	}
 

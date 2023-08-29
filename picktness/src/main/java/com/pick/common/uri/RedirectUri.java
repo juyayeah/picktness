@@ -13,5 +13,6 @@ public class RedirectUri {
 	public void redirectUri(String str, HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		session.setAttribute("uri", str);
+		System.out.println("햇니?");
 	}
 }

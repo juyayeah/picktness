@@ -27,10 +27,15 @@ public interface BoardDAO {
     // 댓글 조회
     public List<CommentVO> getComments(int bno) throws DataAccessException;
     // 댓글 삭제
-    public void deleteComment(int cno) throws DataAccessException;
+    public void deleteComment(int p_bno) throws DataAccessException;
     // 댓글 수정
     public void updateComment(CommentVO comment) throws DataAccessException;
-    }
+
+    public void deleteMillBoard(int bno) throws DataAccessException;
+
+}
+
+
     	
     
 

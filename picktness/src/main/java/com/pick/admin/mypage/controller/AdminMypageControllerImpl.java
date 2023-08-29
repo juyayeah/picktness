@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 	@Controller("adminMypageController")
-		public class AdminMypageControllerImpl {
+		public class AdminMypageControllerImpl implements AdminMypageController{
 		
 		//--------상품관리------------//
 		@RequestMapping(value="/admin/mypage/adminProdList.do", method=RequestMethod.GET)
-		private ModelAndView adminProdList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adminProdList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
 			return mav;
 		}
 		@RequestMapping(value="/admin/mypage/adminProdForm.do", method=RequestMethod.GET)
-		private ModelAndView adminProdForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adminProdForm(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
 			return mav;
 		}
 		@RequestMapping(value="/admin/mypage/adminProdMod.do", method=RequestMethod.GET)
-		private ModelAndView adminProdMod(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adminProdMod(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
@@ -35,7 +35,7 @@ import org.springframework.web.servlet.ModelAndView;
 		}
 		//--------상품문의------------//
 		@RequestMapping(value="/admin/mypage/adminQnAList.do", method=RequestMethod.GET)
-		private ModelAndView adminQnAList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adminQnAList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
@@ -44,14 +44,14 @@ import org.springframework.web.servlet.ModelAndView;
 		
 		//--------사업자 운동시설 관리------------//
 		@RequestMapping(value="/admin/mypage/adminBusiList.do", method=RequestMethod.GET)
-		private ModelAndView adminBusiList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adminBusiList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
 			return mav;
 		}
 		@RequestMapping(value="/admin/mypage/busiMemberInfo.do", method=RequestMethod.GET)
-		private ModelAndView busiMemberInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView busiMemberInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
@@ -60,14 +60,14 @@ import org.springframework.web.servlet.ModelAndView;
 		
 		//--------트레이너 관리------------//
 		@RequestMapping(value="/admin/mypage/adminTrainerList.do", method=RequestMethod.GET)
-		private ModelAndView adminTrainerList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adminTrainerList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
 			return mav;
 		}
 		@RequestMapping(value="/admin/mypage/trainerDetail.do", method=RequestMethod.GET)
-		private ModelAndView trainerDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView trainerDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
@@ -77,21 +77,21 @@ import org.springframework.web.servlet.ModelAndView;
 		//--------주문 결제 배송관리------------//
 
 		@RequestMapping(value="/admin/mypage/adminDeliverList.do", method=RequestMethod.GET)
-		private ModelAndView adminDeliverList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adminDeliverList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
 			return mav;
 		}
 		@RequestMapping(value="/admin/mypage/adminOrder.do", method=RequestMethod.GET)
-		private ModelAndView adminOrder(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adminOrder(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
 			return mav;
 		}
 		@RequestMapping(value="/admin/mypage/adminOrderList.do", method=RequestMethod.GET)
-		private ModelAndView adminOrderList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adminOrderList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
@@ -99,7 +99,7 @@ import org.springframework.web.servlet.ModelAndView;
 		}
 		//--------리뷰관리------------//
 		@RequestMapping(value="/admin/mypage/adminReviewCont.do", method=RequestMethod.GET)
-		private ModelAndView adminReviewCont(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adminReviewCont(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
@@ -108,7 +108,7 @@ import org.springframework.web.servlet.ModelAndView;
 		
 		//--------회원관리------------//
 		@RequestMapping(value="/admin/mypage/memberCont.do", method=RequestMethod.GET)
-		private ModelAndView memberCont(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView memberCont(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);
@@ -117,7 +117,7 @@ import org.springframework.web.servlet.ModelAndView;
 		
 		//--------정산내역------------//
 		@RequestMapping(value="/admin/mypage/adsettlementDetail.do", method=RequestMethod.GET)
-		private ModelAndView adsettlementDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		public ModelAndView adsettlementDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
 			ModelAndView mav = new ModelAndView();
 			String viewName = (String) request.getAttribute("viewName");
 			mav.setViewName(viewName);

@@ -65,6 +65,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  ]]>
 </insert>
 
+<delete id="deleteMillBoard" parameterType="int">
+<![CDATA[
+delete from picktness.todaymill where bno=#{bno}
+]]>
+</delete>
+<delete id="deleteComment" parameterType="int">
+<![CDATA[
+delete from picktness.todaymill_reply where p_bno=#{bno}
+]]>
+</delete>
+
       
       <select id="selectAllMillList" resultMap="millBoardResult">
       <![CDATA[
@@ -94,6 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT * FROM todaymill_reply WHERE p_bno = #{bno}
         ]]>
     </select>
+   
 
  	
 
