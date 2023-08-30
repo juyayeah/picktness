@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
@@ -26,68 +27,70 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.pick.admin.goods.service.AdminGoodsService;
 import com.pick.goods.vo.GoodsImageFileVO;
 import com.pick.goods.vo.GoodsShoppingVO;
+
 @Controller("adminGoodsController")
-public class AdminGoodsControllerImpl implements AdminGoodsController{
+public class AdminGoodsControllerImpl implements AdminGoodsController {
 	private static final String SHOPPING_IMAGE_REPO = "c:\\picktness\\shopping_image";
 	@Autowired
 	GoodsShoppingVO goodsShoppingVO;
 	@Autowired
 	AdminGoodsService adminGoodsService;
-	
-	protected List<GoodsImageFileVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception{
-		List<GoodsImageFileVO> fileList= new ArrayList<GoodsImageFileVO>();
+
+	protected List<GoodsImageFileVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+		List<GoodsImageFileVO> fileList = new ArrayList<GoodsImageFileVO>();
 		Iterator<String> fileNames = multipartRequest.getFileNames();
-		while(fileNames.hasNext()){
-			GoodsImageFileVO imageFileVO =new GoodsImageFileVO();
+		while (fileNames.hasNext()) {
+			GoodsImageFileVO imageFileVO = new GoodsImageFileVO();
 			String fileName = fileNames.next();
 			imageFileVO.setFileType(fileName);
 			MultipartFile mFile = multipartRequest.getFile(fileName);
-			String originalFileName=mFile.getOriginalFilename();
+			String originalFileName = mFile.getOriginalFilename();
 			imageFileVO.setFileName(originalFileName);
 			fileList.add(imageFileVO);
-			
-			File file = new File(SHOPPING_IMAGE_REPO +"\\"+ fileName);
-			if(mFile.getSize()!=0){
-				if(! file.exists()){ 
-					if(file.getParentFile().mkdirs()){ 
-							file.createNewFile();
+
+			File file = new File(SHOPPING_IMAGE_REPO + "\\" + fileName);
+			if (mFile.getSize() != 0) {
+				if (!file.exists()) {
+					if (file.getParentFile().mkdirs()) {
+						file.createNewFile();
 					}
 				}
-				mFile.transferTo(new File(SHOPPING_IMAGE_REPO +"\\"+"temp"+ "\\"+originalFileName));
+				mFile.transferTo(new File(SHOPPING_IMAGE_REPO + "\\" + "temp" + "\\" + originalFileName));
 			}
 		}
 		return fileList;
 	}
 
 	@Override
-	@RequestMapping(value="/admin/goods/addGoods.do", method=RequestMethod.POST)
+	@RequestMapping(value = "/admin/goods/addGoods.do", method = RequestMethod.POST)
 	public ResponseEntity addGoods(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
+
 		LocalDate now = LocalDate.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 		String formatedNow = now.format(formatter);
-		int number = (int)(Math.random() * 8999) + 1000;
+		int number = (int) (Math.random() * 8999) + 1000;
 		String goods_id = "sh" + formatedNow + number;
-		String imageFileName=null;
+		String imageFileName = null;
 		System.out.println(goods_id);
-		
+
 		Map newGoodsMap = new HashMap();
 		Enumeration enu = multipartRequest.getParameterNames();
 		newGoodsMap.put("goods_id", goods_id);
-		while(enu.hasMoreElements()) {
+		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
 			String value = multipartRequest.getParameter(name);
 			newGoodsMap.put(name, value);
-		};
-		if(newGoodsMap.get("detail") == null) {
+		}
+		;
+		if (newGoodsMap.get("detail") == null) {
 			newGoodsMap.put("detail", "null");
 		}
 		List<GoodsImageFileVO> imageFileList = upload(multipartRequest);
-		if(imageFileList != null && imageFileList.size() != 0) {
-			for(GoodsImageFileVO imageFileVO : imageFileList) {
+		if (imageFileList != null && imageFileList.size() != 0) {
+			for (GoodsImageFileVO imageFileVO : imageFileList) {
 				imageFileVO.setGoods_id(goods_id);
 			}
 			newGoodsMap.put("imageFileList", imageFileList);
@@ -98,8 +101,8 @@ public class AdminGoodsControllerImpl implements AdminGoodsController{
 		responseHeaders.add("Context-Type", "test/html; charsert=utf-8");
 		try {
 			adminGoodsService.addNewGoods(newGoodsMap);
-			if(imageFileList!=null && imageFileList.size()!=0) {
-				for(GoodsImageFileVO imageFileVO : imageFileList) {
+			if (imageFileList != null && imageFileList.size() != 0) {
+				for (GoodsImageFileVO imageFileVO : imageFileList) {
 					imageFileName = imageFileVO.getFileName();
 					File srcFile = new File(SHOPPING_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
 					File destDir = new File(SHOPPING_IMAGE_REPO + "\\" + goods_id);
@@ -110,9 +113,9 @@ public class AdminGoodsControllerImpl implements AdminGoodsController{
 			message += " alert('상품이 등록되었습니다.');";
 			message += " location.href='" + multipartRequest.getContextPath() + "/admin/mypage/adminProdList.do';";
 			message += " </script>";
-		} catch(Exception e) {
-			if(imageFileList != null && imageFileList.size() != 0) {
-				for(GoodsImageFileVO imageFileVO : imageFileList) {
+		} catch (Exception e) {
+			if (imageFileList != null && imageFileList.size() != 0) {
+				for (GoodsImageFileVO imageFileVO : imageFileList) {
 					imageFileName = imageFileVO.getFileName();
 					File srcFile = new File(SHOPPING_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
 					srcFile.delete();
@@ -127,5 +130,31 @@ public class AdminGoodsControllerImpl implements AdminGoodsController{
 		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		return resEntity;
 	}
-	
+
+	@Override
+	@RequestMapping(value = "/admin/goods/modifyGoodsInfo.do", method = RequestMethod.POST)
+	public ResponseEntity modifyGoodsInfo(String goods_id, String attribute, String value1, String value2,
+			String value3, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, String> goodsMap = new HashMap<String, String>();
+		request.setCharacterEncoding("utf-8");
+		goodsMap.put("goods_id", goods_id);
+		if (attribute.equals("goods_cate")) {
+			goodsMap.put("cate_fir", value1);
+			goodsMap.put("cate_sec", value2);
+		} else if (attribute.equals("goods_priceOrigin") || attribute.equals("goods_priceRetail")) {
+			goodsMap.put("priceOrigin", value1);
+			goodsMap.put("priceSale", value2);
+			goodsMap.put("priceRetail", value3);
+		} else {
+			goodsMap.put(attribute, value1);
+		}
+		adminGoodsService.modifyGoodsInfo(goodsMap);
+		String message = null;
+		ResponseEntity resEntity = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		message = "mod_success";
+		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		return resEntity;
+	}
+
 }
