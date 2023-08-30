@@ -26,12 +26,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pick.board.service.BoardServiceImpl;
+
 import com.pick.board.vo.BoardVO;
 import com.pick.board.vo.CommentVO;
 import com.pick.member.vo.MemberVO;
 
 @Controller("boardController")
-public class BoardControllerImpl {
+public class BoardControllerImpl  implements BoardController  {
 	private static final String TODAYMILL_IMAGE_REPO = "c:\\picktness\\todaymill_image";
 
 	@Autowired
@@ -42,7 +43,7 @@ public class BoardControllerImpl {
 	CommentVO commentVO;
 	@Autowired
 	HttpSession session;
-
+@Override
 	@RequestMapping(value="/board/faqList.do")
 	public ModelAndView faqList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
@@ -50,6 +51,8 @@ public class BoardControllerImpl {
 		mav.setViewName(viewName);
 		return mav;
  }
+
+@Override
 	@RequestMapping(value="/board/removeMillBoard.do", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView getDelete(@RequestParam("bno") int bno,HttpServletRequest request, HttpServletResponse response)throws Exception{
@@ -63,6 +66,8 @@ public class BoardControllerImpl {
 	
 	
 	}
+
+@Override
 	@RequestMapping(value = "/board/millDetail.do")
 	public ModelAndView millDetail(@RequestParam("bno") int bno, HttpServletRequest request, HttpServletResponse response) {
 		String viewName = (String) request.getAttribute("viewName");
@@ -75,7 +80,7 @@ public class BoardControllerImpl {
         System.out.println(commentList);
 	    return modelAndView;
 	}
-
+@Override
 	@RequestMapping(value = "/board/millBoardForm.do")
 	public ModelAndView millBoardForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -85,6 +90,7 @@ public class BoardControllerImpl {
 
 	}
 
+@Override
 	@RequestMapping(value = "/board/noticeDetail.do")
 	public ModelAndView noticeDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -93,6 +99,7 @@ public class BoardControllerImpl {
 		return mav;
 	}
 
+@Override
 	@RequestMapping(value = "/board/noticeList.do")
 	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -100,6 +107,8 @@ public class BoardControllerImpl {
 		mav.setViewName(viewName);
 		return mav;
 	}
+
+@Override
 	@RequestMapping(value = "/board/freeDetail.do")
 	public ModelAndView freeDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -109,6 +118,7 @@ public class BoardControllerImpl {
 	}
 
 
+@Override
 	@RequestMapping(value = "/board/freeBoardForm.do")
 	public ModelAndView freeboardForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -117,6 +127,7 @@ public class BoardControllerImpl {
 		return mav;
 	}
 
+@Override
 	@RequestMapping(value = "/board/addFreeBoard.do", method = RequestMethod.POST)
 	public ModelAndView addFreeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -125,6 +136,7 @@ public class BoardControllerImpl {
 		return mav;
 	}
 
+@Override
 	@RequestMapping(value = "/board/freeBoardList.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView freeboardList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -135,6 +147,7 @@ public class BoardControllerImpl {
 		return mav;
 	}
 
+@Override
 	@RequestMapping(value = "/board/eventList.do")
 	public ModelAndView eventList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -143,6 +156,7 @@ public class BoardControllerImpl {
 		return mav;
 	}
 
+@Override
 	@RequestMapping(value = "/board/eventDetail.do")
 	public ModelAndView eventDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -151,6 +165,7 @@ public class BoardControllerImpl {
 		return mav;
 	}
 
+@Override
 	@RequestMapping(value = "/board/oneOnOneForm.do")
 	public ModelAndView oneOnOneForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -159,6 +174,7 @@ public class BoardControllerImpl {
 		return mav;
 	}
 
+@Override
 	@RequestMapping(value = "/board/millBoardList.do")
 	public ModelAndView millBoardList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -169,13 +185,14 @@ public class BoardControllerImpl {
 		return mav;
 	}
 
-    
 
+@Override
 	@RequestMapping(value = "/form")
 	public String form() {
 		return "millBoardForm";
 	}
 
+@Override
 	@RequestMapping(value = "board/addMillBoard.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity addMillBoard(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -230,6 +247,8 @@ public class BoardControllerImpl {
 		}
 		return resEnt;
 	}
+
+
 	@RequestMapping(value = "board/addReply.do", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView millrInsert(@RequestParam("member_id") String member_id, @RequestParam("content") String content, @RequestParam("p_bno") int p_bno, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println(member_id);
@@ -244,7 +263,7 @@ public class BoardControllerImpl {
 		return mav;
 		
 	}
-	
+
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
 		String image = null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();

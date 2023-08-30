@@ -49,7 +49,13 @@ System.out.println(uri);
     });
 }); 
 
-
+$(function(){
+    $('#delOk').click(function(){
+        if(!confirm('정말로 삭제하시겠습니까??')){
+            return false;
+        }
+    });
+});
 </script>
 <style>
     .mill_inner{
@@ -162,7 +168,7 @@ System.out.println(uri);
 
     <h3>오늘 식단</h3>
     <c:if test="${member.id == millDetail.member_id }">
-    <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" class="button" >삭제하기</a>
+    <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" id="delOk" class="button" >삭제하기</a>
 
     </c:if>
     <a class="button" href="${contextPath}/board/millBoardList.do">목록으로</a>
@@ -208,6 +214,10 @@ System.out.println(uri);
       <p> 
       <fmt:parseDate value="${item.millrDate} " var="millrDate" pattern="yyyy-MM-dd" />
     <fmt:formatDate value="${millDate}" pattern="yyyy-MM-dd" /></p>
+    <c:if test="${member.id == commentList.member_id}">
+    <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" id="delOk" class="button" >삭제하기</a>
+    
+  </c:if>
     </div>
     </div>
     </c:forEach>
