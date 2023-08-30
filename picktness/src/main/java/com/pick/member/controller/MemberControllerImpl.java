@@ -98,7 +98,7 @@ public class MemberControllerImpl implements MemberController{
 	@RequestMapping(value="/member/emailCheck")
 	@ResponseBody
 	public int emailCheck(@RequestParam("id") String id) throws Exception{
-		int cnt = memberService.idCheck(id);
+		int cnt = memberService.emailCheck(id);
 		return cnt;
 	}
 	
@@ -130,13 +130,12 @@ public class MemberControllerImpl implements MemberController{
 	
 	
 	@Override
-	@RequestMapping(value="/member/addMember.do" , method = RequestMethod.POST)
-	public ResponseEntity addMember(MemberVO member,
+	@RequestMapping(value="/member/addMember.do")
+	public ResponseEntity addMember(MemberVO member, 
 			 @RequestParam(name = "emailConsent", required = false) boolean emailConsentChecked,
 			 @RequestParam(name = "phoneConsent", required = false) boolean phoneConsentChecked,
 		        HttpServletRequest request, HttpServletResponse response)
 	        throws Exception {
-		System.out.println("회원가입 메소드 진입");
 	    response.setContentType("text/html; charset=UTF-8");
 	    request.setCharacterEncoding("utf-8");
 	    String message = null;
@@ -146,10 +145,7 @@ public class MemberControllerImpl implements MemberController{
 	    try {
 	    	 member.setEmailConsent(emailConsentChecked ? "Y" : "N");
 	         member.setPhoneConsent(phoneConsentChecked ? "Y" : "N");
-	    	
-	        // member 객체의 정보를 그대로 사용
-	        memberService.addMember(member);
-	       
+	    	memberService.addMember(member);
 	        message  = "<script>";
 	        message += " location.href='"+request.getContextPath()+"/member/joinSuccess.do';";
 	        message += " </script>";
@@ -159,8 +155,6 @@ public class MemberControllerImpl implements MemberController{
 	    resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 	    return resEntity;
 	}
-
-	
 	
 	@Override
 	@RequestMapping(value="/member/addB_Member.do" , method = RequestMethod.POST)
