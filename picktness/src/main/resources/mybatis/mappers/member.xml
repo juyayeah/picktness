@@ -61,8 +61,8 @@ select count(id) from member where id=#{id}
 
 <insert id="insertMember" parameterType="memberVO">
     <![CDATA[
-    insert into member(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3, memberPoint, emailConsent, phoneConsent, lat, lng)
-    values(
+    INSERT INTO member(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3, memberPoint, emailConsent, phoneConsent, lat, lng)
+    VALUES(
         #{id}, #{pwd}, #{name}, #{zipcode}, #{addrBasic}, #{addrDetail}, 
         #{email1}, #{email2}, #{phone1}, #{phone2}, #{phone3}, 5000, #{emailConsent}, #{phoneConsent}, #{lat}, #{lng})
     ]]>
