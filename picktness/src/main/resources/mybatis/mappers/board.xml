@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		
  		<insert id="insertNewMillBoard" parameterType="java.util.Map">
 <![CDATA[
- insert into todaymill(bno, member_id,hastag, content,todaymill_img)
+ insert into todaymill(bno, member_id, hastag, content,todaymill_img)
  values(#{bno},#{member_id},#{hastag}, #{content},#{todaymill_img})
  ]]>
 </insert>
