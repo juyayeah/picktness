@@ -57,6 +57,8 @@ request.setCharacterEncoding("utf-8");
 	border: 1px solid #999;
 	font-family: inherit;
 	border-radius: 2px;
+	resize: none;
+	outline:none;
 }
 
 .tdfirsttop {
@@ -274,7 +276,7 @@ width:30%;
 							제공됩니다.쇼핑검색에 노출되지 않는 경우 가이드를 확인해주세요.</span></td>
 				<tr>
 					<td class="tdfirsttop" align="right">상세설명</td>
-					<td class="starbluetop">*</td>
+					<td class="starbluetop"></td>
 					<td width="70%"><textarea name="detail" rows="10" cols="60"
 							maxlength="4000"></textarea> <span
 						style="font-size: 11px; color: #2089f1;">* 외부 링크를 통한
@@ -392,7 +394,7 @@ width:30%;
             	$("#addForm").append(input_fir);
 				$("#addForm").append(input_sec);
 				
-				if ($("#priceRetail").val() == 0){
+				if ($("#priceRetail").val() == 0 || $("#priceRetail").val() == null){
 					var priceRetail = $("#priceOrigin").val();
 					$("#priceRetail").attr("value", priceRetail);
 					$("#addForm").append("<input type='hidden' name='priceSale' value='0'/>");

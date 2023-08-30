@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+ <mapper namespace="com.pick.admin.goods.dao.AdminGoodsDAO">
+ 
+ <insert id="insertNewGoods" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	insert into shopping(goods_id, goods_title, goods_qty, cate_fir, cate_sec, priceOrigin, priceSale,
+ 	priceRetail, detail) values (#{goods_id}, #{goods_title}, #{goods_qty}, #{cate_fir}, #{cate_sec},
+ 	#{priceOrigin}, #{priceSale}, #{priceRetail}, #{detail})
+ 	]]>
+ </insert>
+ 
+ <insert id="insertGoodsImageFile" parameterType="goodsImageFileVO">
+ <![CDATA[
+ insert into shopping_detail_image(goods_id, fileName, fileType) values (#{goods_id}, #{fileName}, #{fileType})
+ ]]>
+ </insert>
+ </mapper>

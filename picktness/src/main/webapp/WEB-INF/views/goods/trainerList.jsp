@@ -244,7 +244,7 @@ font-size:14px;
 					<span class="location">
 					<fmt:formatNumber pattern="0.0" value="${trainer.distance/1000 }"/>km</span>
 					<fmt:parseNumber var="price" integerOnly="true" type="number" value="${trainer.prod10retail}" />
-					<span class="price"><fmt:formatNumber value="${price /10}" pattern="#,###" />/회</span>
+					<span class="price"><fmt:formatNumber value="${price /10}" pattern="#,###,###" />/회</span>
 					<div class="cates">
 					<div class="cate">${trainer.cate }</div>
 					</div>

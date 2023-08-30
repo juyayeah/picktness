@@ -2,6 +2,7 @@
 pageEncoding="UTF-8" isELIgnored="false"%> <%@taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@taglib prefix="tiles"
 uri="http://tiles.apache.org/tags-tiles" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
@@ -202,13 +203,13 @@ font-size:14px;
 				<div class="main_item_soldOut"
 					onclick="location.href='${contextPath}/goods/gymDetail.do'">
 					<div class="soldOutImg">
-					<img class="main_img" src="${contextPath}/images/main/health4.jpg" />
+					<img class="main_img" src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" />
 				    <div class="soldOutText">
 					<p>품절</p>
 					</div>
 					</div>
 					<span class="title">${goods.goods_title }</span>
-					<span class="price">${goods.priceRetail }원 </span>
+					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.priceRetail}" />원 </span>
 					<c:if test="${goods.review_count ne 0 }">
 					<div class="star">
 						<img src="${contextPath}/images/main/star.png" /> 
@@ -220,9 +221,9 @@ font-size:14px;
 				<c:otherwise>
 				<div class="main_item"
 					onclick="location.href='${contextPath}/goods/gymDetail.do'">
-					<img class="main_img" src="${contextPath}/images/main/health4.jpg" />
+					<img class="main_img" src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" />
 					<span class="title">${goods.goods_title }</span>
-					<span class="price">${goods.priceRetail }원 </span>
+					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.priceRetail}" />원 </span>
 					<c:if test="${goods.review_count ne 0 }">
 					<div class="star">
 						<img src="${contextPath}/images/main/star.png" /> 

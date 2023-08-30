@@ -126,8 +126,8 @@ height:300px;
 					<c:forEach items="${foodList }" var="food">
 						<div class="main_item" onClick="location.href='#'">
 							<img class="main_img"
-								src="${contextPath}/images/main/health4.jpg" /> <span
-								class="title">${food.goods_title }</span> <span class="price">${food.priceRetail }원
+								src="${contextPath}/download.do?cate=shop&imageFileName=${food.fileName}&bno=${food.goods_id}" /> <span
+								class="title">${food.goods_title }</span> <span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${food.priceRetail}" />원
 							</span>
 							<c:if test="${food.review_count ne 0 }">
 								<div class="star">
@@ -154,8 +154,9 @@ height:300px;
 					<c:forEach items="${goodsList }" var="goods">
 						<div class="main_item" onClick="location.href='#'">
 							<img class="main_img"
-								src="${contextPath}/images/main/health4.jpg" /> <span
-								class="title">${goods.goods_title }</span> <span class="price">${food.priceRetail }원
+								src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" /> <span
+								class="title">${goods.goods_title }</span> <span class="price">
+								<fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.priceRetail}" />원
 							</span>
 							<c:if test="${goods.review_count ne 0 }">
 								<div class="star">

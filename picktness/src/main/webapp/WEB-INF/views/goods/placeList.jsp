@@ -257,7 +257,7 @@ font-size:14px;
 					<span class="location">${place.addrBasic } 
 					</span>
 					<span class="location"><fmt:formatNumber pattern="0.0" value="${place.distance/1000 }"/>km</span>
-					<span class="price">${place.prod1retail }/월 </span>
+					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod1retail}" />/월</span>
 					<div class="cates">
 						<c:if test="${place.allTime == 'Y' }">
 							<div class="cate">24시간</div>
