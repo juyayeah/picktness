@@ -58,7 +58,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 select count(id) from member where id=#{id}
 ]]>
 </select>
-
+<select id="bIdCheck" parameterType="String" resultType="int">
+<![CDATA[
+select count(id) from business where id=#{id}
+]]>
+</select>
 <insert id="insertMember" parameterType="memberVO">
     <![CDATA[
     INSERT INTO member(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3, memberPoint, emailConsent, phoneConsent, lat, lng)
@@ -70,10 +74,10 @@ select count(id) from member where id=#{id}
 
 <insert id="insertB_Member" parameterType="businessVO">
     <![CDATA[
-    insert into business(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3, b_number, b_bank, b_name, b_account)
+    insert into business(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3, b_number, b_bank, b_name, b_account, emailConsent, phoneConsent, lat, lng)
     values(
         #{id}, #{pwd}, #{name}, #{zipcode}, #{addrBasic}, #{addrDetail}, 
-        #{email1}, #{email2}, #{phone1}, #{phone2}, #{phone3}, #{b_number}, #{b_bank}, #{b_name}, #{b_account})
+        #{email1}, #{email2}, #{phone1}, #{phone2}, #{phone3}, #{b_number}, #{b_bank}, #{b_name}, #{b_account}, #{emailConsent}, #{phoneConsent}, #{lat}, #{lng})
     ]]>
 </insert>
 
@@ -88,7 +92,11 @@ select count(id) from member where id=#{id}
         SELECT count(email1) FROM member where email1 = #{email1} and email2 = #{email2}
         ]]>
 </select>
-
+<select id="bEmailCheck" parameterType="java.util.Map" resultType="int">
+        <![CDATA[
+        SELECT count(email1) FROM business where email1 = #{email1} and email2 = #{email2}
+        ]]>
+</select>
 <select id="loginBusiness" parameterType="java.util.Map" resultMap="b_MemberResult">
 	<![CDATA[
 	select * from business where id = #{id} && pwd = #{pwd}

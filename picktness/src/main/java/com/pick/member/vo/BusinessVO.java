@@ -25,6 +25,8 @@ public class BusinessVO {
 	private String b_name;
 	private String b_bank;
 	private String b_account;
+	private String emailConsent;
+	private String phoneConsent;
 	public String getId() {
 		return id;
 	}
@@ -138,6 +140,18 @@ public class BusinessVO {
 	}
 	public void setB_account(String b_account) {
 		this.b_account = b_account;
+	}
+	public String getEmailConsent() {
+		return emailConsent;
+	}
+	public void setEmailConsent(String emailConsent) {
+		this.emailConsent = emailConsent;
+	}
+	public String getPhoneConsent() {
+		return phoneConsent;
+	}
+	public void setPhoneConsent(String phoneConsent) {
+		this.phoneConsent = phoneConsent;
 	}
 	
 	
