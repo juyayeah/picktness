@@ -157,10 +157,10 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           $.ajax({
             url: "${contextPath}/member/emailCheck",
             type: "post",
-            data: { id: fullEmail },
+            data: { email1: domain1,
+            		email2: domain2},
             success: function (cnt) {
-              if (cnt != 1) {
-                console.log("이메일 중복체크2");
+              if (cnt == 0) {
                 $.ajax({
                   type: "POST",
                   url: "${contextPath}/api/mail",

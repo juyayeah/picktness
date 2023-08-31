@@ -2,6 +2,7 @@ package com.pick.member.controller;
 
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,10 +77,17 @@ public class MemberControllerImpl implements MemberController{
 				
 			}
 		} else {
-			//businessVO = memberService.loginBusiness(loginMap);
+			businessVO = memberService.loginBusiness(loginMap);
+			if(businessVO != null) {
+				session.setAttribute("isLogOn", true);
+				session.setAttribute("business", businessVO);
+				return "redirect:/main.do";
+			} else {
+				mav.addObject("message", "아이디나 비밀번호가 틀렸습니다. 다시 로그인 해주세요");
+				return "redirect:/member/loginForm.do";
+			}
 		}
 
-		return "redirect:/member/loginForm.do";
 	}
 	
 	@RequestMapping(value="/member/logout.do", method=RequestMethod.GET)
@@ -105,8 +113,8 @@ public class MemberControllerImpl implements MemberController{
 	
 	@RequestMapping(value="/member/emailCheck")
 	@ResponseBody
-	public int emailCheck(@RequestParam("id") String id) throws Exception{
-		int cnt = memberService.emailCheck(id);
+	public int emailCheck(@RequestParam Map<String, String> emailChk) throws Exception{
+		int cnt = memberService.emailCheck(emailChk);
 		return cnt;
 	}
 	
