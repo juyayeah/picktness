@@ -401,8 +401,8 @@
         return false;
       }
 
-      if (phone1Input.value.trim() !== "010") {
-        alert("올바른 번호를 입력해주세요.");
+      if (phone1Input.value.trim() === "") {
+        alert("번호를 입력해주세요.");
         phone1Input.focus();
         return false;
       }
@@ -582,7 +582,8 @@ input {
 }
 </style>
 <body style="background-color: white;">
-    
+  <form action="${contextPath}/member/addB_Member.do" method="post" onsubmit="return validateAndSubmitForm()"
+  id="joinFrm">
       <div class="signup-container">
         <h1 style="text-align: center;">회원가입</h1><br>
         <div class="cation">
@@ -735,8 +736,7 @@ style="
         <br><br>
         <h2>사업장 정보</h2>
         <hr><br>
-        <form action="${contextPath}/member/addB_Member.do" method="post" onsubmit="return validateAndSubmitForm()"
-        id="joinFrm">
+      
         <input id="lat" type="hidden" name="lat" />
         <input id="lng" type="hidden" name="lng" />
             <div class="form-row">
@@ -759,7 +759,7 @@ style="
 </div>
             <div class="form-row">
                 <label for="b_account">계좌번호<span class="label-with-star">*</span></label><br>
-                <input type="text" id="b_account" name="b_account" placeholder="1234567890(-없이 입력해주세요)" maxlength="10" >
+                <input type="text" id="b_account" name="b_account" placeholder="계좌번호를 입력해주세요" maxlength="14" >
             </div>
            
           <div class="form-row">
@@ -928,43 +928,11 @@ style="
                             </textarea
                   >
                 </li>
-                <li class="checkBox check03">
-                  <ul class="clearfix">
-                    <li>이벤트 등 프로모션 휴대폰 알림 수신(선택)</li>
-                    <li class="checkBtn">
-                      <input type="checkbox" name="phoneConsent" />
-                    </li>
-                  </ul>
     
-                  <textarea disabled>
-    이용자가 본 약관에 동의하는 경우, [회사/서비스명]은 주기적으로 이벤트, 할인, 프로모션 등에
-    관련된 정보를 전자메일을 통해 제공할 수 있습니다.
-    정보 수신 동의 여부는 이용자의 개인정보 처리 방침과 별도로 관리됩니다.</textarea
-                  >
-                </li>
-                <li class="checkBox check04">
-                  <ul class="clearfix">
-                    <li>이벤트 등 프로모션 메일 알림 수신(선택)</li>
-                    <li class="checkBtn">
-                      <input type="checkbox" name="emailConsent" />
-                    </li>
-                  </ul>
-                  <textarea disabled>
-    이용자가 본 약관에 동의하는 경우, [회사/서비스명]은 주기적으로 이벤트, 할인, 프로모션 등에
-    관련된 정보를 휴대전화를 통해 제공할 수 있습니다.
-    정보 수신 동의 여부는 이용자의 개인정보 처리 방침과 별도로 관리됩니다.</textarea
-                  >
-                </li>
-              </ul>
-    
-              <!--latLng(this.form)-->
-    
-              <button type="submit" class="joinButton" id="nextBtn">
-                가입하기
-              </button>
+                <button type="submit" class="joinButton" id="nextBtn">
+                  가입하기
+                </button>
             </div>
-        </div>
-        </form>
-    </div>
+  </form>
 </body>
 </html>
