@@ -2,6 +2,7 @@ package com.pick.member.controller;
 
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,31 +48,46 @@ public class MemberControllerImpl implements MemberController{
 	private String login(@RequestParam Map<String, String> loginMap,HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		HttpSession session =request.getSession();
-		System.out.println("로그인 메소드 진입");
 		String uri = (String) session.getAttribute("uri");
 		session.removeAttribute("uri");
-		memberVO = memberService.login(loginMap);
-		if(memberVO != null) {
-			if(memberVO.getId().equals("admin")) {
-				session.setAttribute("isLogOn", true);
-				session.setAttribute("member", memberVO);
+		if(loginMap.get("userType").equals("member")) {
+			memberVO = memberService.login(loginMap);
+			if(memberVO != null) {
+				if(memberVO.getId().equals("admin")) {
+					session.setAttribute("isLogOn", true);
+					session.setAttribute("member", memberVO);
+				} else {
+					String memLocation = memberVO.getAddrBasic();
+					Double memLat = memberVO.getLat();
+					Double memLng = memberVO.getLng();
+					session.setAttribute("isLogOn", true);
+					session.setAttribute("member", memberVO);		
+					session.setAttribute("memLocation", memLocation);
+					session.setAttribute("lat", memLat);
+					session.setAttribute("lng", memLng);
+				}
+				if(uri != null) {
+					return "redirect:" + uri;
+				} else {
+					return "redirect:/main.do";
+				}
 			} else {
-				String memLocation = memberVO.getAddrBasic();
-				Double memLat = memberVO.getLat();
-				Double memLng = memberVO.getLng();
-				session.setAttribute("isLogOn", true);
-				session.setAttribute("member", memberVO);		
-				session.setAttribute("memLocation", memLocation);
-				session.setAttribute("lat", memLat);
-				session.setAttribute("lng", memLng);
+				mav.addObject("message", "아이디나 비밀번호가 틀렸습니다. 다시 로그인 해주세요");
+				return "redirect:/member/loginForm.do";
+				
 			}
-			if(uri != null) {
-				return "redirect:" + uri;
-			} else {
+		} else {
+			businessVO = memberService.loginBusiness(loginMap);
+			if(businessVO != null) {
+				session.setAttribute("isLogOn", true);
+				session.setAttribute("business", businessVO);
 				return "redirect:/main.do";
+			} else {
+				mav.addObject("message", "아이디나 비밀번호가 틀렸습니다. 다시 로그인 해주세요");
+				return "redirect:/member/loginForm.do";
 			}
 		}
-	return "redirect:/member/loginForm.do";
+
 	}
 	
 	@RequestMapping(value="/member/logout.do", method=RequestMethod.GET)
@@ -97,8 +113,8 @@ public class MemberControllerImpl implements MemberController{
 	
 	@RequestMapping(value="/member/emailCheck")
 	@ResponseBody
-	public int emailCheck(@RequestParam("id") String id) throws Exception{
-		int cnt = memberService.emailCheck(id);
+	public int emailCheck(@RequestParam Map<String, String> emailChk) throws Exception{
+		int cnt = memberService.emailCheck(emailChk);
 		return cnt;
 	}
 	

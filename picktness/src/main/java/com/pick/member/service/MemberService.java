@@ -9,8 +9,9 @@ import com.pick.member.vo.MemberVO;
 
 public interface MemberService {
 	public MemberVO login(Map loginMap) throws DataAccessException;
-	public void addMember(MemberVO memberVO) throws Exception;
-	public void addB_Member(BusinessVO business) throws Exception;
-	public int idCheck(String id) throws Exception;
-	public int emailCheck(String id) throws Exception;
+	public void addMember(MemberVO memberVO) throws DataAccessException;
+	public void addB_Member(BusinessVO business) throws DataAccessException;
+	public int idCheck(String id) throws DataAccessException;
+	public int emailCheck(Map emailChk) throws DataAccessException;
+	public BusinessVO loginBusiness(Map loginMap) throws DataAccessException;
 }

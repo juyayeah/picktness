@@ -19,28 +19,30 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.loginById(loginMap);
 	}
 	@Override
-	public void addMember(MemberVO memberVO) throws Exception {
+	public void addMember(MemberVO memberVO) throws DataAccessException {
 		memberDAO.insertMember(memberVO);
 		memberDAO.eventInitPoint(memberVO);	
 	}
 	
 	@Override
-	public void addB_Member(BusinessVO businessVO) throws Exception {
+	public void addB_Member(BusinessVO businessVO) throws DataAccessException {
 		memberDAO.insertB_Member(businessVO);
 		
 	}
 	@Override
-	public int idCheck(String id) throws Exception {
-		int cnt = memberDAO.idCheck(id);
-		return cnt;
+	public int idCheck(String id) throws DataAccessException {
+		return memberDAO.idCheck(id);
 	}
 	
 	@Override
-    public int emailCheck(String id) throws Exception {
-        int cnt = memberDAO.emailCheck(id);
-      
-        return cnt;
+    public int emailCheck(Map emailChk) throws DataAccessException {
+        return memberDAO.emailCheck(emailChk);
     }
+	@Override
+	public BusinessVO loginBusiness(Map loginMap) throws DataAccessException {
+		return memberDAO.loginBusiness(loginMap);
+	}
+	
 	
 	
 }
