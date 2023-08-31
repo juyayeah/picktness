@@ -33,10 +33,18 @@ public class MemberServiceImpl implements MemberService{
 	public int idCheck(String id) throws DataAccessException {
 		return memberDAO.idCheck(id);
 	}
+	@Override
+	public int bIdCheck(String id) throws DataAccessException {
+		return memberDAO.bIdCheck(id);
+	}
 	
 	@Override
     public int emailCheck(Map emailChk) throws DataAccessException {
         return memberDAO.emailCheck(emailChk);
+    }
+	@Override
+    public int bEmailCheck(Map bEmailChk) throws DataAccessException {
+        return memberDAO.emailCheck(bEmailChk);
     }
 	@Override
 	public BusinessVO loginBusiness(Map loginMap) throws DataAccessException {

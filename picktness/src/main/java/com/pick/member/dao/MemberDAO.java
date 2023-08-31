@@ -17,6 +17,8 @@ public interface MemberDAO {
 	public void insertB_Member(BusinessVO businessVO) throws DataAccessException;
 	public void eventInitPoint(MemberVO memberVO) throws DataAccessException;
 	public int idCheck(String id) throws DataAccessException;
+	public int bIdCheck(String id) throws DataAccessException;
 	public int emailCheck(Map emailChk) throws DataAccessException;
+	public int bEmailCheck(Map bEmailChk) throws DataAccessException;
 	public BusinessVO loginBusiness(Map loginMap) throws DataAccessException;
 }
