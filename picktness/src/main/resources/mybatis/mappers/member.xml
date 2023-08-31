@@ -74,10 +74,10 @@ select count(id) from business where id=#{id}
 
 <insert id="insertB_Member" parameterType="businessVO">
     <![CDATA[
-    insert into business(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3, b_number, b_bank, b_name, b_account, emailConsent, phoneConsent, lat, lng)
+    insert into business(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3, b_number, b_bank, b_name, b_account, lat, lng)
     values(
         #{id}, #{pwd}, #{name}, #{zipcode}, #{addrBasic}, #{addrDetail}, 
-        #{email1}, #{email2}, #{phone1}, #{phone2}, #{phone3}, #{b_number}, #{b_bank}, #{b_name}, #{b_account}, #{emailConsent}, #{phoneConsent}, #{lat}, #{lng})
+        #{email1}, #{email2}, #{phone1}, #{phone2}, #{phone3}, #{b_number}, #{b_bank}, #{b_name}, #{b_account}, #{lat}, #{lng})
     ]]>
 </insert>
 
