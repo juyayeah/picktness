@@ -401,21 +401,21 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 <body>
 	<div class="header-inner">
 		<c:choose>
-			<c:when test="${isLogOn!=null && member.id !='admin'}">
+			<c:when test="${isLogOn!=null && business != null }">
 				<div class="util">
 					<ul>
 						<li><a href="${contextPath}/member/logout.do">로그아웃</a></li>
-						<li><a href="${contextPath }/member/mypage/memberDetail.do">회원정보수정</a>
+						<li><a href="${contextPath}/business/mypage/placeCont.do">사업장정보</a>
 						</li>
 						<li><a href="${contextPath}/board/noticeList.do">고객센터</a></li>
 					</ul>
 				</div>
 			</c:when>
-			<c:when test="${isLogon!=null && business != null }">
+			<c:when test="${isLogOn!=null && member.id !='admin'}">
 				<div class="util">
 					<ul>
 						<li><a href="${contextPath}/member/logout.do">로그아웃</a></li>
-						<li><a href="${contextPath}/business/mypage/modGym.do">사업장정보수정</a>
+						<li><a href="${contextPath }/member/mypage/memberDetail.do">회원정보수정</a>
 						</li>
 						<li><a href="${contextPath}/board/noticeList.do">고객센터</a></li>
 					</ul>
@@ -462,6 +462,12 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 		<!--/header-search-->
 		<div class="my_menu">
 			<c:choose>
+				<c:when test="${isLogOn != null && business != null }">
+					<button type="button" class="btn_top_mypage" onclick="location.href='${contextPath}/business/mypage/placeCont.do'">
+						<img class="btn_top_mypage_img"
+							src="${contextPath}/images/mypage.png" alt="마이페이지" />
+					</button>
+				</c:when>
 				<c:when test="${isLogOn != null && member.id != 'admin'}">
 					<button type="button" class="btn_top_mypage"
 						onclick="location.href='${contextPath}/member/mypage/memberDetail.do'">
@@ -472,12 +478,6 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 						onclick="location.href='${contextPath}/member/cart/cartList.do'">
 						<img class="btn_top_cart_img" src="${contextPath}/images/cart.png"
 							alt="카트" />
-					</button>
-				</c:when>
-				<c:when test="${isLogOn != null && business != null }">
-					<button type="button" class="btn_top_mypage" onclick="location.href='${contextPath}/business/mypage/modGym.do'">
-						<img class="btn_top_mypage_img"
-							src="${contextPath}/images/mypage.png" alt="마이페이지" />
 					</button>
 				</c:when>
 				<c:when test="${isLogOn != null && member.id == 'admin' }">

@@ -1,5 +1,8 @@
 package com.pick.goods.vo;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.stereotype.Component;
 
 @Component("goodsImageFileVO")

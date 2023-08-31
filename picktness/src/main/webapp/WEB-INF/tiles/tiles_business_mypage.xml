@@ -13,18 +13,15 @@
 	</definition>
 	
 	<!-- 운동시설 관리 -->
-	<definition name="/business/mypage/gymCont" extends="busipageLayout">
+	<definition name="/business/mypage/placeCont" extends="busipageLayout">
 		<put-attribute name="title" value="운동시설관리"/>
-		<put-attribute name="body" value="/WEB-INF/views/business/mypage/gymCont.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/placeCont.jsp"/>
 	</definition>
-	<definition name="/business/mypage/addGym" extends="busipageLayout">
+	<definition name="/business/mypage/placeForm" extends="busipageLayout">
 		<put-attribute name="title" value="운동시설등록"/>
-		<put-attribute name="body" value="/WEB-INF/views/business/mypage/gymForm.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/business/mypage/placeForm.jsp"/>
 	</definition>
-	<definition name="/business/mypage/modGym" extends="busipageLayout">
-		<put-attribute name="title" value="운동시설수정"/>
-		<put-attribute name="body" value="/WEB-INF/views/business/mypage/gymForm.jsp"/>
-	</definition>
+
 	<definition name="/business/mypage/goodsAskCont" extends="busipageLayout">
 		<put-attribute name="title" value="상품문의 관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/business/mypage/goodsAskCont.jsp"/>
