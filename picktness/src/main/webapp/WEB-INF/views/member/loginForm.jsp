@@ -179,7 +179,7 @@
                     <button class="loginB" type="submit">로그인</button>
                 </form>
                 <div class="footer-select">
-                    <a href="${contextPath}/member/findById.do"">아이디 찾기</a> |
+                    <a href="${contextPath}/member/findById.do">아이디 찾기</a> |
                     <a href="${contextPath}/member/findByPwd.do">비밀번호 찾기</a> |
                     <a href="${contextPath}/member/selectJoin.do">회원가입</a>
                 </div>
