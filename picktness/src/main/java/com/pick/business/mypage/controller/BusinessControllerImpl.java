@@ -1,17 +1,17 @@
 package com.pick.business.mypage.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,21 +23,35 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pick.business.mypage.service.BusinessService;
+import com.pick.business.mypage.vo.BusinessDetailVO;
+import com.pick.member.vo.BusinessVO;
+
 @Controller("BusinessMypageController")
 public class BusinessControllerImpl implements BusinessController {
-	private static final String IMAGE_REPO = "c:\\picktness\\todaymill_image";
+	private static final String BUSINESS_IMAGE_REPO = "c:\\picktness\\business_image";
+	@Autowired
+	BusinessService businessService;
+	@Autowired
+	BusinessDetailVO businessDetailVO;
 
 	// 운동시설관리//
-	@RequestMapping(value = "/business/mypage/gymCont.do", method = RequestMethod.GET)
-	private ModelAndView gymCont(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/business/mypage/placeCont.do", method = RequestMethod.GET)
+	public ModelAndView placeCont(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		BusinessVO business = (BusinessVO) session.getAttribute("business");
+		String id = business.getId();
+		System.out.println(id);
+		Map businessPlace = businessService.placeDetail(id);
 		mav.setViewName(viewName);
+		mav.addObject("businessPlace", businessPlace);
 		return mav;
 	}
 
-	@RequestMapping(value = "/business/mypage/addGym.do", method = { RequestMethod.GET, RequestMethod.POST })
-	private ModelAndView addGym(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/business/mypage/placeForm.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView placeForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -74,11 +88,11 @@ public class BusinessControllerImpl implements BusinessController {
 			if (imageFileName != null && imageFileName.length() != 0) {
 
 				String originalFileName = (String) Map.get("originalFileName");
-				File oldFile = new File(IMAGE_REPO + "\\" + id + "\\" + originalFileName);
+				File oldFile = new File(BUSINESS_IMAGE_REPO + "\\" + id + "\\" + originalFileName);
 				oldFile.delete();
 
-				File srcFile = new File(IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-				File destDir = new File(IMAGE_REPO + "\\" + id);// 는 destDir.mkdirs();로 꼭 파일을 넣어야 한다.
+				File srcFile = new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+				File destDir = new File(BUSINESS_IMAGE_REPO + "\\" + id);// 는 destDir.mkdirs();로 꼭 파일을 넣어야 한다.
 				FileUtils.moveFileToDirectory(srcFile, destDir, true);// 앞쪽에서 뒤쪽으로 s>d>t)
 
 			}
@@ -90,7 +104,7 @@ public class BusinessControllerImpl implements BusinessController {
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
 			// TODO: handle exception
-			File srcFile = new File(IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+			File srcFile = new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
 			srcFile.delete();
 
 			message = " <script>";
@@ -112,11 +126,11 @@ public class BusinessControllerImpl implements BusinessController {
 			String fileName = fileNames.next();
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			imageFileName = mFile.getOriginalFilename();
-			File file = new File(IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
+			File file = new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
 			if (mFile.getSize() != 0) {
 				if (!file.exists()) {
 					file.getParentFile().mkdirs();
-					mFile.transferTo(new File(IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName));
+					mFile.transferTo(new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName));
 				}
 			}
 		}
@@ -124,7 +138,7 @@ public class BusinessControllerImpl implements BusinessController {
 	}
 
 	@RequestMapping(value = "/business/mypage/modGym.do", method = RequestMethod.GET)
-	private ModelAndView modGym(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView modGym(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -133,7 +147,7 @@ public class BusinessControllerImpl implements BusinessController {
 
 	// 상품문의 관리//
 	@RequestMapping(value = "/business/mypage/goodsAskCont.do", method = RequestMethod.GET)
-	private ModelAndView goodsAskCont(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView goodsAskCont(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -142,7 +156,7 @@ public class BusinessControllerImpl implements BusinessController {
 
 	// 트레이너 관리//
 	@RequestMapping(value = "/business/mypage/trainerCont.do", method = RequestMethod.GET)
-	private ModelAndView trainerCont(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView trainerCont(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -151,7 +165,7 @@ public class BusinessControllerImpl implements BusinessController {
 
 	// 트레이너 등록//
 	@RequestMapping(value = "/business/mypage/trainerForm.do", method = RequestMethod.GET)
-	private ModelAndView trainerForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView trainerForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -160,7 +174,7 @@ public class BusinessControllerImpl implements BusinessController {
 
 	// 주문결제 관리//
 	@RequestMapping(value = "/business/mypage/orderPayCont.do", method = RequestMethod.GET)
-	private ModelAndView orderPayCont(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView orderPayCont(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -169,7 +183,7 @@ public class BusinessControllerImpl implements BusinessController {
 
 	// 주문/결제 리스트//
 	@RequestMapping(value = "/business/mypage/orderPayList.do", method = RequestMethod.GET)
-	private ModelAndView orderPayList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView orderPayList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -178,7 +192,7 @@ public class BusinessControllerImpl implements BusinessController {
 
 	// 리뷰 관리//
 	@RequestMapping(value = "/business/mypage/reviewCont.do", method = RequestMethod.GET)
-	private ModelAndView reviewCont(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView reviewCont(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -187,7 +201,7 @@ public class BusinessControllerImpl implements BusinessController {
 
 	// 사업자정보//
 	@RequestMapping(value = "/business/mypage/busiInfo.do", method = RequestMethod.GET)
-	private ModelAndView busiInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView busiInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -195,7 +209,7 @@ public class BusinessControllerImpl implements BusinessController {
 	}
 
 	@RequestMapping(value = "/business/mypage/withdraw.do", method = { RequestMethod.GET, RequestMethod.POST })
-	private ModelAndView withdraw(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView withdraw(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -203,7 +217,7 @@ public class BusinessControllerImpl implements BusinessController {
 	}
 
 	@RequestMapping(value = "/business/mypage/withdrawFixed.do", method = RequestMethod.GET)
-	private ModelAndView withdrawFixed(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView withdrawFixed(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -211,7 +225,7 @@ public class BusinessControllerImpl implements BusinessController {
 	}
 
 	@RequestMapping(value = "/business/mypage/withdrawBye.do", method = RequestMethod.GET)
-	private ModelAndView withdrawBye(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView withdrawBye(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -220,7 +234,7 @@ public class BusinessControllerImpl implements BusinessController {
 
 	// 정산내역//
 	@RequestMapping(value = "/business/mypage/settlement.do", method = RequestMethod.GET)
-	private ModelAndView settlement(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView settlement(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
@@ -228,7 +242,7 @@ public class BusinessControllerImpl implements BusinessController {
 	}
 
 	@RequestMapping(value = "/business/mypage/settlementDetail.do", method = RequestMethod.GET)
-	private ModelAndView settlementDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView settlementDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);

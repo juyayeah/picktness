@@ -1,5 +1,8 @@
 package com.pick.goods.vo;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.stereotype.Component;
 
 @Component("goodsImageFileVO")
@@ -24,7 +27,11 @@ public class GoodsImageFileVO {
 		return fileName;
 	}
 	public void setFileName(String fileName) {
-		this.fileName = fileName;
+		try {
+			this.fileName = URLEncoder.encode(fileName,"UTF-8");
+		} catch(UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
 	public String getFileType() {
 		return fileType;

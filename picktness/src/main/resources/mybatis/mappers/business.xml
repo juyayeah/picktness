@@ -3,31 +3,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
 <mapper namespace="com.pick.business.mypage.dao.BusinessDAO">
- <resultMap id="businessList" type="businessVO">
-<result property="goods_id" column="goods_id"/>
-<result property="id" column="id"/>
-<result property="detail" column="detail"/>
-<result property="notice" column="notice"/>
-<result property="b_time" column="b_time"/>
-<result property="program" column="program"/>
-<result property="service" column="service"/>
-<result property="prod1" column="prod1"/>
-<result property="prod3" column="prod3"/>
-<result property="prod6" column="prod6"/>
-<result property="prod12" column="prod12"/>
-<result property="prod1sale" column="prod1sale"/>
-<result property="prod3sale" column="prod3sale"/>
-<result property="prod6sale" column="prod6sale"/>
-<result property="prod12sale" column="prod12sale"/>
-<result property="prod1retail" column="prod1retail"/>
-<result property="prod3retail" column="prod3retail"/>
-<result property="prod6retail" column="prod6retail"/>
-<result property="prod12retail" column="prod12retail"/>
-<result property="cate" column="cate"/>
-<result property="alltime" column="alltime"/>
-<result property="review_star" column="review_star"/>
-<result property="review_count" column="review_count"/>
- </resultMap>
+	<select id="placeDetail" resultType="businessDetailVO" parameterType="String">
+	select * from business_detail where id = #{id}
+	</select>
+	
+	<select id="businessImage" resultType="goodsImageFileVO" parameterType="String">
+	select * from business_detail_image where goods_id = #{goods_id}
+	</select>
+	
+	
 	<select id="businessDetailSearch" resultType="businessVO" parameterType="String">
 	<![CDATA[
 select * from  business_detail
