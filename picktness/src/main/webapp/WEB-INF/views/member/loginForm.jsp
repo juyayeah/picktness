@@ -150,6 +150,7 @@
 
             <div id="personalLoginForm">
                 <form action="${contextPath}/member/login.do" method="post">
+                	<input type="hidden" name="userType" value="member">
                     <input type="text" id="id" name="id" placeholder="아이디" required>
                     <br>
                     <input type="password" id="password" name="pwd" placeholder="비밀번호" required>
@@ -170,6 +171,7 @@
             
             <div id="businessLoginForm" style="display: none;">
                 <form action="${contextPath}/member/login.do" method="post">
+                	<input type="hidden" name="userType"value="business">
                     <input type="text" id="businessId" name="businessId" placeholder="사업자 아이디" required>
                     <br>
                     <input type="password" id="businessPassword" name="businessPassword" placeholder="비밀번호" required>
