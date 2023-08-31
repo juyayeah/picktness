@@ -349,7 +349,7 @@ input:focus {
 								class="l_title">${place.b_name }</span> <span class="location">${place.addrBasic }
 							</span> <span class="location"> <fmt:formatNumber pattern="0.0"
 									value="${place.distance/1000 }" />km
-							</span> <span class="price">${place.prod1retail }/월 </span>
+							</span> <span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod1retail}" />/월 </span>
 							<div class="cates">
 								<c:if test="${place.allTime == 'Y' }">
 									<div class="cate">24시간</div>
@@ -383,7 +383,8 @@ input:focus {
 								class="l_title">${place.b_name }</span> <span class="location">${place.addrBasic }
 							</span> <span class="location"> <fmt:formatNumber pattern="0.0"
 									value="${place.distance/1000 }" />km
-							</span> <span class="price">${place.prod1retail }/월 </span>
+							</span> <span class="price">
+							<fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod1retail}" />/월</span>
 							<div class="cates">
 								<c:if test="${place.allTime == 'Y' }">
 									<div class="cate">24시간</div>
@@ -423,7 +424,7 @@ input:focus {
 							<fmt:parseNumber var="price" integerOnly="true" type="number"
 								value="${trainer.prod10retail}" />
 							<span class="price"><fmt:formatNumber value="${price /10}"
-									pattern="#,###" />/회</span>
+									pattern="#,###,###" />/회</span>
 							<div class="cates">
 								<div class="cate">${trainer.cate }</div>
 							</div>
@@ -453,8 +454,9 @@ input:focus {
 						<div class="main_item"
 							onclick="location.href='${contextPath}/goods/gymDetail.do'">
 							<img class="main_img"
-								src="${contextPath}/images/main/health4.jpg" /> <span
-								class="l_title">${goods.goods_title }</span> <span class="price">${goods.priceRetail }원
+								src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" /> <span
+								class="l_title">${goods.goods_title }</span>
+								<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.priceRetail}" />원
 							</span>
 							<c:if test="${goods.review_count ne 0 }">
 								<div class="star">
@@ -480,8 +482,8 @@ input:focus {
 						<div class="main_item"
 							onclick="location.href='${contextPath}/goods/gymDetail.do'">
 							<img class="main_img"
-								src="${contextPath}/images/main/health4.jpg" /> <span
-								class="l_title">${food.goods_title }</span> <span class="price">${food.priceRetail }원
+								src="${contextPath}/download.do?cate=shop&imageFileName=${food.fileName}&bno=${food.goods_id}" /> <span
+								class="l_title">${food.goods_title }</span> <span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${food.priceRetail}" />원
 							</span>
 							<c:if test="${food.review_count ne 0 }">
 								<div class="star">

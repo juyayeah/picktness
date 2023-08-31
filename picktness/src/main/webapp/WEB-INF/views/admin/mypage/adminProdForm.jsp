@@ -57,6 +57,8 @@ request.setCharacterEncoding("utf-8");
 	border: 1px solid #999;
 	font-family: inherit;
 	border-radius: 2px;
+	resize: none;
+	outline:none;
 }
 
 .tdfirsttop {
@@ -157,7 +159,7 @@ request.setCharacterEncoding("utf-8");
 }
 
 .imgbox img {
-	width: 70px;
+	width: 90px;
 	height: 90px;
 }
 
@@ -266,27 +268,16 @@ width:30%;
 					<td width="70%"><div class="imgbox">
 							<input type="button" class="addButton" value="파일 추가" onClick="fn_addFile()"/>
 							<div class="newFile"></div>
-							<div class="upload">
-							
-							</div>
-						</div> <span style="font-size: 11px;">권장 크기 : 1000 x 1000 (윈도대상
-							750 x 1000)대표이미지 기준 1000x1000 이상 이미지를 등록하시면, 이미지 확대 기능이
-							제공됩니다.쇼핑검색에 노출되지 않는 경우 가이드를 확인해주세요.</span></td>
+						</div></td>
 				<tr>
 					<td class="tdfirsttop" align="right">상세설명</td>
-					<td class="starbluetop">*</td>
+					<td class="starbluetop"></td>
 					<td width="70%"><textarea name="detail" rows="10" cols="60"
-							maxlength="4000"></textarea> <span
-						style="font-size: 11px; color: #2089f1;">* 외부 링크를 통한
-							개인정보(휴대폰 번호, 이메일 주소) 수집은 금지되므로 등록시 노출이 제재될 수 있습니다.<br> *
-							상품명과 직접적 관련 없는 상세설명, 외부 링크 입력 시 관리자에 의해 판매 금지 될 수 있습니다. <br>
-							* 안전거래정책에 위배될 경우 관리자에 의해 제재조치가 있을 수 있습니다.<br> * 픽트니스 이외의
-							외부링크, 일부 스크립트 및 태그는 자동 삭제될 수 있습니다.
-					</span></td>
+							maxlength="4000"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="3" align="right"><br>
-						<button class="button_white"
+						<button type="button" class="button_white"
 							onclick="location.href='${contextPath}/admin/mypage/adminProdList.do'">목록으로</button>&nbsp;&nbsp;
 						<button type="button" class="button_blue">등록하기</button>
 				</tr>
@@ -298,11 +289,11 @@ width:30%;
 	var cnt=0;
 	function fn_addFile(){
 		if(cnt == 0){
-			$(".newFile").append("<br>"+"<label>메인이미지</lable><input type='file' name='main_image' onchange='readURL(this,"+cnt+");' />");
-			$('.upload').append("<img id='preview" + cnt + "'width=150 height=150/>");
+			$(".newFile").append("<br>"+"<label>메인이미지</label><input type='file' name='main_image' onchange='readURL(this,"+cnt+");' />");
+			$('.newFile').append("<div class='upload'><img id='preview" + cnt + "'/></div>");
 		} else if(cnt < 3) {
-			$(".newFile").append("<br>"+"<labe>상세이미지</label><input type='file' name='detail_image'" + cnt + " onchange='readURL(this,"+cnt+");'/>");
-			$('.upload').append("<img id='preview" + cnt + "'width=150 height=150/>");
+			$(".newFile").append("<br>"+"<label>상세이미지</label><input type='file' name='detail_image'" + cnt + " onchange='readURL(this,"+cnt+");'/>");
+			$('.newFile').append("<div class='upload'><img id='preview" + cnt + "'/></div>");
 		} else {
 			alert("사진은 최대 3장만 첨부 가능합니다.");
 		}
@@ -392,7 +383,7 @@ width:30%;
             	$("#addForm").append(input_fir);
 				$("#addForm").append(input_sec);
 				
-				if ($("#priceRetail").val() == 0){
+				if ($("#priceRetail").val() == 0 || $("#priceRetail").val() == null){
 					var priceRetail = $("#priceOrigin").val();
 					$("#priceRetail").attr("value", priceRetail);
 					$("#addForm").append("<input type='hidden' name='priceSale' value='0'/>");

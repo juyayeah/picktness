@@ -45,6 +45,8 @@ public class FileDownloadController {
 		switch(cate) {
 		case "mill":fileName = TODAYMILL_IMAGE_REPO+"\\"+bno+"\\"+imageFileName;
 		break;
+		case "shop":fileName = SHOPPING_IMAGE_REPO+"\\"+bno+"\\"+imageFileName;
+		break;
 		}
 		return fileName;
 	}
