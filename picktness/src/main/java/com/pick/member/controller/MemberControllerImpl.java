@@ -106,14 +106,21 @@ public class MemberControllerImpl implements MemberController{
 			return mav;
 		}
 	
-	
+	//일반회원 아이디 중복
 	@RequestMapping(value="/member/idCheck")
 	@ResponseBody
 	public int idCheck(@RequestParam("id") String id) throws Exception{
 		int cnt = memberService.idCheck(id);
 		return cnt;
 	}
-	
+	//사업자 아이디 중복
+	@RequestMapping(value="/member/bIdCheck")
+	@ResponseBody
+	public int bIdCheck(@RequestParam("id") String id) throws Exception{
+		int cnt = memberService.bIdCheck(id);
+		return cnt;
+	}
+	//일반회원 이메일 중복
 	@RequestMapping(value="/member/emailCheck")
 	@ResponseBody
 	public int emailCheck(@RequestParam Map<String, String> emailChk) throws Exception{
@@ -121,7 +128,13 @@ public class MemberControllerImpl implements MemberController{
 		return cnt;
 	}
 	
-	
+	//사업자 이메일 중복
+		@RequestMapping(value="/member/bEmailCheck")
+		@ResponseBody
+		public int bEmailCheck(@RequestParam Map<String, String> bEmailChk) throws Exception{
+			int cnt = memberService.bEmailCheck(bEmailChk);
+			return cnt;
+		}
 	@RequestMapping(value="/member/join.do", method=RequestMethod.GET)
 	private ModelAndView join(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
@@ -177,9 +190,12 @@ public class MemberControllerImpl implements MemberController{
 	
 	@Override
 	@RequestMapping(value="/member/addB_Member.do" , method = RequestMethod.POST)
-	public ResponseEntity addB_Member(BusinessVO business, HttpServletRequest request, HttpServletResponse response)
+	public ResponseEntity addB_Member(BusinessVO business,
+			 @RequestParam(name = "emailConsent", required = false) boolean emailConsentChecked,
+			 @RequestParam(name = "phoneConsent", required = false) boolean phoneConsentChecked,
+			 HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		System.out.println("회원가입 메소드 진입");
+		
 	    response.setContentType("text/html; charset=UTF-8");
 	    request.setCharacterEncoding("utf-8");
 	    String message = null;
@@ -187,7 +203,8 @@ public class MemberControllerImpl implements MemberController{
 	    HttpHeaders responseHeaders = new HttpHeaders();
 	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 	    try {
-	        // member 객체의 정보를 그대로 사용
+	    	business.setEmailConsent(emailConsentChecked ? "Y" : "N");
+	    	business.setPhoneConsent(phoneConsentChecked ? "Y" : "N");
 	        memberService.addB_Member(business);
 	       
 	        message  = "<script>";

@@ -746,6 +746,7 @@ function isValidEmailDomain(domain) {
               placeholder="상세주소"
               style="width: 250px"
             />
+            </div>
             <div class="form-row">
               <label for="email"
                 >이메일<span class="label-with-star">*</span></label
@@ -837,9 +838,7 @@ function isValidEmailDomain(domain) {
                 name="phone1"
                 class="phone-input"
                 maxlength="3"
-                value="010"
                 onkeyup="formatPhoneNumber()"
-                disabled
               />
               <span>-</span>
               <input
