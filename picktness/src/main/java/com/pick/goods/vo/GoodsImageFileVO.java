@@ -27,11 +27,7 @@ public class GoodsImageFileVO {
 		return fileName;
 	}
 	public void setFileName(String fileName) {
-		try {
-			this.fileName = URLEncoder.encode(fileName,"UTF-8");
-		} catch(UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		this.fileName = fileName;
 	}
 	public String getFileType() {
 		return fileType;

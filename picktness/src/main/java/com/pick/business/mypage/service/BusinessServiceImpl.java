@@ -1,16 +1,20 @@
 package com.pick.business.mypage.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pick.business.mypage.dao.BusinessDAO;
 import com.pick.business.mypage.vo.BusinessDetailVO;
 import com.pick.goods.vo.GoodsImageFileVO;
 @Service("businessService")
+@Transactional(propagation=Propagation.REQUIRED)
 public class BusinessServiceImpl implements BusinessService{
 	@Autowired
 	BusinessDAO businessDAO;
@@ -31,11 +35,17 @@ public class BusinessServiceImpl implements BusinessService{
 	}
 
 
-
 	@Override
-	public void insertBusinessDetail(Map gymmap) throws Exception {
-		businessDAO.insertBusinessDetail(gymmap);
-		
+	public void insertBusinessDetail(Map newGoodsMap) throws Exception {
+		businessDAO.insertBusinessDetail(newGoodsMap);
+		ArrayList<GoodsImageFileVO> imageFileList = (ArrayList<GoodsImageFileVO>) newGoodsMap.get("imageFileList");
+		for(int i=0; i<imageFileList.size(); i++) {
+			GoodsImageFileVO imageFileVO = imageFileList.get(i);
+			businessDAO.insertBusinessImage(imageFileVO);
+		}
 	}
+
+
+
 
 }

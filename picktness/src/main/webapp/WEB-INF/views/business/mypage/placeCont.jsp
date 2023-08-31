@@ -14,14 +14,6 @@ request.setCharacterEncoding("utf-8");
 <script  src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src ="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-$(function(){
-	if(${businessPlace eq null}){
-		
-alert("멍미");
-	} else{
-		alert("없음");
-	}
-})
 function mon1(){
 	document.getElementById("pricebox").style.display = "block";
 	document.getElementById("pricebox1").style.display = "block";
@@ -271,7 +263,7 @@ textarea {
 <body>
 <form action="${contextPath }/business/mypage/addGymDetail.do" method="post" name ="frmBusiness" enctype="multipart/form-data">
 	<div>
-		<h2 align="center">운동시설 등록</h2>
+		<h2 align="center">운동시설</h2>
 		<table>
 			<tr>
 				<td colspan="3" align="right"><span class="starblue" style="font-size: small;">*필수항목</span>
@@ -371,7 +363,7 @@ textarea {
 			</tr>
 			<tr>
 				<td colspan="3" align="right"><button type="reset" class="button_white">취소</button>&nbsp;&nbsp;
-					<button class="button_blue" type="submit">등록</button>
+					<button class="button_blue" type="submit">수정</button>
 			</tr>
 		</table>
 	</div>

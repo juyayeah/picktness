@@ -1,9 +1,13 @@
 package com.pick.business.mypage.controller;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pick.business.mypage.service.BusinessService;
 import com.pick.business.mypage.vo.BusinessDetailVO;
+import com.pick.goods.vo.GoodsImageFileVO;
 import com.pick.member.vo.BusinessVO;
 
 @Controller("BusinessMypageController")
@@ -45,8 +50,12 @@ public class BusinessControllerImpl implements BusinessController {
 		String id = business.getId();
 		System.out.println(id);
 		Map businessPlace = businessService.placeDetail(id);
-		mav.setViewName(viewName);
-		mav.addObject("businessPlace", businessPlace);
+		if(businessPlace != null) {
+			mav.setViewName("redirect:/business/mypage/placeForm.do");
+		}else {
+			mav.setViewName(viewName);
+			mav.addObject("businessPlace", businessPlace);
+		}
 		return mav;
 	}
 
@@ -64,77 +73,92 @@ public class BusinessControllerImpl implements BusinessController {
 	public ResponseEntity addGymDetail(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("test222");
 		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String, Object> Map = new HashMap<String, Object>();
-		System.out.println("MC15811111 Map : " + Map);
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String formatedNow = now.format(formatter);
+		int number = (int) (Math.random() * 8999) + 1000;
+		String goods_id = "pc" + formatedNow + number;
+		String imageFileName = null;
+		System.out.println(goods_id);
+		
+		Map newGoodsMap = new HashMap();
 		Enumeration enu = multipartRequest.getParameterNames();
+		newGoodsMap.put("goods_id", goods_id);
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
 			String value = multipartRequest.getParameter(name);
-			Map.put(name, value);
+			newGoodsMap.put(name, value);
 		}
-		String imageFileName = upload(multipartRequest);
-		Map.put("imageFileName", imageFileName);
-		System.out.println("MapMap  : " + Map);
-
-		String id = (String) Map.get("id");
-		String message;
-		ResponseEntity resEnt = null;
+		if(newGoodsMap.get("allTime") == null) {
+			newGoodsMap.put("allTime", "N");
+		}
+		List<GoodsImageFileVO> imageFileList = upload(multipartRequest);
+		if(imageFileList != null && imageFileList.size() !=0) {
+			for(GoodsImageFileVO imageFileVO : imageFileList) {
+				imageFileVO.setGoods_id(goods_id);
+			}
+			newGoodsMap.put("imageFileList", imageFileList);
+		}
+		System.out.println("MapMap  : " + newGoodsMap);
+		String message = null;
+		ResponseEntity resEntity = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html;charset=utf-8");
 		try {
-
-			if (imageFileName != null && imageFileName.length() != 0) {
-
-				String originalFileName = (String) Map.get("originalFileName");
-				File oldFile = new File(BUSINESS_IMAGE_REPO + "\\" + id + "\\" + originalFileName);
-				oldFile.delete();
-
-				File srcFile = new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-				File destDir = new File(BUSINESS_IMAGE_REPO + "\\" + id);// 는 destDir.mkdirs();로 꼭 파일을 넣어야 한다.
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);// 앞쪽에서 뒤쪽으로 s>d>t)
+			businessService.insertBusinessDetail(newGoodsMap);
+			if (imageFileList != null && imageFileList.size() != 0) {
+				for(GoodsImageFileVO imageFileVO : imageFileList) {
+					imageFileName = imageFileVO.getFileName();
+					File srcFile = new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+					File destDir = new File(BUSINESS_IMAGE_REPO + "\\" + goods_id);
+					FileUtils.moveFileToDirectory(srcFile, destDir, true);
+				}
 
 			}
 			message = "<script>";
-			message += " alert('관리자정보를 수정했습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/business/mypage/addGym.do?id=" + id
-					+ "';";
+			message += " alert('운동시설을 등록했습니다.');";
+			message += " location.href='" + multipartRequest.getContextPath() + "/business/mypage/placeCont.do';";
 			message += "</script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			// TODO: handle exception
-			File srcFile = new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
-			srcFile.delete();
-
+			if(imageFileList != null && imageFileList.size() !=0) {
+				for(GoodsImageFileVO imageFileVO : imageFileList) {
+					imageFileName = imageFileVO.getFileName();
+					File srcFile = new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName);
+					srcFile.delete();
+				}
+			}
 			message = " <script>";
-			message += " alert('수정 중 오류가 발생했습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/business/mypage/addGym.do?id=" + id
-					+ "';";
+			message += " alert('등록 중 오류가 발생했습니다.');";
+			message += " location.href='" + multipartRequest.getContextPath() + "/business/mypage/addGym.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
 		}
-		return resEnt;
+		resEntity = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		return resEntity;
 	}
 
-	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
-		// TODO Auto-generated method stub
-		String imageFileName = null;
+	private List<GoodsImageFileVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+		List<GoodsImageFileVO> fileList = new ArrayList<GoodsImageFileVO>();
 		Iterator<String> fileNames = multipartRequest.getFileNames();
-
 		while (fileNames.hasNext()) {
+			GoodsImageFileVO imageFileVO = new GoodsImageFileVO();
 			String fileName = fileNames.next();
+			imageFileVO.setFileType(fileName);
 			MultipartFile mFile = multipartRequest.getFile(fileName);
-			imageFileName = mFile.getOriginalFilename();
-			File file = new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
+			String originalFileName = mFile.getOriginalFilename();
+			imageFileVO.setFileName(originalFileName);
+			fileList.add(imageFileVO);
+			
+			File file = new File(BUSINESS_IMAGE_REPO + "\\" + fileName);
 			if (mFile.getSize() != 0) {
 				if (!file.exists()) {
 					file.getParentFile().mkdirs();
-					mFile.transferTo(new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + imageFileName));
+					mFile.transferTo(new File(BUSINESS_IMAGE_REPO + "\\" + "temp" + "\\" + originalFileName));
 				}
 			}
 		}
-		return imageFileName;
+		return fileList;
 	}
 
 	@RequestMapping(value = "/business/mypage/modGym.do", method = RequestMethod.GET)

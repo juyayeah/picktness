@@ -99,6 +99,8 @@ public class MemberControllerImpl implements MemberController{
 			HttpSession session = request.getSession();
 			session.removeAttribute("isLogOn");
 			session.removeAttribute("member");
+			session.removeAttribute("business");
+			session.removeAttribute("uri");
 			session.setAttribute("lat", 36.3492640);
 			session.setAttribute("lng", 127.3776557);
 			session.setAttribute("memLocation", "대전 서구 대덕대로 182");

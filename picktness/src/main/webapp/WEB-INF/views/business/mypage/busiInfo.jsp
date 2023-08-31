@@ -51,7 +51,7 @@ height:40px;
 </tr>
 <tr>
 <th class="busith" align="right">사업장소재지</th>
-<td>${business.addrbasic } ${business.addrbasic }</td>
+<td>${business.addrBasic } ${business.addrDetail }</td>
 <td><button id="modBtn" onclick='modinfo()'>수정</button></td>
 </tr>
 <tr>

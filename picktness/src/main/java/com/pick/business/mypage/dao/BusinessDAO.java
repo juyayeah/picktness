@@ -14,6 +14,7 @@ import com.pick.goods.vo.GoodsImageFileVO;
 public interface BusinessDAO {
 	public BusinessDetailVO placeDetail(String id) throws DataAccessException;
 	public List<GoodsImageFileVO> businessImage(String goods_id) throws DataAccessException;
-	public void insertBusinessDetail(Map gymmap) throws DataAccessException;
+	public void insertBusinessDetail(Map newGoodsMap) throws DataAccessException;
+	public void insertBusinessImage(GoodsImageFileVO imageFileVO) throws DataAccessException;
 
 }
