@@ -191,8 +191,6 @@ public class MemberControllerImpl implements MemberController{
 	@Override
 	@RequestMapping(value="/member/addB_Member.do" , method = RequestMethod.POST)
 	public ResponseEntity addB_Member(BusinessVO business,
-			 @RequestParam(name = "emailConsent", required = false) boolean emailConsentChecked,
-			 @RequestParam(name = "phoneConsent", required = false) boolean phoneConsentChecked,
 			 HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
@@ -203,8 +201,6 @@ public class MemberControllerImpl implements MemberController{
 	    HttpHeaders responseHeaders = new HttpHeaders();
 	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 	    try {
-	    	business.setEmailConsent(emailConsentChecked ? "Y" : "N");
-	    	business.setPhoneConsent(phoneConsentChecked ? "Y" : "N");
 	        memberService.addB_Member(business);
 	       
 	        message  = "<script>";

@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService{
 	MemberDAO memberDAO;
 	@Autowired
 	MemberVO memberVO;
-	public MemberVO login(Map loginMap) throws DataAccessException{
+	public MemberVO login(Map<String, String> loginMap) throws DataAccessException{
 		return memberDAO.loginById(loginMap);
 	}
 	@Override
@@ -39,15 +39,15 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-    public int emailCheck(Map emailChk) throws DataAccessException {
+    public int emailCheck(Map<String, String> emailChk) throws DataAccessException {
         return memberDAO.emailCheck(emailChk);
     }
 	@Override
-    public int bEmailCheck(Map bEmailChk) throws DataAccessException {
+    public int bEmailCheck(Map<String, String> bEmailChk) throws DataAccessException {
         return memberDAO.emailCheck(bEmailChk);
     }
 	@Override
-	public BusinessVO loginBusiness(Map loginMap) throws DataAccessException {
+	public BusinessVO loginBusiness(Map<String, String> loginMap) throws DataAccessException {
 		return memberDAO.loginBusiness(loginMap);
 	}
 	

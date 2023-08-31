@@ -16,8 +16,6 @@ public interface MemberController {
 			 @RequestParam(name = "phoneConsent", required = false) boolean phoneConcentChecked,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity addB_Member(@ModelAttribute("business") BusinessVO business,
-			 @RequestParam(name = "emailConsent", required = false) boolean emailConcentChecked,
-			 @RequestParam(name = "phoneConsent", required = false) boolean phoneConcentChecked,
            HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
 
