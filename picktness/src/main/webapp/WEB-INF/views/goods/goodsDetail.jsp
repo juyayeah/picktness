@@ -375,12 +375,10 @@ background-color:#fff;
 				<table border=0 align="center" width="860px">
 					<tr>
 						<!-- 사진칸 -->
-						<td class="detail_goods_img" rowspan="7"><input
-							type="hidden" name="originalFileName"
-							value="${user.imageFileName }" /> <img
-							src="${contextPath}/images/member/yoga.jpg" width="300px"
-							align="right"></td>
-
+						<td class="detail_goods_img" rowspan="7">
+							<input type="hidden" name="originalFileName" value="${food.fileName}" />
+							<img src="${contextPath}/images/member/yoga.jpg" width="300px" align="right">
+						</td>
 						<!-- <img src="${contextPath }/download.do?imageFileName=${member.imageFileName }&num=${member.num}" id="preview" width="300px" height="300px" /><br> <input type="file"
                   name="imageFileName" id="imageFileName"
                   onchange="readURL(this);" disabled /></td> -->
