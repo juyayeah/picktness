@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pick.goods.service.GoodsService;
 import com.pick.goods.vo.GoodsBusinessVO;
+import com.pick.goods.vo.GoodsImageFileVO;
 import com.pick.goods.vo.GoodsShoppingVO;
 import com.pick.goods.vo.GoodsTrainerVO;
 
@@ -258,15 +259,18 @@ public class GoodsControllerImpl implements GoodsController{
 		return mav;
 	}
 
-	//--------운동시설------------//
-	@RequestMapping(value="/goods/gymDetail.do", method=RequestMethod.GET)
-	private ModelAndView gymDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@Override
+	@RequestMapping(value="/goods/placeDetail.do")
+	public ModelAndView placeDetail(String goods_id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		GoodsBusinessVO placeVO = goodsService.goodsBusinessDetail(goods_id);
+		List<GoodsImageFileVO> placeImage = goodsService.goodsBusinessImage(goods_id);
 		mav.setViewName(viewName);
 		return mav;
 	}
-	
+
 	//--------트레이너------------//
 	@RequestMapping(value="/goods/trainerDetail.do", method=RequestMethod.GET)
 	private ModelAndView trainerDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
