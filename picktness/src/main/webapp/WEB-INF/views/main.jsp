@@ -346,7 +346,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
               <div class="main_item" onClick="location.href='#'">
                 <img
                   class="main_img"
-                  src="${contextPath}/download.do?cate=place&imageFileName=${place.fileName}&bno=${place.goods_id}"
+                  src="${contextPath}/images/main/health4.jpg"
                 />
                 <span class="l_title">${place.b_name }</span>
                 <span class="location">${place.addrBasic } </span>
@@ -549,7 +549,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
             <c:forEach items="${foodList }" var="food">
               <div
                 class="main_item"
-                onclick="location.href='${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id}'"
+                onclick="location.href='${contextPath}/goods/goodsDetail.do?goods_id=${food.goods_id}'"
               >
                 <img
                   class="main_img"

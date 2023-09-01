@@ -21,11 +21,16 @@ import com.pick.goods.vo.GoodsBusinessVO;
 import com.pick.goods.vo.GoodsImageFileVO;
 import com.pick.goods.vo.GoodsShoppingVO;
 import com.pick.goods.vo.GoodsTrainerVO;
+import com.pick.member.vo.MemberVO;
 
 @Controller("goodsController")
 public class GoodsControllerImpl implements GoodsController{
 	@Autowired
 	GoodsService goodsService;
+	
+	@Autowired
+	GoodsShoppingVO goodsShoppingVO;
+	
 	@Autowired
 	HttpSession session;
 
@@ -286,9 +291,14 @@ public class GoodsControllerImpl implements GoodsController{
 	//--------쇼핑------------//
 	@RequestMapping(value="/goods/goodsDetail.do", method=RequestMethod.GET)
 	private ModelAndView goodsDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		goodsShoppingVO = (GoodsShoppingVO) session.getAttribute("goods");
+		//String id = goodsShoppingVO.getId();
+		ModelAndView mav = new ModelAndView();
+		//goodsShoppingVO = mypageService.memberDetail(id);
 		mav.setViewName(viewName);
+		mav.addObject("goods",goodsShoppingVO);
 		return mav;
 	}
 	//검색
