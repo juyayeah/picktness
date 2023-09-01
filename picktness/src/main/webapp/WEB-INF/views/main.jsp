@@ -549,7 +549,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
             <c:forEach items="${foodList }" var="food">
               <div
                 class="main_item"
-                onclick="location.href='${contextPath}/goods/gymDetail.do'"
+                onclick="location.href='${contextPath}/goods/goodsDetail.do?goods_id=${item.goods_id}'"
               >
                 <img
                   class="main_img"
