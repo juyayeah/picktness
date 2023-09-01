@@ -3,79 +3,33 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
 <mapper namespace="com.pick.business.mypage.dao.BusinessDAO">
- <resultMap id="businessList" type="businessVO">
-<result property="goods_id" column="goods_id"/>
-<result property="id" column="id"/>
-<result property="detail" column="detail"/>
-<result property="notice" column="notice"/>
-<result property="b_time" column="b_time"/>
-<result property="program" column="program"/>
-<result property="service" column="service"/>
-<result property="prod1" column="prod1"/>
-<result property="prod3" column="prod3"/>
-<result property="prod6" column="prod6"/>
-<result property="prod12" column="prod12"/>
-<result property="prod1sale" column="prod1sale"/>
-<result property="prod3sale" column="prod3sale"/>
-<result property="prod6sale" column="prod6sale"/>
-<result property="prod12sale" column="prod12sale"/>
-<result property="prod1retail" column="prod1retail"/>
-<result property="prod3retail" column="prod3retail"/>
-<result property="prod6retail" column="prod6retail"/>
-<result property="prod12retail" column="prod12retail"/>
-<result property="cate" column="cate"/>
-<result property="alltime" column="alltime"/>
-<result property="review_star" column="review_star"/>
-<result property="review_count" column="review_count"/>
- </resultMap>
-	<select id="businessDetailSearch" resultType="businessVO" parameterType="String">
+	<select id="placeDetail" resultType="businessDetailVO" parameterType="String">
 	<![CDATA[
-select * from  business_detail
+	select * from business_detail where id = #{id}
 	]]>
 	</select>
-	<insert id="insertBusinessDetail" parameterType="businessVO">
-INSERT INTO business_detail
-(goods_id,
-id,
-detail,
-notice,
-b_time,
-program,
-service,
-prod1,
-prod3,
-prod6,
-prod12,
-prod1sale,
-prod3sale,
-prod6sale,
-prod12sale,
-prod1retail,
-prod3retail,
-prod6retail,
-prod12retail,
-cate)
-VALUES
-(#{goods_id},
-#{id},
-#{detail},
-#{notice},
-#{b_time},
-#{program},
-#{service},
-#{prod1},
-#{prod3},
-#{prod6},
-#{prod12},
-#{prod1sale},
-#{prod3sale},
-#{prod6sale},
-#{prod12sale},
-#{prod1retail},
-#{prod3retail},
-#{prod6retail},
-#{prod12retail},
-#{cate});
+	
+	<select id="businessImage" resultType="goodsImageFileVO" parameterType="String">
+	<![CDATA[
+	select * from business_detail_image where goods_id = #{goods_id}
+	]]>
+	</select>
+	
+	
+	<select id="businessDetailSearch" resultType="businessVO" parameterType="String">
+	<![CDATA[
+	select * from  business_detail
+	]]>
+	</select>
+	<insert id="insertBusinessDetail" parameterType="java.util.Map">
+	<![CDATA[
+insert into business_detail values(#{goods_id}, #{id}, #{detail}, #{notice, jdbcType=VARCHAR}, #{b_time}, #{program ,jdbcType=VARCHAR}, #{service,jdbcType=VARCHAR}, #{prod1}, #{prod3,jdbcType=VARCHAR}, #{prod6,jdbcType=VARCHAR}, #{prod12,jdbcType=VARCHAR}, #{prod1sale}, #{prod3sale,jdbcType=VARCHAR}, #{prod6sale,jdbcType=VARCHAR},#{prod12sale,jdbcType=VARCHAR}, #{prod1retail}, #{prod3retail,jdbcType=VARCHAR}, #{prod6retail,jdbcType=VARCHAR}, #{prod12retail},#{cate}, #{allTime,jdbcType=VARCHAR}, 0, 0)
+	]]>
 	</insert>
 	
+	<insert id="insertBusinessImage" parameterType="goodsImageFileVO">
+	<![CDATA[
+	insert into business_detail_image(goods_id, fileName, fileType) value (#{goods_id}, #{fileName}, #{fileType})
+	]]>
+	</insert>
  </mapper>

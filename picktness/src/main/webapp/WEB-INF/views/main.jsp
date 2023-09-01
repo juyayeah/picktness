@@ -346,7 +346,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
               <div class="main_item" onClick="location.href='#'">
                 <img
                   class="main_img"
-                  src="${contextPath}/images/main/health4.jpg"
+                  src="${contextPath}/download.do?cate=place&imageFileName=${place.fileName}&bno=${place.goods_id}"
                 />
                 <span class="l_title">${place.b_name }</span>
                 <span class="location">${place.addrBasic } </span>

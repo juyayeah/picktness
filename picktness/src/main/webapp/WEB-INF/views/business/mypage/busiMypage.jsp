@@ -183,11 +183,11 @@ li {
 					<li class="mypage-name"><b>사업자페이지</b></li>
 					<img src="${contextPath}/images/underline.png" alt="밑줄"
 						class="underline"/>
-					<li class="menu"><a href="${contextPath }/business/mypage/gymCont.do">운동시설관리</a>
+					<li class="menu"><a href="${contextPath }/business/mypage/placeCont.do">운동시설관리</a>
 						<ul class="hide">
 							<li class="current"><a
 								href="${contextPath }/business/mypage/goodsAskCont.do" class="minimi">상품문의
-									관리1</a></li>
+									관리</a></li>
 						</ul></li>
 					<li class="menu"><a
 						href="${contextPath }/business/mypage/trainerCont.do"> 트레이너 관리</a></li>

@@ -269,6 +269,7 @@ width:30%;
 							<input type="button" class="addButton" value="파일 추가" onClick="fn_addFile()"/>
 							<div class="newFile"></div>
 						</div></td>
+				</tr>
 				<tr>
 					<td class="tdfirsttop" align="right">상세설명</td>
 					<td class="starbluetop"></td>

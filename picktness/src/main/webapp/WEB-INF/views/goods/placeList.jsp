@@ -252,7 +252,7 @@ font-size:14px;
 			<c:forEach items="${placeList }" var="place">
 				<div class="main_item"
 					onclick="location.href='${contextPath}/goods/gymDetail.do'">
-					<img class="main_img" src="${contextPath}/images/main/health4.jpg" />
+					<img class="main_img" src="${contextPath}/download.do?cate=place&imageFileName=${place.fileName}&bno=${place.goods_id}" />
 					<span class="title">${place.b_name }</span>
 					<span class="location">${place.addrBasic } 
 					</span>

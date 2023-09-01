@@ -7,7 +7,14 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
+<c:if test='${not empty message }'>
+<script>
+alert("${message}");
+</script>
+</c:if>
+
     <style>
       .container {
         font-family: Arial, sans-serif;
@@ -15,20 +22,17 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         justify-content: center;
         align-items: center;
 
-        margin: 70px 0px 150px 0px;
-      }
-      .login-container {
-        width: 30%;
-        text-align: center;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        background-color: white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      h1 {
-        margin-bottom: 20px;
-      }
+
+        .bBtn {
+            color: black;;
+            width: 120px; 
+            height: 50px;
+            border: none;
+            background-color: white;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
 
       .pBtn {
         color: black;
@@ -121,21 +125,37 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           personalLoginForm.style.display = "none";
           businessLoginForm.style.display = "block";
         }
-      }
 
-      // 페이지 로딩 시 초기값 설정
-      window.onload = function () {
-        var personalButton = document.getElementById("personalButton");
-        var businessButton = document.getElementById("businessButton");
-        var personalLoginForm = document.getElementById("personalLoginForm");
-        var businessLoginForm = document.getElementById("businessLoginForm");
+        
+        // 페이지 로딩 시 초기값 설정
+         window.onload = function() {
+        	if(${type == null}){
 
-        personalButton.style.color = "#2890F1";
-        businessButton.style.color = "black";
-        businessButton.style.textDecoration = "none";
-        personalLoginForm.style.display = "block";
-        businessLoginForm.style.display = "none";
-      };
+            var personalButton = document.getElementById('personalButton');
+            var businessButton = document.getElementById('businessButton');
+            var personalLoginForm = document.getElementById('personalLoginForm');
+            var businessLoginForm = document.getElementById('businessLoginForm');
+            
+            personalButton.style.color = '#2890F1';
+            businessButton.style.color = 'black';
+            businessButton.style.textDecoration = 'none';
+            personalLoginForm.style.display = 'block';
+            businessLoginForm.style.display = 'none';
+        	} else{
+
+                var personalButton = document.getElementById('personalButton');
+                var businessButton = document.getElementById('businessButton');
+                var personalLoginForm = document.getElementById('personalLoginForm');
+                var businessLoginForm = document.getElementById('businessLoginForm');
+                
+                personalButton.style.color = 'black';
+                personalButton.style.textDecoration = 'none';
+                businessButton.style.color = '#2890F1';            
+                personalLoginForm.style.display = 'none';
+                businessLoginForm.style.display = 'block';
+        	}
+        }; 
+
     </script>
     <meta charset="UTF-8" />
     <title>로그인창</title>
@@ -188,6 +208,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           </div>
         </div>
 
+
         <div id="businessLoginForm" style="display: none">
           <form action="${contextPath}/member/login.do" method="post">
             <input type="hidden" name="userType" value="business" />
@@ -214,6 +235,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
             <a href="${contextPath}/member/findByPwd.do">비밀번호 찾기</a> |
             <a href="${contextPath}/member/selectJoin.do">회원가입</a>
           </div>
+
         </div>
       </div>
     </div>

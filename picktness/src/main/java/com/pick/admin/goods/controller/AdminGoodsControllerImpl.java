@@ -37,6 +37,7 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 	AdminGoodsService adminGoodsService;
 
 	protected List<GoodsImageFileVO> upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
 		List<GoodsImageFileVO> fileList = new ArrayList<GoodsImageFileVO>();
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		while (fileNames.hasNext()) {
@@ -52,10 +53,9 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 			if (mFile.getSize() != 0) {
 				if (!file.exists()) {
 					if (file.getParentFile().mkdirs()) {
-						file.createNewFile();
+						mFile.transferTo(new File(SHOPPING_IMAGE_REPO + "\\" + "temp" + "\\" + originalFileName));
 					}
 				}
-				mFile.transferTo(new File(SHOPPING_IMAGE_REPO + "\\" + "temp" + "\\" + originalFileName));
 			}
 		}
 		return fileList;
