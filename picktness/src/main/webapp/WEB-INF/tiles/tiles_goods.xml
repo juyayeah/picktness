@@ -36,9 +36,9 @@
 	<put-attribute name="title" value="기구/용품/장비"/>
 	<put-attribute name="body" value="/WEB-INF/views/goods/shopGoodsList.jsp"/>
 	</definition>
-		<definition name="/goods/gymDetail" extends="baseLayout">
+		<definition name="/goods/placeDetail" extends="baseLayout">
 		<put-attribute name="title" value="시설정보"/>
-		<put-attribute name="body" value="/WEB-INF/views/goods/gymDetail.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/goods/placeDetail.jsp"/>
 	</definition>
 	<definition name="/goods/trainerDetail" extends="baseLayout">
 		<put-attribute name="title" value="트레이너정보"/>
