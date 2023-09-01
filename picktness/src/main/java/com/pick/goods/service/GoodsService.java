@@ -7,6 +7,8 @@ import org.springframework.dao.DataAccessException;
 
 import com.pick.goods.vo.GoodsBusinessVO;
 import com.pick.goods.vo.GoodsImageFileVO;
+import com.pick.goods.vo.GoodsReviewAnswerVO;
+import com.pick.goods.vo.GoodsReviewVO;
 import com.pick.goods.vo.GoodsShoppingVO;
 import com.pick.goods.vo.GoodsTrainerVO;
 
@@ -23,4 +25,7 @@ public interface GoodsService {
 	public Map<String, List> searchGoods(String search_content) throws DataAccessException;
 	public GoodsBusinessVO goodsBusinessDetail(String goods_id) throws DataAccessException;
 	public List<GoodsImageFileVO> goodsBusinessImage(String goods_id) throws DataAccessException;
+	public List<GoodsTrainerVO> goodsBusinessTrainerList(String id) throws DataAccessException;
+	public List<GoodsReviewVO> goodsBusinessReviewList(String goods_id) throws DataAccessException;
+	public List<GoodsReviewAnswerVO> goodsBusinessReviewAnswerList(String goods_id) throws DataAccessException;
 }

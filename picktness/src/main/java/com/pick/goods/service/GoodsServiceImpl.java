@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.pick.goods.dao.GoodsDAO;
 import com.pick.goods.vo.GoodsBusinessVO;
 import com.pick.goods.vo.GoodsImageFileVO;
+import com.pick.goods.vo.GoodsReviewAnswerVO;
+import com.pick.goods.vo.GoodsReviewVO;
 import com.pick.goods.vo.GoodsShoppingVO;
 import com.pick.goods.vo.GoodsTrainerVO;
 @Service("goodsService")
@@ -97,14 +99,35 @@ public class GoodsServiceImpl implements GoodsService{
 	@Override
 	public GoodsBusinessVO goodsBusinessDetail(String goods_id) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return goodsDAO.goodsBusinessDetail(goods_id);
 	}
 
 	@Override
 	public List<GoodsImageFileVO> goodsBusinessImage(String goods_id) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return goodsDAO.goodsBusinessImage(goods_id);
 	}
+
+	@Override
+	public List<GoodsTrainerVO> goodsBusinessTrainerList(String id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.goodsBusinessTrainerList(id);
+	}
+
+	@Override
+	public List<GoodsReviewVO> goodsBusinessReviewList(String goods_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.goodsBusinessReviewList(goods_id);
+	}
+
+	@Override
+	public List<GoodsReviewAnswerVO> goodsBusinessReviewAnswerList(String goods_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.goodsBusinessReviewAnswerList(goods_id);
+	}
+	
+	
+	
 	
 	
 	

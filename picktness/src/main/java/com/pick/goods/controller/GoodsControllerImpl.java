@@ -19,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pick.goods.service.GoodsService;
 import com.pick.goods.vo.GoodsBusinessVO;
 import com.pick.goods.vo.GoodsImageFileVO;
+import com.pick.goods.vo.GoodsReviewAnswerVO;
+import com.pick.goods.vo.GoodsReviewVO;
 import com.pick.goods.vo.GoodsShoppingVO;
 import com.pick.goods.vo.GoodsTrainerVO;
 
@@ -266,7 +268,18 @@ public class GoodsControllerImpl implements GoodsController{
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		GoodsBusinessVO placeVO = goodsService.goodsBusinessDetail(goods_id);
-		List<GoodsImageFileVO> placeImage = goodsService.goodsBusinessImage(goods_id);
+		List<GoodsImageFileVO> placeImageList = goodsService.goodsBusinessImage(goods_id);
+		String id = placeVO.getId();
+		List<GoodsTrainerVO> trainerList = goodsService.goodsBusinessTrainerList(id);
+		if(placeVO.getReview_count() != 0) {
+			List<GoodsReviewVO> placeReviewList = goodsService.goodsBusinessReviewList(goods_id);
+			List<GoodsReviewAnswerVO> placeReviewAnswerList = goodsService.goodsBusinessReviewAnswerList(goods_id);
+			mav.addObject("reviewList",placeReviewList);
+			mav.addObject("answerList", placeReviewAnswerList);
+		}
+		mav.addObject("place", placeVO);
+		mav.addObject("imageList", placeImageList);
+		mav.addObject("trainerList", trainerList);
 		mav.setViewName(viewName);
 		return mav;
 	}
