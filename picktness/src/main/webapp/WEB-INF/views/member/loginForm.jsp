@@ -174,11 +174,6 @@ alert("${message}");
                     <br>
                     <button class="loginB" type="submit">로그인</button>
                 </form>
-                <div class="button3">
-                    <button type="button" class="custom-button"  class="kakaoLogin" onClick="https://kauth.kakao.com/oauth/authorize">
-                        <img src="https://ifh.cc/g/8gHrO6.png" alt="카카오톡로그인" class="button-image button-image-kakao">
-                    </button>
-                </div>
                 <div class="footer-select">
                     <a href="${contextPath}/member/findById.do">아이디 찾기</a> |
                     <a href="${contextPath}/member/findByPwd.do">비밀번호 찾기</a> |
