@@ -364,6 +364,21 @@ a:hover {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
+.review_button{
+font-size:13px;
+float:right;
+text-align:center;
+width:90px;
+padding:10px 0px;
+border:1px solid #555;
+border-radius:5px;
+cursor: pointer;
+}
+.review_null{
+clear:both;
+margin:30px 0px;
+text-align:center;
+}
 /*post slider-end*/
 </style>
 
@@ -456,8 +471,7 @@ a:hover {
 </head>
 <body>
 	<div class="bodybody">
-		<form action="${contextPath }/business/addGymDetail.do" method="post"
-			name="frmGym" enctype="multipart/form-data">
+		<form action="#" method="post" name="frmGym">
 			<div>
 				<table>
 					<tr>
@@ -470,88 +484,108 @@ a:hover {
 							<div class="slideshow-container">
 
 								<!-- Full-width images with number and caption text -->
+								<c:forEach items="${imageList }" var="image" varStatus="status">
 								<div class="mySlides fade">
-									<div class="numbertext">1 / 6</div>
-									<img src="${contextPath}/images/member/gym1.png"
+									<div class="numbertext">${status.count } / ${imageList.size() }</div>
+									<img src="${contextPath}/download.do?cate=place&imageFileName=${image.fileName }&bno=${place.goods_id}"
 										class="img-size" />
-									<div class="text">전체사진보기</div>
 								</div>
+								</c:forEach>
 
-								<div class="mySlides fade">
+
+<%-- 								<div class="mySlides fade">
 									<div class="numbertext">2 / 6</div>
 									<img src="${contextPath}/images/member/gym2.png"
 										class="img-size">
-									<<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">3 / 6</div>
 									<img src="${contextPath}/images/member/gym3.png"
 										class="img-size">
-									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">4 / 6</div>
 									<img src="${contextPath}/images/member/gym4.png"
 										class="img-size">
-									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">5 / 6</div>
 									<img src="${contextPath}/images/member/health1.jpg"
 										class="img-size">
-									<div class="text">전체사진보기</div>
 								</div>
 
 								<div class="mySlides fade">
 									<div class="numbertext">6 / 6</div>
 									<img src="${contextPath}/images/member/health2.jpg"
 										class="img-size">
-									<div class="text">전체사진보기</div>
-								</div>
+								</div> --%>
 
 								<!-- Next and previous buttons -->
-								<a class="prev" onclick="moveSlides(-1)">&#10094;</a> <a
-									class="next" onclick="moveSlides(1)">&#10095;</a>
+								<c:choose>
+								<c:when test="${imageList.size() ne 1 }">
+								<a class="prev" onclick="moveSlides(-1)">&#10094;</a>
+								<a class="next" onclick="moveSlides(1)">&#10095;</a>
+								</c:when>
+								</c:choose>
 							</div> <br />
 
 							<div style="text-align: center">
-								<span class="dot" onclick="currentSlide(0)"></span> <span
-									class="dot" onclick="currentSlide(1)"></span> <span class="dot"
-									onclick="currentSlide(2)"></span> <span class="dot"
-									onclick="currentSlide(3)"></span> <span class="dot"
-									onclick="currentSlide(4)"></span> <span class="dot"
-									onclick="currentSlide(5)"></span>
-							</div> <!-- <img src="${contextPath }/download.do?imageFileName=${member.imageFileName }&num=${member.num}" id="preview" width="300px" height="300px" /><br> <input type="file"
-                  name="imageFileName" id="imageFileName"
-                  onchange="readURL(this);" disabled /></td> --> <!-- disabled 있으면 바꿀 수 없음 -->
-							<!-- 시설명 --></td>
+							<c:forEach var="i" begin="0" end="${imageList.size() -1 }">
+								<span class="dot" onclick="currentSlide(${i})"></span>
+								</c:forEach>
+<!-- 								<span class="dot" onclick="currentSlide(1)"></span>
+								<span class="dot" onclick="currentSlide(2)"></span>
+								<span class="dot" onclick="currentSlide(3)"></span>
+								<span class="dot" onclick="currentSlide(4)"></span>
+								<span class="dot" onclick="currentSlide(5)"></span> -->
+							</div></td>
 						<td align="left">
-							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">헬스보이짐&필라걸
-								둔산점</h2> <a style="padding: 0 0 0 30px; font-size: 13px;"
-							href="https://map.naver.com/v5/entry/place/1213678018?c=15,0,0,0,dh">대전광역시
-								서구 대덕대로 226 명동플라자 2층 헬스보이짐</a> <!-- 고객이 보는 창 --> <input
+							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">${place.b_name }</h2> <a style="padding: 0 0 0 30px; font-size: 13px;"
+							href="https://map.naver.com/v5/entry/place/1213678018?c=15,0,0,0,dh">${place.addrBasic } ${place.addrDetail }</a> <!-- 고객이 보는 창 --> <input
 							type="hidden" value="${member.num}" name="num" /> <!-- 인터페이스 -->
 						</td>
 					</tr>
 					<tr>
 						<td align="left"><span
-							style="padding: 0 0 0 30px; font-size: 20px;">헬스 이용권</span></td>
+							style="padding: 0 0 0 30px; font-size: 20px;">${place.cate } 이용권</span></td>
 					</tr>
 					<tr>
 						<td align="left"><b
-							style="padding: 0 0 0 30px; font-size: 23px;">70,000원/월</b><span
+							style="padding: 0 0 0 30px; font-size: 23px;">
+							<fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod1retail}"/>/월</b><span
 							style="font-size: 11px"> 부터</span></td>
 					</tr>
 					<tr>
 						<td align="left" style="padding: 0 0 0 30px;"><select>
 								<option id="selectlist" selected>[필수]옵션선택</option>
-								<option>1개월 이용권 70,000원</option>
-								<option>3개월 이용권 210,000원</option>
-								<option>6개월 이용권 420,000원</option>
-								<option>12개월 이용권 840,000원</option>
+								<option>1개월 이용권 <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod1retail}"/>원</option>
+                    <c:if test="${place.prod3retail ne '' && place.prod3retail ne null}">
+								<option>3개월 이용권 <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod3retail}"/>원</option>
+                    </c:if>
+                    <c:if test="${place.prod6retail ne '' && place.prod6retail ne null }">
+								<option>6개월 이용권 <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod6retail}"/>원</option>
+                    </c:if>
+                    <c:if test="${place.prod12retail ne '' && place.prod12retail ne null}">
+								<option>12개월 이용권 <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod12retail}"/>원</option>
+                    </c:if>
 						</select></td>
 					</tr>
 					<tr>
@@ -570,7 +604,7 @@ a:hover {
 				<nav class="info-nav">
 					<ul>
 						<li><a href="#" class="hover-underline" onclick="content()">상품정보</a></li>
-						<li><a href="#" class="hover-underline" onclick="review()">이용후기</a></li>
+						<li><a href="#" class="hover-underline" onclick="review()">이용후기${place.review_count }</a></li>
 						<li><a href="#" class="hover-underline" onclick="inquiry()">상품문의</a></li>
 					</ul>
 				</nav>
@@ -579,23 +613,16 @@ a:hover {
 			<div class=gymdetail_content style="display: block;"
 				id="gymdetail_content">
 				<p>시설소개</p>
-				<textarea rows="15" cols="60" name="" disabled /></textarea>
+				<textarea rows="15" cols="60" disabled>${place.detail }</textarea>
 				<p>공지사항</p>
-				<textarea rows="8" cols="60" name="" disabled>
-				사업자가 넣은 공지사항
-				</textarea>
+				<textarea rows="8" cols="60" disabled>${place.notice }</textarea>
 				<p>운영시간</p>
-				<textarea rows="8" cols="60" name="" disabled>
-				사업자가 넣은 운영시간 및 휴관일
-				</textarea>
+				<textarea rows="8" cols="60" disabled>${place.b_time }</textarea>
 				<p>운영프로그램</p>
-				<textarea rows="3" cols="60" name="" disabled>
-				사업자가 넣은 운영프로그램
-				</textarea>
+				<textarea rows="3" cols="60" disabled>${place.program }</textarea>
 				<p>부가서비스</p>
-				<textarea rows="2" cols="60" name="" disabled>
-				사업자가 넣은 부가서비스
-				</textarea>
+				<textarea rows="2" cols="60" disabled>${place.service }</textarea>
+				<c:if test="${!empty trainerList}">
 				<p>트레이너</p>
 				<div class="intro_etc">
 					<!-- post slider start-->
@@ -645,6 +672,7 @@ a:hover {
 	</div>
 	</div>
 	</div>
+	</c:if>
 	<!--post slider end-->
 
 	<!-- 지도 API -->
@@ -663,8 +691,8 @@ a:hover {
 						<script>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							mapOption = {
-								center : new kakao.maps.LatLng(36.352850,
-										127.379800), // 지도의 중심좌표
+								center : new kakao.maps.LatLng(${place.lat},
+										${place.lng}), // 지도의 중심좌표
 								level : 3
 							// 지도의 확대 레벨
 							};
@@ -674,7 +702,7 @@ a:hover {
 
 							// 마커가 표시될 위치입니다 
 							var markerPosition = new kakao.maps.LatLng(
-									36.352850, 127.379800);
+									${place.lat}, ${place.lng});
 
 							// 마커를 생성합니다
 							var marker = new kakao.maps.Marker({
@@ -690,15 +718,25 @@ a:hover {
 					</div>
 				</td>
 				<td width="10%"></td>
-				<td width="50%" class="addressgym"><b>헬스보이짐&필라걸 둔산점</b><br>
-					대전 서구 대덕대로 226 명동프라자 2층 헬스보이짐<br> 연락처:0507-1441-8922</td>
+				<td width="50%" class="addressgym"><b>${place.b_name }</b><br>
+					${place.addrBasic } ${place.addrDetail }<br> 연락처 : ${place.phone1 }-${place.phone2 }-${place.phone3 }</td>
 			</tr>
 		</table>
 	</div>
 	</div>
 	<div class=gymdetail_review style="display: none" id="gymdetail_review">
 		<p>이용후기</p>
+		<c:choose>
+		<c:when test="${reviewList ne null }">
 		<textarea rows="15" cols="60" name="" disabled /></textarea>
+		</c:when>
+		<c:otherwise>
+		<div class="review_button">리뷰 작성</div>
+		<div class="review_null">
+		등록된 후기가 없습니다.
+		</div>
+		</c:otherwise>
+		</c:choose>
 	</div>
 	<!-- 상품문의 -->
 	<div class=gymdetail_inquiry style="display: none"
