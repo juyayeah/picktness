@@ -50,7 +50,7 @@ public class BusinessControllerImpl implements BusinessController {
 		String id = business.getId();
 		System.out.println(id);
 		Map businessPlace = businessService.placeDetail(id);
-		if(businessPlace != null) {
+		if(businessPlace == null) {
 			mav.setViewName("redirect:/business/mypage/placeForm.do");
 		}else {
 			mav.setViewName(viewName);
@@ -161,7 +161,7 @@ public class BusinessControllerImpl implements BusinessController {
 		return fileList;
 	}
 
-	@RequestMapping(value = "/business/mypage/modGym.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/business/mypage/modPlaceCont.do", method = RequestMethod.GET)
 	public ModelAndView modGym(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");

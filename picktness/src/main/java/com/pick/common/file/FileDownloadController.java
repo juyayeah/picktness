@@ -48,6 +48,8 @@ public class FileDownloadController {
 		break;
 		case "shop":fileName = SHOPPING_IMAGE_REPO+"\\"+bno+"\\"+imageFileName;
 		break;
+		case "place":fileName = BUSINESS_IMAGE_REPO + "\\" + bno + "\\" + imageFileName;
+		break;
 		}
 		return fileName;
 	}
