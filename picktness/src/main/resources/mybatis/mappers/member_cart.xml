@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+ <mapper namespace="com.pick.member.cart.dao.MemberCartDAO">
+    <select id="findCartGoods" resultType="String" parameterType="memberCartVO">
+    <![CDATA[
+     select case when count(*) =1 then 'true' else 'false' end result from cart where goods_id=#{goods_id} and member_id=#{member_id}
+    ]]>
+    </select>
+    
+    <insert id="addCart" parameterType="memberCartVO">
+    <![CDATA[
+    insert into cart(goods_id, member_id, goods_option) values (#{goods_id}, #{member_id}, #{goods_option})
+    ]]>
+    </insert>
+ </mapper>
+ 

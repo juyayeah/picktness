@@ -48,9 +48,8 @@ public class BusinessControllerImpl implements BusinessController {
 		HttpSession session = request.getSession();
 		BusinessVO business = (BusinessVO) session.getAttribute("business");
 		String id = business.getId();
-		System.out.println(id);
 		Map businessPlace = businessService.placeDetail(id);
-		if(businessPlace == null) {
+		if(businessPlace.get("businessDetail") == null) {
 			mav.setViewName("redirect:/business/mypage/placeForm.do");
 		}else {
 			mav.setViewName(viewName);

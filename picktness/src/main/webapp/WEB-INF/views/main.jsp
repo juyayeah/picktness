@@ -343,10 +343,10 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
           <div class="main_box">
             <div class="main_cate">헬스</div>
             <c:forEach items="${healthList }" var="place">
-              <div class="main_item" onClick="location.href='#'">
+              <div class="main_item" onclick="location.href='${contextPath}/goods/placeDetail.do?goods_id=${place.goods_id }'">
                 <img
                   class="main_img"
-                  src="${contextPath}/images/main/health4.jpg"
+                  src="${contextPath}/download.do?cate=place&imageFileName=${place.fileName}&bno=${place.goods_id}"
                 />
                 <span class="l_title">${place.b_name }</span>
                 <span class="location">${place.addrBasic } </span>
