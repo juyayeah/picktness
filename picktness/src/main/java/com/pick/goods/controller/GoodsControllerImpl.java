@@ -216,6 +216,9 @@ public class GoodsControllerImpl implements GoodsController{
 	}
 
 	
+	
+	
+	
 	@Override
 	@RequestMapping(value="/goods/shopGoodsList.do", method=RequestMethod.GET)
 	public ModelAndView shopGoodsList(int section, int pageNum, String cate, String orderBy, HttpServletRequest request,
