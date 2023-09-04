@@ -542,11 +542,11 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         </div>
         <!--/menu_sp-->
         <div class="menu_cm">
-          <span class="menu_cm_title" onclick="location.href='${contextPath}/board/freeBoardList.do'"
+          <span class="menu_cm_title" onclick="location.href='${conterxPath }/board/millBoardList.do'"
             >커뮤니티</span
           >
           <ul class="menu_cm_dt">
-            <li class="menu_list_a"><a href="">자유게시판</a></li>
+            
             <li class="menu_list_a"><a href="${conterxPath }/board/millBoardList.do">오늘 식단</a></li>
           </ul>
         </div>
