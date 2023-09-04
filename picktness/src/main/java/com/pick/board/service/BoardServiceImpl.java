@@ -64,5 +64,18 @@ public class BoardServiceImpl {
     }
 
 
+	public BoardVO selectMillBoard(int bno) {
+		 return boardDAO.getMillByBno(bno);
+		
+	}
+	public void modMillBoard(Map boardMap) throws Exception {
+		System.out.println("디버그 로그: 메서드가 실행됨 before");
+		System.out.println(boardMap);
+		
+		boardDAO.updateMillBoard(boardMap);
+		System.out.println("디버그 로그: 메서드가 실행됨 after");
+	}
+
+
 
 }

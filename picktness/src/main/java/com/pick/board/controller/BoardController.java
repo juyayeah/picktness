@@ -44,4 +44,10 @@ public interface BoardController {
 
 	ModelAndView millrInsert(String member_id, String content, int p_bno, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
+
+	ModelAndView updateMillBoardForm(int bno,HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView updateMillBoard(int bno, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+
 }

@@ -21,6 +21,7 @@ public interface BoardDAO {
     public int selectNewBoardNO()throws DataAccessException;
     
     public BoardVO getMillByBno(int bno) throws DataAccessException;
+    
     void insertComment(Map boardMap) throws DataAccessException;
         
     public void insertComment(CommentVO comment) throws DataAccessException;
@@ -32,7 +33,10 @@ public interface BoardDAO {
     public void updateComment(CommentVO comment) throws DataAccessException;
 
     public void deleteMillBoard(int bno) throws DataAccessException;
+    
 
+    public void updateMillBoard (Map boardMap) throws DataAccessException;
+    
 }
 
 

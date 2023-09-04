@@ -9,14 +9,12 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>오늘식단 글쓰기</title>
+<title>글 수정하기</title>
 
   <style>
-   .board_inner {
-        position: relative;
-        width: 1100px;
-        margin: 0 auto;
-      }
+    .mill_inner{
+    margin:30px 0 0 30px;
+    }
       
       .file_input{
         margin-left: 50px;
@@ -91,11 +89,56 @@ float:right;
 .file_list{
 float:right;
 }
+.image_pic{
+width:70px;
+height:70px;
+margin-left:60px;
+}
   </style>
   
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script>
+<script type="text/javascript">
+function backToList(obj){ 
+obj.action = "${contextPath}/board/updateMillBoard.do";
+obj.submit();
+}
+
+function fn_modify_article(obj){
+obj.action = "${contextPath}/board/updateMillBoard.do";
+obj.submit();
+} 
+
+
+
+
+
+
+
+
+form.appendChild(articleNOInput);
+document.body.appendChild(form); 
+form.submit();
+}
+
+var parentNOInput = document.createElement("input"); 
+parentNOInput.setAttribute("type","hidden");
+parentNOInput.setAttribute("name","parentNO");
+parentNOInput.setAttribute("value",parentNO);
+
+form.appendChild(parentNOInput);
+document.body.appendChild(form); 
+form.submit();
+}
+function readURL(input){
+if (input.files && input.files[0]){
+	var reader = new FileReader();
+	reader.onload = function (e){
+		$('#preview').attr('src',e.target.result);
+	}
+	reader.readAsDataURL(input.files[0]);
+}
+
 $(function() {
     $('#btn').click(function() {
         if ($("#title").val() === '' || $("textarea[name='content']").val() === '') {
@@ -131,41 +174,56 @@ function fn_addFile(){
 	float:right;
 }
 
-
+document.addEventListener("DOMContentLoaded", function () {
+    // "수정하기" 버튼 클릭 이벤트 핸들러
+    document.getElementById("updateButton").addEventListener("click", function () {
+        // 폼을 선택하고 제출
+        var form = document.getElementById("myForm");
+        form.submit();
+    });
+});
 </script>
 </head>
 <body>
-<div class ="board_inner"></div>
-<h1>글쓰기</h1>
-<form method="post" action="${contextPath}/board/addMillBoard.do" enctype="multipart/form-data">
+<div class ="mill_inner">
+<h1>글 수정하기</h1>
+<form name="frmboard" method="post" action="${contextPath}/board/updateMillBoard.do" enctype="multipart/form-data">
      
-      <p><span style="font-size: 20px;">태그</span> <input  type="text" name="hastag" placeholder="#오운완 #오늘식단" name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
-      <p class="content"><span style="font-size: 20px;">내용</span> <textarea  style="margin-left: 5px;" placeholder="내용을 입력해 주세요." name="content" style="width: 80%; margin-bottom: 50px;"></textarea></p>
+      <p><span style="font-size: 20px;">태그</span> <input  type="text" name="hastag" value="${board.hastag }" style="width: 80%; height: 30px; font-size: 17px;"></p>
+      
+      <p class="content"><span style="font-size: 20px;">내용</span> <textarea  style="margin-left: 5px" name="content" style="width: 80%; margin-bottom: 50px;">${board.content }</textarea></p>
     <table>
+    
     <tr>
-        
+        <td>
+        <input type ="hidden" name ="originalFileName" value="${board.todaymill_img }" />
+        <img  class="image_pic" src="${contextPath}/download.do?cate=mill&imageFileName=${board.todaymill_img}&bno=${board.bno}" alt="이미지 설명">
+        </td>
         <td colspan="3">
             <div class="file_list">
                 <div>
                     <span class="file_input">
                         
                         <label> 첨부파일
-                            <input type="file" name="todaymill_img" onchange="selectFile(this);" />
+                            <input type="file" name="todaymill_img" onchange="readURL(this);"/>
                         </label>
+                     
+
                     </span>
                     </td>
                     <td>
+                  <input type="hidden" name="bno" value="${board.bno}">
                     <span class= "btn_right">
                     <button type="button" onclick="back()" class="btns del_btn"><span>돌아가기</span></button>
-                    <button class= "btn_margin" id="btn" type="submit" class="btns fn_add_btn"><span>등록하기</span></button>
+                    <input class= "btn_margin" id="btn" type="submit"  class="btns fn_add_btn" value="수정하기">
                   </span>
                   </div>
             </div>
         </td>
     </tr>
     </table>
-<div id="root">
-</div>
+<div id="root"></div>
 </form>
+</div>
 </body>
 </html>
