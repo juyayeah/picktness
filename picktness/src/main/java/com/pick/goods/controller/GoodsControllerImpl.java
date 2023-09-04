@@ -303,16 +303,13 @@ public class GoodsControllerImpl implements GoodsController{
 	
 	//--------쇼핑------------//
 	@RequestMapping(value="/goods/goodsDetail.do", method=RequestMethod.GET)
-	private ModelAndView goodsDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String viewName = (String) request.getAttribute("viewName");
-		HttpSession session = request.getSession();
-		goodsShoppingVO = (GoodsShoppingVO) session.getAttribute("goods");
-		//String id = goodsShoppingVO.getId();
-		ModelAndView mav = new ModelAndView();
-		//goodsShoppingVO = mypageService.memberDetail(id);
-		mav.setViewName(viewName);
-		mav.addObject("goods",goodsShoppingVO);
-		return mav;
+	public ModelAndView goodsDetail(@RequestParam("goods_id") String goods_id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	    String viewName = (String) request.getAttribute("viewName");
+	    ModelAndView mav = new ModelAndView();
+	    GoodsShoppingVO goodsShoppingVO = goodsService.goodsDetail(goods_id);
+	    mav.setViewName(viewName);
+	    mav.addObject("goods", goodsShoppingVO);
+	    return mav;
 	}
 	//검색
 	@Override

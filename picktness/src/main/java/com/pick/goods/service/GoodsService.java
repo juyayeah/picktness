@@ -28,4 +28,5 @@ public interface GoodsService {
 	public List<GoodsTrainerVO> goodsBusinessTrainerList(String id) throws DataAccessException;
 	public List<GoodsReviewVO> goodsBusinessReviewList(String goods_id) throws DataAccessException;
 	public List<GoodsReviewAnswerVO> goodsBusinessReviewAnswerList(String goods_id) throws DataAccessException;
+	public GoodsShoppingVO goodsDetail(String goods_id) throws DataAccessException;
 }

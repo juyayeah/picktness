@@ -168,7 +168,6 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
         font-size: 15px;
         display: block;
         font-weight: bold;
-        height: 40px;
       }
 
       .main_item .location {
@@ -556,7 +555,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
                   src="${contextPath}/download.do?cate=shop&imageFileName=${food.fileName}&bno=${food.goods_id}"
                 />
                 <span class="l_title">${food.goods_title }</span>
-                <span class="price"
+                <span class="price" style="font-weight: bold"
                   ><fmt:formatNumber
                     type="number"
                     maxFractionDigits="3"

@@ -53,7 +53,7 @@ request.setCharacterEncoding("utf-8");
 	font-size: 15px;
 	display: block;
 	font-weight: bold;
-	height: 40px;
+	
 }
 
 .main_item .location {
@@ -124,10 +124,10 @@ height:300px;
 			<c:choose>
 				<c:when test="${!empty foodList }">
 					<c:forEach items="${foodList }" var="food">
-						<div class="main_item" onClick="location.href='#'">
+						<div class="main_item" onclick="location.href='${contextPath}/goods/goodsDetail.do?goods_id=${food.goods_id}'">
 							<img class="main_img"
 								src="${contextPath}/download.do?cate=shop&imageFileName=${food.fileName}&bno=${food.goods_id}" /> <span
-								class="title">${food.goods_title }</span> <span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${food.priceRetail}" />원
+								class="title">${food.goods_title }</span> <span class="price" style="font-weight: bold;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${food.priceRetail}" />원
 							</span>
 							<c:if test="${food.review_count ne 0 }">
 								<div class="star">
