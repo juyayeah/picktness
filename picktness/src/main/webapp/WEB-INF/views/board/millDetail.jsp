@@ -196,7 +196,6 @@ $(function(){
     </div>
   </div>
    <c:if test ="${!empty commentList}">
-  
   <div class="divider"></div>
   <h3>전체 댓글</h3>
   <div class="divider"></div>
@@ -214,9 +213,8 @@ $(function(){
       <p> 
       <fmt:parseDate value="${item.millrDate} " var="millrDate" pattern="yyyy-MM-dd" />
     <fmt:formatDate value="${millDate}" pattern="yyyy-MM-dd" /></p>
-    <c:if test="${member.id == commentList.member_id}">
+    <c:if test="${member.id == item.member_id}">
     <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" id="delOk" class="button" >삭제하기</a>
-    
   </c:if>
     </div>
     </div>

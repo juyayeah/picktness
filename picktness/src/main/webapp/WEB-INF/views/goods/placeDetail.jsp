@@ -417,6 +417,31 @@ display:none;
     font-size: 13px;
     color:#2890f1;
 }
+.addCart{
+	display: none;
+	position: relative;
+    top: -120px;
+    left:-3px;
+    background-color: #383838;
+    color: #fff;
+}
+.addCart_p{
+    border-radius: 4px;
+	width: 355px;
+	height: 17px;
+    padding: 20px 20px;
+	background-color: #383838;
+    position: absolute;
+    line-height: normal;
+    font-size: 13px;
+}
+.addCart_p a{
+	margin-left:50px;
+    line-height: normal;
+    font-size: 13px;
+    color:#2890f1;
+}
+
 /*post slider-end*/
 </style>
 
@@ -575,7 +600,10 @@ function fn_addCart(){
 		},
 		success : function(data) {
 			if(data == 'add'){
-				alert("등록에 성공했습니다.");
+				$(".addCart").css('display','block');
+				$(".addCart_p").css('display', 'block');
+				setTimeout(function(){ $( '.addCart_p' ).fadeOut();}, 2500);
+				setTimeout(function(){ $(".addCart").css('display','none');}, 3000);
 			} else{
 				$(".alreadyCart").css('display','block');
 				$(".alreadyCart_p").css('display', 'block');
@@ -742,12 +770,18 @@ function fn_buyNow(){
 						<button class=button_blue id="nowbuy" onclick="fn_buyLogin()">바로구매</button>
 					</c:otherwise>
 					</c:choose>
-						<div class="alreadyCart">
-	<div class="alreadyCart_p">
-		이미 장바구니에 있는 상품입니다.
-		<a href="${contextPath }/member/cart/cartList.do">장바구니로 가기</a>
-	</div>
-	</div>
+				<div class="alreadyCart">
+					<div class="alreadyCart_p">
+					이미 장바구니에 있는 상품입니다.
+					<a href="${contextPath }/member/cart/cartList.do">장바구니로 가기</a>
+					</div>
+				</div>
+				<div class="addCart">
+					<div class="addCart_p">
+					장바구니에 상품이 담겼습니다.
+					<a href="${contextPath }/member/cart/cartList.do">장바구니로 가기</a>
+					</div>
+				</div>
 					</td>
 				</tr>
 			</table>
