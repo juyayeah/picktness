@@ -35,6 +35,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/admin/mypage/adminQnAList.jsp" />
 	</definition>
+	<definition name="/admin/mypage/adminProdMod" extends="adpageLayout">
+		<put-attribute name="title" value="상품 수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/admin/mypage/adminProdMod.jsp"/>
+	</definition>
 	<!-- busi-member info -->
 	<definition name="/admin/mypage/adminBusiList"
 		extends="adpageLayout">

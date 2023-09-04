@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.pick.member.dao.MemberDAO;
+import com.pick.member.vo.BusinessVO;
 import com.pick.member.vo.MemberVO;
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
@@ -14,22 +15,41 @@ public class MemberServiceImpl implements MemberService{
 	MemberDAO memberDAO;
 	@Autowired
 	MemberVO memberVO;
-	public MemberVO login(Map loginMap) throws DataAccessException{
+	public MemberVO login(Map<String, String> loginMap) throws DataAccessException{
 		return memberDAO.loginById(loginMap);
 	}
 	@Override
-	public void addMember(MemberVO memberVO) throws Exception {
+	public void addMember(MemberVO memberVO) throws DataAccessException {
 		memberDAO.insertMember(memberVO);
-
-		memberDAO.eventInitPoint(memberVO);
+		memberDAO.eventInitPoint(memberVO);	
+	}
+	
+	@Override
+	public void addB_Member(BusinessVO businessVO) throws DataAccessException {
+		memberDAO.insertB_Member(businessVO);
 		
 	}
 	@Override
-	public int idCheck(String id) throws Exception {
-		int cnt = memberDAO.idCheck(id);
-		return cnt;
+	public int idCheck(String id) throws DataAccessException {
+		return memberDAO.idCheck(id);
+	}
+	@Override
+	public int bIdCheck(String id) throws DataAccessException {
+		return memberDAO.bIdCheck(id);
 	}
 	
+	@Override
+    public int emailCheck(Map<String, String> emailChk) throws DataAccessException {
+        return memberDAO.emailCheck(emailChk);
+    }
+	@Override
+    public int bEmailCheck(Map<String, String> bEmailChk) throws DataAccessException {
+        return memberDAO.emailCheck(bEmailChk);
+    }
+	@Override
+	public BusinessVO loginBusiness(Map<String, String> loginMap) throws DataAccessException {
+		return memberDAO.loginBusiness(loginMap);
+	}
 	
 	
 	

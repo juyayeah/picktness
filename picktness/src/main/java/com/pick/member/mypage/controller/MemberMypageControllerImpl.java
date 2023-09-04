@@ -25,8 +25,11 @@ public class MemberMypageControllerImpl implements MemberMypageController{
 	MemberVO memberVO;
 	@Override
 	@RequestMapping(value="/member/mypage/memberDetail.do", method=RequestMethod.GET)
-	public ModelAndView memberDetail(@RequestParam("id")String id,HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView memberDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("member");
+		String id = memberVO.getId();
 		ModelAndView mav = new ModelAndView();
 		memberVO = mypageService.memberDetail(id);
 		mav.setViewName(viewName);

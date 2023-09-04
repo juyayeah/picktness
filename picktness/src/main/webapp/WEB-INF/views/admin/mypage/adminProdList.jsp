@@ -30,7 +30,6 @@ request.setCharacterEncoding("utf-8");
 }
 
 .bodybody th {
-	width: 10%;
 	background-color: #2890f1;
 	color: #ffffff;
 }
@@ -189,10 +188,10 @@ request.setCharacterEncoding("utf-8");
 		<div>
 			<div class="topbar">
 				판매상태<select>
-					<option value="전체">전체</option>
+					<option value="전체" selected>전체</option>
 					<option value="판매중">판매중</option>
 					<option value="판매종료">판매종료</option>
-					<option value="재고없음" selected>재고없음</option>
+					<option value="재고없음">재고없음</option>
 				</select>
 			</div>
 			<div class="topbar" style="padding-left: 20px;">
@@ -227,19 +226,18 @@ request.setCharacterEncoding("utf-8");
 
 		<div class="tableWrapper">
 			<table id="userListTable">
-				<tr style="cursor: default;">
-					<th width="10%">번호</th>
-					<th width="20%">카테고리</th>
-					<th width="25%">상품명</th>
-					<th width="20%">판매가</th>
-					<th width="10%">판매상태</th>
-					<th width="10%">재고</th>
-					<th width="15%">수정/삭제</th>
+					<th width="14%">번호</th>
+					<th width="13%">카테고리</th>
+					<th width="17%">상품명</th>
+					<th width="10%">판매가</th>
+					<th width="5%">판매상태</th>
+					<th width="8%">재고</th>
+					<th width="8%">수정/삭제</th>
 				</tr>
 
 				<!-- 조건리스트 -->
 			<c:choose>
-					<c:when test="${empty adminProdList}">
+					<c:when test="${empty goodsList}">
 						<tr height="10px">
 							<td colspan="7">
 								<p align="center" style="margin: 5px auto;">
@@ -248,19 +246,26 @@ request.setCharacterEncoding("utf-8");
 							</td>
 						</tr>
 						</c:when>
-					<c:when test="${!empty adminProdList }">
-				<c:forEach var="trainer" items="${adminProdList }">
+					<c:when test="${!empty goodsList }">
+				<c:forEach var="goods" items="${goodsList }">
 					<tr align="center">
-					<td></td>
-						<td>${shopping.cate_fir} ${shopping.cate_sec}</td>
-						<td>${shopping.goods_title}</td>
-						<td>${shopping.priceretail}</td>
-						<td>${shopping.state}</td>
-						<td>${shopping.goods_qty}</td>
+					<td>${goods.goods_id }</td>
+						<td>${goods.cate_fir}/${goods.cate_sec}</td>
+						<td>${goods.goods_title}</td>
+						<td>${goods.priceRetail}</td>
+						<c:choose>
+						<c:when test="${goods.goods_qty == 0 }">
+						<td>품절</td>	
+						</c:when>
+						<c:otherwise>
+						<td>판매중</td>
+						</c:otherwise>
+						</c:choose>
+						<td>${goods.goods_qty}</td>
 						<td><a
-						href="${contextPath}/admin/mypage/modProd.do?name=${trainer.name}"><button
+						href="/admin/mypage/adminProdMod.do?goods_id=${goods.goods_id}"><button
 								class="modbtn">수정</button></a> &nbsp; <a
-						href="${contextPath}/admin/mypage/delProd.do?name=${trainer.name}"><button
+						href="${contextPath}/admin/mypage/delProd.do?name=${goods.goods_id}"><button
 								class="delbtn" onclick="delProd()">삭제</button></a></td>
 					</tr>
 				</c:forEach>

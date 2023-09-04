@@ -51,13 +51,16 @@ request.setCharacterEncoding("utf-8");
 }
 
 .bodybody select, .bodybody input, .bodybody textarea {
-	width: 100%;
+	width: 500px;
 	padding: .4em .1em;
 	margin: 5px 0;
 	border: 1px solid #999;
 	font-family: inherit;
 	border-radius: 2px;
+	resize: none;
+	outline:none;
 }
+
 .tdfirsttop {
 	width: 20%;
 	text-align: right;
@@ -70,6 +73,7 @@ request.setCharacterEncoding("utf-8");
 	width: 5%;
 	color: #2890f1;
 }
+
 .starbluetop {
 	width: 5%;
 	color: #2890f1;
@@ -115,6 +119,9 @@ request.setCharacterEncoding("utf-8");
 	cursor: pointer;
 	border-color: #fff;
 }
+      form input::file-selector-button {
+        display: none;
+      }
 
 /* 사진추가창 */
 .imgadd {
@@ -148,19 +155,19 @@ request.setCharacterEncoding("utf-8");
 	border-radius: 5px;
 	width: 70px;
 	height: 90px;
-	margin-left:10px;
+	margin-left: 10px;
 }
 
 .imgbox img {
-	width: 70px;
+	width: 90px;
 	height: 90px;
 }
 
-.real-upload {
+/* .real-upload {
 	display: none;
-}
+} */
 
-.upload {
+/* .upload {
 	position: relative;
 	border: 2px solid #a0a0a0;
 	border-radius: 5px;
@@ -168,7 +175,7 @@ request.setCharacterEncoding("utf-8");
 	height: 90px;
 	background-color: rgba(255, 255, 255, 0.2);
 	z-index: 5;
-}
+} */
 
 .image-preview {
 	position: relative;
@@ -177,12 +184,15 @@ request.setCharacterEncoding("utf-8");
 	background-color: rgba(255, 255, 255, 0.2);
 	display: flex;
 	margin-top: -4px;
-	margin-left:70px;
+	margin-left: 70px;
 	z-index: 1;
 }
 
 select option[value=""][disabled] {
 	display: none;
+}
+.addButton{
+width:30%;
 }
 </style>
 
@@ -190,47 +200,48 @@ select option[value=""][disabled] {
 <body>
 	<div class="bodybody">
 		<h2 align="center">상품 등록</h2>
-		<table>
-			<tr>
-				<td colspan="2"></td>
-				<td align="right"><em>*필수항목</em></td>
-			</tr>
-			<tr>
-				<td class="tdfirsttop" align="right">카테고리</td>
-				<td class="starblue">*</td>
-				<td class="td_third"><select>
-				<optgroup name="cate_fir" label="식품">
-						<option value="" disabled selected>전체</option>
-						<option name="cate_sec" value="프로틴쉐이크">프로틴쉐이크</option>
-						<option name="cate_sec" value="닭가슴살">닭가슴살</option>
-						</optgroup>
-						<optgroup name="cate_fir" label="기구/용품/장비">
-						<option name="cate_sec" value="스트레칭/마사지">스트레칭/마사지</option>
-						<option name="cate_sec" value="테이프/아대">테이프/아대</option>
-						<option name="cate_sec" value="근력/유산소용품">근력/유산소용품</option>
-						</optgroup>
-				</select>
-			</tr>
-			<tr>
-				<td class="tdfirst" align="right">상품명</td>
-				<td class="starblue"></td>
-				<td width="70%"><input type="text" value="" name=""></td>
-			</tr>
-			<tr>
-				<td class="tdfirst" align="right">정가</td>
-				<td class="starblue">*</td>
-				<td width="70%"><input type="number" placeholder="숫자만입력"
-					name=""></td>
-			</tr>
-			<tr>
-				<td class="tdfirst" align="right">할인가</td>
-				<td class="starblue"></td>
-				<td width="70%"><input type="number" placeholder="숫자만입력"
-					name=""></td>
-			</tr>
+		<form action="${contextPath }/admin/goods/addGoods.do" method="post" id="addForm" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td colspan="2"></td>
+					<td align="right"><em>*필수항목</em></td>
+				</tr>
+				<tr>
+					<td class="tdfirsttop" align="right">카테고리</td>
+					<td class="starblue">*</td>
+					<td class="td_third"><select id="cate" >
+							<optgroup label="식품">
+								<option value="" disabled selected>전체</option>
+								<option value="protain">프로틴쉐이크</option>
+								<option value="tender">닭가슴살</option>
+							</optgroup>
+							<optgroup label="기구/용품/장비">
+								<option value="masage">스트레칭/마사지</option>
+								<option value="tape">테이프/아대</option>
+								<option value="aerobic">근력/유산소용품</option>
+							</optgroup>
+					</select>
+				</tr>
+				<tr>
+					<td class="tdfirst" align="right">상품명</td>
+					<td class="starblue"></td>
+					<td width="70%"><input type="text" name="goods_title"></td>
+				</tr>
+				<tr>
+					<td class="tdfirst" align="right">정가</td>
+					<td class="starblue">*</td>
+					<td width="70%"><input type="number" placeholder="숫자만입력"
+						name="priceOrigin" id="priceOrigin" min="0"></td>
+				</tr>
+				<tr>
+					<td class="tdfirst" align="right">판매가</td>
+					<td class="starblue"></td>
+					<td width="70%"><input type="number" placeholder="숫자만입력"
+						name="priceRetail" id="priceRetail" min="0"></td>
+				</tr>
 
-			<!-- 특정기간 할인 -->
-			<!--
+				<!-- 특정기간 할인 -->
+				<!--
 <tr>
 <td width="20% "align="right"></td>
 <td class="starblue"></td>
@@ -245,43 +256,64 @@ select option[value=""][disabled] {
 </span> 
 </td>
 </tr>-->
-			<tr>
-				<td class="tdfirst" align="right">재고수량</td>
-				<td class="starblue">*</td>
-				<td width="70%"><input type="number" placeholder="숫자만입력"
-					name=""></td>
-			</tr>
-			<tr>
-				<td class="tdfirsttop" align="right">상품이미지(#/3)</td>
-				<td class="starbluetop">*</td>
-				<td width="70%"><div class="imgbox">
-						<input type="file" class="real-upload" accept="image/*" required
-							multiple>
-						<div class="upload">
-							<ul class="image-preview"></ul>
-						</div>
-					</div>
-					<span style="font-size: 11px;">권장 크기 : 1000 x 1000 (윈도대상 750 x 1000)대표이미지 기준 1000x1000 이상 이미지를 등록하시면, 이미지 확대 기능이 제공됩니다.쇼핑검색에 노출되지 않는 경우 가이드를 확인해주세요.</span></td>
-			<tr>
-				<td class="tdfirsttop" align="right">상세설명</td>
-				<td class="starbluetop">*</td>
-				<td width="70%"><textarea name="coment" rows="10" cols="60"
-						maxlength="4000"></textarea>
-						<span style="font-size: 11px; color: #2089f1;">* 외부 링크를 통한 개인정보(휴대폰 번호, 이메일 주소) 수집은 금지되므로 등록시 노출이 제재될 수 있습니다.<br>
-						* 상품명과 직접적 관련 없는 상세설명, 외부 링크 입력 시 관리자에 의해 판매 금지 될 수 있습니다. <br>
-						* 안전거래정책에 위배될 경우 관리자에 의해 제재조치가 있을 수 있습니다.<br>
-						* 픽트니스 이외의 외부링크, 일부 스크립트 및 태그는 자동 삭제될 수 있습니다.</span>
-						</td>
-			</tr>
-			<tr>
-				<td colspan="3" align="right">
-				<br><a href="${contextPath }/admin/mypage/adminProdList.do"><button class="button_white">목록으로</button></a>&nbsp;&nbsp;
-					<a href="${contextPath }/admin/mypage/addProd.do"><button class="button_blue">등록하기</button></a>
-			</tr>
-		</table><br><br>
+				<tr>
+					<td class="tdfirst" align="right">재고수량</td>
+					<td class="starblue">*</td>
+					<td width="70%"><input type="number" placeholder="숫자만입력"
+						name="goods_qty" min="0"></td>
+				</tr>
+				<tr>
+					<td class="tdfirsttop" align="right">상품이미지</td>
+					<td class="starbluetop">*</td>
+					<td width="70%"><div class="imgbox">
+							<input type="button" class="addButton" value="파일 추가" onClick="fn_addFile()"/>
+							<div class="newFile"></div>
+						</div></td>
+				</tr>
+				<tr>
+					<td class="tdfirsttop" align="right">상세설명</td>
+					<td class="starbluetop"></td>
+					<td width="70%"><textarea name="detail" rows="10" cols="60"
+							maxlength="4000"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="3" align="right"><br>
+						<button type="button" class="button_white"
+							onclick="location.href='${contextPath}/admin/mypage/adminProdList.do'">목록으로</button>&nbsp;&nbsp;
+						<button type="button" class="button_blue">등록하기</button>
+				</tr>
+			</table>
+			<br> <br>
+		</form>
 	</div>
 	<script>
-      function getImageFiles(e) {
+	var cnt=0;
+	function fn_addFile(){
+		if(cnt == 0){
+			$(".newFile").append("<br>"+"<label>메인이미지</label><input type='file' name='main_image' onchange='readURL(this,"+cnt+");' />");
+			$('.newFile').append("<div class='upload'><img id='preview" + cnt + "'/></div>");
+		} else if(cnt < 3) {
+			$(".newFile").append("<br>"+"<label>상세이미지</label><input type='file' name='detail_image'" + cnt + " onchange='readURL(this,"+cnt+");'/>");
+			$('.newFile').append("<div class='upload'><img id='preview" + cnt + "'/></div>");
+		} else {
+			alert("사진은 최대 3장만 첨부 가능합니다.");
+		}
+		cnt++;
+	}
+	
+	function readURL(input, num){
+		if(input.files && input.files[0]){
+			var reader = new FileReader();
+			reader.onload = function(e){
+				var preview = "preview" + num;
+				$('#'+preview).attr("src", e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	
+      	/* 유민 사진 추가 코드
+		function getImageFiles(e) {
         const uploadFiles = [];
         const files = e.currentTarget.files;
         const imagePreview = document.querySelector('.image-preview');
@@ -328,6 +360,43 @@ select option[value=""][disabled] {
       upload.addEventListener('click', () => realUpload.click());
   
       realUpload.addEventListener('change', getImageFiles);
+       */
+      
+      $(function(){
+    	  $(".button_blue").click(function(){
+    		  var cate  = document.getElementById("cate");
+            	var cate_fir
+          		var cate_sec = (cate.options[cate.selectedIndex].value);
+          		if(cate_sec == "tender" || cate_sec == "protain"){
+          			cate_fir = "food";
+          		} else{
+          			cate_fir = "goods";
+          		}
+            	var input_fir = document.createElement("input");
+            	var input_sec = document.createElement("input");
+            	input_fir.setAttribute("type", "hidden");
+            	input_fir.setAttribute("name", "cate_fir");
+            	input_fir.setAttribute("value", cate_fir)
+            	input_sec.setAttribute("type", "hidden");
+            	input_sec.setAttribute("name", "cate_sec");
+            	input_sec.setAttribute("value", cate_sec);
+            	
+            	$("#addForm").append(input_fir);
+				$("#addForm").append(input_sec);
+				
+				if ($("#priceRetail").val() == 0 || $("#priceRetail").val() == null){
+					var priceRetail = $("#priceOrigin").val();
+					$("#priceRetail").attr("value", priceRetail);
+					$("#addForm").append("<input type='hidden' name='priceSale' value='0'/>");
+				} else{
+					var priceSale = $("#priceOrigin").val() - $("#priceRetail").val();
+					$("#addForm").append("<input type='hidden' name='priceSale' value='"+ priceSale+"'/>");
+				}
+				$("#addForm").submit();
+    	  });
+
+      });
+
     </script>
 </body>
 </html>

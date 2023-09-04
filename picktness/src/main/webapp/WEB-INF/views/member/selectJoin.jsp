@@ -14,23 +14,6 @@
         text-align: center;
         padding: 30px;
     }
-
-    .custom-button {
-    background-image: url("https://ifh.cc/g/8gHrO6.png");
-    background-size: contain;
-    background-color: #fee500;
-    width: 20%;
-    height: 50px; 
-    padding: 10px;
-    border: 1px solid #F6DD00;
-    border-radius: 5px;
-    box-sizing: border-box;
-    outline: none;
-    cursor:pointer;
-    background-repeat: no-repeat;
-}
-
-
     
 </style>
 <body>
@@ -46,11 +29,6 @@
     <a href='${contextPath}/member/bJoin.do'><img src='https://ifh.cc/g/CxjKyC.png' border='0'style="padding-left: 25px;" width="250" height="250"></a>
 </div>
 
-<h4>SNS계정으로 가입하기</h4>
-
-<br>
-<button type="button" class="custom-button"  onClick="">
-  </button>
 </div>
 </body>
 </html>

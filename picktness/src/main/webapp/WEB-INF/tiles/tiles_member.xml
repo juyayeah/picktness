@@ -4,47 +4,47 @@
 "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
 
-	<definition name="/member/loginForm" extends="baseLayout">
+	<definition name="/member/loginForm" extends="baseMemberLayout">
 		<put-attribute name="title" value="로그인창"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
 	</definition>
 	
-	<definition name="/member/join" extends="baseLayout">
+	<definition name="/member/join" extends="baseMemberLayout">
 		<put-attribute name="title" value="개인회원"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/join.jsp"/>
 	</definition>
 	
-	<definition name="/member/bJoin" extends="baseLayout">
+	<definition name="/member/bJoin" extends="baseMemberLayout">
 		<put-attribute name="title" value="사업자"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/bJoin.jsp"/>
 	</definition>
 	
-	<definition name="/member/selectJoin" extends="baseLayout">
+	<definition name="/member/selectJoin" extends="baseMemberLayout">
 		<put-attribute name="title" value="회원유형"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/selectJoin.jsp"/>
 	</definition>
 	
-	<definition name="/member/joinSuccess" extends="baseLayout">
+	<definition name="/member/joinSuccess" extends="baseMemberLayout">
 		<put-attribute name="title" value="가입완료"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/joinSuccess.jsp"/>
 	</definition>
 	
-	<definition name="/member/findById" extends="baseLayout">
+	<definition name="/member/findById" extends="baseMemberLayout">
 		<put-attribute name="title" value="아이디찾기"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/findById.jsp"/>
 	</definition>
 	
-	<!-- <definition name="/member/findByIdResult" extends="baseLayout">
+	<!-- <definition name="/member/findByIdResult" extends="baseMemberLayout">
 		<put-attribute name="title" value="아이디찾기결과"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/findByIdResult.jsp"/>
 	</definition> -->
 	
-	<definition name="/member/findByPwd" extends="baseLayout">
+	<definition name="/member/findByPwd" extends="baseMemberLayout">
 		<put-attribute name="title" value="비밀번호찾기"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/findByPwd.jsp"/>
 	</definition>
 	
-	<!-- <definition name="/member/findByPwdResult" extends="baseLayout">
+	<!-- <definition name="/member/findByPwdResult" extends="baseMemberLayout">
 		<put-attribute name="title" value="비밀번호찾기결과"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/findByPwdResult.jsp"/>
 	</definition> -->

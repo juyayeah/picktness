@@ -18,13 +18,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pick.goods.service.GoodsService;
 import com.pick.goods.vo.GoodsBusinessVO;
+import com.pick.goods.vo.GoodsImageFileVO;
+import com.pick.goods.vo.GoodsReviewAnswerVO;
+import com.pick.goods.vo.GoodsReviewVO;
 import com.pick.goods.vo.GoodsShoppingVO;
 import com.pick.goods.vo.GoodsTrainerVO;
+import com.pick.member.vo.MemberVO;
 
 @Controller("goodsController")
 public class GoodsControllerImpl implements GoodsController{
 	@Autowired
 	GoodsService goodsService;
+	
+	@Autowired
+	GoodsShoppingVO goodsShoppingVO;
+	
 	@Autowired
 	HttpSession session;
 
@@ -49,7 +57,6 @@ public class GoodsControllerImpl implements GoodsController{
 			session.setAttribute("lng", memLng);
 		} else {
 			memLat = (double) session.getAttribute("lat");
-			System.out.println(memLat);
 			memLng = (double) session.getAttribute("lng");	
 		}
 		option.put("lat", memLat);
@@ -162,6 +169,13 @@ public class GoodsControllerImpl implements GoodsController{
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
+		Map<String, Object> option = new HashMap<String, Object>();
+		option.put("orderBy", "review_star DESC");
+		option.put("limit", "limit 4");
+		List<GoodsShoppingVO> goodsFoodList = goodsService.goodsFoodAllList(option);
+		List<GoodsShoppingVO> goodsGoodsList = goodsService.goodsGoodsAllList(option);
+		mav.addObject("foodList", goodsFoodList);
+		mav.addObject("goodsList", goodsGoodsList);
 		return mav;
 	}
 
@@ -169,55 +183,115 @@ public class GoodsControllerImpl implements GoodsController{
 
 	@Override
 	@RequestMapping(value="/goods/shopFoodList.do", method=RequestMethod.GET)
-	public ModelAndView shopFoodList(String cate, String orderBy, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView shopFoodList(@RequestParam(value="section", defaultValue="1") int section, @RequestParam(value="pageNum", defaultValue="1") int pageNum,String cate, String orderBy, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		Map<String, Object> option = new HashMap<String, Object>();
-		List<GoodsShoppingVO> goodsFoodList;
+		List<GoodsShoppingVO> goodsFoodAllList = new ArrayList<>();
+		List<GoodsShoppingVO> goodsFoodList = new ArrayList<>();
 		session.setAttribute("cate", cate);
 		session.setAttribute("orderBy", orderBy);
 		switch(orderBy) {
-		case "best" : orderBy =  "review_star DESC";
+		case "best" : orderBy = "review_star DESC";
 		break;
-		case "row" : orderBy = "priceretail asc";
+		case "row" : orderBy = "priceretail ASC";
 		}
 		option.put("orderBy", orderBy);
-		
+		System.out.println(orderBy);
 		if(cate.equals("all")) {
-			goodsFoodList = goodsService.goodsFoodAllList(option);
+			goodsFoodAllList = goodsService.goodsFoodAllList(option);
 		} else {
-			switch(cate) {
-			case "tender": cate = "s.cate_sec = 닭가슴살";
-			break;
-			case "protain": cate= "s.cate_sec = 프로틴";
-			break;
-			}
 			option.put("cate", cate);
-			goodsFoodList = goodsService.goodsFoodCateList(option);
+			goodsFoodAllList = goodsService.goodsFoodCateList(option);
 		}
 		
+		
+		try {
+			for(int i=(pageNum-1)*12; i<pageNum*12; i++) {
+				goodsFoodList.add(goodsFoodAllList.get(i));
+				System.out.println(goodsFoodAllList.get(i).getGoods_title());
+			}
+		} catch(IndexOutOfBoundsException  e) {
+			
+		}
+		mav.addObject("section", section);
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("totalGoods", goodsFoodAllList.size());
+		mav.addObject("foodList", goodsFoodList);
 		mav.setViewName(viewName);
+		option.clear();
+		return mav;
+	}
+
+	
+	
+	
+	
+	@Override
+	@RequestMapping(value="/goods/shopGoodsList.do", method=RequestMethod.GET)
+	public ModelAndView shopGoodsList(int section, int pageNum, String cate, String orderBy, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		Map<String, Object> option = new HashMap<String, Object>();
+		List<GoodsShoppingVO> goodsGoodsAllList = new ArrayList<>();
+		List<GoodsShoppingVO> goodsGoodsList = new ArrayList<>();
+		session.setAttribute("cate", cate);
+		session.setAttribute("orderBy", orderBy);
+		switch(orderBy) {
+		case "best" : orderBy = "review_star DESC";
+		break;
+		case "row" : orderBy = "priceretail ASC";
+		}
+		option.put("orderBy", orderBy);
+		System.out.println(orderBy);
+		if(cate.equals("all")) {
+			goodsGoodsAllList = goodsService.goodsGoodsAllList(option);
+		} else {
+			option.put("cate", cate);
+			goodsGoodsAllList = goodsService.goodsGoodsCateList(option);
+		}
+		
+		
+		try {
+			for(int i=(pageNum-1)*12; i<pageNum*12; i++) {
+				goodsGoodsList.add(goodsGoodsAllList.get(i));
+			}
+		} catch(IndexOutOfBoundsException  e) {
+			
+		}
+		mav.addObject("section", section);
+		mav.addObject("pageNum",pageNum);
+		mav.addObject("totalGoods", goodsGoodsAllList.size());
+		mav.addObject("goodsList", goodsGoodsList);
+		mav.setViewName(viewName);
+		option.clear();
 		return mav;
 	}
 
 	@Override
-	@RequestMapping(value="/goods/shopGoodsList.do", method=RequestMethod.GET)
-	public ModelAndView shopGoodsList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value="/goods/placeDetail.do")
+	public ModelAndView placeDetail(String goods_id, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		GoodsBusinessVO placeVO = goodsService.goodsBusinessDetail(goods_id);
+		List<GoodsImageFileVO> placeImageList = goodsService.goodsBusinessImage(goods_id);
+		String id = placeVO.getId();
+		List<GoodsTrainerVO> trainerList = goodsService.goodsBusinessTrainerList(id);
+		if(placeVO.getReview_count() != 0) {
+			List<GoodsReviewVO> placeReviewList = goodsService.goodsBusinessReviewList(goods_id);
+			List<GoodsReviewAnswerVO> placeReviewAnswerList = goodsService.goodsBusinessReviewAnswerList(goods_id);
+			mav.addObject("reviewList",placeReviewList);
+			mav.addObject("answerList", placeReviewAnswerList);
+		}
+		mav.addObject("place", placeVO);
+		mav.addObject("imageList", placeImageList);
+		mav.addObject("trainerList", trainerList);
 		mav.setViewName(viewName);
 		return mav;
 	}
 
-	//--------운동시설------------//
-	@RequestMapping(value="/goods/gymDetail.do", method=RequestMethod.GET)
-	private ModelAndView gymDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ModelAndView mav = new ModelAndView();
-		String viewName = (String) request.getAttribute("viewName");
-		mav.setViewName(viewName);
-		return mav;
-	}
-	
 	//--------트레이너------------//
 	@RequestMapping(value="/goods/trainerDetail.do", method=RequestMethod.GET)
 	private ModelAndView trainerDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -230,9 +304,14 @@ public class GoodsControllerImpl implements GoodsController{
 	//--------쇼핑------------//
 	@RequestMapping(value="/goods/goodsDetail.do", method=RequestMethod.GET)
 	private ModelAndView goodsDetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		goodsShoppingVO = (GoodsShoppingVO) session.getAttribute("goods");
+		//String id = goodsShoppingVO.getId();
+		ModelAndView mav = new ModelAndView();
+		//goodsShoppingVO = mypageService.memberDetail(id);
 		mav.setViewName(viewName);
+		mav.addObject("goods",goodsShoppingVO);
 		return mav;
 	}
 	//검색

@@ -47,25 +47,6 @@ request.setCharacterEncoding("utf-8");
 	margin-bottom: 15px;
 }
 
-.map_button2 {
-	display: inline-block;
-	border-radius: 13px;
-	background-color: #2890f1;
-	width: fit-content;
-	padding: 8px 14px 8px 8px;
-}
-
-.map_button2 img {
-	width: 25px;
-}
-
-.map_button2 span {
-	vertical-align: super;
-	font-size: 14px;
-	color: white;
-	margin-bottom: 15px;
-}
-
 .pc_cate ul {
 	height: 30px;
 	border-bottom: solid 1px #ccc;
@@ -108,7 +89,6 @@ request.setCharacterEncoding("utf-8");
 	font-size: 15px;
 	display: block;
 	font-weight: bold;
-	height:25px;
 }
 .main_item .trainer_work{
 	text-align: left;
@@ -264,7 +244,7 @@ font-size:14px;
 					<span class="location">
 					<fmt:formatNumber pattern="0.0" value="${trainer.distance/1000 }"/>km</span>
 					<fmt:parseNumber var="price" integerOnly="true" type="number" value="${trainer.prod10retail}" />
-					<span class="price"><fmt:formatNumber value="${price /10}" pattern="#,###" />/회</span>
+					<span class="price"><fmt:formatNumber value="${price /10}" pattern="#,###,###" />/회</span>
 					<div class="cates">
 					<div class="cate">${trainer.cate }</div>
 					</div>

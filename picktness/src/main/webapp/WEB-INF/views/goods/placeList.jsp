@@ -251,13 +251,13 @@ font-size:14px;
 		<div class="main_box">
 			<c:forEach items="${placeList }" var="place">
 				<div class="main_item"
-					onclick="location.href='${contextPath}/goods/gymDetail.do'">
-					<img class="main_img" src="${contextPath}/images/main/health4.jpg" />
+					onclick="location.href='${contextPath}/goods/placeDetail.do?goods_id=${place.goods_id }'">
+					<img class="main_img" src="${contextPath}/download.do?cate=place&imageFileName=${place.fileName}&bno=${place.goods_id}" />
 					<span class="title">${place.b_name }</span>
 					<span class="location">${place.addrBasic } 
 					</span>
 					<span class="location"><fmt:formatNumber pattern="0.0" value="${place.distance/1000 }"/>km</span>
-					<span class="price">${place.prod1retail }/월 </span>
+					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod1retail}" />/월</span>
 					<div class="cates">
 						<c:if test="${place.allTime == 'Y' }">
 							<div class="cate">24시간</div>

@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<select id="goodsBusinessCateList" resultType="goodsBusinessVO" parameterType="java.util.Map">
  	<![CDATA[
- 	select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance from (select t.*, i.fileName from (select b.id, d.goods_id, b.b_name, b.addrbasic, d.prod1retail, d.cate, d.alltime, d.review_star, d.review_count, b.lat, b.lng from business_detail as d join business as b on d.id = b.id where d.cate = #{cate}) as t join business_detail_image as i on i.goods_id = t.goods_id where i.filetype = "main_image") as l where ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) <=5000 order by distance; 
+ 	select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance from (select t.*, i.fileName from (select b.id, d.goods_id, b.b_name, b.addrbasic, d.prod1retail, d.cate, d.alltime, d.review_star, d.review_count, b.lat, b.lng from business_detail as d join business as b on d.id = b.id where d.cate = #{cate}) as t join business_detail_image as i on i.goods_id = t.goods_id where i.filetype = "main_image") as l where ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) <=5000 order by distance ${limit};
  	]]>
  	</select>
  	
@@ -34,13 +34,25 @@ select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance 
  	
  	<select id="goodsFoodAllList" resultType="goodsShoppingVO" parameterType="java.util.Map">
  	<![CDATA[
- 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" ORDER BY SIGN(goods_qty) DESC, #{orderBy}, goods_qty DESC;
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_fir = "food" ${where} order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC ${limit}
  	]]>
  	</select>
  	
  	<select id="goodsFoodCateList" resultType="goodsShoppingVO" parameterType="java.util.Map">
  	<![CDATA[
- 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && #{cate} ORDER BY SIGN(goods_qty) DESC, #{orderBy}, goods_qty DESC;
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_sec = #{cate} ${where} order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC;
+ 	]]>
+ 	</select>
+ 	
+ 	 <select id="goodsGoodsAllList" resultType="goodsShoppingVO" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_fir = "goods" order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC ${limit}
+ 	]]>
+ 	</select>
+ 	
+ 	<select id="goodsGoodsCateList" resultType="goodsShoppingVO" parameterType="java.util.Map">
+ 	<![CDATA[
+ 	select s.goods_id, s.goods_title, i.fileName, s.priceretail, s.goods_qty, s.review_star, s.review_count  from shopping as s join shopping_detail_image as i on i.goods_id = s.goods_id where i.filetype="main_image" && s.cate_sec = #{cate} order by SIGN(goods_qty) DESC, ${orderBy}, goods_qty DESC;
  	]]>
  	</select>
  	
@@ -64,5 +76,37 @@ select s.*, i.filename from shopping as s join shopping_detail_image as i on s.g
 	]]>
 	</select>
 	
+	<select id="goodsBusinessDetail" resultType="goodsBusinessVO" parameterType="String">
+	<![CDATA[
+	select d.*, b.b_name, b.addrbasic, b.addrdetail, b.phone1, b.phone2, b.phone3, b.lat, b.lng from business_detail as d join business as b on d.id = b.id where goods_id = #{goods_id}
+	]]>
+	</select>
 	
+	<select id="goodsBusinessImage" resultType="goodsImageFileVO" parameterType="String">
+	<![CDATA[
+	select * from business_detail_image where goods_id = #{goods_id}
+	]]>
+	</select>
+	
+	<select id="goodsBusinessTrainerList" resultType="goodsTrainerVO" parameterType="String">
+	<![CDATA[
+	select t.name, t.prod10, i.fileName from trainer as t join trainer_detail_image as i on t.goods_id = i.goods_id where t.id = #{id} and i.fileType="main_image";
+	]]>
+	</select>
+	
+	<select id="goodsBusinessReviewList" resultType="goodsReviewVO" parameterType="String">
+	<![CDATA[
+	select bno, member_id, star, reviewDate, review_pic, review_content from goods_review where goods_id = #{goods_id}
+	]]>
+	</select>
+	
+	<select id="goodsBusinessReviewAnswerList" resultType="goodsReviewAnswerVO" parameterType="String">
+	<![CDATA[
+	select p_bno, reviewDate, answer_content from goods_review_answer where goods_id = #{goods_id}
+	]]>
+	</select>
+	
+	<select id="goodsTrainerDetail" resultType="goodsTrainerVO" parameterType="String">
+	
+	</select>
  </mapper>

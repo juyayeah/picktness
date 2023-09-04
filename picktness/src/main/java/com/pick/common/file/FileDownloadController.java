@@ -3,6 +3,7 @@ package com.pick.common.file;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,7 +26,7 @@ public class FileDownloadController {
 		OutputStream out = response.getOutputStream();
 		String downFile = fileName(cate, bno, imageFileName);
 		File file = new File(downFile);
-		
+		imageFileName = URLEncoder.encode(imageFileName, "UTF-8"); // 이미지 파일 이름 깨지는 거 해결
 		response.setHeader("Cache-Control", "no-cache");
 		response.addHeader("Content-disposition", "attachment;fileName=" + imageFileName);
 		FileInputStream in = new FileInputStream(file);
@@ -44,6 +45,10 @@ public class FileDownloadController {
 		String fileName = null;
 		switch(cate) {
 		case "mill":fileName = TODAYMILL_IMAGE_REPO+"\\"+bno+"\\"+imageFileName;
+		break;
+		case "shop":fileName = SHOPPING_IMAGE_REPO+"\\"+bno+"\\"+imageFileName;
+		break;
+		case "place":fileName = BUSINESS_IMAGE_REPO + "\\" + bno + "\\" + imageFileName;
 		break;
 		}
 		return fileName;

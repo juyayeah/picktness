@@ -375,29 +375,29 @@ background-color:#fff;
 				<table border=0 align="center" width="860px">
 					<tr>
 						<!-- 사진칸 -->
-						<td class="detail_goods_img" rowspan="7"><input
-							type="hidden" name="originalFileName"
-							value="${user.imageFileName }" /> <img
-							src="${contextPath}/images/member/yoga.jpg" width="300px"
-							align="right"></td>
-
+						<td class="detail_goods_img" rowspan="7">
+							<input type="hidden" name="originalFileName" value="${food.fileName}" />
+							<!--<img src="${contextPath}/download.do?cate=shop&imageFileName=${food.fileName}&bno=${food.goods_id}" width="300px" align="right"> -->
+						</td>
 						<!-- <img src="${contextPath }/download.do?imageFileName=${member.imageFileName }&num=${member.num}" id="preview" width="300px" height="300px" /><br> <input type="file"
                   name="imageFileName" id="imageFileName"
                   onchange="readURL(this);" disabled /></td> -->
 						<!-- disabled 있으면 바꿀 수 없음 -->
 						<!-- 상품명 -->
 						<td align="left">
-							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">비기너
-								요가매트 베이직 TPE 6MM</h2> <!-- 고객이 보는 창 --> <input type="hidden"
-							value="${member.num}" name="num" /> <!-- 인터페이스 -->
-					<b
-							style="padding: 0 0 0 30px; font-size: 23px;">36,000원</b></td>
+							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">${food.goods_title }</h2>
+							<input type="hidden" value="${member.num}" name="num" />
+							<b style="padding: 0 0 0 30px; font-size: 23px;">${food.priceRetail}원</b>
+						</td>
 					</tr>
 					<tr>
 						<td align="left"><span
-							style="padding: 0 0 0 30px; font-size: 15px;">남은 수량</span><span style="padding: 0 0 0 10px; font-size: 15px;">5개</span><br>
-					  <span	style="padding: 0 0 0 30px; font-size: 15px;">배송방법</span><span style="padding: 0 0 0 10px; font-size: 15px;">일반배송</span><br>
-						<span style="padding: 0 0 0 30px; font-size: 15px;">적립금</span><span style="padding: 0 0 0 10px; font-size: 15px;">1,080원</span><br></td>
+							<span style="padding: 0 0 0 30px; font-size: 15px;">남은 수량</span>
+							<span style="padding: 0 0 0 10px; font-size: 15px;">${food.goods_qty}개</span><br>
+							<span style="padding: 0 0 0 30px; font-size: 15px;">배송방법</span>
+							<span style="padding: 0 0 0 10px; font-size: 15px;">${food.deliveryMethod}</span><br>
+							<span style="padding: 0 0 0 30px; font-size: 15px;">적립금</span>
+							<span style="padding: 0 0 0 10px; font-size: 15px;">${food.priceRetail}원</span><br>
 					</tr>
 					<tr>
 						<td align="left" style="padding: 0 0 0 30px;"><div class="minus-plus" align="center">

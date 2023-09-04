@@ -7,6 +7,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:if test='${not empty message }'>
+<script>
+alert("${message}");
+</script>
+</c:if>
     <style>
         .container {
             font-family: Arial, sans-serif;
@@ -40,8 +45,7 @@
         }
 
         .bBtn {
-            color: #2890F1;
-            text-decoration: underline;
+            color: black;;
             width: 120px; 
             height: 50px;
             border: none;
@@ -124,7 +128,9 @@
         }
         
         // 페이지 로딩 시 초기값 설정
-        window.onload = function() {
+         window.onload = function() {
+        	if(${type == null}){
+
             var personalButton = document.getElementById('personalButton');
             var businessButton = document.getElementById('businessButton');
             var personalLoginForm = document.getElementById('personalLoginForm');
@@ -135,9 +141,20 @@
             businessButton.style.textDecoration = 'none';
             personalLoginForm.style.display = 'block';
             businessLoginForm.style.display = 'none';
+        	} else{
 
-
-        };
+                var personalButton = document.getElementById('personalButton');
+                var businessButton = document.getElementById('businessButton');
+                var personalLoginForm = document.getElementById('personalLoginForm');
+                var businessLoginForm = document.getElementById('businessLoginForm');
+                
+                personalButton.style.color = 'black';
+                personalButton.style.textDecoration = 'none';
+                businessButton.style.color = '#2890F1';            
+                personalLoginForm.style.display = 'none';
+                businessLoginForm.style.display = 'block';
+        	}
+        }; 
     </script>
     <meta charset="UTF-8">
     <title>로그인창</title>
@@ -150,17 +167,13 @@
 
             <div id="personalLoginForm">
                 <form action="${contextPath}/member/login.do" method="post">
+                	<input type="hidden" name="userType" value="member">
                     <input type="text" id="id" name="id" placeholder="아이디" required>
                     <br>
                     <input type="password" id="password" name="pwd" placeholder="비밀번호" required>
                     <br>
                     <button class="loginB" type="submit">로그인</button>
                 </form>
-                <div class="button3">
-                    <button type="button" class="custom-button"  class="kakaoLogin" onClick="https://kauth.kakao.com/oauth/authorize">
-                        <img src="https://ifh.cc/g/8gHrO6.png" alt="카카오톡로그인" class="button-image button-image-kakao">
-                    </button>
-                </div>
                 <div class="footer-select">
                     <a href="${contextPath}/member/findById.do">아이디 찾기</a> |
                     <a href="${contextPath}/member/findByPwd.do">비밀번호 찾기</a> |
@@ -170,14 +183,15 @@
             
             <div id="businessLoginForm" style="display: none;">
                 <form action="${contextPath}/member/login.do" method="post">
-                    <input type="text" id="businessId" name="businessId" placeholder="사업자 아이디" required>
+                	<input type="hidden" name="userType"value="business">
+                    <input type="text" id="businessId" name="id" placeholder="사업자 아이디" required>
                     <br>
-                    <input type="password" id="businessPassword" name="businessPassword" placeholder="비밀번호" required>
+                    <input type="password" id="businessPassword" name="pwd" placeholder="비밀번호" required>
                     <br>
                     <button class="loginB" type="submit">로그인</button>
                 </form>
                 <div class="footer-select">
-                    <a href="${contextPath}/member/findById.do"">아이디 찾기</a> |
+                    <a href="${contextPath}/member/findById.do">아이디 찾기</a> |
                     <a href="${contextPath}/member/findByPwd.do">비밀번호 찾기</a> |
                     <a href="${contextPath}/member/selectJoin.do">회원가입</a>
                 </div>
