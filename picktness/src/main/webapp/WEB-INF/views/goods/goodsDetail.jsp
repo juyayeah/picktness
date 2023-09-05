@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%
 request.setCharacterEncoding("utf-8");
@@ -193,9 +193,26 @@ border:0;
 cursor:pointer;
 background-color:#fff;
 }
+.custom-image {
+    max-width: 100%;
+    height: auto; 
+  }
 </style>
 
 <script type="text/javascript">
+
+	window.addEventListener('DOMContentLoaded', function () {
+        // goods.detail이 null 또는 빈 문자열인 경우 textarea를 숨깁니다.
+        var goodsDetail = "${goods.detail}";
+        if (!goodsDetail || goodsDetail.trim() === "") {
+            var textareaElement = document.querySelector('textarea[name=""]');
+            if (textareaElement) {
+                textareaElement.style.display = 'none';
+            }
+        }
+    });
+
+
 	//상품정보, 이용후기, 상품문의 마우스 이벤트
 	function content() {
 		document.getElementById("gymdetail_content").style.display = "block";
@@ -337,47 +354,63 @@ background-color:#fff;
 	                resizeRowspan(cls);
 	            });
 	 
-	function count(type)  {
-	  // 결과를 표시할 element
-	  const resultElement = document.getElementById('result');
-	  const total1 = document.getElementById('total');
-	  
-	  // 현재 화면에 표시된 값
-	  let number = resultElement.innerText;
-	  
-	  // 더하기/빼기
-	  if(type === 'plus') {
-	    number = parseInt(number) + 1;
-	    if(1 > number){
-	    number = 0;
-	    }
-	    total = number * 36000;
-	  }else if(type === 'minus')  {
-	    number = parseInt(number) - 1;
-	    if(1 > number){
-	    number = 0;
-	    }
-	    total = number * 36000;
-	  }
-	  
-	  // 결과 출력
-	  resultElement.innerText = number;
-	  total1.innerText = total;
-	}
+				document.addEventListener("DOMContentLoaded", function () {
+        count("plus"); // 페이지 로드 시 + 버튼 클릭한 것과 같은 효과로 초기화
+    });
+
+    function count(type) {
+    // 결과를 표시할 element
+    const resultElement = document.getElementById("result");
+    const totalElement = document.getElementById("total"); // 총 결재 금액 요소 추가
+
+    // 현재 화면에 표시된 값
+    let number = parseInt(resultElement.innerText); // 현재 값 가져오기
+
+    // 더하기/빼기
+    if (type === "plus") {
+        number = number + 1;
+        if (1 > number) {
+            number = 0;
+        }
+    } else if (type === "minus") {
+        number = number - 1;
+        if (1 > number) {
+            number = 0;
+        }
+    }
+
+    // ${goods.priceRetail} 가져오기 (상품 가격)
+    const goodsPrice = parseFloat("${goods.priceRetail}"); // 문자열을 부동 소수점 숫자로 변환
+
+    // 총 결재 금액 계산
+    const total = number * goodsPrice;
+
+    // 콤마 포함한 숫자로 서식화
+    const formattedTotal = total.toLocaleString("ko-KR"); // 한국어로 표시
+
+    // 결과 출력
+    resultElement.innerText = number;
+    totalElement.innerText = formattedTotal;
+}
+
+
+
+
+
 </script>
 
 </head>
 <body>
 	<div class="bodybody">
-		<form action="${contextPath }" method="post" name=""
+		<form action="${contextPath }/member/order/orderDetail.do" method="get" name=""
 			enctype="multipart/form-data">
 			<div>
 				<table border=0 align="center" width="860px">
 					<tr>
 						<!-- 사진칸 -->
 						<td class="detail_goods_img" rowspan="7">
-							<input type="hidden" name="originalFileName" value="${food.fileName}" />
-							<!--<img src="${contextPath}/download.do?cate=shop&imageFileName=${food.fileName}&bno=${food.goods_id}" width="300px" align="right"> -->
+							<input type="hidden" name="originalFileName" value="${goods.fileName}" />
+								<img src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" width="300px" align="right">
 						</td>
 						<!-- <img src="${contextPath }/download.do?imageFileName=${member.imageFileName }&num=${member.num}" id="preview" width="300px" height="300px" /><br> <input type="file"
                   name="imageFileName" id="imageFileName"
@@ -385,34 +418,41 @@ background-color:#fff;
 						<!-- disabled 있으면 바꿀 수 없음 -->
 						<!-- 상품명 -->
 						<td align="left">
-							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">${food.goods_title }</h2>
-							<input type="hidden" value="${member.num}" name="num" />
-							<b style="padding: 0 0 0 30px; font-size: 23px;">${food.priceRetail}원</b>
+							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">${goods.goods_title }</h2>
+
+							<span style="padding: 0 0 0 30px; font-size: 23px; color: #2890f1;">
+								${Math.round(((goods.priceOrigin - goods.priceRetail) / goods.priceOrigin) * 100)}%
+								</span>
+							<b style="font-size: 23px; color: red;">${goods.priceRetail}원</b>
+							<span style="text-decoration: line-through; font-size: 12px; color: #c0c0c0;">${goods.priceOrigin}원</span>
 						</td>
 					</tr>
 					<tr>
 						<td align="left"><span
 							<span style="padding: 0 0 0 30px; font-size: 15px;">남은 수량</span>
-							<span style="padding: 0 0 0 10px; font-size: 15px;">${food.goods_qty}개</span><br>
+							<span style="padding: 0 0 0 10px; font-size: 15px;">${goods.goods_qty}개</span><br>
 							<span style="padding: 0 0 0 30px; font-size: 15px;">배송방법</span>
-							<span style="padding: 0 0 0 10px; font-size: 15px;">${food.deliveryMethod}</span><br>
+							<!--<span style="padding: 0 0 0 10px; font-size: 15px;">${food.deliveryMethod}</span><br>-->
+							<span style="padding: 0 0 0 10px; font-size: 15px;">일반배송</span><br>
 							<span style="padding: 0 0 0 30px; font-size: 15px;">적립금</span>
-							<span style="padding: 0 0 0 10px; font-size: 15px;">${food.priceRetail}원</span><br>
+							<span style="padding: 0 0 0 10px; font-size: 15px;">${goods.priceRetail}원</span><br>
 					</tr>
 					<tr>
 						<td align="left" style="padding: 0 0 0 30px;"><div class="minus-plus" align="center">
-								<button class="minusplus_cart" onclick='count("minus")'>-</button>
+								<button type="button" class="minusplus_cart" onclick='count("minus")'>-</button>
 								<span id='result'>0</span>
-								<button class="minusplus_cart" onclick='count("plus")'>+</button>
+								<button type="button" class="minusplus_cart" onclick='count("plus")'>+</button>
 							</div></td>
 					</tr>
-					<tr><td align="left"><span
-							style="padding: 0 0 0 30px; font-size: 15px;">총 상품금액</span><span id='total' style="font-size: 23px;">0</span><span>원</span>
+					<tr><td align="left">
+						<span style="padding: 0 0 0 30px; font-size: 15px;">총 상품금액</span>
+						<span id='total' style="font-size: 23px; margin-left: 10px;">0</span>
+						<span>원</span>
 					</td>
 					</tr>
 				<tr>
 					<td align="left" style="padding: 0 0 10px 30px;">
-						<button class=button_white value="장바구니">장바구니</button>&nbsp;&nbsp;
+						<button type="button" class="button_white" value="장바구니">장바구니</button>&nbsp;&nbsp;
 						<button class=button_blue id="nowbuy" onclick="nowbuy()">바로구매</button>
 					</td>
 				</table>
@@ -430,12 +470,16 @@ background-color:#fff;
 			<!-- 소개 및 정보 시작 -->
 			<div class=gymdetail_content style="display: block;"
 				id="gymdetail_content">
-				<img src="${contextPath }/images/member/yoga3.jpg"
-					style="width: 100%; display: black"> <img
-					src="${contextPath }/images/member/yoga2.jpg"
-					style="width: 100%; display: none" id="gymdetail_goods"> <img
-					src="${contextPath }/images/member/delivery.jpg"
-					style="width: 100%; display: none" id="gymdetail_goods">
+				<!--상품소개-->
+				<br>
+			<textarea rows="15" cols="60" name="" disabled />${goods.detail}</textarea>
+			<br><br>
+			<div style="text-align: center;">
+				<c:forEach var="image" items="${imageList}">
+					<img class="custom-image" src="${contextPath}/download.do?cate=shop&imageFileName=${image.fileName}&bno=${image.goods_id}">
+				</c:forEach>
+			</div>
+			<br>
 				
 				<button type="button" class=button_white onclick="more()"
 					id="goods_more" style="display: block; width: 500px; margin:auto;">상품설명

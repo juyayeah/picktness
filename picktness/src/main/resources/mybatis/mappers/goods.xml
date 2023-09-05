@@ -3,6 +3,22 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
  <mapper namespace="com.pick.goods.dao.GoodsDAO">
+ 	<resultMap id="goodsResult" type="GoodsShoppingVO">
+ 	<result property="goods_id" column="goods_id" />
+ 	<result property="goods_title" column="goods_title" />
+ 	<result property="goods_qty" column="goods_qty" />
+ 	<result property="priceOrigin" column="priceorigin" />
+ 	<result property="priceRetail" column="priceretail" />
+ 	<result property="fileName" column="fileName" />
+ 	</resultMap>
+ 	
+ 	<resultMap id="imageResult" type="GoodsImageFileVO">
+ 	<result property="image_id" column="image_id" />
+ 	<result property="goods_id" column="goods_id" />
+ 	<result property="fileName" column="filename" />
+ 	<result property="fileType" column="filetype" />
+ 	</resultMap>
+ 	
   	<select id="goodsBusinessAllList" resultType="goodsBusinessVO" parameterType="java.util.Map">
  	<![CDATA[
  	select *, ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) as distance from (select t.*, i.fileName from (select b.id, d.goods_id, b.b_name, b.addrbasic, d.prod1retail, d.cate, d.alltime, d.review_star, d.review_count, b.lat, b.lng from business_detail as d join business as b on d.id = b.id) as t join business_detail_image as i on i.goods_id = t.goods_id where i.filetype = "main_image") as l where ST_Distance_Sphere(POINT(#{lng},#{lat}), POINT(lng, lat)) <=5000 order by distance; 
@@ -109,4 +125,23 @@ select s.*, i.filename from shopping as s join shopping_detail_image as i on s.g
 	<select id="goodsTrainerDetail" resultType="goodsTrainerVO" parameterType="String">
 	
 	</select>
+	
+	<select id="goodsDetail" resultMap="goodsResult" parameterType="String">
+	<![CDATA[
+	SELECT s.goods_id, s.goods_title, s.goods_qty, s.priceorigin, s.priceretail, s.detail, sdi.fileName FROM shopping s, shopping_detail_image sdi
+	WHERE s.goods_id = sdi.goods_id
+	and sdi.fileType='main_image'
+	and s.goods_id=#{goods_id}
+	order by s.goods_id
+	]]>
+	</select>
+	
+	<select id="selectGoodsDetailImage" resultMap="imageResult"   parameterType="String"  >
+	<![CDATA[
+	select * from shopping_detail_image 
+	where  fileType!='main_image'
+	and goods_id=#{goods_id}
+    ]]>
+	</select>
+	
  </mapper>
