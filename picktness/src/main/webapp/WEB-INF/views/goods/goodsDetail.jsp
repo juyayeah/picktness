@@ -428,7 +428,7 @@ background-color:#fff;
 						</td>
 					</tr>
 					<tr>
-						<td align="left"><span
+						<td align="left">
 							<span style="padding: 0 0 0 30px; font-size: 15px;">남은 수량</span>
 							<span style="padding: 0 0 0 10px; font-size: 15px;">${goods.goods_qty}개</span><br>
 							<span style="padding: 0 0 0 30px; font-size: 15px;">배송방법</span>

@@ -133,6 +133,26 @@ pageEncoding="UTF-8" isELIgnored="false"%>
 	.order_price p {
 	display:inline-block;
 	}
+	.order_now{
+	text-align:center;
+	margin-top:30px;
+	}
+	.main_button{
+	background-color:white;
+	padding:16px;
+	font-size:14px;
+	font-weight:bold;
+	border:1px solid #ddd;
+	margin:10px;
+	}
+	.order_button{
+	background-color:#2890f1;
+	padding:16px 30px;
+	font-size:14px;
+	color:white;
+	font-weight:bold;
+	border:1px solid #2890f1;
+	}
     </style>
     <meta charset="UTF-8" />
     <title>장바구니</title>
@@ -153,10 +173,12 @@ pageEncoding="UTF-8" isELIgnored="false"%>
   			  	retail_price = retail_price + parseInt(now_retail);
   			  	
   			});
-  			
-  			$("#order_original_price").text(original_price.toLocaleString() +'원');
-  			$("#order_sale_price").text(sale_price.toLocaleString() +'원');
-  			$("#order_total_price").text(retail_price.toLocaleString()+'원');
+  			$("#order_origin").attr("value", original_price);
+  			$("#order_sale").attr("value", sale_price);
+  			$("#order_total").attr("value", retail_price);
+  			$("#order_original_price").text(original_price.toLocaleString());
+  			$("#order_sale_price").text(sale_price.toLocaleString());
+  			$("#order_total_price").text(retail_price.toLocaleString());
   		}
   		function calc_remove(){
   			$("#order_original_price").text('0원');
@@ -223,23 +245,22 @@ pageEncoding="UTF-8" isELIgnored="false"%>
   function delete_cart_select(){
 	  	if(confirm("상품을 삭제하시겠습니까?")){
 	  		alert("장바구니에서 삭제되었습니다.");
-			$("input[name='chk']:checked").each(function(index) { 
 		  		var id_list = new Array();
+			$("input[name='chk']:checked").each(function(index) { 
 			  	var cart_id = $(this).nextAll(".cart_id").val();
 			  	id_list.push(cart_id);
-			  	$.ajax({
-			  		url : "${contextPath}/member/cart/removeCartGoodsSelect.do",
-			  		type:"post",
-				  	data : {id_list : id_list},
-				  	traditional: true,
-				  	success : function(data){
-				  		location.href=data;
-				  	}, errer:function(request, status, error){
-				  		
-				  	}
-			  	});
-			  	
 			});
+		  	$.ajax({
+		  		url : "${contextPath}/member/cart/removeCartGoodsSelect.do",
+		  		type:"post",
+			  	data : {id_list : id_list},
+			  	traditional: true,
+			  	success : function(data){
+			  		location.href=data;
+			  	}, errer:function(request, status, error){
+			  		
+			  	}
+		  	});
 	  	}		  
   }
   
@@ -266,6 +287,37 @@ pageEncoding="UTF-8" isELIgnored="false"%>
 		  		
 		  	}
 	  	});
+  }
+  
+  function order_cart(){
+	  var checked = $("input[name=chk]:checked").length;
+	  if(checked == 0){
+		  alert("상품을 선택해 주세요.");
+	  } else {
+		  	var idList = new Array();
+		  	var order_original = $("#order_origin").val();
+			var order_sale = $("#order_sale").val();
+			var order_total = $("#order_total").val();
+			$("input[name='chk']:checked").each(function(index) { 
+		  		
+			var cart_id = $(this).nextAll(".cart_id").val();
+			idList.push(cart_id);
+			});
+		  	$.ajax({
+		  		url : "${contextPath}/member/order/order_cart.do",
+		  		type:"post",
+			  	data : {idList : idList,
+			  		original_price : order_original,
+			  		sale_price : order_sale,
+			  		total_price : order_total},
+			  	traditional: true,
+			  	success : function(data){
+			  		location.href=data;
+			  	}, errer:function(request, status, error){
+			  		
+			  	}
+		  	});
+	  }
   }
   </script>
   <body>
@@ -422,11 +474,18 @@ pageEncoding="UTF-8" isELIgnored="false"%>
  </div>
  <a href="javascript:delete_cart_select()" class="goods_button" id="select_button">선택 삭제</a>
  <div class="order_price">
-<p>상품 금액 <span  id="order_original_price"></span></p>
+<p>상품 금액 <span  id="order_original_price"></span>원</p>
 <p> - </p>
-<p>할인 금액 <span  id="order_sale_price"> </span></p>
+<p>할인 금액 <span  id="order_sale_price"> </span>원</p>
 <p> = </p>
-<p>최종 결제 금액 <span  id="order_total_price"> </span></p>
+<p>최종 결제 금액 <span  id="order_total_price"> </span>원</p>
+<input type="hidden" id="order_origin">
+<input type="hidden" id="order_sale">
+<input type="hidden" id="order_total">
+ </div>
+ <div class="order_now">
+ <a href="${contextPath }/main.do" class="main_button">쇼핑계속하기</a>
+ <a href="javascript:order_cart()" class="order_button">주문하기</a>
  </div>
  </div>
  </body>
