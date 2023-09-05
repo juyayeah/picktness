@@ -11,6 +11,18 @@ request.setCharacterEncoding("utf-8");
 <head>
 <script type="text/javascript"
 	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript">
+		window.addEventListener('DOMContentLoaded', function () {
+				// goods.detail이 null 또는 빈 문자열인 경우 textarea를 숨깁니다.
+				var goodsDetail = "${goods.detail}";
+				if (!goodsDetail || goodsDetail.trim() === "") {
+					var textareaElement = document.querySelector('textarea[name=""]');
+					if (textareaElement) {
+						textareaElement.style.display = 'none';
+					}
+				}
+			});
+</script>				
 <meta charset="UTF-8">
 <title>상품 상세페이지</title>
 <style>
@@ -197,21 +209,25 @@ background-color:#fff;
     max-width: 100%;
     height: auto; 
   }
+  .review_button {
+	font-size: 13px;
+	float: right;
+	text-align: center;
+	width: 90px;
+	padding: 10px 0px;
+	border: 1px solid #555;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.review_null {
+	clear: both;
+	margin: 30px 0px;
+	text-align: center;
+}
 </style>
 
 <script type="text/javascript">
-
-	window.addEventListener('DOMContentLoaded', function () {
-        // goods.detail이 null 또는 빈 문자열인 경우 textarea를 숨깁니다.
-        var goodsDetail = "${goods.detail}";
-        if (!goodsDetail || goodsDetail.trim() === "") {
-            var textareaElement = document.querySelector('textarea[name=""]');
-            if (textareaElement) {
-                textareaElement.style.display = 'none';
-            }
-        }
-    });
-
 
 	//상품정보, 이용후기, 상품문의 마우스 이벤트
 	function content() {
@@ -423,7 +439,7 @@ background-color:#fff;
 							<span style="padding: 0 0 0 30px; font-size: 23px; color: #2890f1;">
 								${Math.round(((goods.priceOrigin - goods.priceRetail) / goods.priceOrigin) * 100)}%
 								</span>
-							<b style="font-size: 23px; color: red;">${goods.priceRetail}원</b>
+							<b style="font-size: 23px;">${goods.priceRetail}원</b>
 							<span style="text-decoration: line-through; font-size: 12px; color: #c0c0c0;">${goods.priceOrigin}원</span>
 						</td>
 					</tr>
@@ -462,7 +478,7 @@ background-color:#fff;
 				<nav>
 					<ul>
 						<li><a href="#" class="hover-underline" onclick="content()">상품정보</a></li>
-						<li><a href="#" class="hover-underline" onclick="review()">이용후기</a></li>
+						<li><a href="#" class="hover-underline" onclick="review()">이용후기  ${place.review_count }</a></li>
 						<li><a href="#" class="hover-underline" onclick="inquiry()">상품문의</a></li>
 					</ul>
 				</nav>
@@ -470,13 +486,12 @@ background-color:#fff;
 			<!-- 소개 및 정보 시작 -->
 			<div class=gymdetail_content style="display: block;"
 				id="gymdetail_content">
-				<!--상품소개-->
-				<br>
+				<p>상품소개</p>
 			<textarea rows="15" cols="60" name="" disabled />${goods.detail}</textarea>
 			<br><br>
 			<div style="text-align: center;">
 				<c:forEach var="image" items="${imageList}">
-					<img class="custom-image" src="${contextPath}/download.do?cate=shop&imageFileName=${image.fileName}&bno=${image.goods_id}">
+					<img class="custom-image" src="${contextPath}/download.do?cate=shop&imageFileName=${image.fileName}&bno=${image.goods_id}" >
 				</c:forEach>
 			</div>
 			<br>
@@ -489,13 +504,20 @@ background-color:#fff;
 					&Lambda;</button>
 
 			</div>
-		</form>
+	
 
-		<!-- 이용후기 -->
 		<div class=gymdetail_review style="display: none"
 			id="gymdetail_review">
 			<p>이용후기</p>
-			<textarea rows="15" cols="60" name="" disabled /></textarea>
+			<c:choose>
+				<c:when test="${reviewList ne null }">
+					<textarea rows="15" cols="60" name="" disabled /></textarea>
+				</c:when>
+				<c:otherwise>
+					<div class="review_button">리뷰 작성</div>
+					<div class="review_null">등록된 후기가 없습니다.</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<!-- 상품문의 -->
 		<div class=gymdetail_inquiry style="display: none"
@@ -504,6 +526,6 @@ background-color:#fff;
 			<textarea rows="15" cols="60" name="" disabled /></textarea>
 		</div>
 		</div>
-	
+	</form>
 </body>
 </html>
