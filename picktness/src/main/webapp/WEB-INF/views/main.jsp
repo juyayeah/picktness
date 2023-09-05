@@ -342,7 +342,10 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
           <div class="main_box">
             <div class="main_cate">헬스</div>
             <c:forEach items="${healthList }" var="place">
-              <div class="main_item" onclick="location.href='${contextPath}/goods/placeDetail.do?goods_id=${place.goods_id }'">
+              <div
+                class="main_item"
+                onclick="location.href='${contextPath}/goods/placeDetail.do?goods_id=${place.goods_id }'"
+              >
                 <img
                   class="main_img"
                   src="${contextPath}/download.do?cate=place&imageFileName=${place.fileName}&bno=${place.goods_id}"
@@ -507,7 +510,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
             <c:forEach items="${goodsList }" var="goods">
               <div
                 class="main_item"
-                onclick="location.href='${contextPath}/goods/gymDetail.do'"
+                onclick="location.href='${contextPath}/goods/goodsDetail.do?goods_id=${goods.goods_id}'"
               >
                 <img
                   class="main_img"

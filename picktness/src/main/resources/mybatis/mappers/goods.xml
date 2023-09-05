@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<result property="fileName" column="fileName" />
  	</resultMap>
  	
- 	<resultMap id="imageResult" type="ImageFileVO">
+ 	<resultMap id="imageResult" type="GoodsImageFileVO">
  	<result property="image_id" column="image_id" />
  	<result property="goods_id" column="goods_id" />
  	<result property="fileName" column="filename" />
@@ -134,6 +134,14 @@ select s.*, i.filename from shopping as s join shopping_detail_image as i on s.g
 	and s.goods_id=#{goods_id}
 	order by s.goods_id
 	]]>
+	</select>
+	
+	<select id="selectGoodsDetailImage" resultMap="imageResult"   parameterType="String"  >
+	<![CDATA[
+	select * from shopping_detail_image 
+	where  fileType!='main_image'
+	and goods_id=#{goods_id}
+    ]]>
 	</select>
 	
  </mapper>

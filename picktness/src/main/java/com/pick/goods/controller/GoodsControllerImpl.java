@@ -34,6 +34,9 @@ public class GoodsControllerImpl implements GoodsController{
 	GoodsShoppingVO goodsShoppingVO;
 	
 	@Autowired
+	GoodsImageFileVO goodsImageFileVO;
+	
+	@Autowired
 	HttpSession session;
 
 	@Override
@@ -307,8 +310,10 @@ public class GoodsControllerImpl implements GoodsController{
 	    String viewName = (String) request.getAttribute("viewName");
 	    ModelAndView mav = new ModelAndView();
 	    GoodsShoppingVO goodsShoppingVO = goodsService.goodsDetail(goods_id);
+	    List<GoodsImageFileVO> goodsImageFileVO = goodsService.selectGoodsDetailImage(goods_id);
 	    mav.setViewName(viewName);
 	    mav.addObject("goods", goodsShoppingVO);
+	    mav.addObject("imageList", goodsImageFileVO);
 	    return mav;
 	}
 	//검색

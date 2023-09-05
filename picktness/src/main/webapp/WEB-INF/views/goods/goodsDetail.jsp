@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <%
 request.setCharacterEncoding("utf-8");
@@ -193,9 +193,26 @@ border:0;
 cursor:pointer;
 background-color:#fff;
 }
+.custom-image {
+    max-width: 100%;
+    height: auto; 
+  }
 </style>
 
 <script type="text/javascript">
+
+	window.addEventListener('DOMContentLoaded', function () {
+        // goods.detail이 null 또는 빈 문자열인 경우 textarea를 숨깁니다.
+        var goodsDetail = "${goods.detail}";
+        if (!goodsDetail || goodsDetail.trim() === "") {
+            var textareaElement = document.querySelector('textarea[name=""]');
+            if (textareaElement) {
+                textareaElement.style.display = 'none';
+            }
+        }
+    });
+
+
 	//상품정보, 이용후기, 상품문의 마우스 이벤트
 	function content() {
 		document.getElementById("gymdetail_content").style.display = "block";
@@ -375,6 +392,11 @@ background-color:#fff;
     resultElement.innerText = number;
     totalElement.innerText = formattedTotal;
 }
+
+
+
+
+
 </script>
 
 </head>
@@ -388,11 +410,7 @@ background-color:#fff;
 						<!-- 사진칸 -->
 						<td class="detail_goods_img" rowspan="7">
 							<input type="hidden" name="originalFileName" value="${goods.fileName}" />
-							<c:foreach var="image" items="${imageList}">
-								<c:if test="${image.filetype eq 'main_image'}">
-								<img src="${contextPath}/download.do?cate=shop&imageFileName=${image.fileName}&bno=${goods.goods_id}" width="300px" align="right">
-								</c:if>
-							</c:foreach>
+								<img src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" width="300px" align="right">
 						</td>
 						<!-- <img src="${contextPath }/download.do?imageFileName=${member.imageFileName }&num=${member.num}" id="preview" width="300px" height="300px" /><br> <input type="file"
                   name="imageFileName" id="imageFileName"
@@ -415,7 +433,7 @@ background-color:#fff;
 							<span style="padding: 0 0 0 10px; font-size: 15px;">${goods.goods_qty}개</span><br>
 							<span style="padding: 0 0 0 30px; font-size: 15px;">배송방법</span>
 							<!--<span style="padding: 0 0 0 10px; font-size: 15px;">${food.deliveryMethod}</span><br>-->
-							<span style="padding: 0 0 0 10px; font-size: 15px;">무료배송</span><br>
+							<span style="padding: 0 0 0 10px; font-size: 15px;">일반배송</span><br>
 							<span style="padding: 0 0 0 30px; font-size: 15px;">적립금</span>
 							<span style="padding: 0 0 0 10px; font-size: 15px;">${goods.priceRetail}원</span><br>
 					</tr>
@@ -452,15 +470,16 @@ background-color:#fff;
 			<!-- 소개 및 정보 시작 -->
 			<div class=gymdetail_content style="display: block;"
 				id="gymdetail_content">
-				<p>상품소개</p>
+				<!--상품소개-->
+				<br>
 			<textarea rows="15" cols="60" name="" disabled />${goods.detail}</textarea>
 			<br><br>
-				<img src="${contextPath }/images/member/yoga3.jpg"
-					style="width: 100%; display: black"> <img
-					src="${contextPath }/images/member/yoga2.jpg"
-					style="width: 100%; display: none" id="gymdetail_goods"> <img
-					src="${contextPath }/images/member/delivery.jpg"
-					style="width: 100%; display: none" id="gymdetail_goods">
+			<div style="text-align: center;">
+				<c:forEach var="image" items="${imageList}">
+					<img class="custom-image" src="${contextPath}/download.do?cate=shop&imageFileName=${image.fileName}&bno=${image.goods_id}">
+				</c:forEach>
+			</div>
+			<br>
 				
 				<button type="button" class=button_white onclick="more()"
 					id="goods_more" style="display: block; width: 500px; margin:auto;">상품설명

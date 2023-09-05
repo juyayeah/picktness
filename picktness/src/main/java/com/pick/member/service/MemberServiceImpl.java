@@ -20,6 +20,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	@Override
 	public void addMember(MemberVO memberVO) throws DataAccessException {
+		memberVO.setMemberPoint(5000);
 		memberDAO.insertMember(memberVO);
 		memberDAO.eventInitPoint(memberVO);	
 	}

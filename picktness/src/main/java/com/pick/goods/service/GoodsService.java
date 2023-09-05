@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+
 import com.pick.goods.vo.GoodsBusinessVO;
 import com.pick.goods.vo.GoodsImageFileVO;
 import com.pick.goods.vo.GoodsReviewAnswerVO;
@@ -29,4 +30,5 @@ public interface GoodsService {
 	public List<GoodsReviewVO> goodsBusinessReviewList(String goods_id) throws DataAccessException;
 	public List<GoodsReviewAnswerVO> goodsBusinessReviewAnswerList(String goods_id) throws DataAccessException;
 	public GoodsShoppingVO goodsDetail(String goods_id) throws DataAccessException;
+	public List<GoodsImageFileVO> selectGoodsDetailImage(String goods_id) throws DataAccessException;
 }
