@@ -64,13 +64,13 @@ $(function(){
   body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+
   }
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* margin-bottom: 20px; */
+   
   }
   .button {
     padding: 10px 20px;
@@ -168,7 +168,8 @@ $(function(){
 
     <h3>오늘 식단</h3>
     <c:if test="${member.id == millDetail.member_id }">
-    <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" id="delOk" class="button" >삭제하기</a>
+    <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" id="delOk" style="margin=50%;margin-left: 50%;" class="button">삭제하기</a>
+    <a href="/board/updateMillBoardForm.do?bno=${millDetail.bno}" class="button" >수정하기</a>
 
     </c:if>
     <a class="button" href="${contextPath}/board/millBoardList.do">목록으로</a>
@@ -196,7 +197,6 @@ $(function(){
     </div>
   </div>
    <c:if test ="${!empty commentList}">
-  
   <div class="divider"></div>
   <h3>전체 댓글</h3>
   <div class="divider"></div>
@@ -204,19 +204,22 @@ $(function(){
   <div class="comments-section">
     <div class="comment">
       <p>
-        <b> ${fn:substring(item.member_id,0,4) }
+         ${fn:substring(item.member_id,0,4) }
      <c:forEach begin="5" end="${fn:length(item.member_id)}" step="1">
         *
-      </c:forEach></b>
+      </c:forEach>
        
        </p>
       <p class="comment-text">${item.content}</p>
       <p> 
       <fmt:parseDate value="${item.millrDate} " var="millrDate" pattern="yyyy-MM-dd" />
     <fmt:formatDate value="${millDate}" pattern="yyyy-MM-dd" /></p>
-    <c:if test="${member.id == commentList.member_id}">
+    <c:if test="${member.id == item.member_id}">
+
+    <a href="/board/removeMillrBoard.do?bno=${millDetail.bno}" id="delOk" class="button" >삭제하기</a>
+
     <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" id="delOk" class="button" >삭제하기</a>
-    
+
   </c:if>
     </div>
     </div>
@@ -225,7 +228,7 @@ $(function(){
   <div class="divider"></div>
  <h3>댓글 등록</h3> 
  <c:choose>
- <c:when test="${! empty member}">
+ <c:when test="${!empty member}">
   <form method="post" action="${contextPath}/board/addReply.do">
   <input type="hidden" name="p_bno" value="${millDetail.bno}">
   <input type="hidden" name="member_id" value="${member.id}">

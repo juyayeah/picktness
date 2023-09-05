@@ -637,16 +637,12 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 			<!--/menu_sp-->
 			<div class="menu_cm">
 				<span class="menu_cm_title"
-					onclick="location.href='${contextPath}/board/freeBoardList.do'">커뮤니티</span>
-				<ul class="menu_cm_dt">
-					<li class="menu_list_a"><a href="">자유게시판</a></li>
-					<li class="menu_list_a"><a
-						href="${conterxPath }/board/millBoardList.do">오늘 식단</a></li>
-				</ul>
+					onclick="location.href='${contextPath}/board/millBoardList.do'">오늘 식단</span>
 			</div>
 		</div>
 		<!--navi_inner-->
 	</div>
 	<!--/navibar_fixed-->
 </body>
+
 </html>

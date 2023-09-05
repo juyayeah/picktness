@@ -105,6 +105,17 @@ delete from picktness.todaymill_reply where p_bno=#{bno}
         SELECT * FROM todaymill_reply WHERE p_bno = #{bno}
         ]]>
     </select>
+    
+<update id="updateMillBoard" parameterType="java.util.Map">
+  <![CDATA[
+    UPDATE todaymill
+    SET hastag=#{hastag}, content=#{content}
+    <if test="todaymill_img != '' and todaymill_img != null"> 
+      todaymill_img=#{todaymill_img}
+    </if>
+    WHERE bno=#{bno}
+  ]]>
+</update>
    
 
  	

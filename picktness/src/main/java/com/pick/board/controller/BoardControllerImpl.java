@@ -67,6 +67,94 @@ public class BoardControllerImpl  implements BoardController  {
 	
 	}
 
+@RequestMapping(value="/board/removeMillrBoard.do", method=RequestMethod.GET)
+@ResponseBody
+public ModelAndView replyDelete(@RequestParam("bno") int bno,HttpServletRequest request, HttpServletResponse response)throws Exception{
+	ModelAndView mav = new ModelAndView();
+	String viewName = (String) request.getAttribute("viewName");
+	boardService.deleteComment(bno);
+	mav.addObject("bno", bno);
+	mav.setViewName(viewName);
+	return mav;
+}
+@Override
+@RequestMapping(value="/board/updateMillBoardForm.do", method=RequestMethod.GET)
+@ResponseBody
+public ModelAndView updateMillBoardForm(@RequestParam("bno") int bno,HttpServletRequest request, HttpServletResponse response)throws Exception{
+	ModelAndView mav = new ModelAndView();
+	String viewName = (String) request.getAttribute("viewName");
+	boardVO =boardService.selectMillBoard(bno);
+	mav.addObject("board", boardVO);
+	mav.setViewName(viewName);
+	return mav;
+}
+
+
+
+@RequestMapping(value="/board/updateMillBoard.do", method=RequestMethod.POST)
+@ResponseBody
+public ResponseEntity updateMillBoard(@RequestParam("bno") int bno, MultipartHttpServletRequest multipartRequest, HttpServletResponse response)throws Exception{
+//	ModelAndView mav = new ModelAndView();
+	/* mav.addObject("bno", bno); */
+	System.out.println("메서드 들어갔니 !!!!!!!!!!!!!!!!!!!!!!!");
+	multipartRequest.setCharacterEncoding("utf-8");
+	Map<String,Object> boardMap =new HashMap<String,Object>();
+	Enumeration enu =multipartRequest.getParameterNames();
+	while(enu.hasMoreElements()) {
+		String name=(String)enu.nextElement();
+		String value=multipartRequest.getParameter(name);
+		boardMap.put(name, value);
+		
+	}
+	String todaymill_img = upload(multipartRequest);
+	boardMap.put("todaymill_img", todaymill_img);
+	BoardVO boardVO =(BoardVO) session.getAttribute("board");
+	MemberVO member = (MemberVO) session.getAttribute("member");
+	String member_id = member.getId();
+	boardMap.put("member_id",member_id);
+	boardMap.put("todaymill_img",todaymill_img);
+	boardMap.put("bno", bno);
+	
+	String message;
+	ResponseEntity resEnt=null;
+	HttpHeaders responseHeaders = new HttpHeaders();
+	responseHeaders.add("Content-type", "text/html; charset=utf-8");
+	try {
+		System.out.println(" try 문 들어옴");
+		 boardService.modMillBoard(boardMap);
+		 System.out.println("서비스 다녀왓니!!?");
+		if(todaymill_img != null && todaymill_img.length() !=0) {
+			System.out.println("if문 들어옴");
+			File srcFile = new File(TODAYMILL_IMAGE_REPO+"\\"+"temp+\\"+todaymill_img);
+			File destDir = new File(TODAYMILL_IMAGE_REPO+"\\"+bno);
+			FileUtils.moveFileToDirectory(srcFile,destDir,true);
+			
+			String originalFileName=(String)boardMap.get("orginalFileName");
+			File oldFile = new File(TODAYMILL_IMAGE_REPO+"\\"+bno+"\\"+originalFileName);
+			oldFile.delete();
+			
+		}
+		message = "<script>";
+		message += " alert('글을 수정했습니다.')";
+		message += " location.href='"+multipartRequest.getContextPath()+"/board/millDatail.do?bno="+bno+"';";
+		message += "</script>";
+				resEnt = new ResponseEntity(message,responseHeaders , HttpStatus.CREATED);
+	}catch (Exception e) {
+		File srcFile = new File(TODAYMILL_IMAGE_REPO +"\\"+"temp"+"\\"+todaymill_img);
+		srcFile.delete();
+	}
+	message = "<script>";
+	message += " alert('수정 중 오류가 발생했습니다.')";
+	message += " location.href='"+multipartRequest.getContextPath()+"/board/millDatail.do?bno="+bno+"';";
+	message += "</script>";
+	resEnt = new ResponseEntity(message, responseHeaders,HttpStatus.CREATED);
+
+		return resEnt;
+		}
+
+	
+
+
 @Override
 	@RequestMapping(value = "/board/millDetail.do")
 	public ModelAndView millDetail(@RequestParam("bno") int bno, HttpServletRequest request, HttpServletResponse response) {
@@ -283,6 +371,15 @@ public class BoardControllerImpl  implements BoardController  {
 		return image;
 	}
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
+
+	@Override
+	public ModelAndView updateMillBoard(int bno, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 	
 

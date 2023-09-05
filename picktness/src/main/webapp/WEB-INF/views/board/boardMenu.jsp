@@ -40,11 +40,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
       >
       <div class="line"></div>
       <div class="menu_list">
-        <a
-          href="${contextPath}/board/freeBoardList.do"
-          class="menu_list_item"
-          >자유게시판</a
-        >
+
         <a
           href="${contextPath}/board/millBoardList.do"
           class="menu_list_item"

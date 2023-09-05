@@ -99,12 +99,12 @@ vertical-align: top;
 	color: #;
 	font-size: 10px;
 	padding: 8px 12px;
-	border-radius:10px;
-	margin-left:35%;
+	border-radius: 10px;
+	margin-left: 35%;
 	position: absolute;
 	bottom: 8px;
 	width: 60px;
-	background-color:rgba(255,255,255,0.8);
+	background-color: rgba(255, 255, 255, 0.8);
 	text-align: center;
 	cursor: pointer;
 }
@@ -364,21 +364,84 @@ a:hover {
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
-.review_button{
-font-size:13px;
-float:right;
-text-align:center;
-width:90px;
-padding:10px 0px;
-border:1px solid #555;
-border-radius:5px;
-cursor: pointer;
+
+.review_button {
+	font-size: 13px;
+	float: right;
+	text-align: center;
+	width: 90px;
+	padding: 10px 0px;
+	border: 1px solid #555;
+	border-radius: 5px;
+	cursor: pointer;
 }
-.review_null{
-clear:both;
-margin:30px 0px;
-text-align:center;
+
+.review_null {
+	clear: both;
+	margin: 30px 0px;
+	text-align: center;
 }
+#option_prod1{
+display:block;
+}
+#option_prod3{
+display:none;
+}
+#option_prod6{
+display:none;
+}
+#option_prod12{
+display:none;
+}
+.alreadyCart{
+	display: none;
+	position: relative;
+    top: -120px;
+    left:-3px;
+    background-color: #383838;
+    color: #fff;
+}
+.alreadyCart_p{
+    border-radius: 4px;
+	width: 355px;
+	height: 17px;
+    padding: 20px 20px;
+	background-color: #383838;
+    position: absolute;
+    line-height: normal;
+    font-size: 13px;
+}
+.alreadyCart_p a{
+	margin-left:50px;
+    line-height: normal;
+    font-size: 13px;
+    color:#2890f1;
+}
+.addCart{
+	display: none;
+	position: relative;
+    top: -120px;
+    left:-3px;
+    background-color: #383838;
+    color: #fff;
+}
+.addCart_p{
+    border-radius: 4px;
+	width: 355px;
+	height: 17px;
+    padding: 20px 20px;
+	background-color: #383838;
+    position: absolute;
+    line-height: normal;
+    font-size: 13px;
+}
+.addCart_p a{
+	margin-left:50px;
+    line-height: normal;
+    font-size: 13px;
+    color:#2890f1;
+}
+
 /*post slider-end*/
 </style>
 
@@ -452,10 +515,6 @@ text-align:center;
 		document.getElementById("gymdetail_inquiry").style.display = "block";
 	};
 
-	function nowbuy() {
-		var dd = document.getElementById("selectlist");
-	}
-
 	/*post slider start*/
 	$('.post-wrapper').slick({
 		slidesToShow : 3,
@@ -466,34 +525,134 @@ text-align:center;
 		prevArrow : $('.prev'),
 	});
 	/*post slider-end*/
+	
+	function fn_select(){
+		var option = $("#selectBox").val();
+		  switch (option){
+		    case "prod1retail": 
+		    	$("#option_prod1").css("display", "block");
+		    	$("#option_prod3").css("display", "none");
+		    	$("#option_prod6").css("display", "none");
+		    	$("#option_prod12").css("display", "none");
+		      break; 
+		    case "prod3retail": 
+		    	$("#option_prod1").css("display", "none");
+		    	$("#option_prod3").css("display", "block");
+		    	$("#option_prod6").css("display", "none");
+		    	$("#option_prod12").css("display", "none");
+		      break;
+		    case "prod6retail":
+		    	$("#option_prod1").css("display", "none");
+		    	$("#option_prod3").css("display", "none");
+		    	$("#option_prod6").css("display", "block");
+		    	$("#option_prod12").css("display", "none");
+		      break;
+		    case "prod12retail":
+		    	$("#option_prod1").css("display", "none");
+		    	$("#option_prod3").css("display", "none");
+		    	$("#option_prod6").css("display", "none");
+		    	$("#option_prod12").css("display", "block");
+		      break;
+		  }
+}
+
+function fn_cartLogin(){
+	alert("로그인 후 이용해 주세요");
+	var uri = "${contextPath }/goods/placeDetail.do?goods_id=${place.goods_id}";
+	$.ajax({
+		url : "${contextPath}/redirectUri.do",
+		method : "post",
+		data : {
+			str : uri
+		},
+		success : function(data, status, xhr) {
+			window.location.href = "${contextPath}/member/loginForm.do";
+		}
+	});
+}
+
+function fn_buyLogin(){
+	alert("로그인 후 이용해 주세요");
+	var uri = "${contextPath }/goods/placeDetail.do?goods_id=${place.goods_id}";
+	$.ajax({
+		url : "${contextPath}/redirectUri.do",
+		method : "post",
+		data : {
+			str : uri
+		},
+		success : function(data, status, xhr) {
+			window.location.href = "${contextPath}/member/loginForm.do";
+		}
+	});
+}
+function fn_addCart(){
+	var goods_option = $("#selectBox").val();
+	
+	$.ajax({
+		type : "post",
+		async : false, //false인 경우 동기식으로 처리한다.
+		url : "${contextPath}/member/cart/addCart.do",
+		data : {
+			goods_id:"${place.goods_id}",
+			member_id:"${member.id}",
+			goods_option:goods_option
+			
+		},
+		success : function(data) {
+			if(data == 'add'){
+				$(".addCart").css('display','block');
+				$(".addCart_p").css('display', 'block');
+				setTimeout(function(){ $( '.addCart_p' ).fadeOut();}, 2500);
+				setTimeout(function(){ $(".addCart").css('display','none');}, 3000);
+			} else{
+				$(".alreadyCart").css('display','block');
+				$(".alreadyCart_p").css('display', 'block');
+				setTimeout(function(){ $( '.alreadyCart_p' ).fadeOut();}, 2500);
+				setTimeout(function(){ $(".alreadyCart").css('display','none');}, 3000);
+			}
+		},
+        error: function (request, error) {
+            alert("장바구니에 상품을 추가하는 중 문제가 생겼습니다.");
+          }
+	}); //end ajax	
+}
+
+function fn_buyNow(){
+	
+}
+	
 </script>
 
 </head>
 <body>
 	<div class="bodybody">
-		<form action="#" method="post" name="frmGym">
-			<div>
-				<table>
-					<tr>
-						<!-- 사진칸 -->
-						<td class="detail_gym_img" width="40%" height="40%" rowspan="7"><input
-							type="hidden" name="originalFileName"
-							value="${user.imageFileName }" /> <!--    <img src="./img/trainer.png"> -->
+	<form>
+	<input type="hidden" name="option">
+	</form>
+		<div>
+			<table>
+				<tr>
+					<!-- 사진칸 -->
+					<td class="detail_gym_img" width="40%" height="40%" rowspan="7"><input
+						type="hidden" name="originalFileName"
+						value="${user.imageFileName }" /> <!--    <img src="./img/trainer.png"> -->
 
 
-							<div class="slideshow-container">
+						<div class="slideshow-container">
 
-								<!-- Full-width images with number and caption text -->
-								<c:forEach items="${imageList }" var="image" varStatus="status">
+							<!-- Full-width images with number and caption text -->
+							<c:forEach items="${imageList }" var="image" varStatus="status">
 								<div class="mySlides fade">
-									<div class="numbertext">${status.count } / ${imageList.size() }</div>
-									<img src="${contextPath}/download.do?cate=place&imageFileName=${image.fileName }&bno=${place.goods_id}"
+									<div class="numbertext">${status.count }/
+										${imageList.size() }</div>
+									<img
+										src="${contextPath}/download.do?cate=place&imageFileName=${image.fileName }&bno=${place.goods_id}"
 										class="img-size" />
 								</div>
-								</c:forEach>
+							</c:forEach>
 
 
-<%-- 								<div class="mySlides fade">
+							<%-- 								<div class="mySlides fade">
 									<div class="numbertext">2 / 6</div>
 									<img src="${contextPath}/images/member/gym2.png"
 										class="img-size">
@@ -523,106 +682,138 @@ text-align:center;
 										class="img-size">
 								</div> --%>
 
-								<!-- Next and previous buttons -->
-								<c:choose>
+							<!-- Next and previous buttons -->
+							<c:choose>
 								<c:when test="${imageList.size() ne 1 }">
-								<a class="prev" onclick="moveSlides(-1)">&#10094;</a>
-								<a class="next" onclick="moveSlides(1)">&#10095;</a>
+									<a class="prev" onclick="moveSlides(-1)">&#10094;</a>
+									<a class="next" onclick="moveSlides(1)">&#10095;</a>
 								</c:when>
-								</c:choose>
-							</div> <br />
+							</c:choose>
+						</div> <br />
 
-							<div style="text-align: center">
+						<div style="text-align: center">
 							<c:forEach var="i" begin="0" end="${imageList.size() -1 }">
 								<span class="dot" onclick="currentSlide(${i})"></span>
-								</c:forEach>
-<!-- 								<span class="dot" onclick="currentSlide(1)"></span>
+							</c:forEach>
+							<!-- 								<span class="dot" onclick="currentSlide(1)"></span>
 								<span class="dot" onclick="currentSlide(2)"></span>
 								<span class="dot" onclick="currentSlide(3)"></span>
 								<span class="dot" onclick="currentSlide(4)"></span>
 								<span class="dot" onclick="currentSlide(5)"></span> -->
-							</div></td>
-						<td align="left">
-							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">${place.b_name }</h2> <a style="padding: 0 0 0 30px; font-size: 13px;"
-							href="https://map.naver.com/v5/entry/place/1213678018?c=15,0,0,0,dh">${place.addrBasic } ${place.addrDetail }</a> <!-- 고객이 보는 창 --> <input
-							type="hidden" value="${member.num}" name="num" /> <!-- 인터페이스 -->
-						</td>
-					</tr>
-					<tr>
-						<td align="left"><span
-							style="padding: 0 0 0 30px; font-size: 20px;">${place.cate } 이용권</span></td>
-					</tr>
-					<tr>
-						<td align="left"><b
-							style="padding: 0 0 0 30px; font-size: 23px;">
-							<fmt:formatNumber
-                    type="number"
-                    maxFractionDigits="3"
-                    value="${place.prod1retail}"/>/월</b><span
-							style="font-size: 11px"> 부터</span></td>
-					</tr>
-					<tr>
-						<td align="left" style="padding: 0 0 0 30px;"><select>
-								<option id="selectlist" selected>[필수]옵션선택</option>
-								<option>1개월 이용권 <fmt:formatNumber
-                    type="number"
-                    maxFractionDigits="3"
-                    value="${place.prod1retail}"/>원</option>
-                    <c:if test="${place.prod3retail ne '' && place.prod3retail ne null}">
-								<option>3개월 이용권 <fmt:formatNumber
-                    type="number"
-                    maxFractionDigits="3"
-                    value="${place.prod3retail}"/>원</option>
-                    </c:if>
-                    <c:if test="${place.prod6retail ne '' && place.prod6retail ne null }">
-								<option>6개월 이용권 <fmt:formatNumber
-                    type="number"
-                    maxFractionDigits="3"
-                    value="${place.prod6retail}"/>원</option>
-                    </c:if>
-                    <c:if test="${place.prod12retail ne '' && place.prod12retail ne null}">
-								<option>12개월 이용권 <fmt:formatNumber
-                    type="number"
-                    maxFractionDigits="3"
-                    value="${place.prod12retail}"/>원</option>
-                    </c:if>
-						</select></td>
-					</tr>
-					<tr>
-						<td align="center"><b style="font-size: 23px;">70,000원/월</b></td>
-					</tr>
-					<tr>
-						<td align="left" style="padding: 0 0 10px 30px;">
-							<button class=button_white value="장바구니">장바구니</button>&nbsp;&nbsp;
-							<button class=button_blue id="nowbuy" onclick="nowbuy()">바로구매</button>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<hr>
-			<div>
-				<nav class="info-nav">
-					<ul>
-						<li><a href="#" class="hover-underline" onclick="content()">상품정보</a></li>
-						<li><a href="#" class="hover-underline" onclick="review()">이용후기${place.review_count }</a></li>
-						<li><a href="#" class="hover-underline" onclick="inquiry()">상품문의</a></li>
-					</ul>
-				</nav>
-			</div>
-			<!-- 소개 및 정보 시작 -->
-			<div class=gymdetail_content style="display: block;"
-				id="gymdetail_content">
-				<p>시설소개</p>
-				<textarea rows="15" cols="60" disabled>${place.detail }</textarea>
+						</div></td>
+					<td align="left">
+						<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">${place.b_name }</h2>
+						<a style="padding: 0 0 0 30px; font-size: 13px;"
+						href="https://map.naver.com/v5/entry/place/1213678018?c=15,0,0,0,dh">${place.addrBasic }
+							${place.addrDetail }</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="left"><span
+						style="padding: 0 0 0 30px; font-size: 20px;">${place.cate }
+							이용권</span></td>
+				</tr>
+				<tr>
+					<td align="left"><b
+						style="padding: 0 0 0 30px; font-size: 23px;"> <fmt:formatNumber
+								type="number" maxFractionDigits="3" value="${place.prod1retail}" />/월
+					</b><span style="font-size: 11px"> 부터</span></td>
+				</tr>
+				<tr>
+					<td align="left" style="padding: 0 0 0 30px;"><select
+						id="selectBox" onchange="fn_select()">
+							<option value="prod1retail" selected>1개월 이용권
+								<fmt:formatNumber type="number" maxFractionDigits="3"
+									value="${place.prod1retail}" />원
+							</option>
+							<c:if
+								test="${place.prod3retail ne '' && place.prod3retail ne null}">
+								<option value="prod3retail">3개월 이용권
+									<fmt:formatNumber type="number" maxFractionDigits="3"
+										value="${place.prod3retail}" />원
+								</option>
+							</c:if>
+							<c:if
+								test="${place.prod6retail ne '' && place.prod6retail ne null }">
+								<option value="prod6retail">6개월 이용권
+									<fmt:formatNumber type="number" maxFractionDigits="3"
+										value="${place.prod6retail}" />원
+								</option>
+							</c:if>
+							<c:if
+								test="${place.prod12retail ne '' && place.prod12retail ne null}">
+								<option value="prod12retail">12개월 이용권
+									<fmt:formatNumber type="number" maxFractionDigits="3"
+										value="${place.prod12retail}" />원
+								</option>
+							</c:if>
+					</select></td>
+				</tr>
+				<tr>
+					<td align="center">
+					<b style="font-size: 23px;" id="option_prod1">1개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod1retail}" />원</b>
+					<b style="font-size: 23px;" id="option_prod3">3개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod3retail}" />원</b>
+					<b style="font-size: 23px;" id="option_prod6">6개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod6retail}" />원</b>
+					<b style="font-size: 23px;" id="option_prod12">12개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod12retail}" />원</b>
+					
+					</td>
+				</tr>
+				<tr>
+					<td align="left" style="padding: 0 0 10px 30px;">
+					<c:choose>
+					<c:when test="${! empty member}">
+						<button class=button_white onClick="fn_addCart()">장바구니</button>&nbsp;&nbsp;
+						<button class=button_blue id="nowbuy" onclick="fn_buyNow()">바로구매</button>
+					</c:when>
+					<c:otherwise>
+						<button class=button_white onClick="fn_cartLogin()">장바구니</button>&nbsp;&nbsp;
+						<button class=button_blue id="nowbuy" onclick="fn_buyLogin()">바로구매</button>
+					</c:otherwise>
+					</c:choose>
+				<div class="alreadyCart">
+					<div class="alreadyCart_p">
+					이미 장바구니에 있는 상품입니다.
+					<a href="${contextPath }/member/cart/cartList.do">장바구니로 가기</a>
+					</div>
+				</div>
+				<div class="addCart">
+					<div class="addCart_p">
+					장바구니에 상품이 담겼습니다.
+					<a href="${contextPath }/member/cart/cartList.do">장바구니로 가기</a>
+					</div>
+				</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<div>
+			<nav class="info-nav">
+				<ul>
+					<li><a href="#" class="hover-underline" onclick="content()">상품정보</a></li>
+					<li><a href="#" class="hover-underline" onclick="review()">이용후기${place.review_count }</a></li>
+					<li><a href="#" class="hover-underline" onclick="inquiry()">상품문의</a></li>
+				</ul>
+			</nav>
+		</div>
+		<!-- 소개 및 정보 시작 -->
+		<div class=gymdetail_content style="display: block;"
+			id="gymdetail_content">
+			<p>시설소개</p>
+			<textarea rows="15" cols="60" disabled>${place.detail }</textarea>
+			<c:if test="${place.notice != '' && place.notice != null }">
 				<p>공지사항</p>
 				<textarea rows="8" cols="60" disabled>${place.notice }</textarea>
-				<p>운영시간</p>
-				<textarea rows="8" cols="60" disabled>${place.b_time }</textarea>
-				<p>운영프로그램</p>
-				<textarea rows="3" cols="60" disabled>${place.program }</textarea>
+			</c:if>
+			<p>운영시간</p>
+			<textarea rows="8" cols="60" disabled>${place.b_time }</textarea>
+			<p>운영프로그램</p>
+			<textarea rows="3" cols="60" disabled>${place.program }</textarea>
+			<c:if test="${place.service != '' && place.service != null }">
 				<p>부가서비스</p>
 				<textarea rows="2" cols="60" disabled>${place.service }</textarea>
-				<c:if test="${!empty trainerList}">
+			</c:if>
+			<c:if test="${!empty trainerList}">
 				<p>트레이너</p>
 				<div class="intro_etc">
 					<!-- post slider start-->
@@ -638,57 +829,53 @@ text-align:center;
 										<div class="post-info">
 											<p>홍길동 트레이너</p>
 											<b>60,000/1회</b>
+										</div> </a>
 								</div>
-								</a>
+								<div class="post">
+									<a href="#"><img src="${contextPath}/images/member/tr2.png"
+										class="slider-image">
+										<div class="post-info">
+											<p>고길동 트레이너</p>
+											<b>120,000/1회</b>
+										</div> </a>
+								</div>
+								<div class="post">
+									<a href="#"><img src="${contextPath}/images/member/tr3.png"
+										class="slider-image">
+										<div class="post-info">
+											<p>김길동 트레이너</p>
+											<b>160,000/1회</b>
+										</div> </a>
+								</div>
+								<div class="post">
+									<a href="#"><img src="${contextPath}/images/member/tr4.png"
+										class="slider-image">
+										<div class="post-info">
+											<p>박길동 트레이너</p>
+											<b>80,000/1회</b>
+										</div> </a>
+								</div>
 							</div>
-							<div class="post">
-								<a href="#"><img src="${contextPath}/images/member/tr2.png"
-									class="slider-image">
-									<div class="post-info">
-										<p>고길동 트레이너</p>
-										<b>120,000/1회</b>
-							</div>
-							</a>
 						</div>
-						<div class="post">
-							<a href="#"><img src="${contextPath}/images/member/tr3.png"
-								class="slider-image">
-								<div class="post-info">
-									<p>김길동 트레이너</p>
-									<b>160,000/1회</b>
-						</div>
-						</a>
 					</div>
-					<div class="post">
-						<a href="#"><img src="${contextPath}/images/member/tr4.png"
-							class="slider-image">
-							<div class="post-info">
-								<p>박길동 트레이너</p>
-								<b>80,000/1회</b>
-					</div>
-					</a>
 				</div>
-			</div>
-	</div>
-	</div>
-	</div>
-	</c:if>
-	<!--post slider end-->
+			</c:if>
+			<!--post slider end-->
 
-	<!-- 지도 API -->
-	<div>
-		<p>위치</p>
-		<table>
-			<tr>
-				<td>
-					<div class="intro_etc" id="map"
-						style="width: 500px; height: 250px;">
+			<!-- 지도 API -->
+			<div>
+				<p>위치</p>
+				<table>
+					<tr>
+						<td>
+							<div class="intro_etc" id="map"
+								style="width: 500px; height: 250px;">
 
 
 
-						<script type="text/javascript"
-							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd716f679541979de6d4799000a6523c"></script>
-						<script>
+								<script type="text/javascript"
+									src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fd716f679541979de6d4799000a6523c"></script>
+								<script>
 							var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 							mapOption = {
 								center : new kakao.maps.LatLng(${place.lat},
@@ -715,39 +902,41 @@ text-align:center;
 							// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
 							// marker.setMap(null);
 						</script>
-					</div>
-				</td>
-				<td width="10%"></td>
-				<td width="50%" class="addressgym"><b>${place.b_name }</b><br>
-					${place.addrBasic } ${place.addrDetail }<br> 연락처 : ${place.phone1 }-${place.phone2 }-${place.phone3 }</td>
-			</tr>
-		</table>
-	</div>
-	</div>
-	<div class=gymdetail_review style="display: none" id="gymdetail_review">
-		<p>이용후기</p>
-		<c:choose>
-		<c:when test="${reviewList ne null }">
-		<textarea rows="15" cols="60" name="" disabled /></textarea>
-		</c:when>
-		<c:otherwise>
-		<div class="review_button">리뷰 작성</div>
-		<div class="review_null">
-		등록된 후기가 없습니다.
+							</div>
+						</td>
+						<td width="10%"></td>
+						<td width="50%" class="addressgym"><b>${place.b_name }</b><br>
+							${place.addrBasic } ${place.addrDetail }<br> 연락처 :
+							${place.phone1 }-${place.phone2 }-${place.phone3 }</td>
+					</tr>
+				</table>
+			</div>
 		</div>
-		</c:otherwise>
-		</c:choose>
-	</div>
-	<!-- 상품문의 -->
-	<div class=gymdetail_inquiry style="display: none"
-		id="gymdetail_inquiry">
-		<p>상품문의</p>
-		<button value="1:1문의하기">1:1문의하기</button>
-		<button value="상품문의하기">상품문의하기</button>
-		<textarea rows="15" cols="60" name="" disabled /></textarea>
-	</div>
-	</form>
-	<br><br><br><br>
+		<div class=gymdetail_review style="display: none"
+			id="gymdetail_review">
+			<p>이용후기</p>
+			<c:choose>
+				<c:when test="${reviewList ne null }">
+					<textarea rows="15" cols="60" name="" disabled /></textarea>
+				</c:when>
+				<c:otherwise>
+					<div class="review_button">리뷰 작성</div>
+					<div class="review_null">등록된 후기가 없습니다.</div>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<!-- 상품문의 -->
+		<div class=gymdetail_inquiry style="display: none"
+			id="gymdetail_inquiry">
+			<p>상품문의</p>
+			<button value="1:1문의하기">1:1문의하기</button>
+			<button value="상품문의하기">상품문의하기</button>
+			<textarea rows="15" cols="60" name="" disabled /></textarea>
+		</div>
+		<br>
+		<br>
+		<br>
+		<br>
 	</div>
 </body>
 </html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+ <mapper namespace="com.pick.member.cart.dao.MemberCartDAO">
+    <select id="findCartGoods" resultType="String" parameterType="memberCartVO">
+    <![CDATA[
+     select case when count(*) =1 then 'true' else 'false' end result from cart where goods_id=#{goods_id} and member_id=#{member_id}
+    ]]>
+    </select>
+    
+    <insert id="addCart" parameterType="memberCartVO">
+    <![CDATA[
+    insert into cart(goods_id, member_id, goods_option) values (#{goods_id}, #{member_id}, #{goods_option})
+    ]]>
+    </insert>
+    
+    <select id="cartList" resultType="memberCartVO" parameterType="String">
+    <![CDATA[
+    select * from cart where member_id = #{member_id}
+    ]]>
+    </select>
+    
+    <select id="placeSelectCart" resultType="goodsBusinessVO" parameterType="String">
+    <![CDATA[
+    select t.*, i.fileName from (select d.goods_id, d.prod1retail, d.prod3retail, d.prod6retail, d.prod12retail, d.prod1, d.prod3, d.prod6, d.prod12, d.prod1sale, d.prod3sale, d.prod6sale, d.prod12sale, b.b_name from business_detail as d join business as b on d.id=b.id where goods_id = #{goods_id} ) as t join business_detail_image as i on t.goods_id = i.goods_id and i.fileType="main_image"
+    ]]>
+    </select>
+    
+    <select id="trainerSelectCart" resultType="goodsTrainerVO" parameterType="String">
+    <![CDATA[
+select t.goods_id, t.name, t.prod10retail, t.prod20retail, t.prod30retail, t.prod10, t.prod20, t.prod30, t.prod10sale, t.prod20sale, t.prod30sale, i.fileName from trainer as t join trainer_detail_image as i on t.goods_id = i.goods_id and t.goods_id = #{goods_id} and i.filetype="main_image"
+    ]]>
+    </select>
+    
+    <select id="shoppingSelectCart" resultType="goodsShoppingVO" parameterType="String">
+    <![CDATA[
+    select s.goods_id, s.goods_title, s.priceRetail, s.priceOrigin, s.priceSale, i.fileName from shopping as s join shopping_detail_image as i on s.goods_id = i.goods_id and s.goods_id = #{goods_id} and i.filetype="main_image";
+    ]]>
+    </select>
+    
+    <delete id="removeCartGoodS" parameterType="String">
+    <![CDATA[
+    delete from cart where cart_id = #{cart_id}
+    ]]>
+    </delete>
+    
+    <update id="updateCartGoods" parameterType="java.util.Map">
+    <![CDATA[
+    update cart set goods_option = #{option} where cart_id = ${cart_id} 
+    ]]>
+    </update>
+ </mapper>
+ 
