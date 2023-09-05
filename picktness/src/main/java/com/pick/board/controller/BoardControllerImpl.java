@@ -26,9 +26,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pick.board.service.BoardServiceImpl;
-
 import com.pick.board.vo.BoardVO;
 import com.pick.board.vo.CommentVO;
+import com.pick.board.vo.NoticeVO;
 import com.pick.member.vo.MemberVO;
 
 @Controller("boardController")
@@ -41,6 +41,8 @@ public class BoardControllerImpl  implements BoardController  {
 	BoardVO boardVO;
 	@Autowired
 	CommentVO commentVO;
+	@Autowired
+	NoticeVO noticeVO;
 	@Autowired
 	HttpSession session;
 @Override
@@ -74,7 +76,8 @@ public ModelAndView replyDelete(@RequestParam("bno") int bno,HttpServletRequest 
 	String viewName = (String) request.getAttribute("viewName");
 	boardService.deleteComment(bno);
 	mav.addObject("bno", bno);
-	mav.setViewName(viewName);
+	/* mav.setViewName(viewName); */
+	mav.setViewName("redirect:/board/millDetail.do?bno="+bno);
 	return mav;
 }
 @Override
@@ -94,20 +97,18 @@ public ModelAndView updateMillBoardForm(@RequestParam("bno") int bno,HttpServlet
 @RequestMapping(value="/board/updateMillBoard.do", method=RequestMethod.POST)
 @ResponseBody
 public ResponseEntity updateMillBoard(@RequestParam("bno") int bno, MultipartHttpServletRequest multipartRequest, HttpServletResponse response)throws Exception{
-//	ModelAndView mav = new ModelAndView();
-	/* mav.addObject("bno", bno); */
-	System.out.println("메서드 들어갔니 !!!!!!!!!!!!!!!!!!!!!!!");
+	
 	multipartRequest.setCharacterEncoding("utf-8");
 	Map<String,Object> boardMap =new HashMap<String,Object>();
 	Enumeration enu =multipartRequest.getParameterNames();
 	while(enu.hasMoreElements()) {
 		String name=(String)enu.nextElement();
 		String value=multipartRequest.getParameter(name);
-		boardMap.put(name, value);
-		
+		boardMap.put(name, value);	
 	}
+	
+	
 	String todaymill_img = upload(multipartRequest);
-	boardMap.put("todaymill_img", todaymill_img);
 	BoardVO boardVO =(BoardVO) session.getAttribute("board");
 	MemberVO member = (MemberVO) session.getAttribute("member");
 	String member_id = member.getId();
@@ -120,40 +121,40 @@ public ResponseEntity updateMillBoard(@RequestParam("bno") int bno, MultipartHtt
 	HttpHeaders responseHeaders = new HttpHeaders();
 	responseHeaders.add("Content-type", "text/html; charset=utf-8");
 	try {
-		System.out.println(" try 문 들어옴");
-		 boardService.modMillBoard(boardMap);
+		 boardService.modMillBoard(boardMap); 
+		 
+		 System.out.println(todaymill_img);
 		 System.out.println("서비스 다녀왓니!!?");
-		if(todaymill_img != null && todaymill_img.length() !=0) {
-			System.out.println("if문 들어옴");
-			File srcFile = new File(TODAYMILL_IMAGE_REPO+"\\"+"temp+\\"+todaymill_img);
-			File destDir = new File(TODAYMILL_IMAGE_REPO+"\\"+bno);
-			FileUtils.moveFileToDirectory(srcFile,destDir,true);
 			
-			String originalFileName=(String)boardMap.get("orginalFileName");
-			File oldFile = new File(TODAYMILL_IMAGE_REPO+"\\"+bno+"\\"+originalFileName);
-			oldFile.delete();
-			
+			  if(todaymill_img != null && todaymill_img.length() !=0) {
+				  
+					  String originalFilename = (String) boardMap.get("originalFileName");
+						File oldFile = new File(TODAYMILL_IMAGE_REPO + "\\" + bno + "\\" + originalFilename);
+						oldFile.delete();
+						
+						File srcFile = new File(TODAYMILL_IMAGE_REPO + "\\" + "temp" + "\\" + todaymill_img);
+						File destDir = new File(TODAYMILL_IMAGE_REPO + "\\" + bno);
+						FileUtils.moveFileToDirectory(srcFile, destDir, true);
+					 
+
+			  }
+				message = "<script>";
+				message += " alert('글을 수정했습니다.');";
+				message += " location.href='" + multipartRequest.getContextPath() + "/board/millBoardList.do';";
+				message += "</script>";
+				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			} catch(Exception e) {
+				File srcFile = new File(TODAYMILL_IMAGE_REPO + "\\" + "temp" + "\\" + todaymill_img);
+				srcFile.delete();
+				message = "<script>";
+				message += " alert('수정 중 오류가 발생했습니다.');";
+				message += " location.href='" + multipartRequest.getContextPath() + "/board/millBoardList.do';";
+				message += "</script>";
+				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				e.printStackTrace();
+			}
+			return resEnt;
 		}
-		message = "<script>";
-		message += " alert('글을 수정했습니다.')";
-		message += " location.href='"+multipartRequest.getContextPath()+"/board/millDatail.do?bno="+bno+"';";
-		message += "</script>";
-				resEnt = new ResponseEntity(message,responseHeaders , HttpStatus.CREATED);
-	}catch (Exception e) {
-		File srcFile = new File(TODAYMILL_IMAGE_REPO +"\\"+"temp"+"\\"+todaymill_img);
-		srcFile.delete();
-	}
-	message = "<script>";
-	message += " alert('수정 중 오류가 발생했습니다.')";
-	message += " location.href='"+multipartRequest.getContextPath()+"/board/millDatail.do?bno="+bno+"';";
-	message += "</script>";
-	resEnt = new ResponseEntity(message, responseHeaders,HttpStatus.CREATED);
-
-		return resEnt;
-		}
-
-	
-
 
 @Override
 	@RequestMapping(value = "/board/millDetail.do")
@@ -180,9 +181,12 @@ public ResponseEntity updateMillBoard(@RequestParam("bno") int bno, MultipartHtt
 
 @Override
 	@RequestMapping(value = "/board/noticeDetail.do")
-	public ModelAndView noticeDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView noticeDetail(@RequestParam("bno") int bno,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		NoticeVO noticeList = boardService.selectNoticeList(bno);
+		mav.addObject("noticeList",noticeList);
+		System.out.println(noticeList);
 		mav.setViewName(viewName);
 		return mav;
 	}
@@ -192,8 +196,13 @@ public ResponseEntity updateMillBoard(@RequestParam("bno") int bno, MultipartHtt
 	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		List<NoticeVO> noticeList = boardService.noticeList();
+		mav.addObject("noticeList",noticeList);
 		mav.setViewName(viewName);
+		System.out.println(noticeList);
 		return mav;
+		
+
 	}
 
 @Override
@@ -353,22 +362,22 @@ public ResponseEntity updateMillBoard(@RequestParam("bno") int bno, MultipartHtt
 	}
 
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
-		String image = null;
+		String todaymill_img = null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 
 		while (fileNames.hasNext()) {
 			String fileName = fileNames.next();
 			MultipartFile mFile = multipartRequest.getFile(fileName);
-			image = mFile.getOriginalFilename();
+			todaymill_img = mFile.getOriginalFilename();
 			File file = new File(TODAYMILL_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
 			if (mFile.getSize() != 0) {// File Null Check
 				if (!file.exists()) {
 					file.getParentFile().mkdirs();
-					mFile.transferTo(new File(TODAYMILL_IMAGE_REPO + "\\" + "temp" + "\\" + image));
+					mFile.transferTo(new File(TODAYMILL_IMAGE_REPO + "\\" + "temp" + "\\" + todaymill_img));
 				}
 			}
 		}
-		return image;
+		return todaymill_img;
 	}
 	/* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 

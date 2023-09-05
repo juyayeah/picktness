@@ -35,16 +35,16 @@ uri="http://tiles.apache.org/tags-tiles" %>
   </head>
   <body>
     <div class="menu">
-      <a href="${contextPath}/board/millBoardList.do" class="menu_title"
-        >커뮤니티</a
+      <a href="${contextPath}/board/noticeList.do" class="menu_title"
+        >고객센터</a
       >
       <div class="line"></div>
       <div class="menu_list">
 
         <a
-          href="${contextPath}/board/millBoardList.do"
+          href="${contextPath}/board/noticeList.do"
           class="menu_list_item"
-          >오늘 식단</a
+          >공지사항</a
         >
 
       </div>

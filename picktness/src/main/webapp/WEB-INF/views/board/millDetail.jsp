@@ -73,7 +73,7 @@ $(function(){
    
   }
   .button {
-    padding: 10px 20px;
+    padding: 15px 20px;
     background-color: #007BFF;
     color: #fff;
     border: none;
@@ -123,7 +123,7 @@ $(function(){
     border: 1px solid #ccc;
   }
   .comment-text {
-    width: 70%;
+    width: 60%;
   }
   .comment-input-container {
     display: flex;
@@ -142,6 +142,7 @@ $(function(){
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    
   }
   .comment-button:hover {
     background-color: #999;
@@ -158,6 +159,9 @@ $(function(){
   .content-date{
   margin-top:0px;
   }
+  .border_id{
+  width: 15%;
+  }
 </style>
 <title>오늘 식단</title>
 </head>
@@ -168,7 +172,7 @@ $(function(){
 
     <h3>오늘 식단</h3>
     <c:if test="${member.id == millDetail.member_id }">
-    <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" id="delOk" style="margin=50%;margin-left: 50%;" class="button">삭제하기</a>
+    <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" id="delOk" style="margin-left: 50%;" class="button">삭제하기</a>
     <a href="/board/updateMillBoardForm.do?bno=${millDetail.bno}" class="button" >수정하기</a>
 
     </c:if>
@@ -203,13 +207,13 @@ $(function(){
    <c:forEach var="item" items="${commentList}" >
   <div class="comments-section">
     <div class="comment">
-      <p>
+      <b class= border_id> <p>
          ${fn:substring(item.member_id,0,4) }
      <c:forEach begin="5" end="${fn:length(item.member_id)}" step="1">
         *
       </c:forEach>
        
-       </p>
+       </p></b>
       <p class="comment-text">${item.content}</p>
       <p> 
       <fmt:parseDate value="${item.millrDate} " var="millrDate" pattern="yyyy-MM-dd" />
@@ -218,7 +222,7 @@ $(function(){
 
     <a href="/board/removeMillrBoard.do?bno=${millDetail.bno}" id="delOk" class="button" >삭제하기</a>
 
-    <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" id="delOk" class="button" >삭제하기</a>
+    
 
   </c:if>
     </div>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pick.board.vo.BoardVO;
 import com.pick.board.vo.CommentVO;
+import com.pick.board.vo.NoticeVO;
 
 @Mapper
 @Repository("boardDAO")
@@ -36,6 +37,8 @@ public interface BoardDAO {
     
 
     public void updateMillBoard (Map boardMap) throws DataAccessException;
+	public List<NoticeVO> selectNoticeList()throws DataAccessException;
+	public NoticeVO getNoticeByBno(int bno)throws DataAccessException;
     
 }
 

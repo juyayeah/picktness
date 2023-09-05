@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pick.board.dao.BoardDAO;
 import com.pick.board.vo.BoardVO;
 import com.pick.board.vo.CommentVO;
+import com.pick.board.vo.NoticeVO;
 
 @Service("boardService")
 @Transactional(propagation= Propagation.REQUIRED)
@@ -71,9 +72,18 @@ public class BoardServiceImpl {
 	public void modMillBoard(Map boardMap) throws Exception {
 		System.out.println("디버그 로그: 메서드가 실행됨 before");
 		System.out.println(boardMap);
-		
 		boardDAO.updateMillBoard(boardMap);
 		System.out.println("디버그 로그: 메서드가 실행됨 after");
+	}
+
+	public List<NoticeVO> noticeList() {
+		List<NoticeVO> NoticeList = boardDAO.selectNoticeList();
+		return NoticeList;
+	}
+
+	public NoticeVO selectNoticeList(int bno) {
+		return boardDAO.getNoticeByBno(bno);
+		
 	}
 
 
