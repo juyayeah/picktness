@@ -27,6 +27,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result property="content" column="content"/>
  		<result property="boardDate" column="millrDate"/>
  		</resultMap>
+ 		
+ 		<resultMap id="noticeResult" type="noticeVO">
+ 		<result property="bno" column="bno"/>
+ 		<result property="title" column="title"/>
+ 		<result property="content" column="content"/>
+ 		<result property="noticeDate" column="noticedate"/>
+ 		</resultMap>
+ 		
+ 		
  		  	
  
  		
@@ -79,7 +88,7 @@ delete from picktness.todaymill_reply where p_bno=#{bno}
       
       <select id="selectAllMillList" resultMap="millBoardResult">
       <![CDATA[
- 		select * from todaymill
+ 		select * from todaymill order by millDate desc
  		]]>
       </select>
       <select id="selectNewBoardNO" resultType="int">
@@ -109,13 +118,30 @@ delete from picktness.todaymill_reply where p_bno=#{bno}
 <update id="updateMillBoard" parameterType="java.util.Map">
   <![CDATA[
     UPDATE todaymill
-    SET hastag=#{hastag}, content=#{content}
+    SET hastag=#{hastag}, content=#{content}  
+    ]]>
     <if test="todaymill_img != '' and todaymill_img != null"> 
-      todaymill_img=#{todaymill_img}
+    <![CDATA[
+      ,todaymill_img=#{todaymill_img}]]>
     </if>
-    WHERE bno=#{bno}
-  ]]>
+    <![CDATA[ WHERE bno=#{bno}]]>
+  
 </update>
+  
+  <select id="selectNoticeList" resultMap="noticeResult">
+  <![CDATA[
+  SELECT * FROM notice order by bno desc
+  ]]>
+  
+  
+  </select>
+  
+  <select id="getNoticeByBno"  resultMap="noticeResult" parameterType="int">
+  <![CDATA[
+  SELECT * FROM notice WHERE bno = #{bno}
+  ]]>
+  
+  </select>
    
 
  	

@@ -21,9 +21,6 @@ request.setCharacterEncoding("UTF-8");
       
       }
       
-
-
-
 .btn_right {
 float:right; 
 margin-right:0px;
@@ -90,54 +87,52 @@ float:right;
 float:right;
 }
 .image_pic{
-width:70px;
-height:70px;
+width:100px;
+height:100px;
 margin-left:60px;
 }
+  .button {
+    padding: 15px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width :100px;
+    height:51px;
+    margin-top:12px;
+    
+  }
+    .button1{
+    padding: 15px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width :100px;
+    height:51px;
+    margin-bottom:50px;
+  }
+  
   </style>
   
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-function backToList(obj){ 
-obj.action = "${contextPath}/board/updateMillBoard.do";
-obj.submit();
-}
-
-function fn_modify_article(obj){
-obj.action = "${contextPath}/board/updateMillBoard.do";
-obj.submit();
-} 
-
-
-
-
-
-
-
-
-form.appendChild(articleNOInput);
-document.body.appendChild(form); 
-form.submit();
-}
-
-var parentNOInput = document.createElement("input"); 
-parentNOInput.setAttribute("type","hidden");
-parentNOInput.setAttribute("name","parentNO");
-parentNOInput.setAttribute("value",parentNO);
-
-form.appendChild(parentNOInput);
-document.body.appendChild(form); 
-form.submit();
-}
 function readURL(input){
-if (input.files && input.files[0]){
-	var reader = new FileReader();
-	reader.onload = function (e){
-		$('#preview').attr('src',e.target.result);
+	if (input.files && input.files[0]){
+		var reader = new FileReader();
+		reader.onload = function (e){
+			$('#preview').attr('src',e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
 	}
-	reader.readAsDataURL(input.files[0]);
 }
+
+
+
+
 
 $(function() {
     $('#btn').click(function() {
@@ -156,32 +151,6 @@ $(function() {
 });
 
 
-var cnt=1;
-
-function back() {
-    
-    history.go(-1); 
-
-}
-var cnt=1;
-
-function fn_addFile(){
-	$("#dfile").append("<br>"+"<input type='file' name='file"+cnt+"' />");
-	cnt++;
-}
-
-.btns del_btn{
-	float:right;
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    // "수정하기" 버튼 클릭 이벤트 핸들러
-    document.getElementById("updateButton").addEventListener("click", function () {
-        // 폼을 선택하고 제출
-        var form = document.getElementById("myForm");
-        form.submit();
-    });
-});
 </script>
 </head>
 <body>
@@ -197,25 +166,28 @@ document.addEventListener("DOMContentLoaded", function () {
     <tr>
         <td>
         <input type ="hidden" name ="originalFileName" value="${board.todaymill_img }" />
-        <img  class="image_pic" src="${contextPath}/download.do?cate=mill&imageFileName=${board.todaymill_img}&bno=${board.bno}" alt="이미지 설명">
+        <%-- <img  class="image_pic" src="${contextPath}/download.do?cate=mill&imageFileName=${board.todaymill_img}&bno=${board.bno}" alt="이미지 설명"> --%>
+        
+        <img class="image_pic" id="preview" src="${contextPath}/download.do?cate=mill&imageFileName=${board.todaymill_img}&bno=${board.bno}" width=100 height =100 />
+        <input type="file" name="todaymill_img" onchange="readURL(this);">
         </td>
         <td colspan="3">
             <div class="file_list">
                 <div>
                     <span class="file_input">
-                        
-                        <label> 첨부파일
+
+                       <!--  <label> 첨부파일
                             <input type="file" name="todaymill_img" onchange="readURL(this);"/>
-                        </label>
-                     
+                        </label> -->
+                  
 
                     </span>
                     </td>
                     <td>
                   <input type="hidden" name="bno" value="${board.bno}">
                     <span class= "btn_right">
-                    <button type="button" onclick="back()" class="btns del_btn"><span>돌아가기</span></button>
-                    <input class= "btn_margin" id="btn" type="submit"  class="btns fn_add_btn" value="수정하기">
+                    <a class="button" href="${contextPath}/board/millBoardList.do">목록으로</a>
+                    <input class="button1" class= "btn_margin" id="btn" type="submit"  class="btns fn_add_btn" value="수정하기">
                   </span>
                   </div>
             </div>
