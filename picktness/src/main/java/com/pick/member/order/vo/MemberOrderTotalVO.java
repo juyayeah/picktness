@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component("memberOrderTotalVO")
 public class MemberOrderTotalVO {
-	private int order_num;
+	private String order_num;
 	private String member_id;
 	private String total_price;
 	private String sale_price;
@@ -16,10 +16,11 @@ public class MemberOrderTotalVO {
 	private String credit_company;
 	private String credit_installment;
 	private Date orderDate;
-	public int getOrder_num() {
+	
+	public String getOrder_num() {
 		return order_num;
 	}
-	public void setOrder_num(int order_num) {
+	public void setOrder_num(String order_num) {
 		this.order_num = order_num;
 	}
 	public String getMember_id() {

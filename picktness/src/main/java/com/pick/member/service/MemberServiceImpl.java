@@ -51,6 +51,12 @@ public class MemberServiceImpl implements MemberService{
 	public BusinessVO loginBusiness(Map<String, String> loginMap) throws DataAccessException {
 		return memberDAO.loginBusiness(loginMap);
 	}
+	@Override
+	public MemberVO selectById(String id) throws DataAccessException {
+		return memberDAO.selectById(id);
+	}
+	
+	
 	
 	
 	

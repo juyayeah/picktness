@@ -2,9 +2,12 @@ package com.pick.member.order.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component("memberOrderShoppingVO")
 public class MemberOrderShoppingVO {
 	private int bno;
-	private int order_num;
+	private String order_num;
 	private String member_id;
 	private String goods_id;
 	private String goods_title;
@@ -28,10 +31,11 @@ public class MemberOrderShoppingVO {
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
-	public int getOrder_num() {
+
+	public String getOrder_num() {
 		return order_num;
 	}
-	public void setOrder_num(int order_num) {
+	public void setOrder_num(String order_num) {
 		this.order_num = order_num;
 	}
 	public String getMember_id() {

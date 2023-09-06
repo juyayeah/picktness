@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <mapper namespace="com.pick.member.mypage.dao.MemberMypageDAO">
 	<select id="allPointList" resultType="memberMypagePointVO" parameterType="String">
 	<![CDATA[
-	select * from point_history where member_id=#{id} order by pointdate desc;
+	select * from point_history where member_id=#{id} order by bno desc;
 	]]>
 	</select> 
 	<select id="addPointList" resultType="memberMypagePointVO" parameterType="String">
