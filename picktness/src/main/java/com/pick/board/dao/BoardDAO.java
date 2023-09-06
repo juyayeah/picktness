@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pick.board.vo.BoardVO;
 import com.pick.board.vo.CommentVO;
+import com.pick.board.vo.FaqVO;
 import com.pick.board.vo.NoticeVO;
 
 @Mapper
@@ -17,8 +18,11 @@ public interface BoardDAO {
 
 	
 	public List selectAllFreeBoardList() throws DataAccessException;
+	
 	public int insertNewMillBoard(Map boardMap) throws DataAccessException;
-    public List selectAllMillList()throws DataAccessException;
+    
+	public List selectAllMillList()throws DataAccessException;
+    
     public int selectNewBoardNO()throws DataAccessException;
     
     public BoardVO getMillByBno(int bno) throws DataAccessException;
@@ -37,8 +41,32 @@ public interface BoardDAO {
     
 
     public void updateMillBoard (Map boardMap) throws DataAccessException;
+    
 	public List<NoticeVO> selectNoticeList()throws DataAccessException;
+	
 	public NoticeVO getNoticeByBno(int bno)throws DataAccessException;
+
+	
+	public void deleteNotice(int bno)throws DataAccessException;
+	
+	public void insertNotice(NoticeVO noticeVO)throws DataAccessException;
+	
+	
+
+	public void updateNotice(NoticeVO noticeVO)throws DataAccessException;
+
+	public List<FaqVO> selectAllFaqList()throws DataAccessException;
+
+	public void insertFaq(FaqVO faqVO)throws DataAccessException;
+
+	public void updateFaq(FaqVO faqVO)throws DataAccessException;
+
+	public FaqVO getFaqByBno(int bno)throws DataAccessException;
+
+	public void deleteFaq(int bno)throws DataAccessException;
+	
+	
+	
     
 }
 

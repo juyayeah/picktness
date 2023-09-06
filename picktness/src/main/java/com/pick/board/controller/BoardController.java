@@ -13,9 +13,9 @@ public interface BoardController {
 
 	ModelAndView millBoardForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	ModelAndView millDetail(int bno, HttpServletRequest request, HttpServletResponse response);
+	ModelAndView millDetail(int bno,HttpServletRequest request, HttpServletResponse response);
 
-	ModelAndView getDelete(int bno, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView getDelete(int bno,String todaymill_img, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	ModelAndView noticeDetail(int bno,HttpServletRequest request, HttpServletResponse response) throws Exception;
 
@@ -42,12 +42,15 @@ public interface BoardController {
 	ResponseEntity addMillBoard(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception;
 
-	ModelAndView millrInsert(String member_id, String content, int p_bno, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
+	ModelAndView millrInsert(String member_id, String content, int p_bno, HttpServletRequest request,HttpServletResponse response) throws Exception;
 
 	ModelAndView updateMillBoardForm(int bno,HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	ModelAndView updateMillBoard(int bno, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView noticeForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	ModelAndView faqForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 
 }

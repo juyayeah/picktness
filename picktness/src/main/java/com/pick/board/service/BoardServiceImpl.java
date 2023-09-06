@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pick.board.dao.BoardDAO;
 import com.pick.board.vo.BoardVO;
 import com.pick.board.vo.CommentVO;
+import com.pick.board.vo.FaqVO;
 import com.pick.board.vo.NoticeVO;
 
 @Service("boardService")
@@ -85,6 +86,48 @@ public class BoardServiceImpl {
 		return boardDAO.getNoticeByBno(bno);
 		
 	}
+
+
+	public void deleteNotice(int bno) {
+		boardDAO.deleteNotice(bno);
+		
+	}
+
+	public void insertNotice(NoticeVO noticeVO) {
+		boardDAO.insertNotice(noticeVO);
+		
+	}
+
+	public void updateNotice(NoticeVO noticeVO) {
+		boardDAO.updateNotice(noticeVO);
+		
+	}
+
+	public List<FaqVO> selectFaqList() {
+		List<FaqVO> faqList =boardDAO.selectAllFaqList();
+		return faqList;
+	}
+
+	public void insertFaq(FaqVO faqVO) {
+	      boardDAO.insertFaq(faqVO);
+		
+	}
+
+	public void updateFaq(FaqVO faqVO) {
+		boardDAO.updateFaq(faqVO);
+		
+	}
+
+	public FaqVO selectFaqList(int bno) {
+		
+		return boardDAO.getFaqByBno(bno);
+	}
+
+	public void deleteFaq(int bno) {
+		boardDAO.deleteFaq(bno);
+		
+	}
+
 
 
 

@@ -1,18 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix="c"
-uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fmt"
-uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
-<% request.setCharacterEncoding("utf-8"); %>
+<% 
+request.setCharacterEncoding("utf-8"); 
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  
     <style>
       .faq_inner {
-        position: relative;
-        width: 1100px;
-        margin: 0 auto;
-      }
+    
+    margin:30px 0 0 30px;
+    }
+    
+      
       .layout {
         max-width: 600px;
         margin: 0 auto;
@@ -28,7 +31,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         box-sizing: border-box;
       }
       .qna > li:nth-child(n + 2) {
-        /* 아이템 구분 점선 */
+        
         border-top: 1px dashed #aaa;
       }
       .qna input {
@@ -36,7 +39,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       }
 
       .qna label {
-        /* 제목 - 클릭 영역 */
+       
         font-weight: bold;
         color: #000;
         margin: 20px 0 0;
@@ -74,14 +77,16 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       .qna input:checked + label + div {
         /* 내용 영역 펼침 */
         display: block;
+        
       }
       .divider {
         border-top: 1px solid #ccc;
         margin-top: 20px;
         margin-bottom: 20px;
       }
-      .faq_bgc p {
+      .faq_bgc pre {
         background-color: aliceblue;
+        word-break
       }
       .button2 {
         float: right;
@@ -92,7 +97,37 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         min-height: 30px;
         min-width: 120px;
       }
+      .right_a {
+  float: right; 
+  background-color: #007BFF;
+  color: #fff; /* 텍스트 색상을 흰색으로 설정 */
+  padding: 10px 10px; /* 버튼 패딩 설정 */
+  text-decoration: none; /* 링크 텍스트 밑줄 제거 */
+  border-radius: 5px; /* 버튼 모서리 둥글게 만들기 */
+  margin-right:10px;
+  }
+        .faq_btn{
+
+        float:right;
+    padding: 5px 10px;
+    /* background-color: #007BFF; */
+    /* color: #fff; */
+     
+  
+    border: 1px solid black;
+    color:black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin:0 10px 5px 0;
+    border-radius: 5px; /* 버튼 모서리 둥글게 만들기 */
+      }
+        .faq_btn:hover {
+    background-color: #0056b3;
+  }
+  
     </style>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
@@ -105,6 +140,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     <title>FAQ</title>
   </head>
   <body>
+  
     <div class="faq_inner">
       <h2>자주묻는 FAQ</h2>
       <s_sidebar_element>
@@ -119,24 +155,33 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               placeholder="SEARCH"
             />
 
+
             <input value="검색" type="button" onclick="" class="submit" />
+            <c:if test="${member.id == 'admin' }"> 
+<a type="button"class="right_a" href="${contextPath}/board/faqForm.do">글쓰기</a>
+</c:if>
           </s_search>
         </div>
       </s_sidebar_element>
       <div class="divider"></div>
+<c:forEach var="faq" items="${faqList}" varStatus="loop">
+  <ul class="qna">
+    <li>
+      <input type="checkbox" id="qna-${loop.index}" />
+      <label for="qna-${loop.index}">${faq.title}  <c:if test="${member.id == 'admin' }"> 
+        <a type="button" class="faq_btn" href="${contextPath}/board/deleteFaq.do?bno=${faq.bno}">삭제하기</a>
+        <a type="button" class="faq_btn" href="${contextPath}/board/modFaqForm.do?bno=${faq.bno}">수정하기</a>
+      </c:if></label> 
+      <div class="faq_bgc">
+        <pre>${faq.content}</pre>
+      </div>
+    
+    </li>
+  </ul>
+  <hr />
+</c:forEach>
 
-      <ul class="qna">
-        <li>
-          <input type="checkbox" id="qna-1" />
-          <label for="qna-1">다른 사람 명의의 계좌로 환불받을 수 있나요?${ }</label>
-          <div class="faq_bgc">
-            <p>
-              다른 사람 명의로는 환불할 수 없습니다. 고객님 본인 명의 계좌로만
-              환불이 가능합니다.
-            </p>
-          </div>
-        </li>
-        <li>
+       <!--  <li>
           <input type="checkbox" id="qna-2" />
           <label for="qna-2">등록한 환불계좌를 등록/변경하고 싶어요.</label>
           <div class="faq_bgc">
@@ -197,8 +242,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
               문의하기"를 선택한 후 질의 내용 작성
             </p>
           </div>
-        </li>
-      </ul>
+        </li> -->
+     <!--  </ul> -->
       <div class="divider"></div>
      
     </div>

@@ -427,7 +427,7 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 						<li><a href="${contextPath}/member/logout.do">로그아웃</a></li>
 						<li><a href="${contextPath}/admin/mypage/adminProdList.do">관리자</a>
 						</li>
-						<li><a href="${contextPath}/admin/board/noticeList.do">고객센터</a></li>
+						<li><a href="${contextPath}/board/noticeList.do">고객센터</a></li>
 					</ul>
 				</div>
 			</c:when>
@@ -639,7 +639,7 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 				<span class="menu_cm_title"
 					onclick="location.href='${contextPath}/board/freeBoardList.do'">커뮤니티</span>
 				<ul class="menu_cm_dt">
-					<li class="menu_list_a"><a href="">자유게시판</a></li>
+					
 					<li class="menu_list_a"><a
 						href="${conterxPath }/board/millBoardList.do">오늘 식단</a></li>
 				</ul>
