@@ -34,8 +34,6 @@ import com.pick.member.vo.MemberVO;
 @Controller("memberOrderController")
 public class MemberOrderControllerimpl implements MemberOrderController{
 	@Autowired
-	MemberOrderBusinessVO memberOrderBusinessVO;
-	@Autowired
 	MemberOrderShoppingVO memberOrderShoppingVO;
 	@Autowired
 	MemberOrderService memberOrderService;
@@ -154,9 +152,11 @@ public class MemberOrderControllerimpl implements MemberOrderController{
 		memberOrderService.addTotalOrder(totalVO);
 		
 		for(MemberCartVO memberCartVO : orderCartList) {
+			System.out.println("굿즈 아이디" + memberCartVO.getGoods_id());
 			if(memberCartVO.getGoods_id().contains("pc")) {
 				for(GoodsBusinessVO businessVO : orderBusinessList) {
 					if(memberCartVO.getGoods_id().equals(businessVO.getGoods_id())) {
+						MemberOrderBusinessVO memberOrderBusinessVO = new MemberOrderBusinessVO();
 						memberOrderBusinessVO.setMember_id(member_id);
 						memberOrderBusinessVO.setOrder_num(order_num);
 						memberOrderBusinessVO.setGoods_id(memberCartVO.getGoods_id());
@@ -189,11 +189,11 @@ public class MemberOrderControllerimpl implements MemberOrderController{
 			}
 		}
 		
-		if(addOrderBusinessList != null && addOrderBusinessList.size() != 0) {
+		if(addOrderBusinessList.size() != 0) {
 			memberOrderService.addBusinessOrder(addOrderBusinessList);
 			orderDonMap.put("orderBusinessList", addOrderBusinessList);
 		}
-		if(addOrderShoppingList != null && addOrderShoppingList.size() != 0) {
+		if(addOrderShoppingList.size() != 0) {
 			memberOrderService.addShoppingOrder(addOrderShoppingList);
 			orderDonMap.put("orderShoppingList", addOrderShoppingList);
 		}

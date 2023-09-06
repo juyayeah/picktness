@@ -25,4 +25,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where id = #{id}
 	]]>
 	</select>
+	
+	<select id="orderTotalList" resultType="memberOrderTotalVO" parameterType="String">
+	<![CDATA[
+	select * from order_total where member_id = #{member_id} order by orderdate desc
+	]]>
+	</select>
+	
+	<select id="orderBusinessList" resultType="memberOrderBusinessVO" parameterType="String">
+	<![CDATA[
+	select b.*, i.fileName from order_business as b join business_detail_image as i on b.goods_id = i.goods_id where member_id = #{member_id} and i.filetype = 'main_image'
+	]]>
+	</select>
+	<select id="orderTrainerList" resultType="memberOrderBusinessVO" parameterType="String">
+	<![CDATA[
+	select b.*, i.fileName from order_business as b join trainer_detail_image as i on b.goods_id = i.goods_id where member_id = #{member_id} and i.filetype = 'main_image'
+	]]>
+	</select>
+	<select id="orderShoppingList" resultType="memberOrderShoppingVO" parameterType="String">
+	<![CDATA[
+	select b.*, i.fileName from order_shop as b join shopping_detail_image as i on b.goods_id = i.goods_id where member_id = #{member_id} and i.fileType = 'main_image'
+	]]>
+	</select>
+	
  </mapper>
