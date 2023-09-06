@@ -11,11 +11,13 @@ public class MemberOrderBusinessVO {
 	private String goods_id;
 	private String goods_title;
 	private String goods_option;
-	private String goods_price;
+	private String original_price;
+	private String retail_price;
 	private String state;
 	private Date orderDate;
 	private String review;
 	private Date cancelDate;
+	private String fileName;
 	public int getBno() {
 		return bno;
 	}
@@ -53,11 +55,18 @@ public class MemberOrderBusinessVO {
 	public void setGoods_option(String goods_option) {
 		this.goods_option = goods_option;
 	}
-	public String getGoods_price() {
-		return goods_price;
+	
+	public String getOriginal_price() {
+		return original_price;
 	}
-	public void setGoods_price(String goods_price) {
-		this.goods_price = goods_price;
+	public void setOriginal_price(String original_price) {
+		this.original_price = original_price;
+	}
+	public String getRetail_price() {
+		return retail_price;
+	}
+	public void setRetail_price(String retail_price) {
+		this.retail_price = retail_price;
 	}
 	public String getState() {
 		return state;
@@ -83,6 +92,13 @@ public class MemberOrderBusinessVO {
 	public void setCancelDate(Date cancelDate) {
 		this.cancelDate = cancelDate;
 	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
 	
 	
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.pick.goods.vo.GoodsBusinessVO;
+import com.pick.member.cart.vo.MemberCartVO;
 import com.pick.member.mypage.vo.MemberMypagePointVO;
 import com.pick.member.order.vo.MemberOrderBusinessVO;
 import com.pick.member.order.vo.MemberOrderShoppingVO;
@@ -16,4 +18,5 @@ public interface MemberOrderService {
 	public void addShoppingOrder(List<MemberOrderShoppingVO> shoppingOrderList) throws DataAccessException;
 	public void addOrderPoint(MemberMypagePointVO pointVO) throws DataAccessException;
 	public void useOrderPoint(MemberMypagePointVO pointVO) throws DataAccessException;
+	public void orderRemoveCartGoods(List<MemberCartVO> orderCartList) throws DataAccessException;
 }

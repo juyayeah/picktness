@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pick.goods.service.GoodsService;
 import com.pick.goods.vo.GoodsBusinessVO;
 import com.pick.goods.vo.GoodsShoppingVO;
 import com.pick.goods.vo.GoodsTrainerVO;
@@ -42,6 +43,8 @@ public class MemberOrderControllerimpl implements MemberOrderController{
 	MemberMypagePointVO memberPointVO;
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	GoodsService goodsService;
 	
 	
 	@Override
@@ -121,6 +124,7 @@ public class MemberOrderControllerimpl implements MemberOrderController{
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		String member_id = memberVO.getId();
 		Map orderMap = (Map) session.getAttribute("orderMap");
+		Map orderDonMap = new HashMap();
 		List<MemberCartVO> orderCartList = (List<MemberCartVO>) orderMap.get("orderCartList");
 		List<GoodsBusinessVO> orderBusinessList = (List<GoodsBusinessVO>) orderMap.get("orderBusinessList");
 		List<GoodsTrainerVO> orderTrainerList = (List<GoodsTrainerVO>) orderMap.get("orderTrainerList");
@@ -128,7 +132,7 @@ public class MemberOrderControllerimpl implements MemberOrderController{
 		
 		List<MemberOrderBusinessVO> addOrderBusinessList = new ArrayList<MemberOrderBusinessVO>();
 		List<MemberOrderShoppingVO> addOrderShoppingList = new ArrayList<MemberOrderShoppingVO>();
-
+		
 		MemberOrderTotalVO totalVO = new MemberOrderTotalVO();
 		LocalDate now = LocalDate.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMdd");
@@ -146,7 +150,7 @@ public class MemberOrderControllerimpl implements MemberOrderController{
 		totalVO.setAdd_point(add_point);
 		totalVO.setCredit_company(request.getParameter("credit_company"));
 		totalVO.setCredit_installment(request.getParameter("credit_installment"));
-		
+		orderDonMap.put("totalVO", totalVO);
 		memberOrderService.addTotalOrder(totalVO);
 		
 		for(MemberCartVO memberCartVO : orderCartList) {
@@ -157,16 +161,22 @@ public class MemberOrderControllerimpl implements MemberOrderController{
 						memberOrderBusinessVO.setOrder_num(order_num);
 						memberOrderBusinessVO.setGoods_id(memberCartVO.getGoods_id());
 						memberOrderBusinessVO.setGoods_title(businessVO.getB_name());
+						
+						memberOrderBusinessVO.setFileName(goodsService.businessImageFileName(memberCartVO.getGoods_id()));
 						String goods_option = memberCartVO.getGoods_option();
 						memberOrderBusinessVO.setGoods_option(goods_option);
 						switch(goods_option) {
-						case "prod1retail" : memberOrderBusinessVO.setGoods_price(businessVO.getProd1retail());
+						case "prod1retail" : memberOrderBusinessVO.setRetail_price(businessVO.getProd1retail());
+											memberOrderBusinessVO.setOriginal_price(businessVO.getProd1());
 							break;
-						case "prod3retail" : memberOrderBusinessVO.setGoods_price(businessVO.getProd3retail());
+						case "prod3retail" : memberOrderBusinessVO.setRetail_price(businessVO.getProd3retail());
+											memberOrderBusinessVO.setOriginal_price(businessVO.getProd3());
 							break;
-						case "prod6retail" : memberOrderBusinessVO.setGoods_price(businessVO.getProd6retail());
+						case "prod6retail" : memberOrderBusinessVO.setRetail_price(businessVO.getProd6retail());
+											memberOrderBusinessVO.setOriginal_price(businessVO.getProd6());
 							break;
-						case "prod12retail" : memberOrderBusinessVO.setGoods_price(businessVO.getProd12retail());
+						case "prod12retail" : memberOrderBusinessVO.setRetail_price(businessVO.getProd12retail());
+											memberOrderBusinessVO.setOriginal_price(businessVO.getProd12());
 							break;
 						}
 						addOrderBusinessList.add(memberOrderBusinessVO);
@@ -181,9 +191,11 @@ public class MemberOrderControllerimpl implements MemberOrderController{
 		
 		if(addOrderBusinessList != null && addOrderBusinessList.size() != 0) {
 			memberOrderService.addBusinessOrder(addOrderBusinessList);
+			orderDonMap.put("orderBusinessList", addOrderBusinessList);
 		}
 		if(addOrderShoppingList != null && addOrderShoppingList.size() != 0) {
 			memberOrderService.addShoppingOrder(addOrderShoppingList);
+			orderDonMap.put("orderShoppingList", addOrderShoppingList);
 		}
 		memberPointVO.setMember_id(member_id);
 		if(use_point != 0) {
@@ -196,14 +208,18 @@ public class MemberOrderControllerimpl implements MemberOrderController{
 		memberPointVO.setState("적립");
 		memberPointVO.setContent("구매 적립");
 		memberOrderService.addOrderPoint(memberPointVO);
+		memberOrderService.orderRemoveCartGoods(orderCartList);
+		
 		memberVO = memberService.selectById(member_id);
 		session.setAttribute("member", memberVO);
-		
-		mav.setViewName("redirect:/member/order/orderList.do");
+		session.setAttribute("orderDonMap", orderDonMap);
+		session.removeAttribute("cartMap");
+
+		mav.setViewName("redirect:/member/order/orderDonPage.do");
 		return mav;
 	}
 
-	@RequestMapping(value="/member/order/orderList.do", method=RequestMethod.GET)
+	@RequestMapping(value="/member/order/orderDonPage.do", method=RequestMethod.GET)
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");

@@ -12,6 +12,13 @@ uri="http://tiles.apache.org/tags-tiles" %>
     <title>주문내역</title>
   </head>
   <body>
-    주문내역이 옵니다.
+    <div class="content-inner">
+    <div class="content-title">
+ 	주문내역
+    </div>
+    <div class="main_box">
+    
+    </div>
+    </div>
   </body>
 </html>

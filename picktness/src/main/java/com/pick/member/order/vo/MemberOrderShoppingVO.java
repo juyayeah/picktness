@@ -12,7 +12,8 @@ public class MemberOrderShoppingVO {
 	private String goods_id;
 	private String goods_title;
 	private int goods_qty;
-	private String goods_price;
+	private String original_price;
+	private String retail_price;
 	private String delivery_name;
 	private String delivery_zipcode;
 	private String delivery_addrbasic;
@@ -25,6 +26,7 @@ public class MemberOrderShoppingVO {
 	private String state;
 	private String review;
 	private Date cancelDate;
+	private String fileName;
 	public int getBno() {
 		return bno;
 	}
@@ -62,11 +64,18 @@ public class MemberOrderShoppingVO {
 	public void setGoods_qty(int goods_qty) {
 		this.goods_qty = goods_qty;
 	}
-	public String getGoods_price() {
-		return goods_price;
+
+	public String getOriginal_price() {
+		return original_price;
 	}
-	public void setGoods_price(String goods_price) {
-		this.goods_price = goods_price;
+	public void setOriginal_price(String original_price) {
+		this.original_price = original_price;
+	}
+	public String getRetail_price() {
+		return retail_price;
+	}
+	public void setRetail_price(String retail_price) {
+		this.retail_price = retail_price;
 	}
 	public String getDelivery_name() {
 		return delivery_name;
@@ -139,6 +148,12 @@ public class MemberOrderShoppingVO {
 	}
 	public void setCancelDate(Date cancelDate) {
 		this.cancelDate = cancelDate;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	
 	
