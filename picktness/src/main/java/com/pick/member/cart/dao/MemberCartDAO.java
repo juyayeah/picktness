@@ -21,6 +21,6 @@ public interface MemberCartDAO {
 	public GoodsBusinessVO placeSelectCart(String goods_id) throws DataAccessException;
 	public GoodsTrainerVO trainerSelectCart(String goods_id) throws DataAccessException;
 	public GoodsShoppingVO shoppingSelectCart(String goods_id) throws DataAccessException;
-	public void removeCartGoodS(String goods_id) throws DataAccessException;
+	public void removeCartGoods(String goods_id) throws DataAccessException;
 	public void updateCartGoods(Map updateMap) throws DataAccessException;
 }

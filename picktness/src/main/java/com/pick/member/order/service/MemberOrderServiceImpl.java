@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.pick.member.cart.vo.MemberCartVO;
 import com.pick.member.mypage.vo.MemberMypagePointVO;
 import com.pick.member.order.dao.MemberOrderDAO;
 import com.pick.member.order.vo.MemberOrderBusinessVO;
@@ -49,6 +50,17 @@ public class MemberOrderServiceImpl implements MemberOrderService {
 		memberOrderDAO.useOrderPoint(pointVO);
 		memberOrderDAO.useMemberPoint(pointVO);
 	}
+
+	@Override
+	public void orderRemoveCartGoods(List<MemberCartVO> orderCartList) throws DataAccessException {
+		for(MemberCartVO cartVO : orderCartList) {
+			int cart_id = cartVO.getCart_id();
+			memberOrderDAO.orderRemoveCartGoods(cart_id);
+		}
+		
+	}
+	
+	
 	
 	
 	

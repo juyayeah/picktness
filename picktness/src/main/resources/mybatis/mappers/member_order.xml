@@ -13,8 +13,8 @@ values (#{order_num}, #{member_id}, #{total_price}, #{sale_price}, #{pay_price},
 
 <insert id="addBusinessOrder" parameterType="memberOrderBusinessVO">
 <![CDATA[
-insert into order_business(order_num, member_id, goods_id, goods_title, goods_option, goods_price) 
-values (#{order_num}, #{member_id}, #{goods_id}, #{goods_title}, #{goods_option}, #{goods_price})
+insert into order_business(order_num, member_id, goods_id, goods_title, goods_option, original_price, retail_price) 
+values (#{order_num}, #{member_id}, #{goods_id}, #{goods_title}, #{goods_option}, #{original_price}, #{retail_price})
 ]]>
 </insert>
 
@@ -43,5 +43,11 @@ update member set memberpoint = memberpoint + ${member_point} where id = #{membe
 update member set memberpoint = memberpoint - ${member_point} where id = #{member_id}
 ]]>
 </update>
+
+<delete id="orderRemoveCartGoods" parameterType="int">
+<![CDATA[
+delete from cart where cart_id = #{cart_id}
+]]>
+</delete>
 </mapper>
  

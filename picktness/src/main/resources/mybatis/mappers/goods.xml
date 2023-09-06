@@ -144,4 +144,22 @@ select s.*, i.filename from shopping as s join shopping_detail_image as i on s.g
     ]]>
 	</select>
 	
+	<select id="businessImageFileName" resultType="String" parameterType="String">
+	<![CDATA[
+	select fileName from business_detail_image where goods_id = #{goods_id} and filetype = "main_image"
+	]]>
+	</select>
+	
+	<select id="trainerImageFileName" resultType="String" parameterType="String">
+	<![CDATA[
+	select fileName from trainer_detail_image where goods_id = #{goods_id} and filetype = "main_image"
+	]]>
+	</select>
+	
+	<select id="shoppingImageFileName" resultType="String" parameterType="String">
+	<![CDATA[
+	select fileName from shopping_detail_image where goods_id = #{goods_id} and filetype = "main_image"
+	]]>
+	</select>
+	
  </mapper>

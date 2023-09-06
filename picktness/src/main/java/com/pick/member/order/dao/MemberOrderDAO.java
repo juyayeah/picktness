@@ -19,4 +19,5 @@ public interface MemberOrderDAO {
 	public void useMemberPoint(MemberMypagePointVO pointVO) throws DataAccessException; 
 	public void addOrderPoint(MemberMypagePointVO pointVO) throws DataAccessException;
 	public void addMemberPoint(MemberMypagePointVO pointVO) throws DataAccessException; 
+	public void orderRemoveCartGoods(int cart_id) throws DataAccessException;
 }
