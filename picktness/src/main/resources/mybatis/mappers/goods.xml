@@ -128,7 +128,7 @@ select s.*, i.filename from shopping as s join shopping_detail_image as i on s.g
 	
 	<select id="goodsDetail" resultMap="goodsResult" parameterType="String">
 	<![CDATA[
-	SELECT s.goods_id, s.goods_title, s.goods_qty, s.priceorigin, s.priceretail, s.detail, sdi.fileName FROM shopping s, shopping_detail_image sdi
+	SELECT s.goods_id, s.goods_title, s.goods_qty, s.priceorigin, s.priceretail, s.detail, s.review_count, sdi.fileName FROM shopping s, shopping_detail_image sdi
 	WHERE s.goods_id = sdi.goods_id
 	and sdi.fileType='main_image'
 	and s.goods_id=#{goods_id}

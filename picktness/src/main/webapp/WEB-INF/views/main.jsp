@@ -558,7 +558,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
                   src="${contextPath}/download.do?cate=shop&imageFileName=${food.fileName}&bno=${food.goods_id}"
                 />
                 <span class="l_title">${food.goods_title }</span>
-                <span class="price" style="font-weight: bold"
+                <span class="price"
                   ><fmt:formatNumber
                     type="number"
                     maxFractionDigits="3"
