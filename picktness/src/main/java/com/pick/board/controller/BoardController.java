@@ -17,7 +17,7 @@ public interface BoardController {
 
 	ModelAndView getDelete(int bno, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	ModelAndView noticeDetail(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	ModelAndView noticeDetail(int bno,HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 

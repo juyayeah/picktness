@@ -6,16 +6,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항</title>
+    <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+    <script type="text/javascript">
+    
+    $(function(){
+    	var chkObj = document.getElementsByName("RowCheck");
+    	var rowCnt = chkObj.length;
+    	
+    	$("input[name='allCheck']").click(function(){
+    		var chk_listArr = $("input[name='RowCheck']");
+    		for (var i=0; i<chk_listArr.length; i++){
+    			chk_listArr[i].checked = this.checked;
+    		}
+    	});
+    	$("input[name='RowCheck']").click(function(){
+    		if($("input[name='RowCheck']").click(function(){
+    			if($("input[name='RowCheck']:checked").length == rowCnt){
+    				$("input[name='allCheck']")[0].checked =true;
+    			}
+    			else{
+    				$("input[name='allCheck']")[0].checked =false;
+    			}
+    		});
+    	});
+    		
+    		function deleteVlaue(){
+    			var url = "delete";
+    			var valueArr = new Array();
+    			var list = $("input[name='RowCheck']");
+    			for(var i = 0; i<list.length; i++){
+    				if(list[i].checked){
+    					valueArr.push(list[i].value);
+    				}
+    			}
+    			if (valueArr.length == 0){
+    				alert("선택된 글이 없습니다.");
+    			}
+    			else{
+    				var chk = confirm("정말 삭제하시겠습니까?");
+    				$.ajax({
+    					url:"${contextPath}/board/removeNoticeArray.do",
+    				    type:'POST',
+    				    traditional :true;
+    					data : {
+    						valueArr : valueArr
+    					},
+    					success: function(jdata){
+    						if(jdata = 1){
+    							alert("삭제성공");
+    							location.replace("${contextPath}/board/noticeList.do")
+    						}
+    						else{
+    							alert("삭제 실패")
+    						}
+    					}
+    				});
+    			}
+    		}
+    }
+/*         
+        function fn_delBtn() {
+            if ($("input:checkbox[name='Chk_list']:checked").length === 0) {
+                alert("삭제할 항목을 선택해 주세요.");
+                return;
+            }
+	var info2 = [];
+            $("input:checkbox[name='Chk_list']:checked").each(function(k, kVal) {
+
+                var info = $(this).val();
+                
+                info2.push(info);
+               
+           
+            });
+            console.log(info2);
+        } */
+        
+        
+    </script>
     <style>
-              .notice_inner {
-        position: relative;
-        width: 1100px;
-        margin: 0 auto;
-        margin-bottom:20px;
-      }
+    .mill_inner{
+    margin:30px 0 0 30px;
+    }
         table {
             width: 100%;
            border-collapse: collapse;
@@ -27,7 +103,7 @@
         }
         .divider {
     border-top: 1px solid #ccc;
-    /* margin-top: 10px; */
+    
     margin-bottom: 20px;
   }
   .searchBox{
@@ -43,53 +119,51 @@
 	font-size: 8px;
   color:darkgrey
 	}
-  .notice_btn{
-float: right;
 
+.right_a {
+  float: right; 
+  background-color: #007BFF;
+  color: #fff; /* 텍스트 색상을 흰색으로 설정 */
+  padding: 10px 20px; /* 버튼 패딩 설정 */
+  text-decoration: none; /* 링크 텍스트 밑줄 제거 */
+  border-radius: 5px; /* 버튼 모서리 둥글게 만들기 */
+  margin-right:10px;
   }
-
-  
     </style>
 </head>
 <body>
-    <div class="notice_inner">
+<form name="userForm">
+    <div class="mill_inner">
     <h1>공지사항</h1>
     
-
-
-      </s_sidebar_element>
+<c:if test="${member.id == 'admin' }"> 
+<a type="button"class="right_a" href="${contextPath}/board/addNotice.do">글쓰기</a>
+<input type="button" value="선택삭제" id="btn btn-outline-info"onClick="deleteValue();">
+  </c:if>
     <table>
         <thead>
             <tr>
+            <c:if test="${member.id == 'admin' }"> 
+            <th>선택</th>
+            </c:if>
+                <td><input id="allCheck" type="checkbox" name="allCheck"/></td>
                 <th>순번</th>
                 <th>제목</th>
+
+                
             </tr>
         </thead>
         <tbody>
+            <c:forEach var ="notice" items="${noticeList}" >
             <tr>
-                <td>1</td>
-                <td>서비스 업데이트 예정입니다.<div class="notic_name">픽트니스|2023-08-18</div> </td>
+            <c:if test="${member.id == 'admin' }"> 
+            <td><input type="checkbox" name="RowCheck" value="${notice.bno}"></td>
+            </c:if>
+                <td>${notice.bno }</td>
+                <td><a  href="${contextPath}/board/noticeDetail.do?bno=${notice.bno}">${notice.title}</a><div class="notic_name">픽트니스|${notice.noticeDate }</div> </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>새로운 기능이 추가되었습니다.<div class="notic_name">픽트니스|2023-08-18</div></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>주요 이벤트가 시작됩니다.<div class="notic_name">픽트니스|2023-08-18</div></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>서비스 업데이트 예정입니다.<div class="notic_name">픽트니스|2023-08-18</div> </td>
-          </tr>
-          <tr>
-              <td>5</td>
-              <td>새로운 기능이 추가되었습니다.<div class="notic_name">픽트니스|2023-08-18</div></td>
-          </tr>
-          <tr>
-              <td>6</td>
-              <td>주요 이벤트가 시작됩니다.<div class="notic_name">픽트니스|2023-08-18</div></td>
-          </tr>
+             </c:forEach>
+
         </tbody>
     </table>
        <s_sidebar_element>
@@ -103,6 +177,7 @@ float: right;
               class="text"
               placeholder="SEARCH"
             />
+            
 
             <input value="검색" type="button" onclick="" class="submit" />
           </s_search>
@@ -121,6 +196,6 @@ float: right;
   
   </div>
 </div>
-
+</form>
 </body>
 </html>
