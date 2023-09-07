@@ -182,7 +182,10 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
         font-size: 15px;
         display: block;
       }
-
+	.main_item .original_price{
+	font-size:13px;
+	text-decoration: line-through;
+	}
       .cates {
         text-align: left;
       }
@@ -358,6 +361,15 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
                     value="${place.distance/1000 }"
                   />km
                 </span>
+                <c:choose>
+                <c:when test="${place.prod1 ne place.prod1retail }">
+                <span class="original_price">
+                <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod1}"
+                  />/월
+                </span>
                 <span class="price"
                   ><fmt:formatNumber
                     type="number"
@@ -365,6 +377,17 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
                     value="${place.prod1retail}"
                   />/월
                 </span>
+                </c:when>
+                <c:otherwise>
+                 <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod1retail}"
+                  />/월
+                </span>
+                </c:otherwise>
+                </c:choose>
                 <div class="cates">
                   <c:if test="${place.allTime == 'Y' }">
                     <div class="cate">24시간</div>
@@ -409,13 +432,33 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
                     value="${place.distance/1000 }"
                   />km
                 </span>
-                <span class="price">
-                  <fmt:formatNumber
+                <c:choose>
+                <c:when test="${place.prod1 ne place.prod1retail }">
+                <span class="original_price">
+                <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod1}"
+                  />/월
+                </span>
+                <span class="price"
+                  ><fmt:formatNumber
                     type="number"
                     maxFractionDigits="3"
                     value="${place.prod1retail}"
-                  />/월</span
-                >
+                  />/월
+                </span>
+                </c:when>
+                <c:otherwise>
+                 <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod1retail}"
+                  />/월
+                </span>
+                </c:otherwise>
+                </c:choose>
                 <div class="cates">
                   <c:if test="${place.allTime == 'Y' }">
                     <div class="cate">24시간</div>
@@ -470,12 +513,36 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
                   type="number"
                   value="${trainer.prod10retail}"
                 />
+                <fmt:parseNumber
+                var="original_price"
+                integerOnly="true"
+                type="number"
+                value="${tainer.prod10 }"
+                />
+                <c:choose>
+                <c:when test="${original_price ne price }">
+                <span class="original_price">
+				<fmt:formatNumber
+                    value="${original_price /10}"
+                    pattern="#,###,###"
+                  />/회
+                </span>
                 <span class="price"
                   ><fmt:formatNumber
                     value="${price /10}"
                     pattern="#,###,###"
                   />/회</span
                 >
+                </c:when>
+                <c:otherwise>
+                                <span class="price"
+                  ><fmt:formatNumber
+                    value="${price /10}"
+                    pattern="#,###,###"
+                  />/회</span
+                >
+                </c:otherwise>
+                </c:choose>
                 <div class="cates">
                   <div class="cate">${trainer.cate }</div>
                 </div>
@@ -517,6 +584,15 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
                   src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}"
                 />
                 <span class="l_title">${goods.goods_title }</span>
+              <c:choose>
+              <c:when test="${goods.priceOrigin ne goods.priceRetail}">
+                <span class="original_price">
+                <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceOrigin}"
+                  />원
+                </span>
                 <span class="price"
                   ><fmt:formatNumber
                     type="number"
@@ -524,6 +600,17 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
                     value="${goods.priceRetail}"
                   />원
                 </span>
+                </c:when>
+                <c:otherwise>
+                                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceRetail}"
+                  />원
+                </span>
+                </c:otherwise>
+                </c:choose>
                 <c:if test="${goods.review_count ne 0 }">
                   <div class="star">
                     <img src="${contextPath}/images/main/star.png" />
@@ -558,13 +645,33 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
                   src="${contextPath}/download.do?cate=shop&imageFileName=${food.fileName}&bno=${food.goods_id}"
                 />
                 <span class="l_title">${food.goods_title }</span>
-                <span class="price" style="font-weight: bold"
+              <c:choose>
+              <c:when test="${food.priceOrigin ne food.priceRetail}">
+                <span class="original_price">
+                <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${food.priceOrigin}"
+                  />원
+                </span>
+                <span class="price"
                   ><fmt:formatNumber
                     type="number"
                     maxFractionDigits="3"
                     value="${food.priceRetail}"
                   />원
                 </span>
+                </c:when>
+                <c:otherwise>
+                                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${food.priceRetail}"
+                  />원
+                </span>
+                </c:otherwise>
+                </c:choose>
                 <c:if test="${food.review_count ne 0 }">
                   <div class="star">
                     <img src="${contextPath}/images/main/star.png" />

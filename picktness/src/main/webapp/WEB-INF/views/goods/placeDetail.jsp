@@ -381,16 +381,16 @@ a:hover {
 	margin: 30px 0px;
 	text-align: center;
 }
-#option_prod1{
+.option_prod1{
 display:block;
 }
-#option_prod3{
+.option_prod3{
 display:none;
 }
-#option_prod6{
+.option_prod6{
 display:none;
 }
-#option_prod12{
+.option_prod12{
 display:none;
 }
 .alreadyCart{
@@ -441,7 +441,22 @@ display:none;
     font-size: 13px;
     color:#2890f1;
 }
+.show_original_price{
+height: 30px;
+}
 
+.price_line{
+text-decoration: line-through;
+}
+.percent{
+color:#2890f1;
+font-size:17px;
+font-weight:bold;
+}
+.text-left{
+width:400px;
+text-align:right;
+}
 /*post slider-end*/
 </style>
 
@@ -530,28 +545,32 @@ display:none;
 		var option = $("#selectBox").val();
 		  switch (option){
 		    case "prod1retail": 
-		    	$("#option_prod1").css("display", "block");
-		    	$("#option_prod3").css("display", "none");
-		    	$("#option_prod6").css("display", "none");
-		    	$("#option_prod12").css("display", "none");
+		    	$(".option_prod1").css("display", "block");
+		    	$(".option_prod3").css("display", "none");
+		    	$(".option_prod6").css("display", "none");
+		    	$(".option_prod12").css("display", "none");
+		    	
 		      break; 
 		    case "prod3retail": 
-		    	$("#option_prod1").css("display", "none");
-		    	$("#option_prod3").css("display", "block");
-		    	$("#option_prod6").css("display", "none");
-		    	$("#option_prod12").css("display", "none");
+		    	$(".option_prod1").css("display", "none");
+		    	$(".option_prod3").css("display", "block");
+		    	$(".option_prod6").css("display", "none");
+		    	$(".option_prod12").css("display", "none");
+
 		      break;
 		    case "prod6retail":
-		    	$("#option_prod1").css("display", "none");
-		    	$("#option_prod3").css("display", "none");
-		    	$("#option_prod6").css("display", "block");
-		    	$("#option_prod12").css("display", "none");
+		    	$(".option_prod1").css("display", "none");
+		    	$(".option_prod3").css("display", "none");
+		    	$(".option_prod6").css("display", "block");
+		    	$(".option_prod12").css("display", "none");
+
 		      break;
 		    case "prod12retail":
-		    	$("#option_prod1").css("display", "none");
-		    	$("#option_prod3").css("display", "none");
-		    	$("#option_prod6").css("display", "none");
-		    	$("#option_prod12").css("display", "block");
+		    	$(".option_prod1").css("display", "none");
+		    	$(".option_prod3").css("display", "none");
+		    	$(".option_prod6").css("display", "none");
+		    	$(".option_prod12").css("display", "block");
+
 		      break;
 		  }
 }
@@ -750,12 +769,45 @@ function fn_buyNow(){
 					</select></td>
 				</tr>
 				<tr>
+					<td>
+					<div class="show_original_price">
+					<c:if test="${place.prod1 ne place.prod1retail }">
+					<c:set var="sale" value="${1 - place.prod1retail / place.prod1}"/>
+					<div class="option_prod1 text-left">
+					<span class="percent"><fmt:formatNumber value="${sale }" type="percent"/></span>
+					<span class="price_line"><fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod1}" /></span>
+					</div>
+					</c:if>
+					<c:if test="${place.prod3 ne place.prod3retail }">
+					<c:set var="sale" value="${1 - place.prod3retail / place.prod3}"/>
+					<div class="option_prod3 text-left">
+					<span class="percent"><fmt:formatNumber value="${sale }" type="percent"/></span>
+					<span class="price_line"><fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod3}" /></span>
+					</div>
+					</c:if>
+					<c:if test="${place.prod6 ne place.prod6retail }">
+					<c:set var="sale" value="${1 - place.prod6retail / place.prod6}"/>
+					<div class="option_prod6 text-left">
+					<span class="percent"><fmt:formatNumber value="${sale }" type="percent"/></span>
+					<span class="price_line"><fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod6}" /></span>
+					</div>
+					</c:if>
+					<c:if test="${place.prod12 ne place.prod12retail }">
+					<c:set var="sale" value="${1 - place.prod12retail / place.prod12}"/>
+					<div class="option_prod12 text-left">
+					<span class="percent"><fmt:formatNumber value="${sale }" type="percent"/></span>
+					<span class="price_line"><fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod12}" /></span>
+					</div>
+					</c:if>
+					</div>
+					</td>
+				</tr>
+				<tr>
 					<td align="center">
-					<b style="font-size: 23px;" id="option_prod1">1개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod1retail}" />원</b>
-					<b style="font-size: 23px;" id="option_prod3">3개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod3retail}" />원</b>
-					<b style="font-size: 23px;" id="option_prod6">6개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod6retail}" />원</b>
-					<b style="font-size: 23px;" id="option_prod12">12개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod12retail}" />원</b>
-					
+					<b style="font-size: 23px;" class="option_prod1">1개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod1retail}" />원</b>
+					<b style="font-size: 23px;" class="option_prod3">3개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod3retail}" />원</b>
+					<b style="font-size: 23px;" class="option_prod6">6개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod6retail}" />원</b>
+					<b style="font-size: 23px;" class="option_prod12">12개월 이용권 <fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod12retail}" />원</b>
 					</td>
 				</tr>
 				<tr>

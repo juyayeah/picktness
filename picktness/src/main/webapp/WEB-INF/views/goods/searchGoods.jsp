@@ -2,6 +2,7 @@
 pageEncoding="UTF-8" isELIgnored="false"%> <%@taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core" %> <%@taglib prefix="tiles"
 uri="http://tiles.apache.org/tags-tiles" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
@@ -35,6 +36,75 @@ uri="http://tiles.apache.org/tags-tiles" %>
         color: #2890F1;
         margin-left:10px;
       }
+      .main_box {
+	clear: both;
+	text-align: left;
+}
+
+.main_cate {
+	font-weight: bold;
+	font-size: 35px;
+	margin: 10px;
+}
+
+.main_item {
+	vertical-align: top;
+	position: relative;
+	width: 200px;
+	height:350px;
+	display: inline-block;
+	margin: 10px 0px 10px 57px;
+}
+
+.main_img {
+	position: relative;
+	width: 200px;
+}
+
+.main_item .title {
+	text-align: left;
+	font-size: 15px;
+	display: block;
+	font-weight: bold;
+	height:40px;
+}
+
+.main_item .location {
+	text-align: left;
+	font-size: 12px;
+	color: #555;
+	display: block;
+}
+
+.main_item .price {
+	text-align: left;
+	font-size: 15px;
+	display: block;
+}
+
+.cates {
+	text-align: left;
+}
+
+.cate {
+	display: inline-block;
+	border: 2px solid #bfbfbf;
+	width: fit-content;
+	padding: 4px 8px;
+	margin: 5px 0px;
+	border-radius: 10px;
+	font-size: 13px;
+}
+
+.star img {
+	width: 13px;
+}
+
+.star {
+	text-align: left;
+	font-size: 12px;
+	color: #555;
+}
     </style>
     <script>
       $(".input-search").attr("value", "${search_content}");
@@ -56,11 +126,31 @@ uri="http://tiles.apache.org/tags-tiles" %>
         </c:when>
         <c:otherwise>
         <c:if test="${not empty result.business }">
-        <c:forEach var="place"  items="${result.business }">
-        ${place.b_name }
-        ${place.addrBasic }
-        ${place.prod1retail }원/월
-        </c:forEach>
+		<div class="main_box">
+			<c:forEach items="${result.business }" var="place">
+				<div class="main_item"
+					onclick="location.href='${contextPath}/goods/placeDetail.do?goods_id=${place.goods_id }'">
+					<img class="main_img" src="${contextPath}/download.do?cate=place&imageFileName=${place.fileName}&bno=${place.goods_id}" />
+					<span class="title">${place.b_name }</span>
+					<span class="location">${place.addrBasic } 
+					</span>
+					<span class="location"><fmt:formatNumber pattern="0.0" value="${place.distance/1000 }"/>km</span>
+					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod1retail}" />/월</span>
+					<div class="cates">
+						<c:if test="${place.allTime == 'Y' }">
+							<div class="cate">24시간</div>
+						</c:if>
+						<div class="cate">${place.cate }</div>
+					</div>
+					<c:if test="${place.review_count ne 0 }">
+					<div class="star">
+						<img src="${contextPath}/images/main/star.png" /> 
+						<span class="star">${place.review_star }(${place.review_count })</span>
+					</div>
+					</c:if> 
+				</div>
+			</c:forEach>
+			</div>
         </c:if>
         <c:if test="${not empty result.trainer}">
         <c:forEach var="trainer" items="${result.trainer }">
@@ -68,14 +158,45 @@ uri="http://tiles.apache.org/tags-tiles" %>
         </c:forEach>
         </c:if>
         <c:if test="${not empty result.shopping }">
+        <div class="main_box">
 		<c:forEach var="shop" items="${result.shopping }">
-		${shop.goods_title }
-		${shop.priceRetail }
-		<c:if test="${shop.review_count != 0}">
-		${shop.review_star }
-		${shop.review_count }
-		</c:if>
+<c:choose>
+				<c:when test="${shop.goods_qty == 0}">
+				<div class="main_item_soldOut"
+					onclick="location.href='${contextPath}/goods/gymDetail.do'">
+					<div class="soldOutImg">
+					<img class="main_img" src="${contextPath}/download.do?cate=shop&imageFileName=${shop.fileName}&bno=${shop.goods_id}" />
+				    <div class="soldOutText">
+					<p>품절</p>
+					</div>
+					</div>
+					<span class="title">${shop.goods_title }</span>
+					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${shop.priceRetail}" />원 </span>
+					<c:if test="${shop.review_count ne 0 }">
+					<div class="star">
+						<img src="${contextPath}/images/main/star.png" /> 
+						<span class="star">${shop.review_star }(${shop.review_count })</span>
+					</div>
+					</c:if> 
+				</div>
+				</c:when>
+				<c:otherwise>
+				<div class="main_item"
+					onclick="location.href='${contextPath}/goods/gymDetail.do'">
+					<img class="main_img" src="${contextPath}/download.do?cate=shop&imageFileName=${shop.fileName}&bno=${shop.goods_id}" />
+					<span class="title">${shop.goods_title }</span>
+					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${shop.priceRetail}" />원 </span>
+					<c:if test="${shop.review_count ne 0 }">
+					<div class="star">
+						<img src="${contextPath}/images/main/star.png" /> 
+						<span class="star">${shop.review_star }(${shop.review_count })</span>
+					</div>
+					</c:if> 
+				</div>
+				</c:otherwise>
+				</c:choose>
 		</c:forEach>
+        </div>
         </c:if>
           </c:otherwise>
           </c:choose>

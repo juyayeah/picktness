@@ -169,6 +169,10 @@ margin:0px 10px;
 color:#a6a6a6;
 font-size:14px;
 }
+	.main_item .original_price{
+	font-size:13px;
+	text-decoration: line-through;
+	}
 </style>
 <script>
 	$(function() {
@@ -244,7 +248,32 @@ font-size:14px;
 					<span class="location">
 					<fmt:formatNumber pattern="0.0" value="${trainer.distance/1000 }"/>km</span>
 					<fmt:parseNumber var="price" integerOnly="true" type="number" value="${trainer.prod10retail}" />
-					<span class="price"><fmt:formatNumber value="${price /10}" pattern="#,###,###" />/회</span>
+					<fmt:parseNumber var="original_price" integerOnly="true" type="number" value="${tainer.prod10 }"/>
+					<c:choose>
+                <c:when test="${original_price ne price }">
+                <span class="original_price">
+				<fmt:formatNumber
+                    value="${original_price /10}"
+                    pattern="#,###,###"
+                  />/회
+                </span>
+                <span class="price"
+                  ><fmt:formatNumber
+                    value="${price /10}"
+                    pattern="#,###,###"
+                  />/회</span
+                >
+                </c:when>
+                <c:otherwise>
+                                <span class="price"
+                  ><fmt:formatNumber
+                    value="${price /10}"
+                    pattern="#,###,###"
+                  />/회</span
+                >
+                </c:otherwise>
+                </c:choose>
+					
 					<div class="cates">
 					<div class="cate">${trainer.cate }</div>
 					</div>
