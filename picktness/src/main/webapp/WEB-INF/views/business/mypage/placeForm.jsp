@@ -17,7 +17,7 @@ request.setCharacterEncoding("utf-8");
 var cnt=1;
 function fn_addFile(){
 	if(cnt < 6) {
-		$(".newFile").append("<br>"+"<label>상세이미지</label><input type='file' class='fileBtn'name='detail_image'" + cnt + " onchange='readURL(this,"+cnt+");'/>");
+		$(".newFile").append("<br>"+"<label>상세이미지</label><input type='file' class='fileBtn'name='detail_image" + cnt + "' onchange='readURL(this,"+cnt+");'/>");
 		$('.newFile').append("<div class='upload'><img id='preview" + cnt + "'/></div>");
 	} else {
 		alert("사진은 최대 6장만 첨부 가능합니다.");
@@ -312,28 +312,28 @@ textarea {
 			<tr>
 				<td class="tdfirsttop">시설소개</td>
 				<td class="starbluetop">*&nbsp;&nbsp;</td>
-				<td class="tdlast"><textarea rows="4" cols="60" name="detail"></textarea></td>
+				<td class="tdlast"><textarea rows="4" cols="60" name="detail" spellcheck="false"></textarea></td>
 			</tr>
 			<tr>
 				<td class="tdfirsttop">공지사항</td>
 				<td class="starbluetop">&nbsp;&nbsp;</td>
-				<td class="tdlast"><textarea rows="4" cols="60" name="notice"></textarea></td>
+				<td class="tdlast"><textarea rows="4" cols="60" name="notice" spellcheck="false"></textarea></td>
 			</tr>
 			<tr>
 				<td class="tdfirsttop">운영시간</td>
 				<td class="starbluetop">*&nbsp;&nbsp;</td>
-				<td class="tdlast"><textarea rows="4" cols="60" name="b_time"></textarea></td>
+				<td class="tdlast"><textarea rows="4" cols="60" name="b_time" spellcheck="false"></textarea></td>
 			</tr>
 			<tr>
 				<td class="tdfirsttop">운영프로그램</td>
 				<td class="starbluetop">*&nbsp;&nbsp;</td>
-				<td class="tdlast"><textarea rows="4" cols="60" name="program"></textarea></td>
+				<td class="tdlast"><textarea rows="4" cols="60" name="program" spellcheck="false"></textarea></td>
 			</tr>
 
 			<tr>
 				<td class="tdfirsttop">부가서비스</td>
 				<td></td>
-				<td class="tdlast"><textarea rows="4" cols="60" name="service"></textarea></td>
+				<td class="tdlast"><textarea rows="4" cols="60" name="service" spellcheck="false"></textarea></td>
 			</tr>
 			<tr>
 				<td class="tdfirsttop">가격</td>
