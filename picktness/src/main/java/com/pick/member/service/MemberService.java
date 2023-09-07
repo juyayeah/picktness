@@ -17,4 +17,6 @@ public interface MemberService {
 	public int bEmailCheck(Map<String, String> bEmailChk) throws DataAccessException;
 	public BusinessVO loginBusiness(Map<String, String> loginMap) throws DataAccessException;
 	public MemberVO selectById(String id) throws DataAccessException;
+	public int modifyMember(MemberVO memberVO)throws DataAccessException;
+
 }

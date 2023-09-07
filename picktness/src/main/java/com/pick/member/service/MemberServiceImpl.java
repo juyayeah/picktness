@@ -56,7 +56,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.selectById(id);
 	}
 	
-	
+	@Override
+	public int modifyMember(MemberVO memberVO) throws DataAccessException {
+		return memberDAO.updateMember(memberVO);
+	}
 	
 	
 	

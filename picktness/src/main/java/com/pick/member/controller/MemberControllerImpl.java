@@ -2,7 +2,7 @@ package com.pick.member.controller;
 
 
 
-import java.util.HashMap;
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -240,6 +240,18 @@ public class MemberControllerImpl implements MemberController{
 		return mav;
 	}
 
+	@Override
+	@RequestMapping(value="/member/modifyMember.do", method = RequestMethod.GET)
+	public void modifyMember(MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		int result = memberService.modifyMember(member);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.write("<script>");
+		out.write("location.href='"+request.getContextPath()+"/member/mypage/memberDetail.do';");
+		out.write("</script>");
+		return;	
+		
+	}
 }
 
 

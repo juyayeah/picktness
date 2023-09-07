@@ -17,6 +17,7 @@ public interface MemberController {
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity addB_Member(@ModelAttribute("business") BusinessVO business,
            HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public void modifyMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response)throws Exception;
 }
 
 	

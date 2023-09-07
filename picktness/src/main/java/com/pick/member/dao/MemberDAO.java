@@ -22,4 +22,5 @@ public interface MemberDAO {
 	public int bEmailCheck(Map bEmailChk) throws DataAccessException;
 	public BusinessVO loginBusiness(Map loginMap) throws DataAccessException;
 	public MemberVO selectById(String id) throws DataAccessException;
+	public int updateMember(MemberVO memberVO)throws DataAccessException;
 }
