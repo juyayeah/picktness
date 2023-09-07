@@ -251,8 +251,8 @@ background-color:#fff;
 }
 .alreadyCart_p{
     border-radius: 4px;
-	width: 355px;
-	height: 17px;
+	width: 394px;
+	height: 57px;
     padding: 20px 20px;
 	background-color: #383838;
     position: absolute;
@@ -275,8 +275,8 @@ background-color:#fff;
 }
 .addCart_p{
     border-radius: 4px;
-	width: 355px;
-	height: 17px;
+	width: 394px;
+	height: 57px;
     padding: 20px 20px;
 	background-color: #383838;
     position: absolute;
@@ -288,6 +288,9 @@ background-color:#fff;
     line-height: normal;
     font-size: 13px;
     color:#2890f1;
+}
+.delivery{
+margin:50px 0px;
 }
 </style>
 
@@ -661,31 +664,31 @@ function fn_addCart(){
 			<p>상품문의</p>
 			<textarea rows="15" cols="60" name="" disabled /></textarea>
 		</div>
-		<p style="font-size: 46px;">배송안내</p>
+		<div class="delivery">
+		<h3>배송안내</h3>
 		<div style="display: flex; align-items: center;">
-			<img src="${contextPath}/images/goods/delivery.jpg" style="width: 350px; height: 230px; margin-left: 50px;">
-			<p style="font-size: 24px; margin-left: 100px;">픽트니스는 전제품 무료 배송입니다. <br>토요일, 공휴일 결제 시 다음 영업일 발송</p>
+			<img src="${contextPath}/images/goods/delivery.jpg" style="width: 200px;margin-left: 50px;">
+			<p style="margin-left: 100px;">픽트니스는 전제품 무료 배송입니다. <br>토요일, 공휴일 결제 시 다음 영업일 발송</p>
 		</div>
 		<br><br><br>
-		<p style="font-size: 46px;">교환/반품 안내</p>
+		<h3>교환/반품 안내</h3>
 		<div style="margin-left:50px;">
 		<div style="display: flex; align-items: center;">
-			<p style="font-size: 24px; font-weight: bold;">주의사항<br>
-				교환/반품이 가능한 경우</p>
-				<p style="font-size: 16px; margin-left: 200px;"><br><br><br>
+				<h4>교환/반품이 가능한 경우</h4>
+				<p style="margin-left: 200px;"><br><br><br>
 					본 상품은 제품 특성상 단순 변심에 의한 교환 · 반품은 불가합니다.<br>
 					주문한 제품과 다르거나 판매자의 제공정보와 상이한 경우<br>
 					제품이 불량이거나 손상된 경우 <br> 배송사의 귀책 사유에 따른 배송 지연 발생 및 제품이 변질 된 경우</p>	
 				</div>
 				<br><br>
 				<div style="display: flex; align-items: center;">
-					<p style="font-size: 24px; font-weight: bold;">교환/반품이 불가능한 경우</p>
-					<p style="font-size: 16px; margin-left: 177px;">
+					<h4>교환/반품이 불가능한 경우</h4>
+					<p style="margin-left: 177px;">
 						상품 수령 후 7일 이내 교환/환불을 요청해야 합니다.<br>
 						반품 요청 기간(수령 후 7일 이내)이 경과한 경우<br>
 						상품을 사용 혹은 훼손하여 재판매가 어려울 정도로 <br>상품가치가 현저히 감소한 경우</p>	
 					</div>
 					</div>
-		<br><br><br>
+					</div>
 </body>
 </html>
