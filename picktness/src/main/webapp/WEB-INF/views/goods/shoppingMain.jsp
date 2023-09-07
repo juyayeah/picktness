@@ -123,7 +123,7 @@ height:300px;
 		<img class="shop_banner"
 			src="${contextPath}/images/main/shop_banner.png" />
 		<div class="main_box">
-			<div class="main_cate">쇼핑</div>
+			<div class="main_cate">식품</div>
 			<c:choose>
 				<c:when test="${!empty foodList }">
 					<c:forEach items="${foodList }" var="food">

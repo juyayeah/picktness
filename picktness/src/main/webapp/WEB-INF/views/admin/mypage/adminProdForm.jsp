@@ -274,7 +274,7 @@ width:30%;
 					<td class="tdfirsttop" align="right">상세설명</td>
 					<td class="starbluetop"></td>
 					<td width="70%"><textarea name="detail" rows="10" cols="60"
-							maxlength="4000"></textarea></td>
+							maxlength="4000" spellcheck="false"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="3" align="right"><br>

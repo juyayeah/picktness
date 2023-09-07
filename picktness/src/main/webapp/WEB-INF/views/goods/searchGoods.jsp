@@ -163,7 +163,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
 <c:choose>
 				<c:when test="${shop.goods_qty == 0}">
 				<div class="main_item_soldOut"
-					onclick="location.href='${contextPath}/goods/gymDetail.do'">
+					onclick="location.href='${contextPath}/goods/goodsDetail.do?goods_id=${shop.goods_id}'">
 					<div class="soldOutImg">
 					<img class="main_img" src="${contextPath}/download.do?cate=shop&imageFileName=${shop.fileName}&bno=${shop.goods_id}" />
 				    <div class="soldOutText">
@@ -182,7 +182,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
 				</c:when>
 				<c:otherwise>
 				<div class="main_item"
-					onclick="location.href='${contextPath}/goods/gymDetail.do'">
+					onclick="location.href='${contextPath}/goods/goodsDetail.do?goods_id=${shop.goods_id}'">
 					<img class="main_img" src="${contextPath}/download.do?cate=shop&imageFileName=${shop.fileName}&bno=${shop.goods_id}" />
 					<span class="title">${shop.goods_title }</span>
 					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${shop.priceRetail}" />원 </span>

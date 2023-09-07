@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 request.setCharacterEncoding("utf-8");
 %>
@@ -562,12 +563,12 @@ function fn_addCart(){
 								<div style="text-align: left; margin-right:30px;">
 									<div style="padding: 0 0 0 30px; font-size: 15px;">남은 수량</div>
 									<div style="padding: 0 0 0 30px; font-size: 15px;">배송방법</div>
-									<div style="padding: 0 0 0 30px; font-size: 15px;">적립금</div>
+		
 								</div>	
 								<div style="text-align: left; flex: 1;">
 									<div style="font-size: 15px;">${goods.goods_qty}개</div>
 									<div style="font-size: 15px;">일반배송</div>
-									<div style="font-size: 15px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.priceRetail}" />원</div>
+
 								</div>
 							</div>
 						</td>
@@ -644,29 +645,7 @@ function fn_addCart(){
 				</c:forEach>
 			</div>
 			<br>
-			</div>
-	
-
-		<div class=gymdetail_review style="display: none"
-			id="gymdetail_review">
-			<p>이용후기</p>
-			<c:choose>
-				<c:when test="${reviewList ne null }">
-					<textarea rows="15" cols="60" name="" disabled /></textarea>
-				</c:when>
-				<c:otherwise>
-					<div class="review_button">리뷰 작성</div>
-					<div class="review_null">등록된 후기가 없습니다.</div>
-				</c:otherwise>
-			</c:choose>
-		</div>
-		<!-- 상품문의 -->
-		<div class=gymdetail_inquiry style="display: none"
-			id="gymdetail_inquiry">
-			<p>상품문의</p>
-			<textarea rows="15" cols="60" name="" disabled /></textarea>
-		</div>
-		<div class="delivery">
+					<div class="delivery">
 		<h3>배송안내</h3>
 		<div style="display: flex; align-items: center;">
 			<img src="${contextPath}/images/goods/delivery.jpg" style="width: 200px;margin-left: 50px;">
@@ -692,5 +671,28 @@ function fn_addCart(){
 					</div>
 					</div>
 					</div>
+			</div>
+	
+
+		<div class=gymdetail_review style="display: none"
+			id="gymdetail_review">
+			<p>이용후기</p>
+			<c:choose>
+				<c:when test="${reviewList ne null }">
+					<textarea rows="15" cols="60" name="" disabled /></textarea>
+				</c:when>
+				<c:otherwise>
+					<div class="review_button">리뷰 작성</div>
+					<div class="review_null">등록된 후기가 없습니다.</div>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<!-- 상품문의 -->
+		<div class=gymdetail_inquiry style="display: none"
+			id="gymdetail_inquiry">
+			<p>상품문의</p>
+			<textarea rows="15" cols="60" name="" disabled /></textarea>
+		</div>
+
 </body>
 </html>

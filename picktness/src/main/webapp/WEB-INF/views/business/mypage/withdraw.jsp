@@ -116,7 +116,7 @@ function yesleaving(){
 			<tr>
 				<td align="center">
 					<button class="button_white">아니오</button>&nbsp;&nbsp;
-					<button class="button_blue"><a onclick='yesleaving();'>네</a></button>
+					<button class="button_blue" onclick='yesleaving()'>예</button>
 				</td>
 			</tr>
 		</table>

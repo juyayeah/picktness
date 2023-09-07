@@ -61,7 +61,7 @@ height:40px;
 </tr>
 <tr>
 <th class="busith" align="right">이메일 주소</th>
-<td>${business.email1} ${business.email1}</td>
+<td>${business.email1}@${business.email2}</td>
 <td><button id="modBtn" onclick='modinfo()'>수정</button></td>
 </tr>
 <tr>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
 <%
 request.setCharacterEncoding("utf-8");
@@ -426,7 +427,9 @@ textarea {
 					<c:when test="${image.fileType eq 'main_image' }">
 					<label>메인이미지</label>
 					<img id='preview0' src="${contextPath}/download.do?cate=place&imageFileName=${image.fileName}&bno=${businessPlace.businessDetail.goods_id}">
+					<c:if test="${fn:length(businessPlace.placeImageList) ne 1}">
 					<label>상세이미지</label>
+					</c:if>
 					</c:when>
 					<c:otherwise>
 					<img id='preview0' src="${contextPath}/download.do?cate=place&imageFileName=${image.fileName}&bno=${businessPlace.businessDetail.goods_id}">
