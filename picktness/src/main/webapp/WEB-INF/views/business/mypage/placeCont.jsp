@@ -303,11 +303,17 @@ textarea {
       .fileBtn{
       margin-left:30px;
       }
+      .imgbox{
+      display:none;
+      }
       .imgbox img {
 	width: 90px;
 	height: 90px;
 }
-      
+      .imgbox_origin img{
+      width: 90px;
+	height: 90px;
+      }
 </style>
 
 
@@ -408,11 +414,25 @@ textarea {
 				<td class="starbluetop">*&nbsp;&nbsp;</td>
 				<td class="tdlast">
 					<div class="imgbox">
-					<input type="button" class="addButton" value="파일 추가" onClick="fn_addFile()"/>
+					<input type="button" class="addButton" value="파일 추가" onClick="fn_addFile()" disabled/>
 					<div class="newFile">
 					<label>메인이미지</label><input class="fileBtn" type='file' name='main_image' onchange='readURL(this,0)'>
 					<div class='upload'><img id='preview0'/></div>
 					</div>
+					</div>
+					<div class="imgbox_origin">
+					<c:forEach var="image" items='${businessPlace.placeImageList}'>
+					<c:choose>
+					<c:when test="${image.fileType eq 'main_image' }">
+					<label>메인이미지</label>
+					<img id='preview0' src="${contextPath}/download.do?cate=place&imageFileName=${image.fileName}&bno=${businessPlace.businessDetail.goods_id}">
+					<label>상세이미지</label>
+					</c:when>
+					<c:otherwise>
+					<img id='preview0' src="${contextPath}/download.do?cate=place&imageFileName=${image.fileName}&bno=${businessPlace.businessDetail.goods_id}">
+					</c:otherwise>
+					</c:choose>
+					</c:forEach>
 					</div>
 				</td>
 			</tr>

@@ -149,7 +149,7 @@ public class BusinessControllerImpl implements BusinessController {
 			imageFileVO.setFileName(originalFileName);
 			fileList.add(imageFileVO);
 			
-			File file = new File(BUSINESS_IMAGE_REPO + "\\" + fileName);
+			File file = new File(BUSINESS_IMAGE_REPO + "\\"+"temp"+"\\" + fileName);
 			if (mFile.getSize() != 0) {
 				if (!file.exists()) {
 					file.getParentFile().mkdirs();

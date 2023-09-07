@@ -49,12 +49,12 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 			imageFileVO.setFileName(originalFileName);
 			fileList.add(imageFileVO);
 
-			File file = new File(SHOPPING_IMAGE_REPO + "\\" + fileName);
+			File file = new File(SHOPPING_IMAGE_REPO + "\\" +  "temp"+ "\\"+fileName);
 			if (mFile.getSize() != 0) {
 				if (!file.exists()) {
-					if (file.getParentFile().mkdirs()) {
+					file.getParentFile().mkdirs();
 						mFile.transferTo(new File(SHOPPING_IMAGE_REPO + "\\" + "temp" + "\\" + originalFileName));
-					}
+					
 				}
 			}
 		}

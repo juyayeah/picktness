@@ -634,11 +634,13 @@ function fn_addCart(){
 			<div class=gymdetail_content style="display: block;"
 				id="gymdetail_content">
 				<p>상품소개</p>
-			<textarea rows="15" cols="60" name="" disabled />${goods.detail}</textarea>
+			<textarea rows="15" cols="60" name="" disabled >${goods.detail}</textarea>
 			<br><br>
 			<div style="text-align: center;">
 				<c:forEach var="image" items="${imageList}">
+					<div class="detail_image">
 					<img class="custom-image" src="${contextPath}/download.do?cate=shop&imageFileName=${image.fileName}&bno=${image.goods_id}" >
+					</div>
 				</c:forEach>
 			</div>
 			<br>
