@@ -46,6 +46,11 @@ uri="http://tiles.apache.org/tags-tiles" %>
           class="menu_list_item"
           >공지사항</a
         >
+                <a
+          href="${contextPath}/board/faqList.do"
+          class="menu_list_item"
+          >자주묻는 FAQ</a
+        >
 
       </div>
     </div>

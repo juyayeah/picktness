@@ -9,52 +9,54 @@ request.setCharacterEncoding("utf-8");
 <html>
 <head>
     <title>공지사항</title>
+    
+
     <style>
     .notice_inner{
+    
     margin:30px 0 0 30px;
     }
 
       .notice_btn{
 
         float:right;
-        margin-right:10px;
-        margin-bottom:10px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin:0 10px 5px 0;
+    border-radius: 9px;
       }
+        .notice_btn:hover {
+    background-color: #0056b3;
+  }
+
     </style>
 </head>
 <body>
 
-
+<form id="frm" method="post" >
     <div class="notice_inner">
-<span><h2>${noticeList.title}</h2><button  class="notice_btn"type="button" onclick="alert('Hello World!')">목록으로</button></span>
+    
+
+<h2>${noticeList.title}</h2>
+<a  class="notice_btn" type="button" href="${contextPath}/board/noticeList.do">목록으로</a></span>
+
 <p>${noticeList.noticeDate}</p>
 <hr width="100%" color="#959ea6" style="padding=30px">
 
-<p>${noticeList.content}</p>
+<pre>${noticeList.content}</pre>
 
-<p>현재 태풍 '카눈'의 영향으로 전국적인 배송 지연이 발생할 수 있습니다.<br>
-    제주/도서산간 지역의 경우 선박 결항이 예정되어 있어 내용 안내드립니다.
-    <br>
-    배송 과정에 발생할 수 있는 피해를 최소화하기 위함이니 너른 양해 부탁드립니다.
-    <br>
-     1. 제주 지역
-     - 선박 결항 일자: 8/9(수)~10(목)<br>
-     - 선박 출항 재개 일자: 8/11(금)<br>
-    <br>
-     2. 도서산간 지역<br>
-     1) 신안군, 완도군<br>
-     - 선박 결항 일자: 8/9(수)~10(목)<br>
-     - 선박 출항 재개 일자: 8/11(금)<br>
-     2) 울릉도, 진도<br>
-     - 선박 결항 일자: 8/9(수)~14(월)<br>
-     - 선박 출항 재개 일자: 8/15(화)<br>
-     ※ 기상 변동에 따라 지역 추가 및 선박 운영 여부 변동될 수 있습니다.
-    <br>
-     안전한 배송할 수 있도록 노력하겠습니다.<br>
-     감사합니다.
-     </p>
-     
-    </div>
+</div>
 
+   <c:if test="${member.id == 'admin' }"> 
+    
+    <a type="button" class="notice_btn" href="${contextPath}/board/deleteNotice.do?bno=${noticeList.bno}">삭제하기</a>
+   <a type="button"  class="notice_btn" href="${contextPath }/board/modNoticeForm.do?bno=${noticeList.bno}" >수정하기</a>
+    <input type="hidden" name="bno" value="${noticeList.bno}">
+    </c:if> 
+    </form>
 </body>
 </html>

@@ -35,8 +35,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result property="noticeDate" column="noticedate"/>
  		</resultMap>
  		
+ 		 		<resultMap id="faqResult" type="faqVO">
+ 		<result property="bno" column="bno"/>
+ 		<result property="title" column="title"/>
+ 		<result property="content" column="content"/>
+ 		<result property="faqDate" column="faqdate"/>
+ 		</resultMap>
+ 		
  		
  		  	
+ 
  
  		
  		
@@ -130,7 +138,7 @@ delete from picktness.todaymill_reply where p_bno=#{bno}
   
   <select id="selectNoticeList" resultMap="noticeResult">
   <![CDATA[
-  SELECT * FROM notice order by bno desc
+  SELECT * FROM notice order by noticedate desc
   ]]>
   
   
@@ -142,10 +150,70 @@ delete from picktness.todaymill_reply where p_bno=#{bno}
   ]]>
   
   </select>
+  
+<delete id="deleteNotice" parameterType="int">
+<![CDATA[
+delete  from notice where bno= #{bno}
+]]>
+</delete>
+
+<insert id="insertNotice" parameterType="noticeVO">
+<![CDATA[
+insert into notice(title,content,noticedate)
+value ( #{title},#{content},NOW())
+]]>
+</insert>
+
+<update id="updateNotice" parameterType="noticeVO">
+<![CDATA[
+update notice
+set title=#{title},content=#{content},noticedate=NOW()
+where bno= #{bno}
+]]>
+</update>
+
+   <select id="selectAllFaqList" resultMap="faqResult">
+  <![CDATA[
+  SELECT * FROM faq order by faqdate desc
+  ]]>
+  </select>
    
 
- 	
+<insert id="insertFaq" parameterType="noticeVO">
+<![CDATA[
+insert into faq(title,content,faqdate)
+value ( #{title},#{content},NOW())
+]]>
+</insert>
 
+
+<update id="updateFaq" parameterType="faqVO">
+<![CDATA[
+update faq
+set title=#{title},content=#{content},faqdate=NOW()
+where bno= #{bno}
+]]>
+</update>
+
+  <select id="getFaqByBno"  resultMap="faqResult" parameterType="int">
+  <![CDATA[
+  SELECT * FROM faq WHERE bno = #{bno}
+  ]]>
+  
+  </select>
  	
+ 
+ 	
+ 	<delete id="deleteFaq" parameterType="int">
+<![CDATA[
+delete  from faq where bno= #{bno}
+]]>
+</delete>
+
+ 	    <delete id="delNotice" parameterType="String">
+    <![CDATA[
+    delete from notice where bno = #{bno}
+    ]]>
+    </delete>
       
 </mapper>

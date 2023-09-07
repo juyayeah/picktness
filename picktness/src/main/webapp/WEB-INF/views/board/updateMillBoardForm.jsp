@@ -158,7 +158,8 @@ $(function() {
 <h1>글 수정하기</h1>
 <form name="frmboard" method="post" action="${contextPath}/board/updateMillBoard.do" enctype="multipart/form-data">
      
-      <p><span style="font-size: 20px;">태그</span> <input  type="text" name="hastag" value="${board.hastag }" style="width: 80%; height: 30px; font-size: 17px;"></p>
+      <p><span style="font-size: 20px;">태그</span> 
+      <input  type="text" name="hastag" value="${board.hastag }" style="width: 80%; height: 30px; font-size: 17px;"></p>
       
       <p class="content"><span style="font-size: 20px;">내용</span> <textarea  style="margin-left: 5px" name="content" style="width: 80%; margin-bottom: 50px;">${board.content }</textarea></p>
     <table>
@@ -166,8 +167,7 @@ $(function() {
     <tr>
         <td>
         <input type ="hidden" name ="originalFileName" value="${board.todaymill_img }" />
-        <%-- <img  class="image_pic" src="${contextPath}/download.do?cate=mill&imageFileName=${board.todaymill_img}&bno=${board.bno}" alt="이미지 설명"> --%>
-        
+      
         <img class="image_pic" id="preview" src="${contextPath}/download.do?cate=mill&imageFileName=${board.todaymill_img}&bno=${board.bno}" width=100 height =100 />
         <input type="file" name="todaymill_img" onchange="readURL(this);">
         </td>

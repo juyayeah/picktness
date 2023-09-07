@@ -51,7 +51,7 @@ System.out.println(uri);
 
 $(function(){
     $('#delOk').click(function(){
-        if(!confirm('정말로 삭제하시겠습니까??')){
+        if(!confirm('삭제하시겠습니까?')){
             return false;
         }
     });
@@ -79,6 +79,7 @@ $(function(){
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+     border-radius: 9px;
   }
   .button:hover {
     background-color: #0056b3;
@@ -172,7 +173,7 @@ $(function(){
 
     <h3>오늘 식단</h3>
     <c:if test="${member.id == millDetail.member_id }">
-    <a href="/board/removeMillBoard.do?bno=${millDetail.bno }" id="delOk" style="margin-left: 50%;" class="button">삭제하기</a>
+    <a href="/board/removeMillBoard.do?bno=${millDetail.bno}&todaymill_img=${millDetail.todaymill_img}" id="delOk" style="margin-left: 50%;" class="button">삭제하기</a>
     <a href="/board/updateMillBoardForm.do?bno=${millDetail.bno}" class="button" >수정하기</a>
 
     </c:if>

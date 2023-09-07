@@ -116,21 +116,22 @@ function readURL(input){
 		reader.readAsDataURL(input.files[0]);
 	}
 }
-$(function() {
-    $('#btn').click(function() {
-        if ($("#title").val() === '' || $("textarea[name='content']").val() === '') {
-            alert("제목과 내용을 입력하세요.");
-            return false; 
-        }
 
-        
-        var fileInput = $("input[type='file'][name='files']");
-        if (fileInput.get(0).files.length === 0) {
-            alert("이미지를 첨부하세요.");
-            return false; 
-        }
-    });
-});
+	
+	function fn_form_submit(){
+		 if ($("#title").val() == '' || $("textarea[name='content']").val() == '') {
+	            alert("제목과 내용을 입력하세요.");
+	            return false; 
+	        };
+
+		 if ($("#todaymill_img").val() == '') {
+	            alert("사진을 첨부해 주세요.");
+	            return false; 
+	        } ;
+	       
+	       $("#addForm").submit();
+	};
+
 
 
 
@@ -141,10 +142,10 @@ $(function() {
 <body>
 <div class ="board_inner"></div>
 <h1>글쓰기</h1>
-<form method="post" action="${contextPath}/board/addMillBoard.do" enctype="multipart/form-data">
+<form id="addForm" method="post" action="${contextPath}/board/addMillBoard.do" enctype="multipart/form-data">
      
-      <p><span style="font-size: 20px;">태그</span> <input  type="text" name="hastag" placeholder="#오운완 #오늘식단" name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
-      <p class="content"><span style="font-size: 20px;">내용</span> <textarea  style="margin-left: 5px;" placeholder="내용을 입력해 주세요." name="content" style="width: 80%; margin-bottom: 50px;"></textarea></p>
+      <p><span style="font-size: 20px;">태그</span> <input spellcheck="false" type="text" name="hastag" placeholder="#오운완 #오늘식단" name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
+      <p class="content"><span style="font-size: 20px;">내용</span> <textarea spellcheck="false" style="margin-left: 5px;" placeholder="내용을 입력해 주세요." name="content" style="width: 80%; margin-bottom: 50px;"></textarea></p>
     <table>
     <tr>
         
@@ -154,17 +155,18 @@ $(function() {
                     <span class="file_input">
                        <img id="preview" src="#" width=100 height =100 />
                         <label> 첨부파일
-                            <input type="file" name="todaymill_img" onchange="readURL(this);" />
+                            <input type="file" id="todaymill_img" name="todaymill_img" onchange="readURL(this);" />
                         </label>
                     </span>
+                    </div>
+                    </div>
                     </td>
                     <td>
+                    
                     <span class= "btn_right">
-                    <a href="${contextPath}/board/millBoardList.do" type="button" class="button" onclick="back()" class="btns del_btn" >돌아가기</a>
-                    <button class= "button" id="btn" type="submit" ><span>등록하기</span></button>
+                    <a href="${contextPath}/board/millBoardList.do"  class="button"  >돌아가기</a>
+                    <a href="javascript:fn_form_submit()"  class="button"  >등록하기</a>
                   </span>
-                  </div>
-            </div>
         </td>
     </tr>
     </table>
