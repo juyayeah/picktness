@@ -205,7 +205,7 @@ font-size:14px;
 			<c:choose>
 				<c:when test="${goods.goods_qty == 0}">
 				<div class="main_item_soldOut"
-					onclick="location.href='${contextPath}/goods/gymDetail.do'">
+					onclick="location.href='${contextPath}/goods/goodsDetail.do?goods_id=${goods.goods_id}'">
 					<div class="soldOutImg">
 					<img class="main_img" src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" />
 				    <div class="soldOutText">
@@ -250,7 +250,7 @@ font-size:14px;
 				</c:when>
 				<c:otherwise>
 				<div class="main_item"
-					onclick="location.href='${contextPath}/goods/gymDetail.do'">
+					onclick="location.href='${contextPath}/goods/goodsDetail.do?goods_id=${goods.goods_id}'">
 					<img class="main_img" src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" />
 					<span class="title">${goods.goods_title }</span>
 									<c:choose>

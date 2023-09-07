@@ -367,7 +367,7 @@ select option[value=""][disabled] {
 </head>
 <body>
 	<div class="bodybody">
-		<h2 align="center">상품 등록</h2>
+		<h2 align="center">상품 수정</h2>
 		<form action="${contextPath }/admin/goods/updateGoods.do"
 			method="post" id="addForm" enctype="multipart/form-data" name="frm_mod_goods">
 			<table>
@@ -503,7 +503,7 @@ select option[value=""][disabled] {
 					<td class="tdfirsttop" align="right">상세설명</td>
 					<td class="starbluetop"></td>
 					<td><textarea name="detail" rows="10" cols="60"
-							maxlength="4000" value="${goods.detail }"></textarea></td>
+							maxlength="4000">${goods.detail }</textarea></td>
 					<td class="modfy_btn">
 						<button type="button" class="button_blue"
 							onClick="fn_modify_goods('${goods.goods_id }','detail')">수정

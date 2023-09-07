@@ -469,24 +469,17 @@ ul {
                     <div class="recent-prd-item">
                         <ul class="recent-prod-list">
                             <li>
-                                    <a href="${contextPath }/goods/trainerDetail.do">
-                                        <span class="img"><img src="${contextPath }/images/member/tr1.png" width="70px" height="70px" alt="최근 본 상품"></span>
+                                    <a href="${contextPath }/goods/placeDetail.do?goods_id=pc202309073859">
+                                        <span class="img"><img src="${contextPath }/images/gym1.jpg" width="70px" height="70px" alt="최근 본 상품"></span>
                                         <div class="detail">
-                                            <span class="tit text-elps2">[PT]박지성(10회)</span>
-                                            <span class="recent-price-info">120,500원</span>
+                                            <span class="tit text-elps2">해피헬스</span>
+                                            <span class="recent-price-info">160,000원</span>
                                         </div>
                                     </a>
                                 </li>
                          </ul>
                     </div>
                     <!--// 상품 목록 영역 -->
-                    <div class="btn-move-group">
-                        <div class="btn-move-cnt">
-                            <span class="move-current">1</span>/<span class="move-total">2</span>
-                        </div>
-                        <a href="javascript:;" class="btn-left-xs disabled" onclick="moveList('prev', 'recent-prod-list', 3, 3);return false;"><i class="ico-arr-left"></i><span class="blind"><</span></a>
-                        <a href="javascript:;" class="btn-right-xs" onclick="moveList('next', 'recent-prod-list', 3, 3);return false;"><i class="ico-arr-right"></i><span class="blind">></span></a>
-                    </div>
                 </div>
                 <div>
         <a href="#" onclick="goTop()" class="go-top">
