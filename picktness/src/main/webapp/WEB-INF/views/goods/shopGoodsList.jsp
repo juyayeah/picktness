@@ -65,6 +65,10 @@ uri="http://tiles.apache.org/tags-tiles" %>
 	font-size: 15px;
 	display: block;
 }
+	.main_item .original_price{
+	font-size:13px;
+	text-decoration: line-through;
+	}
 .star img {
 	width: 13px;
 }
@@ -209,7 +213,33 @@ font-size:14px;
 					</div>
 					</div>
 					<span class="title">${goods.goods_title }</span>
-					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.priceRetail}" />원 </span>
+									<c:choose>
+              <c:when test="${goods.priceOrigin ne goods.priceRetail}">
+                <span class="original_price">
+                <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceOrigin}"
+                  />원
+                </span>
+                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceRetail}"
+                  />원
+                </span>
+                </c:when>
+                <c:otherwise>
+                                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceRetail}"
+                  />원
+                </span>
+                </c:otherwise>
+                </c:choose>
 					<c:if test="${goods.review_count ne 0 }">
 					<div class="star">
 						<img src="${contextPath}/images/main/star.png" /> 
@@ -223,7 +253,33 @@ font-size:14px;
 					onclick="location.href='${contextPath}/goods/gymDetail.do'">
 					<img class="main_img" src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" />
 					<span class="title">${goods.goods_title }</span>
-					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.priceRetail}" />원 </span>
+									<c:choose>
+              <c:when test="${goods.priceOrigin ne goods.priceRetail}">
+                <span class="original_price">
+                <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceOrigin}"
+                  />원
+                </span>
+                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceRetail}"
+                  />원
+                </span>
+                </c:when>
+                <c:otherwise>
+                                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceRetail}"
+                  />원
+                </span>
+                </c:otherwise>
+                </c:choose>
 					<c:if test="${goods.review_count ne 0 }">
 					<div class="star">
 						<img src="${contextPath}/images/main/star.png" /> 

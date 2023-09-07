@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+ <mapper namespace="com.pick.member.order.dao.MemberOrderDAO">
+ 
+<insert id="addTotalOrder" parameterType="memberOrderTotalVO">
+<![CDATA[
+insert into order_total(order_num, member_id, total_price, sale_price, pay_price, use_point, add_point, credit_company, credit_installment)
+values (#{order_num}, #{member_id}, #{total_price}, #{sale_price}, #{pay_price}, #{use_point}, #{add_point}, #{credit_company}, #{credit_installment})
+]]>
+</insert>
+
+<insert id="addBusinessOrder" parameterType="memberOrderBusinessVO">
+<![CDATA[
+insert into order_business(order_num, member_id, goods_id, goods_title, goods_option, original_price, retail_price) 
+values (#{order_num}, #{member_id}, #{goods_id}, #{goods_title}, #{goods_option}, #{original_price}, #{retail_price})
+]]>
+</insert>
+
+<insert id="addOrderPoint" parameterType="memberMypagePointVO">
+<![CDATA[
+insert into point_history(member_id, member_point, state, content)
+values (#{member_id}, ${member_point}, #{state}, #{content})
+]]>
+</insert>
+
+<insert id="useOrderPoint" parameterType="memberMypagePointVO">
+<![CDATA[
+insert into point_history(member_id, member_point, state, content)
+values (#{member_id}, ${member_point}, #{state}, #{content})
+]]>
+</insert>
+
+<update id="addMemberPoint" parameterType="memberMypagePointVO">
+<![CDATA[
+update member set memberpoint = memberpoint + ${member_point} where id = #{member_id}
+]]>
+</update>
+
+<update id="useMemberPoint" parameterType="memberMypagePointVO">
+<![CDATA[
+update member set memberpoint = memberpoint - ${member_point} where id = #{member_id}
+]]>
+</update>
+
+<delete id="orderRemoveCartGoods" parameterType="int">
+<![CDATA[
+delete from cart where cart_id = #{cart_id}
+]]>
+</delete>
+</mapper>
+ 

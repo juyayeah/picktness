@@ -15,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pick.member.mypage.service.MemberMypageService;
 import com.pick.member.mypage.vo.MemberMypagePointVO;
+import com.pick.member.order.vo.MemberOrderBusinessVO;
+import com.pick.member.order.vo.MemberOrderShoppingVO;
+import com.pick.member.order.vo.MemberOrderTotalVO;
 import com.pick.member.vo.MemberVO;
 @Controller("memberMypageController")
 public class MemberMypageControllerImpl implements MemberMypageController{
@@ -43,6 +46,19 @@ public class MemberMypageControllerImpl implements MemberMypageController{
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
+		HttpSession session = request.getSession();
+		memberVO = (MemberVO) session.getAttribute("member");
+		String member_id = memberVO.getId();
+		System.out.println("가나");
+		List<MemberOrderTotalVO> orderTotalList = mypageService.orderTotalList(member_id);
+		System.out.println("오나");
+		List<MemberOrderBusinessVO> orderBusinessList = mypageService.orderBusinessList(member_id);
+		List<MemberOrderBusinessVO> orderTrainerList = mypageService.orderTrainerList(member_id);
+		List<MemberOrderShoppingVO> orderShoppingList = mypageService.orderShoppingList(member_id);
+		mav.addObject("orderTotalList", orderTotalList);
+		mav.addObject("orderBusinessList", orderBusinessList);
+		mav.addObject("orderTrainerList", orderTrainerList);
+		mav.addObject("orderShoppingList", orderShoppingList);
 		mav.setViewName(viewName);
 		return mav;
 	}

@@ -20,6 +20,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	@Override
 	public void addMember(MemberVO memberVO) throws DataAccessException {
+		memberVO.setMemberPoint(5000);
 		memberDAO.insertMember(memberVO);
 		memberDAO.eventInitPoint(memberVO);	
 	}
@@ -50,6 +51,12 @@ public class MemberServiceImpl implements MemberService{
 	public BusinessVO loginBusiness(Map<String, String> loginMap) throws DataAccessException {
 		return memberDAO.loginBusiness(loginMap);
 	}
+	@Override
+	public MemberVO selectById(String id) throws DataAccessException {
+		return memberDAO.selectById(id);
+	}
+	
+	
 	
 	
 	

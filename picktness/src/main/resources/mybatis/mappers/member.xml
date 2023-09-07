@@ -53,16 +53,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	where id=#{id} and pwd=#{pwd}
  	]]>
  </select>
+ 
 <select id="idCheck" parameterType="String" resultType="int">
 <![CDATA[
 select count(id) from member where id=#{id}
 ]]>
 </select>
+
 <select id="bIdCheck" parameterType="String" resultType="int">
 <![CDATA[
 select count(id) from business where id=#{id}
 ]]>
 </select>
+
 <insert id="insertMember" parameterType="memberVO">
     <![CDATA[
     INSERT INTO member(id, pwd, name, zipcode, addrBasic, addrDetail, email1, email2, phone1, phone2, phone3, memberPoint, emailConsent, phoneConsent, lat, lng)
@@ -87,6 +90,7 @@ select count(id) from business where id=#{id}
     values(#{id}, #{memberPoint}, "회원가입 이벤트")
     ]]>
 </insert>
+
 <select id="emailCheck" parameterType="java.util.Map" resultType="int">
         <![CDATA[
         SELECT count(email1) FROM member where email1 = #{email1} and email2 = #{email2}
@@ -102,6 +106,11 @@ select count(id) from business where id=#{id}
 	select * from business where id = #{id} && pwd = #{pwd}
 	]]>
 </select>
-    
+
+<select id="selectById" resultType="memberVO" parameterType="String">
+<![CDATA[
+select * from member where id=#{id}
+]]>
+</select>
  </mapper>
  

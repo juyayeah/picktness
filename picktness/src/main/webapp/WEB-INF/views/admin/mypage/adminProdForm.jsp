@@ -293,7 +293,7 @@ width:30%;
 			$(".newFile").append("<br>"+"<label>메인이미지</label><input type='file' name='main_image' onchange='readURL(this,"+cnt+");' />");
 			$('.newFile').append("<div class='upload'><img id='preview" + cnt + "'/></div>");
 		} else if(cnt < 3) {
-			$(".newFile").append("<br>"+"<label>상세이미지</label><input type='file' name='detail_image'" + cnt + " onchange='readURL(this,"+cnt+");'/>");
+			$(".newFile").append("<br>"+"<label>상세이미지</label><input type='file' name='detail_image" + cnt + "' onchange='readURL(this,"+cnt+");'/>");
 			$('.newFile').append("<div class='upload'><img id='preview" + cnt + "'/></div>");
 		} else {
 			alert("사진은 최대 3장만 첨부 가능합니다.");

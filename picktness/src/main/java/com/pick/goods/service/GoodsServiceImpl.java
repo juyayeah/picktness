@@ -125,6 +125,35 @@ public class GoodsServiceImpl implements GoodsService{
 		// TODO Auto-generated method stub
 		return goodsDAO.goodsBusinessReviewAnswerList(goods_id);
 	}
+
+	@Override
+	public GoodsShoppingVO goodsDetail(String goods_id) throws DataAccessException {
+	    return goodsDAO.goodsDetail(goods_id);
+	}
+
+	@Override
+	public List<GoodsImageFileVO> selectGoodsDetailImage(String goods_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.selectGoodsDetailImage(goods_id);
+	}
+
+	@Override
+	public String businessImageFileName(String goods_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.businessImageFileName(goods_id);
+	}
+
+	@Override
+	public String trainerImageFileName(String goods_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.trainerImageFileName(goods_id);
+	}
+
+	@Override
+	public String shoppingImageFileName(String goods_id) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return goodsDAO.shoppingImageFileName(goods_id);
+	}
 	
 	
 	

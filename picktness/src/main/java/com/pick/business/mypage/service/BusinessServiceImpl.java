@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,7 @@ public class BusinessServiceImpl implements BusinessService{
 
 	
 	@Override
-	public Map placeDetail(String id) throws Exception {
+	public Map placeDetail(String id) throws DataAccessException {
 		BusinessDetailVO businessDetail = businessDAO.placeDetail(id);
 		Map businessMap = new HashMap();
 		businessMap.put("businessDetail", businessDetail);
@@ -36,7 +37,7 @@ public class BusinessServiceImpl implements BusinessService{
 
 
 	@Override
-	public void insertBusinessDetail(Map newGoodsMap) throws Exception {
+	public void insertBusinessDetail(Map newGoodsMap) throws DataAccessException {
 		businessDAO.insertBusinessDetail(newGoodsMap);
 		ArrayList<GoodsImageFileVO> imageFileList = (ArrayList<GoodsImageFileVO>) newGoodsMap.get("imageFileList");
 		for(int i=0; i<imageFileList.size(); i++) {

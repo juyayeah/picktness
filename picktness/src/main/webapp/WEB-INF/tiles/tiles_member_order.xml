@@ -3,11 +3,16 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-	<definition name="/member/order/orderDetail" extends="baseLayout">
+	<definition name="/member/order/orderDetail" extends="baseMemberLayout">
 		<put-attribute name="title" value="결제페이지"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/order/orderDetail.jsp"/>
 	</definition>
-		<definition name="/member/order/orderList" extends="baseLayout">
+	
+	<definition name="/member/order/orderDonPage" extends="baseMemberLayout">
+		<put-attribute name="title" value="결제완료"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/order/orderDonPage.jsp"/>
+	</definition>
+	<definition name="/member/order/orderPay" extends="baseMemberLayout">
 		<put-attribute name="title" value="결제완료"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/order/orderList.jsp"/>
 	</definition>

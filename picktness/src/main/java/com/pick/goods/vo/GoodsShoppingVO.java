@@ -1,5 +1,7 @@
 package com.pick.goods.vo;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component("goodsShoppingVO")
@@ -16,6 +18,7 @@ public class GoodsShoppingVO {
 	private double review_star;
 	private int review_count;
 	private String fileName;
+	private List<String> imageList;
 	
 	public String getGoods_id() {
 		return goods_id;
@@ -88,6 +91,12 @@ public class GoodsShoppingVO {
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	public List<String> getImageList() {
+		return imageList;
+	}
+	public void setImageList(List<String> imageList) {
+		this.imageList = imageList;
 	}
 
 	

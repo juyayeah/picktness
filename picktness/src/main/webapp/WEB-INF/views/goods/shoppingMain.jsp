@@ -53,7 +53,7 @@ request.setCharacterEncoding("utf-8");
 	font-size: 15px;
 	display: block;
 	font-weight: bold;
-	height: 40px;
+	
 }
 
 .main_item .location {
@@ -68,7 +68,10 @@ request.setCharacterEncoding("utf-8");
 	font-size: 15px;
 	display: block;
 }
-
+	.main_item .original_price{
+	font-size:13px;
+	text-decoration: line-through;
+	}
 .cates {
 	text-align: left;
 }
@@ -124,10 +127,37 @@ height:300px;
 			<c:choose>
 				<c:when test="${!empty foodList }">
 					<c:forEach items="${foodList }" var="food">
-						<div class="main_item" onClick="location.href='#'">
+						<div class="main_item" onclick="location.href='${contextPath}/goods/goodsDetail.do?goods_id=${food.goods_id}'">
 							<img class="main_img"
 								src="${contextPath}/download.do?cate=shop&imageFileName=${food.fileName}&bno=${food.goods_id}" /> <span
-								class="title">${food.goods_title }</span> <span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${food.priceRetail}" />원
+								class="title">${food.goods_title }</span> <span class="price">
+			<c:choose>
+              <c:when test="${food.priceOrigin ne food.priceRetail}">
+                <span class="original_price">
+                <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${food.priceOrigin}"
+                  />원
+                </span>
+                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${food.priceRetail}"
+                  />원
+                </span>
+                </c:when>
+                <c:otherwise>
+                                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${food.priceRetail}"
+                  />원
+                </span>
+                </c:otherwise>
+                </c:choose>
 							</span>
 							<c:if test="${food.review_count ne 0 }">
 								<div class="star">
@@ -156,7 +186,33 @@ height:300px;
 							<img class="main_img"
 								src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" /> <span
 								class="title">${goods.goods_title }</span> <span class="price">
-								<fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.priceRetail}" />원
+				<c:choose>
+              <c:when test="${goods.priceOrigin ne goods.priceRetail}">
+                <span class="original_price">
+                <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceOrigin}"
+                  />원
+                </span>
+                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceRetail}"
+                  />원
+                </span>
+                </c:when>
+                <c:otherwise>
+                                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${goods.priceRetail}"
+                  />원
+                </span>
+                </c:otherwise>
+                </c:choose>
 							</span>
 							<c:if test="${goods.review_count ne 0 }">
 								<div class="star">

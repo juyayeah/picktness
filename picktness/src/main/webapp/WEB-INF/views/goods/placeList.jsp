@@ -122,6 +122,10 @@ request.setCharacterEncoding("utf-8");
 	font-size: 15px;
 	display: block;
 }
+	.main_item .original_price{
+	font-size:13px;
+	text-decoration: line-through;
+	}
 
 .cates {
 	text-align: left;
@@ -257,7 +261,33 @@ font-size:14px;
 					<span class="location">${place.addrBasic } 
 					</span>
 					<span class="location"><fmt:formatNumber pattern="0.0" value="${place.distance/1000 }"/>km</span>
-					<span class="price"><fmt:formatNumber type="number" maxFractionDigits="3" value="${place.prod1retail}" />/월</span>
+                <c:choose>
+                <c:when test="${place.prod1 ne place.prod1retail }">
+                <span class="original_price">
+                <fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod1}"
+                  />/월
+                </span>
+                <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod1retail}"
+                  />/월
+                </span>
+                </c:when>
+                <c:otherwise>
+                 <span class="price"
+                  ><fmt:formatNumber
+                    type="number"
+                    maxFractionDigits="3"
+                    value="${place.prod1retail}"
+                  />/월
+                </span>
+                </c:otherwise>
+                </c:choose>
 					<div class="cates">
 						<c:if test="${place.allTime == 'Y' }">
 							<div class="cate">24시간</div>
