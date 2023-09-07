@@ -11,6 +11,21 @@ request.setCharacterEncoding("utf-8");
 <head>
 <script type="text/javascript"
 	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript">
+		window.addEventListener('DOMContentLoaded', function () {
+    // goods.detail이 null 또는 빈 문자열인 경우 textarea를 숨깁니다.
+    var goodsDetail = "${goods.detail}";
+    if (!goodsDetail || goodsDetail.trim() === "") {
+        var textareaElement = document.querySelector('textarea[name=""]');
+        if (textareaElement) {
+            textareaElement.style.display = 'none';
+        }
+    }
+
+    // 기본 수량을 1로 설정
+    count("plus");
+});
+</script>				
 <meta charset="UTF-8">
 <title>상품 상세페이지</title>
 <style>
@@ -19,6 +34,7 @@ display: none;
 } */
 .detail_goods_img {
 	padding: 40px;
+	
 }
 
 .bodybody {
@@ -177,12 +193,14 @@ textarea {
 	border-bottom-left-radius: 5px;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
-	width: 65px;
+	width: 130px;
 	border: 2px solid #000;
 	background-color: rgba(0, 0, 0, 0);
 	color: #000;
 	font-size:12px; 
 	padding: 5px 0px;
+	margin-top: 5px;
+    margin-bottom: 5px;
 }
 .minusplus_cart{
 border:0;
@@ -197,21 +215,83 @@ background-color:#fff;
     max-width: 100%;
     height: auto; 
   }
+  .review_button {
+	font-size: 13px;
+	float: right;
+	text-align: center;
+	width: 90px;
+	padding: 10px 0px;
+	border: 1px solid #555;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.review_null {
+	clear: both;
+	margin: 30px 0px;
+	text-align: center;
+}
+
+.detail_goods_img {
+        padding: 20px;
+    }
+
+.info-nav {
+	background: #fff;
+	padding: 0;
+	text-align: center;
+}
+.alreadyCart{
+	display: none;
+	position: relative;
+    top: -120px;
+    left:-3px;
+    background-color: #383838;
+    color: #fff;
+}
+.alreadyCart_p{
+    border-radius: 4px;
+	width: 355px;
+	height: 17px;
+    padding: 20px 20px;
+	background-color: #383838;
+    position: absolute;
+    line-height: normal;
+    font-size: 13px;
+}
+.alreadyCart_p a{
+	margin-left:50px;
+    line-height: normal;
+    font-size: 13px;
+    color:#2890f1;
+}
+.addCart{
+	display: none;
+	position: relative;
+    top: -120px;
+    left:-3px;
+    background-color: #383838;
+    color: #fff;
+}
+.addCart_p{
+    border-radius: 4px;
+	width: 355px;
+	height: 17px;
+    padding: 20px 20px;
+	background-color: #383838;
+    position: absolute;
+    line-height: normal;
+    font-size: 13px;
+}
+.addCart_p a{
+	margin-left:50px;
+    line-height: normal;
+    font-size: 13px;
+    color:#2890f1;
+}
 </style>
 
 <script type="text/javascript">
-
-	window.addEventListener('DOMContentLoaded', function () {
-        // goods.detail이 null 또는 빈 문자열인 경우 textarea를 숨깁니다.
-        var goodsDetail = "${goods.detail}";
-        if (!goodsDetail || goodsDetail.trim() === "") {
-            var textareaElement = document.querySelector('textarea[name=""]');
-            if (textareaElement) {
-                textareaElement.style.display = 'none';
-            }
-        }
-    });
-
 
 	//상품정보, 이용후기, 상품문의 마우스 이벤트
 	function content() {
@@ -226,22 +306,10 @@ background-color:#fff;
 	};
 	function inquiry() {
 		document.getElementById("gymdetail_content").style.display = "none";
-		document.getElementById("gymdetail_review").style.display = "none";
+		document.getElementById("gymdetail_review").style.display = "none";	
 		document.getElementById("gymdetail_inquiry").style.display = "block";
 	};
 
-	function more() {
-		document.getElementById("gymdetail_goods").style.display = "block";
-		document.getElementById("goods_none").style.display = "block";
-		document.getElementById("goods_more").style.display = "none";
-		window.scrollTo(200, 300);
-	};
-	function none() {
-		document.getElementById("gymdetail_goods").style.display = "none";
-		document.getElementById("goods_none").style.display = "none";
-		document.getElementById("goods_more").style.display = "block";
-		window.scrollTo(200, 300);
-	};
 
 	function nowbuy() {
 		var dd = document.getElementById("selectlist");
@@ -366,18 +434,16 @@ background-color:#fff;
     // 현재 화면에 표시된 값
     let number = parseInt(resultElement.innerText); // 현재 값 가져오기
 
-    // 더하기/빼기
     if (type === "plus") {
+    if (number < ${goods.goods_qty}) {
         number = number + 1;
-        if (1 > number) {
-            number = 0;
-        }
-    } else if (type === "minus") {
-        number = number - 1;
-        if (1 > number) {
-            number = 0;
-        }
     }
+} else if (type === "minus") {
+    if (number > 1) {
+        number = number - 1;
+    }
+}
+
 
     // ${goods.priceRetail} 가져오기 (상품 가격)
     const goodsPrice = parseFloat("${goods.priceRetail}"); // 문자열을 부동 소수점 숫자로 변환
@@ -393,7 +459,66 @@ background-color:#fff;
     totalElement.innerText = formattedTotal;
 }
 
+function fn_cartLogin(){
+	alert("로그인 후 이용해 주세요");
+	var uri = "${contextPath }/goods/goodsDetail.do?goods_id=${goods.goods_id}";
+	$.ajax({
+		url : "${contextPath}/redirectUri.do",
+		method : "post",
+		data : {
+			str : uri
+		},
+		success : function(data, status, xhr) {
+			window.location.href = "${contextPath}/member/loginForm.do";
+		}
+	});
+}
 
+function fn_buyLogin(){
+	alert("로그인 후 이용해 주세요");
+	var uri = "${contextPath }/goods/goodsDetail.do?goods_id=${goods.goods_id}";
+	$.ajax({
+		url : "${contextPath}/redirectUri.do",
+		method : "post",
+		data : {
+			str : uri
+		},
+		success : function(data, status, xhr) {
+			window.location.href = "${contextPath}/member/loginForm.do";
+		}
+	});
+}
+function fn_addCart(){
+	var goods_option = $("#goodsQty").val();
+	
+	$.ajax({
+		type : "post",
+		async : false, //false인 경우 동기식으로 처리한다.
+		url : "${contextPath}/member/cart/addCart.do",
+		data : {
+			goods_id:"${goods.goods_id}",
+			member_id:"${member.id}",
+			goods_option:goods_option
+			
+		},
+		success : function(data) {
+			if(data == 'add'){
+				$(".addCart").css('display','block');
+				$(".addCart_p").css('display', 'block');
+				setTimeout(function(){ $( '.addCart_p' ).fadeOut();}, 2500);
+				setTimeout(function(){ $(".addCart").css('display','none');}, 3000);
+			} else{
+				$(".alreadyCart").css('display','block');
+				$(".alreadyCart_p").css('display', 'block');
+				setTimeout(function(){ $( '.alreadyCart_p' ).fadeOut();}, 2500);
+				setTimeout(function(){ $(".alreadyCart").css('display','none');}, 3000);
+			}
+		},
+        error: function (request, error) {
+            alert("장바구니에 상품을 추가하는 중 문제가 생겼습니다.");
+          }
+	}); //end ajax	
+}
 
 
 
@@ -404,65 +529,100 @@ background-color:#fff;
 	<div class="bodybody">
 		<form action="${contextPath }/member/order/orderDetail.do" method="get" name=""
 			enctype="multipart/form-data">
+			<input type="hidden" name="option">
+		</form>
 			<div>
 				<table border=0 align="center" width="860px">
 					<tr>
 						<!-- 사진칸 -->
-						<td class="detail_goods_img" rowspan="7">
+						<td class="detail_goods_img" rowspan="7" >
 							<input type="hidden" name="originalFileName" value="${goods.fileName}" />
 								<img src="${contextPath}/download.do?cate=shop&imageFileName=${goods.fileName}&bno=${goods.goods_id}" width="300px" align="right">
 						</td>
-						<!-- <img src="${contextPath }/download.do?imageFileName=${member.imageFileName }&num=${member.num}" id="preview" width="300px" height="300px" /><br> <input type="file"
-                  name="imageFileName" id="imageFileName"
-                  onchange="readURL(this);" disabled /></td> -->
-						<!-- disabled 있으면 바꿀 수 없음 -->
+
 						<!-- 상품명 -->
-						<td align="left">
+						<td align="left" id="goodsQty">
 							<h2 style="padding: 0 0 0 30px; margin-bottom: 1px;">${goods.goods_title }</h2>
 
 							<span style="padding: 0 0 0 30px; font-size: 23px; color: #2890f1;">
 								${Math.round(((goods.priceOrigin - goods.priceRetail) / goods.priceOrigin) * 100)}%
 								</span>
-							<b style="font-size: 23px; color: red;">${goods.priceRetail}원</b>
-							<span style="text-decoration: line-through; font-size: 12px; color: #c0c0c0;">${goods.priceOrigin}원</span>
+							<b style="font-size: 23px;"><fmt:formatNumber
+								type="number" maxFractionDigits="3" value="${goods.priceRetail}" />원</b>
+							<span style="text-decoration: line-through; font-size: 12px; color: #c0c0c0;"><fmt:formatNumber
+								type="number" maxFractionDigits="3" value="${goods.priceOrigin}" />원</span>
 						</td>
 					</tr>
 					<tr>
 						<td align="left">
-							<span style="padding: 0 0 0 30px; font-size: 15px;">남은 수량</span>
-							<span style="padding: 0 0 0 10px; font-size: 15px;">${goods.goods_qty}개</span><br>
-							<span style="padding: 0 0 0 30px; font-size: 15px;">배송방법</span>
-							<!--<span style="padding: 0 0 0 10px; font-size: 15px;">${food.deliveryMethod}</span><br>-->
-							<span style="padding: 0 0 0 10px; font-size: 15px;">일반배송</span><br>
-							<span style="padding: 0 0 0 30px; font-size: 15px;">적립금</span>
-							<span style="padding: 0 0 0 10px; font-size: 15px;">${goods.priceRetail}원</span><br>
+							<div style="display: flex; justify-content: space-between;">
+								<div style="text-align: left; margin-right:30px;">
+									<div style="padding: 0 0 0 30px; font-size: 15px;">남은 수량</div>
+									<div style="padding: 0 0 0 30px; font-size: 15px;">배송방법</div>
+									<div style="padding: 0 0 0 30px; font-size: 15px;">적립금</div>
+								</div>	
+								<div style="text-align: left; flex: 1;">
+									<div style="font-size: 15px;">${goods.goods_qty}개</div>
+									<div style="font-size: 15px;">일반배송</div>
+									<div style="font-size: 15px;"><fmt:formatNumber type="number" maxFractionDigits="3" value="${goods.priceRetail}" />원</div>
+								</div>
+							</div>
+						</td>
+							<br>
 					</tr>
 					<tr>
-						<td align="left" style="padding: 0 0 0 30px;"><div class="minus-plus" align="center">
-								<button type="button" class="minusplus_cart" onclick='count("minus")'>-</button>
-								<span id='result'>0</span>
-								<button type="button" class="minusplus_cart" onclick='count("plus")'>+</button>
-							</div></td>
+						<td align="left" style="padding: 0 0 0 30px;">
+							<div class="minus-plus" align="center">
+								<button type="button" class="minusplus_cart" style="width: 40px; height: 20px; padding: 0; font-size: 20px;" onclick='count("minus")'>-</button>
+								<span id='result' style="font-size: 20px;">0</span>
+								<button type="button" class="minusplus_cart" style="width: 40px; height: 20px; padding: 0; font-size: 20px;" onclick='count("plus")'>+</button>
+							</div>
+						</td>
 					</tr>
-					<tr><td align="left">
-						<span style="padding: 0 0 0 30px; font-size: 15px;">총 상품금액</span>
-						<span id='total' style="font-size: 23px; margin-left: 10px;">0</span>
-						<span>원</span>
-					</td>
+					<tr>
+						<td style="display: flex; align-items: center;">
+							<span style="padding: 0 0 0 30px; font-size: 15px;">총 상품금액</span>
+							<div style="flex: 1; text-align: center;">
+								<span id='total' style="font-size: 23px;">0</span>
+								<span>원</span>
+							</div>
+						</td>
 					</tr>
-				<tr>
-					<td align="left" style="padding: 0 0 10px 30px;">
-						<button type="button" class="button_white" value="장바구니">장바구니</button>&nbsp;&nbsp;
-						<button class=button_blue id="nowbuy" onclick="nowbuy()">바로구매</button>
-					</td>
+					<tr>
+						<td align="left" style="padding: 0 0 10px 30px;">
+						<c:choose>
+						<c:when test="${! empty member}">
+							<button class=button_white onClick="fn_addCart()">장바구니</button>&nbsp;&nbsp;
+							<button class=button_blue id="nowbuy" onclick="fn_buyNow()">바로구매</button>
+						</c:when>
+						<c:otherwise>
+							<button class=button_white onClick="fn_cartLogin()">장바구니</button>&nbsp;&nbsp;
+							<button class=button_blue id="nowbuy" onclick="fn_buyLogin()">바로구매</button>
+						</c:otherwise>
+						</c:choose>
+					<div class="alreadyCart">
+						<div class="alreadyCart_p">
+						이미 장바구니에 있는 상품입니다.
+						<a href="${contextPath }/member/cart/cartList.do">장바구니로 가기</a>
+						</div>
+					</div>
+					<div class="addCart">
+						<div class="addCart_p">
+						장바구니에 상품이 담겼습니다.
+						<a href="${contextPath }/member/cart/cartList.do">장바구니로 가기</a>
+						</div>
+					</div>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<hr>
+			<br>
 			<div>
-				<nav>
+				<nav class="info-nav">
 					<ul>
 						<li><a href="#" class="hover-underline" onclick="content()">상품정보</a></li>
-						<li><a href="#" class="hover-underline" onclick="review()">이용후기</a></li>
+						<li><a href="#" class="hover-underline" onclick="review()">이용후기  ${goods.review_count }</a></li>
 						<li><a href="#" class="hover-underline" onclick="inquiry()">상품문의</a></li>
 					</ul>
 				</nav>
@@ -470,32 +630,30 @@ background-color:#fff;
 			<!-- 소개 및 정보 시작 -->
 			<div class=gymdetail_content style="display: block;"
 				id="gymdetail_content">
-				<!--상품소개-->
-				<br>
+				<p>상품소개</p>
 			<textarea rows="15" cols="60" name="" disabled />${goods.detail}</textarea>
 			<br><br>
 			<div style="text-align: center;">
 				<c:forEach var="image" items="${imageList}">
-					<img class="custom-image" src="${contextPath}/download.do?cate=shop&imageFileName=${image.fileName}&bno=${image.goods_id}">
+					<img class="custom-image" src="${contextPath}/download.do?cate=shop&imageFileName=${image.fileName}&bno=${image.goods_id}" >
 				</c:forEach>
 			</div>
 			<br>
-				
-				<button type="button" class=button_white onclick="more()"
-					id="goods_more" style="display: block; width: 500px; margin:auto;">상품설명
-					펼쳐보기 V</button>
-				<button type="button" class=button_white onclick="none()"
-					id="goods_none" style="display: none; width: 500px; margin:auto;">접기
-					&Lambda;</button>
-
 			</div>
-		</form>
+	
 
-		<!-- 이용후기 -->
 		<div class=gymdetail_review style="display: none"
 			id="gymdetail_review">
 			<p>이용후기</p>
-			<textarea rows="15" cols="60" name="" disabled /></textarea>
+			<c:choose>
+				<c:when test="${reviewList ne null }">
+					<textarea rows="15" cols="60" name="" disabled /></textarea>
+				</c:when>
+				<c:otherwise>
+					<div class="review_button">리뷰 작성</div>
+					<div class="review_null">등록된 후기가 없습니다.</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<!-- 상품문의 -->
 		<div class=gymdetail_inquiry style="display: none"
@@ -503,7 +661,31 @@ background-color:#fff;
 			<p>상품문의</p>
 			<textarea rows="15" cols="60" name="" disabled /></textarea>
 		</div>
+		<p style="font-size: 46px;">배송안내</p>
+		<div style="display: flex; align-items: center;">
+			<img src="${contextPath}/images/goods/delivery.jpg" style="width: 350px; height: 230px; margin-left: 50px;">
+			<p style="font-size: 24px; margin-left: 100px;">픽트니스는 전제품 무료 배송입니다. <br>토요일, 공휴일 결제 시 다음 영업일 발송</p>
 		</div>
-	
+		<br><br><br>
+		<p style="font-size: 46px;">교환/반품 안내</p>
+		<div style="margin-left:50px;">
+		<div style="display: flex; align-items: center;">
+			<p style="font-size: 24px; font-weight: bold;">주의사항<br>
+				교환/반품이 가능한 경우</p>
+				<p style="font-size: 16px; margin-left: 200px;"><br><br><br>
+					본 상품은 제품 특성상 단순 변심에 의한 교환 · 반품은 불가합니다.<br>
+					주문한 제품과 다르거나 판매자의 제공정보와 상이한 경우<br>
+					제품이 불량이거나 손상된 경우 <br> 배송사의 귀책 사유에 따른 배송 지연 발생 및 제품이 변질 된 경우</p>	
+				</div>
+				<br><br>
+				<div style="display: flex; align-items: center;">
+					<p style="font-size: 24px; font-weight: bold;">교환/반품이 불가능한 경우</p>
+					<p style="font-size: 16px; margin-left: 177px;">
+						상품 수령 후 7일 이내 교환/환불을 요청해야 합니다.<br>
+						반품 요청 기간(수령 후 7일 이내)이 경과한 경우<br>
+						상품을 사용 혹은 훼손하여 재판매가 어려울 정도로 <br>상품가치가 현저히 감소한 경우</p>	
+					</div>
+					</div>
+		<br><br><br>
 </body>
 </html>

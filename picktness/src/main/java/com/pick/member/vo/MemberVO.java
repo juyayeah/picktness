@@ -24,6 +24,7 @@ public class MemberVO {
 	private Date joinDate;
 	private double lat;
 	private double lng;
+	private String imageFileName;
 	public String getId() {
 		return id;
 	}
@@ -132,6 +133,12 @@ public class MemberVO {
 	}
 	public void setLng(double lng) {
 		this.lng = lng;
+	}
+	public String getImageFileName() {
+		return imageFileName;
+	}
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
 	}
 
 
