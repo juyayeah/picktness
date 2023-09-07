@@ -472,6 +472,7 @@ pageEncoding="UTF-8" isELIgnored="false"%>
 </c:choose>
  </table>
  </div>
+ <c:if test="${!empty cartMap }">
  <a href="javascript:delete_cart_select()" class="goods_button" id="select_button">선택 삭제</a>
  <div class="order_price">
 <p>상품 금액 <span  id="order_original_price"></span>원</p>
@@ -487,6 +488,7 @@ pageEncoding="UTF-8" isELIgnored="false"%>
  <a href="${contextPath }/main.do" class="main_button">쇼핑계속하기</a>
  <a href="javascript:order_cart()" class="order_button">주문하기</a>
  </div>
+ </c:if>
  </div>
  </body>
 </html>

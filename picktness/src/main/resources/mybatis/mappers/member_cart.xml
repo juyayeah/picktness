@@ -39,7 +39,7 @@ select t.goods_id, t.name, t.prod10retail, t.prod20retail, t.prod30retail, t.pro
     ]]>
     </select>
     
-    <delete id="removeCartGoodS" parameterType="String">
+    <delete id="removeCartGoods" parameterType="String">
     <![CDATA[
     delete from cart where cart_id = #{cart_id}
     ]]>

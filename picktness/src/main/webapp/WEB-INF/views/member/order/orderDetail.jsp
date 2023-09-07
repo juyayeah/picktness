@@ -134,7 +134,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     <script>
     	var js_sale_price = ${sale_price};
     	var js_total_price = ${total_price};
-    	var js_add_point = js_total_price * 0.03;
+    	var js_add_point = Math.ceil(js_total_price * 0.03);
     $(function(){
     	
     	$("#sale_price_content").text(js_sale_price.toLocaleString());
@@ -154,7 +154,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     			$('.use_point').val('');
     			js_sale_price = ${sale_price};
     			js_total_price = ${total_price};
-    			js_add_point = js_total_price * 0.03;
+    			js_add_point = Math.ceil(js_total_price * 0.03);
     			$("#sale_price_content").text(js_sale_price.toLocaleString());
     	    	$("#tatal_price_content").text(js_total_price.toLocaleString());
     	    	$("#nowAddPoint").text(js_add_point.toLocaleString());
@@ -162,7 +162,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
     		} else {
     			js_sale_price = parseInt(js_sale_price)+ parseInt($(".use_point").val());
     			js_total_price = js_total_price - $(".use_point").val();
-    			js_add_point = js_total_price * 0.03;
+    			js_add_point = Math.ceil(js_total_price * 0.03);
     			$("#sale_price_content").text(js_sale_price.toLocaleString());
     	    	$("#tatal_price_content").text(js_total_price.toLocaleString());
     	    	$("#nowAddPoint").text(js_add_point.toLocaleString());
@@ -177,7 +177,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
 		js_total_price = ${total_price};
     	js_sale_price = parseInt(js_sale_price)+ parseInt($(".use_point").val());
 		js_total_price = js_total_price - $(".use_point").val();
-		js_add_point = js_total_price * 0.03;
+		js_add_point = Math.ceil(js_total_price * 0.03);
 		$("#sale_price_content").text(js_sale_price.toLocaleString());
     	$("#tatal_price_content").text(js_total_price.toLocaleString());
     	$("#nowAddPoint").text(js_add_point.toLocaleString());
@@ -197,7 +197,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         	} else{
         		$("#o_use_point").attr("value",$('.use_point').val());
         	}
-        	$("#o_add_point").attr("value", $("#nowAddPoint").text());
+        	$("#o_add_point").attr("value", js_add_point);
         	$("#o_credit_conpany").attr("value", $("#bank_select option:selected").val());
         	$("#o_credit_installment").attr("value", $("#pay_select option:selected").val());
         	$(".order_form").submit();
@@ -360,7 +360,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       <div class="point_box">
         <div class="point_title">포인트 사용</div>
         <input type="text" class="use_point" name="use_point" placeholder="0"oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
-        <button class="button useAllpoint" onclick="fn_allPoint()">전액사용</button>
+        <button type="button" class="button useAllpoint" onclick="fn_allPoint()">전액사용</button>
         <input type="hidden" name="member_point" class="member_point" value="${member.memberPoint}">
         <div class="have_point">보유포인트
          <fmt:formatNumber type="number" maxFractionDigits="3" value="${member.memberPoint}" />
@@ -424,8 +424,6 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         </select>
       </div>
       <div class="order_button">
-        <button class="btn2" onclick="fn_order_now()"></button>
-      </div>
       <form class="order_form" action="${contextPath}/member/order/orderPay.do" method="post">
       <input type="hidden" id="o_total_price" name="total_price">
       <input type="hidden" id="o_sale_price" name="sale_price">
@@ -434,7 +432,9 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       <input type="hidden" id="o_add_point" name="add_point">
       <input type="hidden" id="o_credit_conpany" name="credit_company">
       <input type="hidden" id="o_credit_installment" name="credit_installment">
+        <button type="button" class="btn2" onclick="fn_order_now()"></button>
       </form>
+      </div>
     </div>
   </body>
 </html>

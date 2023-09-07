@@ -63,7 +63,7 @@ public class MemberCartServiceImpl implements MemberCartService{
 
 	@Override
 	public void removeCartGoods(String cart_id) throws DataAccessException {
-		memberCartDAO.removeCartGoodS(cart_id);
+		memberCartDAO.removeCartGoods(cart_id);
 		
 	}
 

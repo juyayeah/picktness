@@ -31,4 +31,7 @@ public interface GoodsService {
 	public List<GoodsReviewAnswerVO> goodsBusinessReviewAnswerList(String goods_id) throws DataAccessException;
 	public GoodsShoppingVO goodsDetail(String goods_id) throws DataAccessException;
 	public List<GoodsImageFileVO> selectGoodsDetailImage(String goods_id) throws DataAccessException;
+	public String businessImageFileName(String goods_id) throws DataAccessException;
+	public String trainerImageFileName(String goods_id) throws DataAccessException;
+	public String shoppingImageFileName(String goods_id) throws DataAccessException;
 }
