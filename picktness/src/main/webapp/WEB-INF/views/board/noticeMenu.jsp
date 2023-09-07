@@ -50,11 +50,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
           href="${contextPath}/board/faqList.do"
           class="menu_list_item"
           >자주묻는 FAQ</a>
-        <a
-                  href="${contextPath}/board/eventList.do"
-          class="menu_list_item"
-          >이벤트</a>
-        
+ 
 
       </div>
     </div>
