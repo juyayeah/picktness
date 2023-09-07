@@ -133,7 +133,10 @@ request.setCharacterEncoding("utf-8");
         .faq_btn:hover {
     background-color: #0056b3;
   }
-  
+  .faq_btn {
+  float: right;
+  margin-left: 10px; /* 수정하기와 삭제하기 버튼 사이의 간격 조정 */
+}
     </style>
     
     <meta charset="UTF-8" />
@@ -176,10 +179,11 @@ request.setCharacterEncoding("utf-8");
   <ul class="qna">
     <li>
       <input type="checkbox" id="qna-${loop.index}" />
-      <label for="qna-${loop.index}">${faq.title}  <c:if test="${member.id == 'admin' }"> 
-        <a type="button" class="faq_btn" href="${contextPath}/board/deleteFaq.do?bno=${faq.bno}">삭제하기</a>
-        <a type="button" class="faq_btn" href="${contextPath}/board/modFaqForm.do?bno=${faq.bno}">수정하기</a>
-      </c:if></label> 
+      <label for="qna-${loop.index}">${faq.title}  <c:if test="${member.id == 'admin' }">
+  <a type="button" class="faq_btn" href="${contextPath}/board/deleteFaq.do?bno=${faq.bno}">삭제하기</a>
+  <a type="button" class="faq_btn" href="${contextPath}/board/modFaqForm.do?bno=${faq.bno}">수정하기</a>
+</c:if>
+</label> 
       <div class="faq_bgc">
         <pre>${faq.content}</pre>
       </div>
