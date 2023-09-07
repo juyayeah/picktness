@@ -637,7 +637,7 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button,
 			<!--/menu_sp-->
 			<div class="menu_cm">
 				<span class="menu_cm_title"
-					onclick="location.href='${contextPath}/board/freeBoardList.do'">커뮤니티</span>
+					onclick="location.href='${contextPath}/board/millBoardList.do'">커뮤니티</span>
 				<ul class="menu_cm_dt">
 					
 					<li class="menu_list_a"><a

@@ -70,9 +70,9 @@ margin-right:10px;
   <form name="freeBoardForm" method="post" action="${contextPath}/board/addFaq.do" enctype="multipart/form-data" >
   
       <p><span style="font-size: 20px;">질문</span> 
-      <input type="text" placeholder="질문을 입력해 주세요." name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
+      <input type="text" placeholder="질문을 입력해 주세요." name="title" style="width: 80%; height: 30px; font-size: 17px;" spellcheck="false"></p>
       <p class="content"><span style="font-size: 20px;">답변</span> 
-      <textarea style="margin-left: 5px;" placeholder="답변을 입력해 주세요." name="content" style="width: 80%; margin-bottom: 50px;"></textarea></p>
+      <textarea style="margin-left: 5px;" placeholder="답변을 입력해 주세요." name="content" style="width: 80%; margin-bottom: 50px;" spellcheck="false"></textarea></p>
       <p class="center"> 
       <input class="btn"type="submit" value="등록하기" style="margin-right:160px;">
       <a class="btn" type="button" href="${contextPath }/board/noticeList.do" style="margin-right: 10px;">돌아가기</a></p>

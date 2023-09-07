@@ -210,6 +210,10 @@ delete  from faq where bno= #{bno}
 ]]>
 </delete>
 
- 	
+ 	    <delete id="delNotice" parameterType="String">
+    <![CDATA[
+    delete from notice where bno = #{bno}
+    ]]>
+    </delete>
       
 </mapper>

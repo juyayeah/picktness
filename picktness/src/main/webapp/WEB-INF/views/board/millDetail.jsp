@@ -51,7 +51,7 @@ System.out.println(uri);
 
 $(function(){
     $('#delOk').click(function(){
-        if(!confirm('정말로 삭제하시겠습니까??')){
+        if(!confirm('삭제하시겠습니까?')){
             return false;
         }
     });
@@ -79,6 +79,7 @@ $(function(){
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
+     border-radius: 9px;
   }
   .button:hover {
     background-color: #0056b3;

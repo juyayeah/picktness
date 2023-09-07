@@ -46,6 +46,18 @@ margin-right:10px;
 .content span{
   margin-right:10px;
 }
+      .notice_btn{
+
+        float:right;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin:0 10px 5px 0;
+    border-radius: 9px;
+      }
   </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript">
@@ -75,12 +87,12 @@ margin-right:10px;
   
   
       <p><span style="font-size: 20px;">제목</span> 
-      <input type="text" value="${noticeList.title }" name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
+      <input type="text" spellcheck="false" value="${noticeList.title }" name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
       <p class="content"><span style="font-size: 20px;">내용</span> 
-      <textarea style="margin-left: 5px;" name="content" style="width: 80%; margin-bottom: 50px;">${noticeList.content}</textarea></p>
+      <textarea spellcheck="false" style="margin-left: 5px;" name="content" style="width: 80%; margin-bottom: 50px;">${noticeList.content}</textarea></p>
       <p class="center"> 
-      <input type="button" id="edit" value="수정하기">
-      <a class="btn" type="button" href="${contextPath }/board/noticeList.do" style="margin-right: 10px;">돌아가기</a></p>
+      <a class="notice_btn" type="button" id="edit" style="margin-right: 90px;" >수정하기</a>
+      <a class="notice_btn" type="button" href="${contextPath }/board/noticeList.do" style="margin-right: 10px;">돌아가기</a></p>
     
        <input type="hidden" name="bno" value="${noticeList.bno }">
     <input type="hidden" name="noticedate" value="${noticeList.noticeDate }"> 

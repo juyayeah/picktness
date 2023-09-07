@@ -267,6 +267,8 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 
 	}
+	
+	
 
 	@Override
 	@RequestMapping(value = "/board/noticeDetail.do")
@@ -281,6 +283,7 @@ public class BoardControllerImpl implements BoardController {
 		mav.setViewName(viewName);
 		return mav;
 	}
+	
 
 	@Override
 	@RequestMapping(value = "/board/noticeList.do")
@@ -295,17 +298,27 @@ public class BoardControllerImpl implements BoardController {
 
 	}
 
-	@RequestMapping(value = "/board/deleteNotice.do", method = RequestMethod.GET)
-	public ModelAndView deleteNotice(@RequestParam("bno") int bno, HttpServletRequest request,
-			HttpServletResponse response) {
+	
+	  @RequestMapping(value = "/board/deleteNotice.do", method = RequestMethod.GET)
+	  public ModelAndView deleteNotice(@RequestParam("bno") int bno,
+	  HttpServletRequest request, HttpServletResponse response) { ModelAndView mav
+	  = new ModelAndView(); System.out.println("서비스 들어가기전" + bno);
+	  boardService.deleteNotice(bno); System.out.println(bno);
+	  System.out.println("service after");
+	  mav.setViewName("redirect:/board/noticeList.do");
+	  
+	  return mav; }
+	 
+	@ResponseBody
+	@RequestMapping(value = "/board/delNotice.do", method = RequestMethod.POST)
+	public String deleteNotice(String[] bnoList) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("서비스 들어가기전" + bno);
-		boardService.deleteNotice(bno);
-		System.out.println(bno);
-		System.out.println("service after");
-		mav.setViewName("redirect:/board/noticeList.do");
+		for(int i=0; i<bnoList.length; i++) {
+			boardService.delNotice(bnoList[i]);
+		}
+		String result = "/board/noticeList.do";
 
-		return mav;
+		return result;
 	}
 
 	@RequestMapping(value = "/board/addNotice.do", method = RequestMethod.POST)

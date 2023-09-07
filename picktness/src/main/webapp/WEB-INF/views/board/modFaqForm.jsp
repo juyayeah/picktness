@@ -33,9 +33,14 @@ display: flex;
 
 }
 .btn{
-  background-color: skyblue;
-  color: white;
-  border: none;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin:0 100px 5px 0;
+    border-radius: 9px;
   float:right;
   
 }
@@ -69,18 +74,19 @@ margin-right:10px;
  
 <form method="post"  id="frm">
   <div class="free_inner">
-  <h1 style="margin-bottom: 5px;">공지사항 수정</h1>
+  <h1 style="margin-bottom: 5px;">자주묻는 FAQ</h1>
   <div class="divider"></div>
-  <h2 class="center" style="margin-right: 120px;">공지사항 수정</h2>
+  <h2 class="center" style="margin-right: 120px;">FAQ 수정</h2>
   
   
       <p><span style="font-size: 20px;">제목</span> 
-      <input type="text" value="${faqList.title }" name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
+      <input type="text" spellcheck="false" value="${faqList.title }" name="title" style="width: 80%; height: 30px; font-size: 17px;"></p>
       <p class="content"><span style="font-size: 20px;">내용</span> 
-      <textarea style="margin-left: 5px;" name="content" style="width: 80%; margin-bottom: 50px;">${faqList.content}</textarea></p>
-      <p class="center"> 
-      <input type="button" id="edit" value="수정하기">
-      <a class="btn" type="button" href="${contextPath }/board/faqList.do" style="margin-right: 10px;">돌아가기</a></p>
+      <textarea spellcheck="false" style="margin-left: 5px;" name="content" style="width: 80%; margin-bottom: 50px;">${faqList.content}</textarea></p>
+      <p > 
+      <a class="btn" type="button" id="edit" >수정하기</a>
+      <a class="btn" type="button" href="${contextPath }/board/faqList.do" style="margin-right: 10px;">돌아가기</a>
+      </p>
     
        <input type="hidden" name="bno" value="${faqList.bno }">
     <input type="hidden" name="noticedate" value="${faqList.faqDate }"> 

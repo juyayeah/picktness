@@ -128,6 +128,11 @@ public class BoardServiceImpl {
 		
 	}
 
+	public void delNotice(String bno) {
+		boardDAO.delNotice(bno);
+		
+	}
+
 
 
 

@@ -27,6 +27,7 @@ request.setCharacterEncoding("utf-8");
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin:0 10px 5px 0;
+    border-radius: 9px;
       }
         .notice_btn:hover {
     background-color: #0056b3;

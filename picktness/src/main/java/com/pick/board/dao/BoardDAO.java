@@ -64,6 +64,8 @@ public interface BoardDAO {
 	public FaqVO getFaqByBno(int bno)throws DataAccessException;
 
 	public void deleteFaq(int bno)throws DataAccessException;
+
+	public void delNotice(String bno)throws DataAccessException;
 	
 	
 	

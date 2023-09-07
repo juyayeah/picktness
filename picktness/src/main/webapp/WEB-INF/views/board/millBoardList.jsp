@@ -68,13 +68,23 @@ request.setCharacterEncoding("utf-8");
     display: none;
 
 }
+  .button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 9px;
+    margin-left:85%;
+  }
 
     </style>
 </head>
 <body>
 <div class="mill_inner">
     <h1>오늘 식단</h1>
-    <input type="button" onclick="javascript:fn_boardForm('${isLogOn}', '${contextPath}/board/millBoardForm.do', '${contextPath}/member/loginForm.do')" value="글쓰기">
+    <input type="button" class="button" onclick="javascript:fn_boardForm('${isLogOn}', '${contextPath}/board/millBoardForm.do', '${contextPath}/member/loginForm.do')" value="글쓰기">
     <div class="divider"></div>
 <div class="mill_content">
     <table>

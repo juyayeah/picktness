@@ -13,25 +13,59 @@
     <title>공지사항</title>
     <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
     <script type="text/javascript">
+    $(function(){
+        $("#allCheck").click(function(){
+            if($("#allCheck").is(":checked")){
+              $("input[name=RowCheck]").prop("checked", true);
+            
+            }else {
+              $("input[name=RowCheck]").prop("checked", false);
+            }
+          });
+        
+        $("input[name=RowCheck]").click(function(){
+            var totalArr = $("input[name=RowCheck]").length;
+            var checked = $("input[name=RowCheck]:checked").length;
+            
+            if(totalArr != checked){
+              $("#allCheck").prop("checked", false);
+            }else{
+              $("#allCheck").prop("checked", true);
+            }
+          });
+        
+    })
     
 
          
         function fn_delBtn() {
-            if ($("input:checkbox[name='Chk_list']:checked").length === 0) {
+            if ($("input:checkbox[name='RowCheck']:checked").length === 0) {
                 alert("삭제할 항목을 선택해 주세요.");
                 return;
             }
-	var info2 = [];
-            $("input:checkbox[name='Chk_list']:checked").each(function(k, kVal) {
+			var info2 = new Array();
+            $("input:checkbox[name='RowCheck']:checked").each(function(index) {
 
                 var info = $(this).val();
-                
-                info2.push(info);
-               
-           
+				info2.push(info);
             });
-            console.log(info2);
-        } 
+         	 console.log(info2);
+             $.ajax({
+             	type : "POST",
+             	url : "${contextPaht}/board/delNotice.do",
+             	data:{
+             		bnoList : info2
+             	},
+             	traditional: true,
+             	success: function(data){
+             		location.href=data;
+             	},
+             	error: function(xhr,status,error){
+             		
+             		alert("실패");
+             	}
+             });
+        }
         
         
     </script>
@@ -79,6 +113,7 @@
   .td_size{
   width:100px;
   }
+  
     </style>
 </head>
 <body>
@@ -88,14 +123,15 @@
     
 <c:if test="${member.id == 'admin' }"> 
 <a type="button"class="right_a" href="${contextPath}/board/noticeForm.do">글쓰기</a>
+<a class ="rigth_a"href="javascript:fn_delBtn()">선택삭제</a>
 
   </c:if>
     <table>
         <thead>
             <tr>
-<%--             <c:if test="${member.id == 'admin' }"> 
-            <td class="td_size"><input id="allCheck" type="checkbox" name="allCheck"/></td>
-            </c:if>  --%>
+             <c:if test="${member.id == 'admin' }"> 
+            <td class="td_size"><input  type="checkbox" id="allCheck"/></td>
+            </c:if> 
                 <th class="td_size">순번</th>
                 <th>제목</th>
 
@@ -105,9 +141,9 @@
         <tbody>
             <c:forEach var ="notice" items="${noticeList}" varStatus="num">
             <tr>
-<%--             <c:if test="${member.id == 'admin' }"> 
+            <c:if test="${member.id == 'admin' }"> 
             <td><input type="checkbox" name="RowCheck" value="${notice.bno}"></td>
-            </c:if> --%>
+            </c:if> 
                 <td>${fn:length(noticeList) - num.index }</td>
                 <td><a  href="${contextPath}/board/noticeDetail.do?bno=${notice.bno}">${notice.title}</a><div class="notic_name">픽트니스|${notice.noticeDate }</div> </td>
             </tr>
@@ -115,6 +151,7 @@
 
         </tbody>
     </table>
+
        <s_sidebar_element>
         <div class="searchBox">
           <s_search>
