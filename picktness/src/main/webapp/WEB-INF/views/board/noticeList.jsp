@@ -66,6 +66,8 @@
              	}
              });
         }
+    
+ 
         
         
     </script>
@@ -102,14 +104,18 @@
 	}
 
 .right_a {
-  float: right; 
+  float: right;
   background-color: #007BFF;
-  color: #fff; /* 텍스트 색상을 흰색으로 설정 */
-  padding: 10px 20px; /* 버튼 패딩 설정 */
-  text-decoration: none; /* 링크 텍스트 밑줄 제거 */
-  border-radius: 5px; /* 버튼 모서리 둥글게 만들기 */
-  margin-right:10px;
-  }
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.right_a:hover {
+  background-color: #0056b3;
+}
   .td_size{
   width:100px;
   }
@@ -123,7 +129,7 @@
     
 <c:if test="${member.id == 'admin' }"> 
 <a type="button"class="right_a" href="${contextPath}/board/noticeForm.do">글쓰기</a>
-<a class ="rigth_a"href="javascript:fn_delBtn()">선택삭제</a>
+ <a class="right_a" href="javascript:fn_delBtn()">선택 삭제</a>
 
   </c:if>
     <table>
@@ -152,21 +158,16 @@
         </tbody>
     </table>
 
-       <s_sidebar_element>
-        <div class="searchBox">
-          <s_search>
-            <input
-              type="text"
-              name=""
-              value=""
-              onkeypress="if (event.keyCode == 13) { }"
-              class="text"
-              placeholder="SEARCH"
-            />
-            
-
-            <input value="검색" type="button" onclick="" class="submit" />
-          </s_search>
+ <div class="searchBox">
+  <s_search>
+    <input type="text" name="searchQuery" 
+      value=""
+      class="text"
+      placeholder="SEARCH"
+    />
+    <input type="button" value="검색" onclick="performSearch()" class="submit" /> <!-- 검색 버튼 추가 -->
+  </s_search>
+</div>
         </div>
     <div class="notice_margin">
       <select> 
