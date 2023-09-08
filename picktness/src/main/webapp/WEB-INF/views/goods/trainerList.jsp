@@ -77,6 +77,7 @@ request.setCharacterEncoding("utf-8");
 	height:380px;
 	display: inline-block;
 	margin: 10px 0px 10px 57px;
+		cursor:pointer;
 }
 
 .main_img {

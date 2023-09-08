@@ -32,7 +32,15 @@ request.setCharacterEncoding("utf-8");
         .notice_btn:hover {
     background-color: #0056b3;
   }
+ pre {
 
+    width: 100%;
+
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
+
+  }
     </style>
 </head>
 <body>

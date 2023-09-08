@@ -138,7 +138,7 @@
 
       if (domain2.length > 0 && domain2.length <= 20) {
         var allDomains = [
-          "google.com",
+          "gmail.com",
           "naver.com",
           "hanmail.com",
           "nate.com",
@@ -383,7 +383,7 @@
       }
 
       var allDomains = [
-        "google.com",
+        "gmail.com",
         "naver.com",
         "hanmail.com",
         "nate.com",
@@ -682,7 +682,7 @@ style="width: 150px"
 <select class="select-box" id="domain-list" style="width: 150px">
 <option value="">이메일 선택</option>
 <option value="">직접입력</option>
-<option value="google.com">google.com</option>
+<option value="gmail.com">gmail.com</option>
 <option value="naver.com">naver.com</option>
 <option value="hanmail.com">hanmail.com</option>
 </select>

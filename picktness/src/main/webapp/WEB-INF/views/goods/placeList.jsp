@@ -80,6 +80,7 @@ request.setCharacterEncoding("utf-8");
 .main_box {
 	clear: both;
 	text-align: left;
+
 }
 
 .main_cate {
@@ -95,6 +96,7 @@ request.setCharacterEncoding("utf-8");
 	height:350px;
 	display: inline-block;
 	margin: 10px 0px 10px 57px;
+		cursor:pointer;
 }
 
 .main_img {

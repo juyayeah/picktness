@@ -42,6 +42,7 @@ uri="http://tiles.apache.org/tags-tiles" %>
 	text-align: left;
 }
 .main_item {
+	cursor:pointer;
 	vertical-align: top;
 	position: relative;
 	width: 200px;

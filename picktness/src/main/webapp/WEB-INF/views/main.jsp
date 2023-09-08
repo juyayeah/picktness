@@ -133,6 +133,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
       .main_box {
         clear: both;
         text-align: left;
+        
       }
 
       .main_cate {
@@ -148,6 +149,7 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
         width: 200px;
         display: inline-block;
         margin: 10px 0px 10px 57px;
+        cursor:pointer;
       }
 
       .main_img {

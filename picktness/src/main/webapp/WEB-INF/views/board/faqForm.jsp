@@ -75,7 +75,7 @@ margin-right:10px;
       <textarea style="margin-left: 5px;" placeholder="답변을 입력해 주세요." name="content" style="width: 80%; margin-bottom: 50px;" spellcheck="false"></textarea></p>
       <p class="center"> 
       <input class="btn"type="submit" value="등록하기" style="margin-right:160px;">
-      <a class="btn" type="button" href="${contextPath }/board/noticeList.do" style="margin-right: 10px;">돌아가기</a></p>
+      <a class="btn" type="button" href="${contextPath }/board/faqList.do" style="margin-right: 10px;">돌아가기</a></p>
     
     </form>
     </div>

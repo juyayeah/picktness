@@ -86,8 +86,8 @@ select count(id) from business where id=#{id}
 
 <insert id="eventInitPoint" parameterType="memberVO">
     <![CDATA[
-   insert into point_history(member_id, member_point, content)
-    values(#{id}, #{memberPoint}, "회원가입 이벤트")
+   insert into point_history(member_id, member_point, content, state)
+    values(#{id}, #{memberPoint}, "회원가입 이벤트", '적립')
     ]]>
 </insert>
 

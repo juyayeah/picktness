@@ -36,6 +36,7 @@ request.setCharacterEncoding("utf-8");
 }
 
 .main_item {
+	cursor:pointer;
 	vertical-align: top;
 	position: relative;
 	width: 200px;
