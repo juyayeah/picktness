@@ -112,5 +112,23 @@ select count(id) from business where id=#{id}
 select * from member where id=#{id}
 ]]>
 </select>
- </mapper>
+
+<select id="checkByEmail" resultType="int" parameterType="String">
+<![CDATA[
+select count(concat(email1, '@',email2)) from member where concat(email1, '@',email2) = #{email}
+]]>
+</select>
+
+<select id="selectByEmail" resultType="memberVO" parameterType="String">
+<![CDATA[
+select * from member where concat(email1, '@',email2) = #{email}
+]]>
+</select>
+
+<insert id="addKakaoMember" parameterType="java.util.Map">
+<![CDATA[
+insert into member(id, email1, email2) values (#{id}, #{email1}, #{email2})
+]]>
+</insert>
+</mapper>
  

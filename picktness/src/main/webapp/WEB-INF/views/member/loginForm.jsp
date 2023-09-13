@@ -104,6 +104,9 @@ alert("${message}");
         .class1 {
             width: 5%;
         }
+		.kakao_login{
+		margin:30px;
+		}
     </style>
     <script>
         function showLoginForm(loginType) {
@@ -155,6 +158,36 @@ alert("${message}");
                 businessLoginForm.style.display = 'block';
         	}
         }; 
+        
+        function loginWithKakao() {
+            Kakao.Auth.authorize({
+              redirectUri: 'http://localhost:8080/callback',
+            });
+          }
+
+          // 아래는 데모를 위한 UI 코드입니다.
+          displayToken()
+          function displayToken() {
+            var token = getCookie('authorize-access-token');
+            if(token) {
+              Kakao.Auth.setAccessToken(token);
+              Kakao.Auth.getStatusInfo()
+                .then(function(res) {
+                  if (res.status === 'connected') {
+                    document.getElementById('token-result').innerText
+                      = 'login success, token: ' + Kakao.Auth.getAccessToken();
+                  }
+                })
+                .catch(function(err) {
+                  Kakao.Auth.setAccessToken(null);
+                });
+            }
+          }
+
+          function getCookie(name) {
+            var parts = document.cookie.split(name + '=');
+            if (parts.length === 2) { return parts[1].split(';')[0]; }
+          }
     </script>
     <meta charset="UTF-8">
     <title>로그인창</title>
@@ -178,6 +211,11 @@ alert("${message}");
                     <a href="${contextPath}/member/findById.do">아이디 찾기</a> |
                     <a href="${contextPath}/member/findByPwd.do">비밀번호 찾기</a> |
                     <a href="${contextPath}/member/selectJoin.do">회원가입</a>
+                </div>
+                <div class="kakao_login">
+               <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=8aeab8c87d417852240221b7ac49e0a6&redirect_uri=http://localhost:8080/kakao/callback">
+                <img src="${contextPath }/images/kakao_login.png" alt="카카오 로그인 버튼"/>
+                </a>
                 </div>
             </div>
             

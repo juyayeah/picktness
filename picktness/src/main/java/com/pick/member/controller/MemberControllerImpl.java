@@ -2,7 +2,6 @@ package com.pick.member.controller;
 
 
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -239,6 +238,9 @@ public class MemberControllerImpl implements MemberController{
 		mav.setViewName(viewName);
 		return mav;
 	}
+	
+
+	
 
 }
 

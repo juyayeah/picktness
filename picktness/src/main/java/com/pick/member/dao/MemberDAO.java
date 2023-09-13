@@ -22,4 +22,7 @@ public interface MemberDAO {
 	public int bEmailCheck(Map bEmailChk) throws DataAccessException;
 	public BusinessVO loginBusiness(Map loginMap) throws DataAccessException;
 	public MemberVO selectById(String id) throws DataAccessException;
+	public int checkByEmail(String email) throws DataAccessException;
+	public MemberVO selectByEmail(String email) throws DataAccessException;
+	public void addKakaoMember(Map kakaoMap) throws DataAccessException;
 }

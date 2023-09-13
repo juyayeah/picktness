@@ -55,6 +55,24 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO selectById(String id) throws DataAccessException {
 		return memberDAO.selectById(id);
 	}
+	@Override
+	public MemberVO mailCheck(String email) throws DataAccessException {
+		// TODO Auto-generated method stub
+		int result = memberDAO.checkByEmail(email);
+		if(result == 0) {
+			return null;
+		} else {
+			return memberDAO.selectByEmail(email);
+		}
+	}
+	@Override
+	public MemberVO addKakaoMember(Map<String, String> kakaoMap) throws DataAccessException {
+		memberDAO.addKakaoMember(kakaoMap);
+		return memberDAO.selectById(kakaoMap.get("id"));
+	}
+	
+	
+	
 	
 	
 	
